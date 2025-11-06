@@ -140,7 +140,7 @@ html, body {
 /* บินจากขวาไปซ้าย พร้อมโค้งขึ้นลงนิด ๆ */
 .dino--fly--1{
   position: absolute;
-  top: 6vh;
+  top: 4vh;
   right: -30vw;
     width: min(22vw, 380px); /* ขยายขึ้นเล็กน้อย */
   animation: fly 22s linear infinite;
