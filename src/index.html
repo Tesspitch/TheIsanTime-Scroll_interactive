@@ -4,24 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Isan Time-Scroll: A Journey Through a Million Years </title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="/assests/style.css">
     <script src="/assests/script.js"></script>
 </head>
 <body>
-    <div class="section1">
+    <div class="section1" data-aos="fade-up" data-aos-duration="1000">
         
         <header>
             <div class="text-top">
                 <h1> ย้อนรอยกาลเวลา </h1>
-                <h1 style="color: #ff781f;">อีสานดินแดนมหัศจรรย์ฟอสซิล</h1>
-                <h3>A Journey Through Time: Isan’s Fossil Wonderland</h3>
-                <h3>ใต้เท้าของคุณคือไทม์แมชชีน ผืนดินที่คุณยืนอยู่ คือพิพิธภัณฑ์ธรรมชาติ</h3>
-                <h3>คือหนังสือประวัติศาสตร์โลกที่ยังมีชีวิต ทุกย่างก้าวที่เหยียบลงไป</h3>
-                <h3>คือการเหยียบลงบนชั้นของกาลเวลา</h3>
+                <h1 style="color: #ff781f;"> อีสานดินแดนมหัศจรรย์ฟอสซิล </h1>
+                <h3> A Journey Through Time: Isan’s Fossil Wonderland </h3>
+                <h3> ใต้เท้าของคุณคือไทม์แมชชีน ผืนดินที่คุณยืนอยู่ คือพิพิธภัณฑ์ธรรมชาติ </h3>
+                <h3> คือหนังสือประวัติศาสตร์โลกที่ยังมีชีวิต ทุกย่างก้าวที่เหยียบลงไป </h3>
+                <h3> คือการเหยียบลงบนชั้นของกาลเวลา </h3>
             </div>
             
         </header>
-        <button>เริ่มต้นการเดินทาง</b></button>
+        <button><b>เริ่มต้นการเดินทาง</b></button>
         <div class="scroll-arrow">▼</div>
         <video autoplay muted loop playsinline webkit-playsinline>
             <source src="/assests/video/bg_section1.mp4" type="video/mp4">
@@ -30,16 +31,31 @@
         <img src="/assests/img/fly_loop_transparent.gif" alt="เทอโรซอร์บิน" class="dino dino--fly--1" />
         <img src="/assests/img/fly_loop_transparent.gif" alt="เทอโรซอร์บิน" class="dino dino--fly--2" />
         <img src="/assests/img/fly_loop_transparent.gif" alt="เทอโรซอร์บิน" class="dino dino--fly--3" />
-        
-        
 
     </div>
 
-    <div class="section2" id="section2">
-        <h1>Question ?</h1>
-        <img src="/assests/img/dino_no_bg.png" alt="ไดโนเสาร์ !!!!!!!1">
-        
+    <section class="section2" id="section2" >
+        <div class="bg-section2">
+            <h1>คุณเคยสงสัยไหม ?</h1>
+            <div class="border-section2">
+                <h2>หากเราย้อนเวลากลับไปได้ 100 ล้านปี</h2>
+                <h2>ผืนดินที่เรายืนอยู่จะเป็นอย่างไร ?</h2>
+                <div class="btn-section2">
+                    <button type="button" id="dino">อาณาจักรไดโนเสาร์ ?</button>
+                    <button type="button" id="sea">มหาสมุทรโบราณ ?</button>
+                    <button type="button" id="neature">พื้นที่โล่ง ?</button>
+                </div>
+            
+            </div>
 
-    </div>
+        </div>
+        
+    </section>
+
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
 </html>
