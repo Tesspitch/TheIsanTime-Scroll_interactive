@@ -82,11 +82,87 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // wire up buttons inside section2 (.btn-section2)
     const btns = document.querySelectorAll('#section2 .btn-section2 button');
+    // typing sequence sentences
+    const typingSentences = [
+        'นี่ใช่โลกที่คุณจินตนาการไว้หรือไม่',
+        'ความจริงจะเป็นอย่างไร',
+        'มาหาคำตอบพร้อมกันกับพวกเรา'
+    ];
+
+    function runTypingSequence(onComplete){
+        // create typing box if not exist
+        let box = section2.querySelector('.typing-box');
+        if (!box){
+            box = document.createElement('div');
+            box.className = 'typing-box';
+            box.innerHTML = '<div class="typing-inner"><span class="typing-line" id="typingLine"></span><span class="typing-cursor" id="typingCursor"></span></div>';
+            section2.appendChild(box);
+        }
+        const lineEl = section2.querySelector('#typingLine');
+        const cursor = section2.querySelector('#typingCursor');
+
+        let idx = 0;
+
+        function typeSentence(sentence, cb){
+            lineEl.textContent = '';
+            // add a short pop class to emphasize new line
+            lineEl.classList.add('pop');
+            let i = 0;
+            const speed = 80; // ms per char (slower)
+            function step(){
+                if (i < sentence.length){
+                    lineEl.textContent += sentence.charAt(i);
+                    i++;
+                    setTimeout(step, speed);
+                } else {
+                    // remove pop after a short delay, then call the callback
+                    setTimeout(() => { lineEl.classList.remove('pop'); cb(); }, 700);
+                }
+            }
+            step();
+        }
+
+        function next(){
+            if (idx < typingSentences.length){
+                typeSentence(typingSentences[idx], () => { idx++; next(); });
+            } else {
+                // finished
+                if (typeof onComplete === 'function') onComplete();
+            }
+        }
+        next();
+    }
+
     btns.forEach(btn => {
         btn.addEventListener('click', () => {
+            // ignore clicks while typing sequence is running
+            if (section2.classList.contains('typing-mode')) return;
             const id = btn.id;
             const src = bgMap[id];
-            if (src) setSection2Video(src);
+            if (src) {
+                // show video
+                setSection2Video(src);
+                // hide card and run typing
+                section2.classList.add('typing-mode');
+                // small delay to let video appear
+                setTimeout(() => {
+                    runTypingSequence(() => {
+                        // restore background to gradient (remove video)
+                        const vid = section2.querySelector('video.bgvideo');
+                        if (vid){
+                            vid.classList.remove('visible');
+                            setTimeout(() => { try{ vid.remove(); }catch{} }, 420);
+                        }
+                        // remove typing box and mode
+                        const box = section2.querySelector('.typing-box');
+                        if (box) box.remove();
+                        section2.classList.remove('typing-mode');
+                        // scroll to section3
+                        const s3 = document.getElementById('section3');
+                        if (s3) s3.scrollIntoView({ behavior: 'smooth' });
+                    });
+                }, 420);
+            }
         });
     });
 
