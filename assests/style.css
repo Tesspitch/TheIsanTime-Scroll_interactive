@@ -1,113 +1,119 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html, body {
-    font-family: 'Arial';
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    background-color: rgb(0, 0, 0);
-    
+html,
+body {
+  font-family: 'Arial';
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: rgb(0, 0, 0);
+
 }
 
 
 .section1 {
-    position: relative;
-    height: 100vh;
-    width: 100vw;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .section1::after {
-    content: '';
-    position: absolute;
-    bottom: -50px;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent);
-    filter: blur(50px);
-    animation: glowingBottom 3s infinite ease-in-out;
-    pointer-events: none;
-    z-index: 3;
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent);
+  filter: blur(50px);
+  animation: glowingBottom 3s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 3;
 }
 
 .section1::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.65); /* เพิ่มความมืดขึ้น */
-    backdrop-filter: blur(2px); /* เพิ่ม blur effect */
-    -webkit-backdrop-filter: blur(2px); /* สำหรับ Safari */
-    z-index: 1;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  /* เพิ่มความมืดขึ้น */
+  backdrop-filter: blur(2px);
+  /* เพิ่ม blur effect */
+  -webkit-backdrop-filter: blur(2px);
+  /* สำหรับ Safari */
+  z-index: 1;
 }
 
 .section1 video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
-    filter: blur(7px); /* เพิ่ม blur ให้วิดีโอเล็กน้อย */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  filter: blur(7px);
+  /* เพิ่ม blur ให้วิดีโอเล็กน้อย */
 }
 
 .section1 header {
   position: relative;
-  z-index: 3; /* ให้ header อยู่เหนือไดโนเสาร์ */
-    color: white;
-    margin-bottom: 2rem;
-    padding-top: 15vh;
+  z-index: 3;
+  /* ให้ header อยู่เหนือไดโนเสาร์ */
+  color: white;
+  margin-bottom: 2rem;
+  padding-top: 15vh;
 }
 
 .section1 h1 {
-    font-size: clamp(2.5rem, 5vw, 4.0rem);
-    margin: 0;
-    color: #D1D5DB;
-    text-shadow: 0 0 15px rgba(0, 0, 0, 0.7),
-                 0 0 10px rgba(255, 255, 255, 0.3);
-    font-weight: bold;
-    letter-spacing: 1.5px;
-    line-height: 1.3;
+  font-size: clamp(2.5rem, 5vw, 4.0rem);
+  margin: 0;
+  color: #D1D5DB;
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.7),
+    0 0 10px rgba(255, 255, 255, 0.3);
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  line-height: 1.3;
 }
 
 .text-top {
-    margin-top: 15vh;
-    margin-left: 10px;
-    margin-right: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  margin-top: 15vh;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .section1 button {
-    position: relative;
-    z-index: 2;
-    padding: 15px 30px;
-    margin-bottom: 20vh;
-    font-size: 1.2rem;
-    background-color: #3f3c3c;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+  position: relative;
+  z-index: 2;
+  padding: 15px 30px;
+  margin-bottom: 20vh;
+  font-size: 1.2rem;
+  background-color: #3f3c3c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .section1 button:hover {
@@ -116,21 +122,31 @@ html, body {
 }
 
 .section1 {
-  position:relative;
-  height:100vh;
-  display:grid;
-  place-items:center;
-  overflow:hidden;          /* กันรูปทะลุ */
-  color:#fff;
+  position: relative;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  /* กันรูปทะลุ */
+  color: #fff;
 }
-.hero::before{             /* ถ้ามีพื้นหลังวิดีโอ/ภาพ */
-  content:"";
-  position:absolute; inset:0;
-  background:rgba(0,0,0,.35); /* layer มืดเพื่ออ่านหัวข้อชัด */
-}
-.hero-inner{ position:relative; text-align:center; z-index:1; }
 
-.dino{
+.hero::before {
+  /* ถ้ามีพื้นหลังวิดีโอ/ภาพ */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .35);
+  /* layer มืดเพื่ออ่านหัวข้อชัด */
+}
+
+.hero-inner {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+.dino {
   position: absolute;
   pointer-events: none;
   user-select: none;
@@ -140,107 +156,162 @@ html, body {
 
 
 /* บินจากขวาไปซ้าย พร้อมโค้งขึ้นลงนิด ๆ */
-.dino--fly--1{
+.dino--fly--1 {
   position: absolute;
   top: 4vh;
   right: -20vw;
-    width: min(22vw, 380px); /* ขยายขึ้นเล็กน้อย */
+  width: min(22vw, 380px);
+  /* ขยายขึ้นเล็กน้อย */
   animation: fly 15s linear infinite;
-  z-index: 2; /* ต่ำกว่า header (3) แต่สูงกว่า overlay (1) */
+  z-index: 2;
+  /* ต่ำกว่า header (3) แต่สูงกว่า overlay (1) */
 }
 
-@keyframes fly{
-  0%   { transform: translateX(0) translateY(0) }
-  25%  { transform: translateX(-40vw) translateY(-3vh) }
-  50%  { transform: translateX(-80vw) translateY(0) }
-  75%  { transform: translateX(-120vw) translateY(2vh) }
-  100% { transform: translateX(-160vw) translateY(0) }
+@keyframes fly {
+  0% {
+    transform: translateX(0) translateY(0)
+  }
+
+  25% {
+    transform: translateX(-40vw) translateY(-3vh)
+  }
+
+  50% {
+    transform: translateX(-80vw) translateY(0)
+  }
+
+  75% {
+    transform: translateX(-120vw) translateY(2vh)
+  }
+
+  100% {
+    transform: translateX(-160vw) translateY(0)
+  }
 }
 
-.dino--fly--2{
+.dino--fly--2 {
   position: absolute;
   top: 17vh;
   right: -5vw;
-    width: min(22vw, 330px); /* ขยายขึ้นเล็กน้อย */
+  width: min(22vw, 330px);
+  /* ขยายขึ้นเล็กน้อย */
   animation: fly 18s linear infinite;
   z-index: 4;
 }
 
-@keyframes fly{
-  0%   { transform: translateX(0) translateY(0) }
-  25%  { transform: translateX(-40vw) translateY(-3vh) }
-  50%  { transform: translateX(-80vw) translateY(0) }
-  75%  { transform: translateX(-120vw) translateY(2vh) }
-  100% { transform: translateX(-160vw) translateY(0) }
+@keyframes fly {
+  0% {
+    transform: translateX(0) translateY(0)
+  }
+
+  25% {
+    transform: translateX(-40vw) translateY(-3vh)
+  }
+
+  50% {
+    transform: translateX(-80vw) translateY(0)
+  }
+
+  75% {
+    transform: translateX(-120vw) translateY(2vh)
+  }
+
+  100% {
+    transform: translateX(-160vw) translateY(0)
+  }
 }
 
-.dino--fly--3{
+.dino--fly--3 {
   position: absolute;
   top: 60vh;
   right: -15vw;
-    width: min(22vw, 300px); /* ขยายขึ้นเล็กน้อย */
+  width: min(22vw, 300px);
+  /* ขยายขึ้นเล็กน้อย */
   animation: fly 12s linear infinite;
   z-index: 4;
 }
 
-@keyframes fly{
-  0%   { transform: translateX(0) translateY(0) }
-  25%  { transform: translateX(-40vw) translateY(-3vh) }
-  50%  { transform: translateX(-80vw) translateY(0) }
-  75%  { transform: translateX(-120vw) translateY(2vh) }
-  100% { transform: translateX(-160vw) translateY(0) }
+@keyframes fly {
+  0% {
+    transform: translateX(0) translateY(0)
+  }
+
+  25% {
+    transform: translateX(-40vw) translateY(-3vh)
+  }
+
+  50% {
+    transform: translateX(-80vw) translateY(0)
+  }
+
+  75% {
+    transform: translateX(-120vw) translateY(2vh)
+  }
+
+  100% {
+    transform: translateX(-160vw) translateY(0)
+  }
 }
 
 /* มือถือ: ลดขนาด + ช้าลง */
-@media (max-width: 768px){
-    .dino--fly{  width: 34vw; animation-duration: 26s; }
+@media (max-width: 768px) {
+  .dino--fly {
+    width: 34vw;
+    animation-duration: 26s;
+  }
 }
 
 /* เข้าถึงได้: ผู้ใช้ที่ปิด motion */
-@media (prefers-reduced-motion: reduce){
-  .dino{ animation: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .dino {
+    animation: none !important;
+  }
 }
 
 @keyframes arrowBounce {
-    0%, 100% {
-        transform: translate(-50%, 0);
-    }
-    50% {
-        transform: translate(-50%, 10px);
-    }
+
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+
+  50% {
+    transform: translate(-50%, 10px);
+  }
 }
 
 .scroll-arrow {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    color: white;
-    font-size: 24px;
-    z-index: 2;
-    animation: arrowBounce 2s infinite ease-in-out;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  color: white;
+  font-size: 24px;
+  z-index: 2;
+  animation: arrowBounce 2s infinite ease-in-out;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
 
 .section2 {
-  
-  height: 100vh; 
+
+  height: 100vh;
   color: white;
-  text-align: center ;
+  text-align: center;
   padding-top: 25vh;
-  background: linear-gradient(to bottom,#1A1A1A, #111827) ;
-  
+  background: linear-gradient(to bottom, #1A1A1A, #111827);
+
   position: relative;
   height: 100vh;
   color: white;
   text-align: center;
   padding-top: 25vh;
-  background: linear-gradient(to bottom,#1A1A1A, #111827);
-  overflow: hidden; /* contain background video */
+  background: linear-gradient(to bottom, #1A1A1A, #111827);
+  overflow: hidden;
+  /* contain background video */
 }
 
 /* section2 background video (inserted by JS) */
-.section2 video.bgvideo{
+.section2 video.bgvideo {
   position: absolute;
   top: 0;
   left: 0;
@@ -252,10 +323,20 @@ html, body {
   transition: opacity 420ms ease;
   pointer-events: none;
 }
-.section2 video.bgvideo.visible{ opacity: 1; }
 
-.bg-section2{ position: relative; z-index: 2; }
-.border-section2{ position: relative; z-index: 3; }
+.section2 video.bgvideo.visible {
+  opacity: 1;
+}
+
+.bg-section2 {
+  position: relative;
+  z-index: 2;
+}
+
+.border-section2 {
+  position: relative;
+  z-index: 3;
+}
 
 .border-section2 {
   box-shadow: 0 0px 2px rgba(255, 227, 186, 0.5);
@@ -267,72 +348,130 @@ html, body {
 }
 
 .btn-section2 {
-  
+
   padding-top: 3vh;
   margin: 10px;
   display: flex;
   flex-direction: column;
-  margin : 0px 20px 0px 20px;
+  margin: 0px 20px 0px 20px;
   gap: 1rem;
-  
+
 }
 
-  .btn-section2 button {
-    /* brown -> orange gradient to right as requested */
-    background: linear-gradient(to right, #8B4513, #D2691E);
-    color: #fff;
-    border: none;
-    padding: 12px 22px;
-    border-radius: 10px;
-    font-weight: 1000;
-    cursor: pointer;
-    
-    transition: transform .16s ease, box-shadow .16s ease, filter .12s ease;
-    
-    display: inline-block;
+.btn-section2 button {
+  /* brown -> orange gradient to right as requested */
+  background: linear-gradient(to right, #8B4513, #D2691E);
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 10px;
+  font-weight: 1000;
+  cursor: pointer;
+
+  transition: transform .16s ease, box-shadow .16s ease, filter .12s ease;
+
+  display: inline-block;
 }
 
-  .btn-section2 button:hover{
-    transform: translateY(-3px) scale(1.01);
-    box-shadow: 0 14px 30px rgba(139,69,19,0.22);
-  }
+.btn-section2 button:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 14px 30px rgba(139, 69, 19, 0.22);
+}
 
-  /* =========================
+/* =========================
      Responsive tweaks
      ========================= */
-  @media (max-width: 1024px) {
-    /* Slightly reduce card padding and button size on medium screens */
-    .border-section2{
-      padding: 32px 36px;
-    }
-    .border-section2 h2{ font-size: 1rem; }
-    .dino--fly--1{ width: min(24vw, 300px); }
-    .dino--fly--2{ width: min(24vw, 280px); }
-    .dino--fly--3{ width: min(20vw, 220px); }
+@media (max-width: 1024px) {
+
+  /* Slightly reduce card padding and button size on medium screens */
+  .border-section2 {
+    padding: 32px 36px;
   }
 
-  @media (max-width: 768px) {
-    /* Mobile / tablet: simplify visuals, increase tap targets */
-    .section1 header{ padding-top: 10vh; }
-    .text-top{ margin-top: 8vh; }
-    /* hide flying dinos on smaller screens to reduce clutter and improve performance */
-    .dino--fly--1, .dino--fly--2, .dino--fly--3{ display: none !important; }
-
-    .section2{ padding-top: 20vh; }
-    .border-section2{ width: 96%; padding: 22px 18px; border-radius: 14px; }
-    .border-section2 h2{ font-size: 0.98rem; }
-    .border-section2 button{ width: 100%; padding: 14px 18px; border-radius: 10px; }
+  .border-section2 h2 {
+    font-size: 1rem;
   }
 
-  @media (max-width: 480px) {
-    /* Small phones: compact spacing, readable sizes */
-    .section1 h1{ font-size: clamp(1.6rem, 7.5vw, 2rem); }
-    .section1 header{ padding-top: 8vh; }
-    .text-top{ margin-top: 6vh; }
-    .border-section2{ padding: 18px 14px; }
-    .border-section2 h2{ font-size: 0.9rem; }
-    .border-section2 button{ font-size: 1rem; padding: 12px 16px; }
+  .dino--fly--1 {
+    width: min(24vw, 300px);
   }
+
+  .dino--fly--2 {
+    width: min(24vw, 280px);
+  }
+
+  .dino--fly--3 {
+    width: min(20vw, 220px);
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* Mobile / tablet: simplify visuals, increase tap targets */
+  .section1 header {
+    padding-top: 10vh;
+  }
+
+  .text-top {
+    margin-top: 8vh;
+  }
+
+  /* hide flying dinos on smaller screens to reduce clutter and improve performance */
+  .dino--fly--1,
+  .dino--fly--2,
+  .dino--fly--3 {
+    display: none !important;
+  }
+
+  .section2 {
+    padding-top: 20vh;
+  }
+
+  .border-section2 {
+    width: 96%;
+    padding: 22px 18px;
+    border-radius: 14px;
+  }
+
+  .border-section2 h2 {
+    font-size: 0.98rem;
+  }
+
+  .border-section2 button {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* Small phones: compact spacing, readable sizes */
+  .section1 h1 {
+    font-size: clamp(1.6rem, 7.5vw, 2rem);
+  }
+
+  .section1 header {
+    padding-top: 8vh;
+  }
+
+  .text-top {
+    margin-top: 6vh;
+  }
+
+  .border-section2 {
+    padding: 18px 14px;
+  }
+
+  .border-section2 h2 {
+    font-size: 0.9rem;
+  }
+
+  .border-section2 button {
+    font-size: 1rem;
+    padding: 12px 16px;
+  }
+}
 
 /* =========================================================
    SECTION 3 – Fossil Timeline (ตาม Figma)
@@ -342,6 +481,8 @@ html, body {
   background: linear-gradient(to bottom, #020617, #020617);
   color: #f9fafb;
   padding: 64px 16px 96px;
+  position: relative;
+  overflow: hidden;
 }
 
 /* กล่องกลางของ section */
@@ -372,14 +513,16 @@ html, body {
   position: relative;
   display: flex;
   flex-direction: column;
-  row-gap: 72px;           /* ระยะห่างแต่ละแถวในแนวตั้ง */
+  row-gap: 72px;
+  /* ระยะห่างแต่ละแถวในแนวตั้ง */
   padding: 32px 0 64px;
 }
 
 /* เส้นแกนกลางสีส้ม */
 .timeline-line {
   position: absolute;
-  top: 350px;              /* หัวเส้นเริ่มใกล้จุดส้มจุดที่ 2 */
+  top: 350px;
+  /* หัวเส้นเริ่มใกล้จุดส้มจุดที่ 2 */
   bottom: 40px;
   left: 50%;
   width: 4px;
@@ -399,7 +542,8 @@ html, body {
 
 /* แถวแรก (อีสานโนซอรัส + จุดส้ม 1) ขยับขึ้นใกล้ Late Triassic */
 .timeline .timeline-row:first-of-type {
-  margin-top: -90px;  /* อยากขึ้น/ลงปรับตัวเลขนี้ */
+  margin-top: -90px;
+  /* อยากขึ้น/ลงปรับตัวเลขนี้ */
 }
 
 .timeline-col {
@@ -500,102 +644,135 @@ html, body {
       (ตอนนี้คือ timeline-row ลำดับที่ 2 ใน .timeline)
       ขยับบล็อกซ้ายลงมาให้อยู่กลางระหว่างจุดส้ม 1 กับ 2 */
 .timeline .timeline-row:nth-of-type(2) .timeline-col--left {
-  margin-top: 10px;   /* เพิ่มเลข = ลงอีก, ลดเลข = ขึ้น */
+  margin-top: 10px;
+  /* เพิ่มเลข = ลงอีก, ลดเลข = ขึ้น */
 }
 
-.timeline > .timeline-row:nth-child(3) .timeline-col--left {
-  margin-top: 30px;      /* ปรับ 30 / 50 แล้วดูระยะที่ชอบ */
+.timeline>.timeline-row:nth-child(3) .timeline-col--left {
+  margin-top: 30px;
+  /* ปรับ 30 / 50 แล้วดูระยะที่ชอบ */
 }
 
 /* ขยับข้อความ "ครีเทเซียสตอนต้น (Early Cretaceous)"
    ให้ลอยขึ้นเหนือกล่องภูเวียงฯ แต่จุดส้มยังอยู่ที่เดิม */
-.timeline > .timeline-row:nth-child(3) .timeline-era {
+.timeline>.timeline-row:nth-child(3) .timeline-era {
   font-size: 18px;
-  margin: 0 0 6px 0;     /* เคลียร์ margin เดิมก่อน */
-  transform: translateY(-80px);  /* เลื่อนขึ้น 40px (ปรับเลขได้) */
+  margin: 0 0 6px 0;
+  /* เคลียร์ margin เดิมก่อน */
+  transform: translateY(-80px);
+  /* เลื่อนขึ้น 40px (ปรับเลขได้) */
 }
 
-.late-end{ position: relative; margin-top: 20px; }
+.late-end {
+  position: relative;
+  margin-top: 20px;
+}
 
 
 
 /* ขยับหัวข้อ + จุดส้ม "Late Cretaceous" ลงมาให้ตรงกับภาพ */
-.late-end > .timeline-center{
-  transform: translateY(10px); /* ปรับ 24–48px ตามภาพจริงของคุณ */
+.late-end>.timeline-center {
+  transform: translateY(10px);
+  /* ปรับ 24–48px ตามภาพจริงของคุณ */
 }
 
 /* แถว Compsognathus: จัดดอทกลางให้ไม่แสดง (กันเหลือช่องเปล่า) */
-.comps-row > .timeline-center{
+.comps-row>.timeline-center {
   display: none;
 }
 
 /* ให้เส้นแกนอยู่ชั้นล่าง เพื่อให้ .cut-line ทับได้แน่นอน */
-.section3 .timeline-line{ z-index: 1; }
+.section3 .timeline-line {
+  z-index: 1;
+}
 
-.section3 .late-end > .timeline-center{
+.section3 .late-end>.timeline-center {
   font-size: 18px;
   position: relative;
-  transform: translateY(-10px);  /* ค่าติดลบ = ขยับขึ้น, ค่าบวก = ขยับลง */
-  z-index: 3;                     /* กันไม่ให้โดนแผ่นทับเส้นบัง */
+  transform: translateY(-10px);
+  /* ค่าติดลบ = ขยับขึ้น, ค่าบวก = ขยับลง */
+  z-index: 3;
+  /* กันไม่ให้โดนแผ่นทับเส้นบัง */
   padding: 20px;
 }
 
-.section3 .late-end > .timeline-center .timeline-era{
-  margin-bottom: 100px;             /* มากขึ้น = ข้อความห่างจุดมากขึ้น */
+.section3 .late-end>.timeline-center .timeline-era {
+  margin-bottom: 100px;
+  /* มากขึ้น = ข้อความห่างจุดมากขึ้น */
 }
 
-.section3 .late-end .timeline-row:first-of-type .timeline-col--left{
-  transform: translateY(10px);  /* ลอง 10–20px แล้วดูระดับที่พอดีบนจอจริง */
+.section3 .late-end .timeline-row:first-of-type .timeline-col--left {
+  transform: translateY(10px);
+  /* ลอง 10–20px แล้วดูระดับที่พอดีบนจอจริง */
 }
 
-.section3 .late-end .timeline-row:first-of-type .timeline-item{
-  align-items: center;  /* กันเคสข้อความดันให้รูป/บล็อกลอย */
+.section3 .late-end .timeline-row:first-of-type .timeline-item {
+  align-items: center;
+  /* กันเคสข้อความดันให้รูป/บล็อกลอย */
 }
 
 /* ===== Late Cretaceous (เฉพาะส่วนเพิ่มใหม่) ===== */
-.late-end{ position: relative; }
+.late-end {
+  position: relative;
+}
 
 /* ซ่อนเส้นแกนที่อยู่ถัดจาก Minimocursor ลงมา (ให้เส้นสิ้นสุดที่จุดนั้นจริง ๆ) */
-.late-end .cut-line{
-  position:absolute;
-  left:50%; transform:translateX(-50%);
+.late-end .cut-line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   /* ถ้าบล็อค Late Cretaceous อยู่ทันทีหลัง Minimocursor ใช้ค่าประมาณนี้ */
-  top:-154px;                 /* ขยับให้เริ่มซ่อนตั้งแต่ใต้จุด Minimocursor ลงมานิดหน่อย */
-  height:1200px;             /* ยาวพอให้ปิดเส้นถึงท้าย section; ปรับได้ */
-  width:6px;                 /* กว้างกว่าเส้นจริง (4px) เล็กน้อยพอปิดสนิท */
-  background:#020617;        /* ★ สีเดียวกับพื้นหลัง section3 เพื่อไม่เห็นเป็นแท่งดำ */
-  z-index:3;
-  pointer-events:none;
-  border-radius:3px;
+  top: -154px;
+  /* ขยับให้เริ่มซ่อนตั้งแต่ใต้จุด Minimocursor ลงมานิดหน่อย */
+  height: 1200px;
+  /* ยาวพอให้ปิดเส้นถึงท้าย section; ปรับได้ */
+  width: 6px;
+  /* กว้างกว่าเส้นจริง (4px) เล็กน้อยพอปิดสนิท */
+  background: #020617;
+  /* ★ สีเดียวกับพื้นหลัง section3 เพื่อไม่เห็นเป็นแท่งดำ */
+  z-index: 3;
+  pointer-events: none;
+  border-radius: 3px;
 }
 
 .timeline-row--late1 {
-  margin-top: -10px;   /* ลอง -20 / -36 / -48 แล้วจูนให้พอดีกับจุดส้ม */
+  margin-top: -10px;
+  /* ลอง -20 / -36 / -48 แล้วจูนให้พอดีกับจุดส้ม */
 }
 
-.timeline-row--late1 .timeline-col--left .timeline-item{
-  transform: translateY(-117px); /* ปรับ -10 ถึง +10 ตามที่เห็นพอดี */
+.timeline-row--late1 .timeline-col--left .timeline-item {
+  transform: translateY(-117px);
+  /* ปรับ -10 ถึง +10 ตามที่เห็นพอดี */
 }
 
 /* ระยะระหว่างหัวข้อยุคกับแถวแรก */
-.late-end > .timeline-center{ margin-top: 8px; }
+.late-end>.timeline-center {
+  margin-top: 8px;
+}
 
 /* แถว Late1 = วางฝั่งซ้ายเหมือนรายการฝั่งซ้ายทั่วไป */
-.timeline-row--late1 .timeline-item{
-  align-items:center; gap:16px;
+.timeline-row--late1 .timeline-item {
+  align-items: center;
+  gap: 16px;
 }
 
 
-.late-end .timeline-era{
-  font-size: 18px;        /* ใส่ขนาดที่ต้องการ */
+.late-end .timeline-era {
+  font-size: 18px;
+  /* ใส่ขนาดที่ต้องการ */
   line-height: 1.2;
-  white-space: nowrap;      /* กันตัดบรรทัด */
-  font-weight: 700;         /* ถ้าอยากหนาขึ้น */
-  letter-spacing: 0.3px;    /* ถ้าอยากเพิ่มช่องไฟตัวอักษรนิดหน่อย */
+  white-space: nowrap;
+  /* กันตัดบรรทัด */
+  font-weight: 700;
+  /* ถ้าอยากหนาขึ้น */
+  letter-spacing: 0.3px;
+  /* ถ้าอยากเพิ่มช่องไฟตัวอักษรนิดหน่อย */
 }
 
 /* ไม่มีจุดกลางของแถว Late1 */
-.timeline-row--late1 > .timeline-center{ display:none; }
+.timeline-row--late1>.timeline-center {
+  display: none;
+}
 
 
 /* =========================
@@ -632,5 +809,177 @@ html, body {
   }
 }
 
+/* ===== Section 4 (Titans) ===== */
+/* ============ SECTION 4 ============ */
+/* =========================
+   SECTION 4 – MEET THE TITANS
+   ========================= */
+.section4 {
+  --card-radius: 40px;                  /* ปรับความโค้งมุมการ์ดได้ที่นี่ */
+  padding: 64px 16px 96px;
+  background: radial-gradient(1200px 700px at 50% -10%, #0b1220 0%, #020617 55%, #020617 100%);
+  color: #e5e7eb;
+}
+
+/* หรือจะขยับกริดลงโดยตรง */
+.section4 .titans-grid {
+  margin-top: 100px;      /* ปรับเลขตามชอบ */
+}
 
 
+.titans-container {
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.titans-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.titans-title {
+  font-size: clamp(2rem, 4.2vw, 2.8rem);
+  font-weight: 900;
+  letter-spacing: .06em;
+  color: #f3f4f6;
+}
+
+.titans-subtitle {
+  margin-top: 10px;
+  font-size: .98rem;
+  color: #cbd5e1;
+}
+
+/* กริด 1 → 2 → 3 คอลัมน์ */
+.titans-grid {
+  display: grid;
+  gap: 22px;
+  margin-top: 28px;
+  grid-template-columns: 1fr;           /* mobile */
+}
+
+@media (min-width:700px) {
+  .titans-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width:1024px) {
+  .titans-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }   /* (แก้ selector ให้ถูก) */
+}
+
+/* ===== การ์ด ===== */
+.titan-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, .05);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(2, 6, 23, .06), inset 0 0 0 1px rgba(255, 255, 255, .053);
+  transition: transform .25s ease, box-shadow .25s ease;
+  transform: translateZ(0);             /* แก้คำสะกด tranform -> transform */
+}
+
+/* ป้องกันข้อความแปลก ๆ (แนวตั้ง/บีบ) ในบางเบราว์เซอร์ */
+.titan-card,
+.titan-body,
+.titan-name,
+.titan-desc {
+  min-width: 0;
+  writing-mode: horizontal-tb;
+}
+
+.titan-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 40px 80px rgba(2, 6, 23, .75), inset 0 0 0 1px rgba(255, 255, 255, .06);
+}
+
+/* ===== ส่วนรูป ===== */
+.titan-media{
+  padding: 16px 16px 0;
+  background: #020617;                  /* เฟรมดำเหมือนกันทุกใบ */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 230px;                         /* ปรับความสูงรูปได้จุดเดียว */
+  overflow: hidden;
+}
+
+.titan-img{
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;                   /* (เดิมเคยพิมพ์ผิด) */
+  display: block;
+}
+
+/* ===== เนื้อหาการ์ด ===== */
+.titan-body {
+  padding: 12px 16px 8px;
+  min-height: 64px;
+}
+
+.titan-name {
+  margin: 0 0 4px 0;
+  font-size: clamp(1.05rem, 1.8vw, 1.15rem);
+  font-weight: 800;
+  color: #f9fafb;
+}
+
+.titan-desc {
+  margin: 0;
+  color: #cbd5e1;
+  font-size: .92rem;
+}
+
+/* ===== แท็ก/ชิป ===== */
+.titan-meta {
+  padding: 10px 16px 14px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .82rem;
+  line-height: 1;
+  padding: 7px 9px;
+  border-radius: 10px;
+  background: #0b1220;
+  border: 1px solid rgba(255, 255, 255, .05);
+  color: #cbd5e1;
+}
+
+.chip--length {
+  color: #fb923c;
+  border-color: rgba(251, 146, 60, .25);
+  background: rgba(251, 146, 60, .08);
+}
+
+.chip--diet {
+  color: #34d399;
+  border-color: rgba(52, 211, 153, .25);
+  background: rgba(52, 211, 153, .08);
+}
+
+/* ===== โหมดเบลอ/เทา (การ์ดปิด) ===== */
+.is-muted .titan-img { filter: grayscale(1) contrast(.9) brightness(.85); }
+
+.is-muted::after {
+  content: attr(data-label);
+  position: absolute;
+  inset: 18px 18px auto auto;
+  background: rgba(2, 6, 23, .08);       /* แก้ 08 → .08 */
+  border: 1px solid rgba(255, 255, 255, .12);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  font-size: .94rem;
+  pointer-events: none;
+}
