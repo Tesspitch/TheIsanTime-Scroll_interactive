@@ -983,3 +983,80 @@ body {
   font-size: .94rem;
   pointer-events: none;
 }
+
+
+/* ============ SECTION 5 : Apex Predators (2 การ์ดกึ่งกลาง) ============ */
+.section5{
+  position: relative;
+  padding: 56px 16px 96px;
+  background: #020617;
+  color: #e5e7eb;
+  border-top: 1px solid rgba(255,255,255,.04);
+  overflow: hidden;
+}
+
+.pred-container{
+  /* แคบลงเพื่อให้ 2 การ์ดดูพอดี และกึ่งกลาง */
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.pred-header{ text-align: center; margin-bottom: 28px; }
+.pred-title{
+  font-size: clamp(2rem,3.5vw,2.6rem);
+  font-weight: 800;
+  letter-spacing: .04em;
+  color: #f9fafb;
+}
+.pred-subtitle{ margin-top: 8px; font-size: .95rem; color: #9ca3af; }
+
+/* กริด 1 → 2 คอลัมน์เสมอ (ไม่มีคอลัมน์ที่ 3) + จัดกึ่งกลาง */
+.pred-grid{
+  display: grid;
+  gap: 22px;
+  grid-template-columns: 1fr;      /* mobile */
+  max-width: 900px;                /* คุมความกว้างรวมของ 2 การ์ด */
+  margin: 0 auto;                  /* จัดกึ่งกลางกริด */
+}
+@media (min-width: 700px){
+  .pred-grid{
+    grid-template-columns: repeat(2, minmax(320px, 1fr)); /* 2 คอลัมน์ตลอด */
+  }
+}
+/* ไม่มี @media 1024 ให้ขึ้น 3 คอลัมน์แล้ว */
+
+.pred-card{
+  background: #111827;
+  border: 1px solid rgba(127,29,29,.55);
+  border-radius: 22px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 18px 40px rgba(15,23,42,.55), 0 0 0 1px rgba(15,23,42,.65);
+}
+.pred-card--highlight{ border-color: #7F1D1D; }
+
+.pred-imgwrap{
+  padding: 14px 14px 0;
+  background: #020617;
+  display: flex; align-items: center; justify-content: center;
+  height: 220px;
+  overflow: hidden;
+}
+.pred-img{
+  max-width: 100%; max-height: 100%;
+  width: auto; height: auto;
+  display: block; object-fit: contain;
+  border-radius: 16px;
+}
+
+.pred-body{ display: flex; flex-direction: column; padding: 12px 14px 14px; }
+.pred-head{ display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.pred-name{ margin: 0; font-size: 1.25rem; font-weight: 800; color: #f9fafb; }
+.pred-role{ min-height: 20px; margin: 6px 0 12px; font-size: .95rem; color: #9ca3af; }
+
+.pred-stats{ display: flex; flex-direction: column; gap: 6px; }
+.pred-row{ display: flex; justify-content: space-between; font-size: .95rem; }
+.pred-label{ color: #9ca3af; }
+.pred-val{ color: #F87171; }
+.pred-val--hi{ color: #F87171; }
+.pred-val--accent{ color: #F87171; }
