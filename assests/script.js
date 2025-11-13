@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Section2 background video switcher ---
     // Map button ids to video paths (as requested)
     const bgMap = {
-        dino: '/assests/video/bg_dino.mp4',
-        sea:  '/assests/video/bg_sea.mp4',
-        neature: '/assests/video/bg_neature.mp4'
+        dino: '../assests/video/bg_dino.mp4',
+        sea:  '../assests/video/bg_sea.mp4',
+        neature: '../assests/video/bg_neature.mp4'
     };
 
     function setSection2Video(src) {
