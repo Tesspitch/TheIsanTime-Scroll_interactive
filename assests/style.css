@@ -869,10 +869,23 @@ body {
 }
 
 .timeline-image {
-  width: 150px;
-  height: 150px;
+  /* show the whole image without cropping */
+  width: auto;
+  max-width: 260px;
+  height: auto;
   border-radius: 12px;
-  object-fit: cover;
+  object-fit: contain;
+  display: block;
+}
+
+/* Mobile: allow images to be larger and responsive (stacked layout) */
+@media (max-width: 768px) {
+  .timeline-image {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+    object-fit: contain;
+  }
 }
 
 /* ข้อความซ้าย/ขวา */

@@ -162,9 +162,33 @@ document.addEventListener('DOMContentLoaded', function() {
                         const box = section2.querySelector('.typing-box');
                         if (box) box.remove();
                         section2.classList.remove('typing-mode');
-                        // scroll to section3
-                        const s3 = document.getElementById('section3');
-                        if (s3) s3.scrollIntoView({ behavior: 'smooth' });
+                        // scroll to the next section after section2 (robust DOM-based fallback)
+                        function scrollToNextSection(delay = 140) {
+                            setTimeout(() => {
+                                if (!section2) {
+                                    const s3 = document.querySelector('#section3, #timeline');
+                                    if (s3) s3.scrollIntoView({ behavior: 'smooth' });
+                                    return;
+                                }
+
+                                // find the next sibling element that is a SECTION (skip text/comments)
+                                let el = section2.nextElementSibling;
+                                while (el && el.nodeType === 1 && el.tagName.toLowerCase() !== 'section') {
+                                    el = el.nextElementSibling;
+                                }
+
+                                if (el) {
+                                    el.scrollIntoView({ behavior: 'smooth' });
+                                    return;
+                                }
+
+                                // fallback to explicit ids
+                                const s3 = document.querySelector('#section3, #timeline');
+                                if (s3) s3.scrollIntoView({ behavior: 'smooth' });
+                            }, delay);
+                        }
+
+                        scrollToNextSection(160);
                     });
                 }, 420);
             }
