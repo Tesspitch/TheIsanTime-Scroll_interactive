@@ -10,7 +10,14 @@
   </head>
   <body>
     
-    <div class="section1">      
+
+    <!-- 
+    section1
+    -->
+    <button onclick="location.href='/src/ex.html'">หน้าตัวอย่าง</button>
+    
+    <div class="section1">
+      
       <div class="fade">
         <header>
           <div class="text-top" data-aos="fade-up" data-aos-duration="1200">
@@ -72,287 +79,339 @@
     </section>
 
     <!-- 
-    Section 3: Timeline of Thai Dinosaur Discoveries
+    section 3
     -->
-    <section class="section3" id="section3">
-      <div class="timeline-container">
-        <header class="timeline-header" data-aos="fade-up" data-aos-duration="1000">
-          <h2 class="timeline-title">การค้นพบไดโนเสาร์ไทย</h2>
-          <p class="timeline-subtitle">ย้อนรอยการค้นพบฟอสซิลไดโนเสาร์ในประเทศไทย</p>
-        </header>
 
-        <!-- Timeline Container -->
-        <div class="timeline">
-          <!-- Central vertical line -->
-          <div class="timeline-line"></div>
+    <section class="section3" id="timeline">
+        <div class="timeline-container">
+            <header class="timeline-header">
+                <h2 class="timeline-title">ยุคบรรพชีวิน</h2>
+                <p class="timeline-subtitle">ไทรแอสซิกตอนปลาย(Late Triassic)</p>
+            </header>
 
-          <!-- Row 1: Isanosaurus attavipatchi (Late Triassic) -->
-          <div class="timeline-row" data-aos="fade-right" data-aos-delay="0" data-aos-duration="800">
+            <!-- =========== TIMELINE =========== -->
+            <div class="timeline">
+                <!-- เส้นแกนกลาง -->
+                <div class="timeline-line"></div>
+
+                <!-- Row 1 : อีสานโนซอรัส อรรถวิภัชน์ซี (ขวา) + จุดส้ม 1 -->
+                <div class="timeline-row">
                     <div class="timeline-col timeline-col--left"></div>
+
                     <div class="timeline-center">
-                      <div class="timeline-dot"></div>
+                        <div class="timeline-dot"></div>
                     </div>
+
                     <div class="timeline-col timeline-col--right">
-                      <div class="timeline-item">
-                        <img src="../assests/img/fly_rmbg.webp" alt="Isanosaurus attavipatchi" class="timeline-image">
-                        <div class="timeline-text timeline-text--right">
-                          <h3 class="timeline-dino-name">
-                            อีสานโนซอรัส อรรถวิภัชน์ซี
-                            <span class="timeline-dino-name-en">(Isanosaurus attavipatchi)</span>
-                          </h3>
-                          <p class="timeline-dino-meta">ค้นพบปี 2531 (1988), รายงานปี 2000</p>
+                        <div class="timeline-item">
+                            <img src="../assests/img/fly_rmbg.webp" alt="อีสานโนซอรัส อรรถวิภัชน์ซี"
+                                class="timeline-image">
+                            <div class="timeline-text timeline-text--right">
+                                <h3 class="timeline-dino-name">
+                                    อีสานโนซอรัส อรรถวิภัชน์ซี<br>
+                                    <span class="timeline-dino-name-en">
+                                        (Isanosaurus attavipatchi)
+                                    </span>
+                                </h3>
+                                <p class="timeline-dino-meta">
+                                    ค้นพบปี 2531 (1988),<br>
+                                    รายงานปี 2000
+                                </p>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
+                </div>
 
-          <!-- Row 2: Phuwiangosaurus sirindhornae (Early Cretaceous) -->
-          <div class="timeline-row" data-aos="fade-left" data-aos-delay="100" data-aos-duration="800">
-                    <div class="timeline-col timeline-col--left">
-                      <div class="timeline-item">
-                        <div class="timeline-text timeline-text--left">
-                          <h3 class="timeline-dino-name">
-                            ภูเวียงโทซอรัส สิรินธรเน
-                            <span class="timeline-dino-name-en">(Phuwiangosaurus sirindhornae)</span>
-                          </h3>
-                          <p class="timeline-dino-meta">ค้นพบปี 2519 (1976) ที่ อ.ภูเวียง จ.ขอนแก่น, ประกาศชื่อทางวิทยาศาสตร์ปี 1994</p>
-                        </div>
-                        <img src="../assests/img/fly_rmbg.webp" alt="Phuwiangosaurus sirindhornae" class="timeline-image">
-                      </div>
-                    </div>
-                    <div class="timeline-center">
-                      <p class="timeline-era">ครีเทเซียสตอนต้น (Early Cretaceous)</p>
-                      <div class="timeline-dot"></div>
-                    </div>
-                    <div class="timeline-col timeline-col--right"></div>
-                  </div>
-
-          <!-- Row 3: Siamosaurus suteethorni (Early Cretaceous) -->
-          <div class="timeline-row" data-aos="fade-right" data-aos-delay="200" data-aos-duration="800">
-                    <div class="timeline-col timeline-col--left"></div>
-                    <div class="timeline-center">
-                      <p class="timeline-era">ครีเทเซียสตอนต้น (Early Cretaceous)</p>
-                      <div class="timeline-dot"></div>
-                    </div>
-                    <div class="timeline-col timeline-col--right">
-                      <div class="timeline-item">
-                        <img src="../assests/img/fly_rmbg.webp" alt="Siamosaurus suteethorni" class="timeline-image">
-                        <div class="timeline-text timeline-text--right">
-                          <h3 class="timeline-dino-name">
-                            สยามโมซอรัส สุธีธรนี
-                            <span class="timeline-dino-name-en">(Siamosaurus suteethorni)</span>
-                          </h3>
-                          <p class="timeline-dino-meta">ค้นพบปลายปี 2526 (1983), ประกาศชื่อทางวิทยาศาสตร์ปี 1986 และ 1997</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-          <!-- Row 4: Psittacosaurus sattayaraki (Early Cretaceous) -->
-          <div class="timeline-row" data-aos="fade-left" data-aos-delay="300" data-aos-duration="800">
-                    <div class="timeline-col timeline-col--left">
-                      <div class="timeline-item">
-                        <div class="timeline-text timeline-text--left">
-                          <h3 class="timeline-dino-name">
-                            ซิตตาโคซอรัส สัตตยารากี
-                            <span class="timeline-dino-name-en">(Psittacosaurus sattayaraki)</span>
-                          </h3>
-                          <p class="timeline-dino-meta">ค้นพบปี 2535 (1992) ที่คอนสวรรค์ ชัยภูมิ</p>
-                        </div>
-                        <img src="../assests/img/fly_rmbg.webp" alt="Psittacosaurus sattayaraki" class="timeline-image">
-                      </div>
-                    </div>
-                    <div class="timeline-center">
-                      <p class="timeline-era">ครีเทเซียสตอนต้น (Early Cretaceous)</p>
-                      <div class="timeline-dot"></div>
-                    </div>
-                    <div class="timeline-col timeline-col--right"></div>
-                  </div>
-
-          <!-- Row 5: Kinnareemimus khonkaennsis (Late Cretaceous) -->
-          <div class="timeline-row" data-aos="fade-right" data-aos-delay="400" data-aos-duration="800">
-                    <div class="timeline-col timeline-col--left"></div>
-                    <div class="timeline-center">
-                      <p class="timeline-era">ลายเทเซียสตอนปลาย (Late Cretaceous)</p>
-                      <div class="timeline-dot"></div>
-                    </div>
-                    <div class="timeline-col timeline-col--right">
-                      <div class="timeline-item">
-                        <img src="../assests/img/fly_rmbg.webp" alt="Kinnareemimus khonkaennsis" class="timeline-image">
-                        <div class="timeline-text timeline-text--right">
-                          <h3 class="timeline-dino-name">
-                            กินรีมิมัส ขอนแก่นเอนซิส
-                            <span class="timeline-dino-name-en">(Kinnareemimus khonkaennsis)</span>
-                          </h3>
-                          <p class="timeline-dino-meta">ค้นพบปี 2537 (1994), รายงานทางวิทยาศาสตร์ 2001</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                <!--Row 6: Siamotyrannus isanensis (Late Cretaceous) -->
-                <div class="timeline-row" data-aos="fade-left" data-aos-delay="500" data-aos-duration="800">
+                <!-- Row 2 : ภูเวียงโทซอรัส สิรินธรเน (ซ้าย) + era text + จุดส้ม 2 -->
+                <div class="timeline-row">
                     <div class="timeline-col timeline-col--left">
                         <div class="timeline-item">
                             <div class="timeline-text timeline-text--left">
                                 <h3 class="timeline-dino-name">
-                                    สยามโมไทรันมัส อิสานเอนซิส
+                                    ภูเวียงโทซอรัส สิรินธรเน <br>
+                                    <span class="timeline-dino-name-en">
+                                        (Phuwiangosaurus sirindhornae)
+                                    </span>
+                                </h3>
+                                <p class="timeline-dino-meta">
+                                    ค้นพบปี 2519 (1976) ที่ อ.ภูเวียง จ.ขอนแก่น, <br>
+                                    ประกาศชื่อทางวิทยาศาสตร์ปี 1994
+                                </p>
+                            </div>
+                            <img src="../assests/img/fly_rmbg.webp" alt="ภูเวียงโทซอรัส" class="timeline-image">
+                        </div>
+                    </div>
+
+                    <div class="timeline-center">
+                        <p class="timeline-era">
+                            ครีเทเซียสตอนต้น (Early Cretaceous)
+                        </p>
+                        <div class="timeline-dot"></div>
+                    </div>
+
+                    <div class="timeline-col timeline-col--right"></div>
+                </div>
+
+                <!-- Row 3 : สยามโมซอรัส สุธีธรนี (ขวา) -->
+                <div class="timeline-row">
+                    <div class="timeline-col timeline-col--left"></div>
+
+                    <div class="timeline-center">
+                        <div class="timeline-dot"></div>
+                    </div>
+
+                    <div class="timeline-col timeline-col--right">
+                        <div class="timeline-item">
+                            <img src="../assests/img/fly_rmbg.webp" alt="สยามโมซอรัส" class="timeline-image">
+                            <div class="timeline-text timeline-text--right">
+                                <h3 class="timeline-dino-name">
+                                    สยามโมซอรัส สุธีธรนี<br>
+                                    <span class="timeline-dino-name-en">
+                                        (Siamosaurus suteethorni)
+                                    </span>
+                                </h3>
+                                <p class="timeline-dino-meta">
+                                    ค้นพบปลายปี 2526 (1983),<br>
+                                    ประกาศชื่อทางวิทยาศาสตร์ปี 1986 และ 1997
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 4 : Prittacosaurus (ซ้าย) -->
+                <div class="timeline-row">
+                    <div class="timeline-col timeline-col--left">
+                        <div class="timeline-item">
+                            <div class="timeline-text timeline-text--left">
+                                <h3 class="timeline-dino-name">
+                                    Prittacosaurus sattayaraki
+                                </h3>
+                                <p class="timeline-dino-meta">
+                                    ค้นพบปี 2535 (1992) ที่คอนสวรรค์ ชัยภูมิ
+                                </p>
+                            </div>
+                            <img src="../assests/img/fly_rmbg.webp" alt="Prittacosaurus" class="timeline-image">
+                        </div>
+                    </div>
+
+                    <div class="timeline-center">
+                        <div class="timeline-dot"></div>
+                    </div>
+
+                    <div class="timeline-col timeline-col--right"></div>
+                </div>
+
+                <!-- Row 5 : กินรีมิมัส ขอนแก่นเอนซิส (ขวา) -->
+                <div class="timeline-row">
+                    <div class="timeline-col timeline-col--left"></div>
+
+                    <div class="timeline-center">
+                        <div class="timeline-dot"></div>
+                    </div>
+
+                    <div class="timeline-col timeline-col--right">
+                        <div class="timeline-item">
+                            <img src="../assests/img/fly_rmbg.webp" alt="Kinnareemimus khonkaennsis"
+                                class="timeline-image">
+                            <div class="timeline-text timeline-text--right">
+                                <h3 class="timeline-dino-name">
+                                    กินรีมิมัส ขอนแก่นเอนซิส<br>
+                                    <span class="timeline-dino-name-en">
+                                        Kinnareemimus khonkaennsis
+                                    </span>
+                                </h3>
+                                <p class="timeline-dino-meta">
+                                    ค้นพบปี 2537 (1994),<br>
+                                    รายงานทางวิทยาศาสตร์ 2001
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Row 6-->
+                <div class="timeline-row">
+                    <div class="timeline-col timeline-col--left">
+                        <div class="timeline-item">
+                            <div class="timeline-text timeline-col--left">
+                                <h3 class="timeline-dino-name">
+                                    สยามโมไทรันมัส อิสานเอนซิส <br>
                                     <span class="timeline-dino-name-en">(Siamotyrannus isanensis)</span>
                                 </h3>
-                                <p class="timeline-dino-meta">ค้นพบ เดือนสิงหาคม ปี 2536 (1993), ประกาศชื่อทางวิทยาศาสตร์ปี 1996</p>
+                                <p class="timeline-dino-meta">
+                                    ค้นพบ เดือนสิงหาคม ปี 2536 (1993), <br>
+                                    ประกาศชื่อทางวิทยาศาสตร์ปี 1996
+                                </p>
                             </div>
-                            <img src="../assests/img/fly_rmbg.webp" alt="Siamotyrannus isanensis" class="timeline-image">
+                            <img src="../assests/img/fly_rmbg.webp" alt="Siamotyrannus isanensis"
+                                class="timeline-image">
                         </div>
                     </div>
                     <div class="timeline-center">
-                      <p class="timeline-era">ลายเทเซียสตอนปลาย (Late Cretaceous)</p>
-                      <div class="timeline-dot"></div>
+                        <div class="timeline-dot"></div>
                     </div>
                     <div class="timeline-col timeline-col--right"></div>
                 </div>
 
-                <!--Row 7: Ratchasimasaurus suranareae (Late Cretaceous) -->
-                <div class="timeline-row" data-aos="fade-right" data-aos-delay="600" data-aos-duration="800">
+                <!--Row 7-->
+                <div class="timeline-row">
+
                     <div class="timeline-col timeline-col--left"></div>
+
                     <div class="timeline-center">
-                      <p class="timeline-era">ลายเทเซียสตอนปลาย (Late Cretaceous)</p>
-                      <div class="timeline-dot"></div>
+                        <div class="timeline-dot"></div>
                     </div>
+
                     <div class="timeline-col timeline-col--right">
                         <div class="timeline-item">
-                            <img src="../assests/img/fly_rmbg.webp" alt="Ratchasimasaurus suranareae" class="timeline-image">
+                            <img src="..//assests/img/fly_rmbg.webp" alt="Ratchasimasaurus" class="timeline-image">
                             <div class="timeline-text timeline-text--right">
                                 <h3 class="timeline-dino-name">
-                                    ราชสีมาซอรัส สุรนารีเอ
+                                    ราชสีมาซอรัส สุรนารีเอ <br>
                                     <span class="timeline-dino-name-en">(Ratchasimasaurus suranareae)</span>
                                 </h3>
-                                <p class="timeline-dino-meta">ค้นพบปี 2550 (2007), ตีพิมพ์ประกาศชื่อทางวิทยาศาสตร์ปี 2011</p>
+                                <p class="timeline-dino-meta">
+                                    ค้นพบปี 2550 (2007),<br>
+                                    ตีพิมพ์ประกาศชื่อทางวิทยาศาสตร์ปี 2011
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!--Row 8: Sirindhorna khoratensis (Late Cretaceous) -->
-                <div class="timeline-row" data-aos="fade-left" data-aos-delay="700" data-aos-duration="800">
+                <!--Row 8-->
+                <div class="timeline-row">
                     <div class="timeline-col timeline-col--left">
                         <div class="timeline-item">
-                            <div class="timeline-text timeline-text--left">
+                            <div class="timeline-text timeline-col--left">
                                 <h3 class="timeline-dino-name">
-                                    สิรินธรนา โคราชเอนซิส
+                                    สิรินธรนา โคราชเอนซิส <br>
                                     <span class="timeline-dino-name-en">(Sirindhorna khoratensis)</span>
                                 </h3>
-                                <p class="timeline-dino-meta">ค้นพบปี 2550 (2007), ประกาศเมื่อวันที่ 20 มกราคม 2559, ตีพิมพ์ทางวิทยาศาสตร์ปี 2558 (2015)</p>
+                                <p class="timeline-dino-meta">
+                                    ค้นพบปี 2550 (2007),<br>
+                                    ประกาศเมื่อวันที่ 20 มกราคม 2559, <br>
+                                    ตีพิมพ์ทางวิทยาศาสตร์ปี 2558 (2015)
+                                </p>
                             </div>
-                            <img src="../assests/img/fly_rmbg.webp" alt="Sirindhorna khoratensis" class="timeline-image">
+                            <img src="../assests/img/fly_rmbg.webp" alt="Sirindhorna" class="timeline-image">
                         </div>
                     </div>
                     <div class="timeline-center">
-                      <p class="timeline-era">ลายเทเซียสตอนปลาย (Late Cretaceous)</p>
-                      <div class="timeline-dot"></div>
+                        <div class="timeline-dot"></div>
                     </div>
                     <div class="timeline-col timeline-col--right"></div>
                 </div>
 
-                <!--Row 9: Siamodon nimngami (Late Cretaceous) -->
-                <div class="timeline-row" data-aos="fade-right" data-aos-delay="800" data-aos-duration="800">
+                <!--Row 9-->
+                <div class="timeline-row">
                     <div class="timeline-col timeline-col--left"></div>
                     <div class="timeline-center">
-                      <p class="timeline-era">ลายเทเซียสตอนปลาย (Late Cretaceous)</p>
-                      <div class="timeline-dot"></div>
+                        <div class="timeline-dot"></div>
                     </div>
                     <div class="timeline-col timeline-col--right">
                         <div class="timeline-item">
-                            <img src="../assests/img/fly_rmbg.webp" alt="Siamodon nimngami" class="timeline-image">
+                            <img src="../assests/img/fly_rmbg.webp" alt="Siamodon" class="timeline-image">
                             <div class="timeline-text timeline-text--right">
                                 <h3 class="timeline-dino-name">
-                                    สยามโมดอน นิ่มงามมิ
+                                    สยามโมดอน นิ่มงามมิ <br>
                                     <span class="timeline-dino-name-en">(Siamodon nimngami)</span>
                                 </h3>
-                                <p class="timeline-dino-meta">พบโดย นายวิทยา นิ่มงาม, ตีพิมพ์ประกาศชื่อทางวิทยาศาสตร์ปี 2011</p>
+                                <p class="timeline-dino-meta">
+                                    พบโดย นายวิทยา นิ่มงาม, <br>
+                                    ตีพิมพ์ประกาศชื่อทางวิทยาศาสตร์ปี 2011
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!--Row 10: Phuwiangvenator yeamniyomi (Late Cretaceous) -->
-                <div class="timeline-row" data-aos="fade-left" data-aos-delay="900" data-aos-duration="800">
+                <!--Row 10-->
+                <div class="timeline-row">
                     <div class="timeline-col timeline-col--left">
                         <div class="timeline-item">
                             <div class="timeline-text timeline-text--left">
                                 <h3 class="timeline-dino-name">
-                                    ภูเวียงเวเนเตอร์ แย้มนิยมมิ
+                                    ภูเวียงเวเนเตอร์ แย้มนิยมมิ <br>
                                     <span class="timeline-dino-name-en">(Phuwiangvenator yeamniyomi)</span>
                                 </h3>
-                                <p class="timeline-dino-meta">ค้นพบปี 2562 (2019)</p>
+                                <p class="timeline-dino-meta">
+                                    ค้นพบปี 2562 (2019)
+                                </p>
                             </div>
-                            <img src="../assests/img/fly_rmbg.webp" alt="Phuwiangvenator yeamniyomi" class="timeline-image">
+                            <img src="../assests/img/fly_rmbg.webp" alt="Phuwiangvenator" class="timeline-image">
                         </div>
                     </div>
                     <div class="timeline-center">
-                      <p class="timeline-era">ลายเทเซียสตอนปลาย (Late Cretaceous)</p>
-                      <div class="timeline-dot"></div>
+                        <div class="timeline-dot"></div>
                     </div>
-                    <div class="timeline-col timeline-col--right"></div>
                 </div>
 
-                <!--Row 11: Vayuraptor nongbualamphuensis (Late Cretaceous) -->
-                <div class="timeline-row" data-aos="fade-right" data-aos-delay="1000" data-aos-duration="800">
+                <!--Row 11-->
+                <div class="timeline-row">
                     <div class="timeline-col timeline-col--left"></div>
                     <div class="timeline-center">
-                      <p class="timeline-era">ลายเทเซียสตอนปลาย (Late Cretaceous)</p>
-                      <div class="timeline-dot"></div>
+                        <div class="timeline-dot"></div>
                     </div>
                     <div class="timeline-col timeline-col--right">
                         <div class="timeline-item">
-                            <img src="../assests/img/fly_rmbg.webp" alt="Vayuraptor nongbualamphuensis" class="timeline-image">
+                            <img src="../assests/img/fly_rmbg.webp" alt="Vayuraptor" class="timeline-image">
                             <div class="timeline-text timeline-text--right">
                                 <h3 class="timeline-dino-name">
-                                    วายุแรปเตอร์ หนองบัวลำภูเอนซิส
-                                    <span class="timeline-dino-name-en">(Vayuraptor nongbualamphuensis)</span>
+                                    วายุแรปเตอร์ หนองบัวลำภูเอนซิส <br>
+                                    <span class="timeliสne-dino-name-en">(Vayuraptor nongbualamphuensis)</span>
                                 </h3>
-                                <p class="timeline-dino-meta">ค้นพบปี 2562</p>
+                                <p class="timeline-dino-meta">
+                                    ค้นพบปี 2562
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!--Row 12: Siamraptor suwat (Late Cretaceous) -->
-                <div class="timeline-row" data-aos="fade-left" data-aos-delay="1100" data-aos-duration="800">
+                <!--Row 12-->
+                <div class="timeline-row">
                     <div class="timeline-col timeline-col--left">
                         <div class="timeline-item">
                             <div class="timeline-text timeline-text--left">
                                 <h3 class="timeline-dino-name">
-                                    สยามแรปเตอร์ สุวัจน์ต
+                                    สยามแรปเตอร์ สุวัจน์ต<br>
                                     <span class="timeline-dino-name-en">(Siamraptor suwat)</span>
                                 </h3>
-                                <p class="timeline-dino-meta">ค้นพบจากแหล่งขุดค้รบ้านสะพานหิน จ.นครราชสีมา, ประกาศวันที่ 9 ตุลาตม 2562, เผยแพร่เมื่อ 21-22 พฤศจิกายน 2562</p>
+                                <p class="timeline-dino-meta">
+                                    ค้นพบจากแหล่งขุดค้รบ้านสะพานหิน<br>
+                                    จ.นครราชสีมา, ประกาศวันที่ 9 ตุลาตม 2562,<br>
+                                    เผยแพร่เมื่อ 21-22 พฤศจิกายน 2562
+                                </p>
                             </div>
-                            <img src="../assests/img/fly_rmbg.webp" alt="Siamraptor suwat" class="timeline-image">
+                            <img src="../assests/img/fly_rmbg.webp" alt="Siamraptor" class="timeline-image">
                         </div>
                     </div>
                     <div class="timeline-center">
-                      <p class="timeline-era">ลายเทเซียสตอนปลาย (Late Cretaceous)</p>
-                      <div class="timeline-dot"></div>
+                        <div class="timeline-dot"></div>
                     </div>
-                    <div class="timeline-col timeline-col--right"></div>
                 </div>
 
-                <!--Row 13: Minimocursor phunoiensis (Late Cretaceous) -->
-                <div class="timeline-row" data-aos="fade-right" data-aos-delay="1200" data-aos-duration="800">
+                <!--Row 13-->
+                <div class="timeline-row">
                     <div class="timeline-col timeline-col--left"></div>
                     <div class="timeline-center">
-                      <p class="timeline-era">ลายเทเซียสตอนปลาย (Late Cretaceous)</p>
-                      <div class="timeline-dot"></div>
+                        <div class="timeline-dot"></div>
                     </div>
                     <div class="timeline-col timeline-col--right">
                         <div class="timeline-item">
-                            <img src="../assests/img/fly_rmbg.webp" alt="Minimocursor phunoiensis" class="timeline-image">
+                            <img src="../assests/img/fly_rmbg.webp" alt="Minimocursor phunoiensis"
+                                class="timeline-image">
                             <div class="timeline-text timeline-text--right">
                                 <h3 class="timeline-dino-name">
-                                    มินิโมเคอร์เซอร์ ภูน้อยเอนซิส
+                                    มินิโมเคอร์เซอร์ ภูน้อยเอนซิส<br>
                                     <span class="timeline-dino-name-en">(Minimocursor phunoiensis)</span>
                                 </h3>
-                                <p class="timeline-dino-meta">ค้นพบที่ภูน้อย จ.กาฬสินธุ์, ประกาศเป็นสายพันธู์ใหม่ เมื่อ 25 กรกฎาคม 2566 (2023)</p>
+                                <p class="timeline-dino-meta">
+                                    ค้นพบที่ภูน้อย จ.กาฬสินธุ์, ประกาศเป็นสายพันธู์ใหม่<br>
+                                    เมื่อ 25 กรกฎาคม 2566 (2023)
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -565,7 +624,6 @@
             </div>
         </div>
     </section>
-
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>

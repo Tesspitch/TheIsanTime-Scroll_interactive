@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
 html,
 body {
   font-family: 'Arial';
@@ -155,6 +160,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .section1::after {
@@ -415,20 +422,15 @@ body {
 }
 
 .section2 {
-
   height: 100vh;
   color: white;
   text-align: center;
   padding-top: 25vh;
   background: linear-gradient(to bottom, #1A1A1A, #111827);
-
   position: relative;
-  height: 100vh;
-  color: white;
-  text-align: center;
-  padding-top: 25vh;
-  background: linear-gradient(to bottom, #1A1A1A, #111827);
   overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   /* contain background video */
 }
 
@@ -1415,7 +1417,7 @@ body {
 }
 
 /* =========================================================
-   SECTION 3 – Fossil Timeline (ตาม Figma)
+   SECTION 3 – Fossil Timeline (ตาม Figma) 
    ========================================================= */
 
 .section3 {
@@ -1424,6 +1426,8 @@ body {
   padding: 64px 16px 96px;
   position: relative;
   overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 /* กล่องกลางของ section */
@@ -1958,7 +1962,7 @@ body {
 .pred-header {
   text-align: center;
   margin-bottom: 70px;
-  font-size: ;
+  
 }
 
 .pred-title {

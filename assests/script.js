@@ -1,7 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // === SMOOTH SCROLL BEHAVIOR ===
+    // Enable smooth scroll and section snapping
+    document.documentElement.style.scrollBehavior = 'smooth';
+
     const button = document.querySelector('.section1 button');
     const sections = document.querySelectorAll('.section1, .section2');
     const section2 = document.getElementById('section2');
+    const _section3 = document.getElementById('section3');
 
     // Smooth scroll to section2 when the hero button is clicked
     if (button) {
@@ -165,5 +170,34 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // === SECTION TRANSITION ANIMATIONS ===
+    // Add smooth scroll listener for section-to-section transitions
+    let _currentSection = 0;
+    const allSections = [
+        document.querySelector('.section1'),
+        document.querySelector('.section2'),
+        document.getElementById('section3'),
+        document.querySelector('.section4'),
+        document.querySelector('.section5')
+    ].filter(s => s !== null);
+
+    window.addEventListener('scroll', function() {
+        const scrollY = window.pageYOffset;
+        const windowHeight = window.innerHeight;
+
+        // Update current section
+        allSections.forEach((section, index) => {
+            if (section) {
+                const rect = section.getBoundingClientRect();
+                const sectionTop = scrollY + rect.top;
+                const sectionHeight = rect.height;
+                // If section is in viewport, mark it as current
+                if (scrollY >= sectionTop - windowHeight / 2 && scrollY < sectionTop + sectionHeight) {
+                    _currentSection = index;
+                }
+            }
+        });
+    }, { passive: true });
 
 });
