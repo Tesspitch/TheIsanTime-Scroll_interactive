@@ -978,353 +978,9 @@ body {
   }
 }
 
-/* ===== Section 4 (Titans) ===== */
-.section4 {
-  --card-radius: 40px;
-  /* ปรับความโค้งมุมการ์ดได้ที่นี่ */
-  padding: 64px 16px 96px;
-  background: radial-gradient(1200px 700px at 50% -10%, #0b1220 0%, #020617 55%, #020617 100%);
-  color: #e5e7eb;
-}
-
-/* หรือจะขยับกริดลงโดยตรง */
-.section4 .titans-grid {
-  margin-top: 100px;
-  /* ปรับเลขตามชอบ */
-}
 
 
-.titans-container {
-  max-width: 1150px;
-  margin: 0 auto;
-}
 
-.titans-header {
-  text-align: center;
-  margin-bottom: 28px;
-}
-
-.titans-title {
-  font-size: clamp(2rem, 4.2vw, 2.8rem);
-  font-weight: 900;
-  letter-spacing: .06em;
-  color: #f3f4f6;
-}
-
-.titans-subtitle {
-  margin-top: 10px;
-  font-size: .98rem;
-  color: #cbd5e1;
-}
-
-/* กริด 1 → 2 → 3 คอลัมน์ */
-.titans-grid {
-  display: grid;
-  gap: 22px;
-  margin-top: 28px;
-  grid-template-columns: 1fr;
-  /* mobile */
-}
-
-@media (min-width:700px) {
-  .titans-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width:1024px) {
-  .titans-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  /* (แก้ selector ให้ถูก) */
-}
-
-/* ===== การ์ด ===== */
-.titan-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  background: #0f172a;
-  border: 1px solid rgba(255, 255, 255, .05);
-  border-radius: var(--card-radius);
-  overflow: hidden;
-  box-shadow: 0 30px 60px rgba(2, 6, 23, .06), inset 0 0 0 1px rgba(255, 255, 255, .053);
-  transition: transform .25s ease, box-shadow .25s ease;
-  transform: translateZ(0);
-  /* แก้คำสะกด tranform -> transform */
-}
-
-/* ป้องกันข้อความแปลก ๆ (แนวตั้ง/บีบ) ในบางเบราว์เซอร์ */
-.titan-card,
-.titan-body,
-.titan-name,
-.titan-desc {
-  min-width: 0;
-  writing-mode: horizontal-tb;
-}
-
-.titan-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 40px 80px rgba(2, 6, 23, .75), inset 0 0 0 1px rgba(255, 255, 255, .06);
-}
-
-/* ===== ส่วนรูป ===== */
-.titan-media {
-  padding: 16px 16px 0;
-  background: #020617;
-  /* เฟรมดำเหมือนกันทุกใบ */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 230px;
-  /* ปรับความสูงรูปได้จุดเดียว */
-  overflow: hidden;
-}
-
-.titan-img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  /* (เดิมเคยพิมพ์ผิด) */
-  display: block;
-}
-
-/* ===== เนื้อหาการ์ด ===== */
-.titan-body {
-  padding: 12px 16px 8px;
-  min-height: 64px;
-}
-
-.titan-name {
-  margin: 0 0 4px 0;
-  font-size: clamp(1.05rem, 1.8vw, 1.15rem);
-  font-weight: 800;
-  color: #f9fafb;
-}
-
-.titan-desc {
-  margin: 0;
-  color: #cbd5e1;
-  font-size: .92rem;
-}
-
-/* ===== แท็ก/ชิป ===== */
-.titan-meta {
-  padding: 10px 16px 14px;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: .82rem;
-  line-height: 1;
-  padding: 7px 9px;
-  border-radius: 10px;
-  background: #0b1220;
-  border: 1px solid rgba(255, 255, 255, .05);
-  color: #cbd5e1;
-}
-
-.chip--length {
-  color: #fb923c;
-  border-color: rgba(251, 146, 60, .25);
-  background: rgba(251, 146, 60, .08);
-}
-
-.chip--diet {
-  color: #34d399;
-  border-color: rgba(52, 211, 153, .25);
-  background: rgba(52, 211, 153, .08);
-}
-
-/* ===== โหมดเบลอ/เทา (การ์ดปิด) ===== */
-.is-muted .titan-img {
-  filter: grayscale(1) contrast(.9) brightness(.85);
-}
-
-.is-muted::after {
-  content: attr(data-label);
-  position: absolute;
-  inset: 18px 18px auto auto;
-  background: rgba(2, 6, 23, .08);
-  /* แก้ 08 → .08 */
-  border: 1px solid rgba(255, 255, 255, .12);
-  color: #fff;
-  padding: 10px 14px;
-  border-radius: 999px;
-  font-weight: 800;
-  letter-spacing: .02em;
-  font-size: .94rem;
-  pointer-events: none;
-}
-
-
-/* ============ SECTION 5 : Apex Predators (2 การ์ดกึ่งกลาง) ============ */
-.section5 {
-  position: relative;
-  padding: 56px 16px 96px;
-  background: #020617;
-  color: #e5e7eb;
-  border-top: 1px solid rgba(255, 255, 255, .04);
-  overflow: hidden;
-}
-
-.pred-container {
-  /* แคบลงเพื่อให้ 2 การ์ดดูพอดี และกึ่งกลาง */
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.pred-header {
-  text-align: center;
-  margin-bottom: 70px;
-
-}
-
-.pred-title {
-  font-size: clamp(2rem, 3.5vw, 2.6rem);
-  font-weight: 800;
-  letter-spacing: .04em;
-  color: #f9fafb;
-}
-
-.pred-subtitle {
-  margin-top: 50px;
-  font-size: 1.0rem;
-  color: #9ca3af;
-}
-
-/* กริด 1 → 2 คอลัมน์เสมอ (ไม่มีคอลัมน์ที่ 3) + จัดกึ่งกลาง */
-.pred-grid {
-  display: grid;
-  gap: 22px;
-  grid-template-columns: 1fr;
-  /* mobile */
-  max-width: 900px;
-  /* คุมความกว้างรวมของ 2 การ์ด */
-  margin: 0 auto;
-  /* จัดกึ่งกลางกริด */
-}
-
-@media (min-width: 700px) {
-  .pred-grid {
-    grid-template-columns: repeat(2, minmax(320px, 1fr));
-    /* 2 คอลัมน์ตลอด */
-  }
-}
-
-/* ไม่มี @media 1024 ให้ขึ้น 3 คอลัมน์แล้ว */
-
-.pred-card {
-  background: #111827;
-  border: 1px solid rgba(127, 29, 29, .55);
-  border-radius: 22px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, .55), 0 0 0 1px rgba(15, 23, 42, .65);
-}
-
-.pred-card--highlight {
-  border-color: #7F1D1D;
-}
-
-.pred-imgwrap {
-  padding: 14px 14px 0;
-  background: #020617;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 220px;
-  overflow: hidden;
-}
-
-.pred-img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  border-radius: 16px;
-}
-
-.pred-body {
-  display: flex;
-  flex-direction: column;
-  padding: 12px 14px 14px;
-}
-
-.pred-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-
-.pred-name {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: #f9fafb;
-}
-
-.pred-role {
-  min-height: 20px;
-  margin: 6px 0 12px;
-  font-size: .95rem;
-  color: #9ca3af;
-}
-
-.pred-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.pred-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: .95rem;
-}
-
-.pred-label {
-  color: #9ca3af;
-}
-
-.pred-val {
-  color: #F87171;
-}
-
-.pred-val--hi {
-  color: #F87171;
-}
-
-.pred-val--accent {
-  color: #F87171;
-}
-
-/* RESET เล็กน้อย */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* ถ้าหน้าหลักมี font / background อยู่แล้ว ตัดส่วน body ออกได้ */
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-  background: #020617;
-  color: #e5e7eb;
-}
 
 /* SECTION */
 .timeline-section {
@@ -1560,336 +1216,197 @@ body {
 }
 
 
-/* ===== Section 4 (Titans) ===== */
+/* โทนสีคล้ายภาพ: น้ำเงินเข้ม / ตัวหนังสือขาว */
+
+
+
+/* SECTION 4 */
 .section4 {
-  --card-radius: 40px;
-  /* ปรับความโค้งมุมการ์ดได้ที่นี่ */
-  padding: 64px 16px 96px;
-  background: radial-gradient(1200px 700px at 50% -10%, #0b1220 0%, #020617 55%, #020617 100%);
-  color: #e5e7eb;
+  padding: 120px 0 80px;
+  background: radial-gradient(circle at top, #020617 0, #020617 35%, #000000 100%);
+  color: white;
 }
-
-/* หรือจะขยับกริดลงโดยตรง */
-.section4 .titans-grid {
-  margin-top: 100px;
-  /* ปรับเลขตามชอบ */
-}
-
 
 .titans-container {
-  max-width: 1150px;
+  max-width: 1200px;
   margin: 0 auto;
-}
-
-.titans-header {
+  padding: 0 24px;
   text-align: center;
-  margin-bottom: 28px;
 }
 
 .titans-title {
-  font-size: clamp(2rem, 4.2vw, 2.8rem);
-  font-weight: 900;
-  letter-spacing: .06em;
-  color: #f3f4f6;
+  font-size: 40px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.titans-title + .titans-title {
+  margin-top: 4px;
 }
 
 .titans-subtitle {
-  margin-top: 10px;
-  font-size: .98rem;
-  color: #cbd5e1;
+  margin-top: 16px;
+  font-size: 16px;
+  color: var(--text-sub);
 }
 
-/* กริด 1 → 2 → 3 คอลัมน์ */
+/* ปุ่มกรอง กินพืช / กินเนื้อ */
+.diet-filter {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+}
+
+/* กล่องครอบ 2 ปุ่ม */
+.diet-group {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.diet-btn {
+  padding: 10px 28px;
+  border: none;
+  background: transparent;
+  color: #e5e7eb;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.15s ease;
+}
+
+.diet-btn:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.diet-btn.active[data-filter="herbivore"] {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.diet-btn.active[data-filter="carnivore"] {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+/* ปิดการ์ดจนกว่าจะเลือก */
+.titan-card.hidden {
+  display: none !important;
+}
+
+/* การ์ด */
 .titans-grid {
+  margin-top: 48px;
   display: grid;
-  gap: 22px;
-  margin-top: 28px;
-  grid-template-columns: 1fr;
-  /* mobile */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
 }
 
-@media (min-width:700px) {
+.titan-card {
+  background: linear-gradient(to bottom, var(--bg-card) 0%, var(--bg-card-soft) 60%);
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.titan-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 1);
+  border-color: rgba(148, 163, 184, 0.4);
+}
+
+.titan-thumb {
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, #0b1120, #020617 70%);
+}
+
+.titan-thumb img {
+  max-width: 80%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.titan-body {
+  padding: 18px 20px 20px;
+  text-align: left;
+}
+
+.titan-name {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+.titan-desc {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-sub);
+}
+
+.titan-tags {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  font-size: 11px;
+  border-radius: 999px;
+  padding: 4px 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tag-length {
+  background: rgba(248, 113, 113, 0.08);
+  border: 1px solid rgba(248, 113, 113, 0.4);
+  color: #fed7aa;
+}
+
+.tag-herbivore {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.7);
+  color: #bbf7d0;
+}
+
+.tag-carnivore {
+  background: rgba(248, 113, 113, 0.15);
+  border: 1px solid rgba(248, 113, 113, 0.7);
+  color: #fecaca;
+}
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .titans-title {
+    font-size: 30px;
+  }
   .titans-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (min-width:1024px) {
+@media (max-width: 640px) {
+  .section4 {
+    padding-top: 96px;
+  }
+  .titans-title {
+    font-size: 24px;
+    letter-spacing: 0.12em;
+  }
   .titans-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1fr;
   }
-
-  /* (แก้ selector ให้ถูก) */
-}
-
-/* ===== การ์ด ===== */
-.titan-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  background: #0f172a;
-  border: 1px solid rgba(255, 255, 255, .05);
-  border-radius: var(--card-radius);
-  overflow: hidden;
-  box-shadow: 0 30px 60px rgba(2, 6, 23, .06), inset 0 0 0 1px rgba(255, 255, 255, .053);
-  transition: transform .25s ease, box-shadow .25s ease;
-  transform: translateZ(0);
-  /* แก้คำสะกด tranform -> transform */
-}
-
-/* ป้องกันข้อความแปลก ๆ (แนวตั้ง/บีบ) ในบางเบราว์เซอร์ */
-.titan-card,
-.titan-body,
-.titan-name,
-.titan-desc {
-  min-width: 0;
-  writing-mode: horizontal-tb;
-}
-
-.titan-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 40px 80px rgba(2, 6, 23, .75), inset 0 0 0 1px rgba(255, 255, 255, .06);
-}
-
-/* ===== ส่วนรูป ===== */
-.titan-media {
-  padding: 16px 16px 0;
-  background: #020617;
-  /* เฟรมดำเหมือนกันทุกใบ */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 230px;
-  /* ปรับความสูงรูปได้จุดเดียว */
-  overflow: hidden;
-}
-
-.titan-img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  /* (เดิมเคยพิมพ์ผิด) */
-  display: block;
-}
-
-/* ===== เนื้อหาการ์ด ===== */
-.titan-body {
-  padding: 12px 16px 8px;
-  min-height: 64px;
-}
-
-.titan-name {
-  margin: 0 0 4px 0;
-  font-size: clamp(1.05rem, 1.8vw, 1.15rem);
-  font-weight: 800;
-  color: #f9fafb;
-}
-
-.titan-desc {
-  margin: 0;
-  color: #cbd5e1;
-  font-size: .92rem;
-}
-
-/* ===== แท็ก/ชิป ===== */
-.titan-meta {
-  padding: 10px 16px 14px;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: .82rem;
-  line-height: 1;
-  padding: 7px 9px;
-  border-radius: 10px;
-  background: #0b1220;
-  border: 1px solid rgba(255, 255, 255, .05);
-  color: #cbd5e1;
-}
-
-.chip--length {
-  color: #fb923c;
-  border-color: rgba(251, 146, 60, .25);
-  background: rgba(251, 146, 60, .08);
-}
-
-.chip--diet {
-  color: #34d399;
-  border-color: rgba(52, 211, 153, .25);
-  background: rgba(52, 211, 153, .08);
-}
-
-/* ===== โหมดเบลอ/เทา (การ์ดปิด) ===== */
-.is-muted .titan-img {
-  filter: grayscale(1) contrast(.9) brightness(.85);
-}
-
-.is-muted::after {
-  content: attr(data-label);
-  position: absolute;
-  inset: 18px 18px auto auto;
-  background: rgba(2, 6, 23, .08);
-  /* แก้ 08 → .08 */
-  border: 1px solid rgba(255, 255, 255, .12);
-  color: #fff;
-  padding: 10px 14px;
-  border-radius: 999px;
-  font-weight: 800;
-  letter-spacing: .02em;
-  font-size: .94rem;
-  pointer-events: none;
-}
-
-
-/* ============ SECTION 5 : Apex Predators (2 การ์ดกึ่งกลาง) ============ */
-.section5 {
-  position: relative;
-  padding: 56px 16px 96px;
-  background: #020617;
-  color: #e5e7eb;
-  border-top: 1px solid rgba(255, 255, 255, .04);
-  overflow: hidden;
-}
-
-.pred-container {
-  /* แคบลงเพื่อให้ 2 การ์ดดูพอดี และกึ่งกลาง */
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.pred-header {
-  text-align: center;
-  margin-bottom: 70px;
-  
-}
-
-.pred-title {
-  font-size: clamp(2rem, 3.5vw, 2.6rem);
-  font-weight: 800;
-  letter-spacing: .04em;
-  color: #f9fafb;
-}
-
-.pred-subtitle {
-  margin-top: 50px;
-  font-size: 1.0rem;
-  color: #9ca3af;
-}
-
-/* กริด 1 → 2 คอลัมน์เสมอ (ไม่มีคอลัมน์ที่ 3) + จัดกึ่งกลาง */
-.pred-grid {
-  display: grid;
-  gap: 22px;
-  grid-template-columns: 1fr;
-  /* mobile */
-  max-width: 900px;
-  /* คุมความกว้างรวมของ 2 การ์ด */
-  margin: 0 auto;
-  /* จัดกึ่งกลางกริด */
-}
-
-@media (min-width: 700px) {
-  .pred-grid {
-    grid-template-columns: repeat(2, minmax(320px, 1fr));
-    /* 2 คอลัมน์ตลอด */
-  }
-}
-
-/* ไม่มี @media 1024 ให้ขึ้น 3 คอลัมน์แล้ว */
-
-.pred-card {
-  background: #111827;
-  border: 1px solid rgba(127, 29, 29, .55);
-  border-radius: 22px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, .55), 0 0 0 1px rgba(15, 23, 42, .65);
-}
-
-.pred-card--highlight {
-  border-color: #7F1D1D;
-}
-
-.pred-imgwrap {
-  padding: 14px 14px 0;
-  background: #020617;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 220px;
-  overflow: hidden;
-}
-
-.pred-img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  display: block;
-  object-fit: contain;
-  border-radius: 16px;
-}
-
-.pred-body {
-  display: flex;
-  flex-direction: column;
-  padding: 12px 14px 14px;
-}
-
-.pred-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-}
-
-.pred-name {
-  margin: 0;
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: #f9fafb;
-}
-
-.pred-role {
-  min-height: 20px;
-  margin: 6px 0 12px;
-  font-size: .95rem;
-  color: #9ca3af;
-}
-
-.pred-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.pred-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: .95rem;
-}
-
-.pred-label {
-  color: #9ca3af;
-}
-
-.pred-val {
-  color: #F87171;
-}
-
-.pred-val--hi {
-  color: #F87171;
-}
-
-.pred-val--accent {
-  color: #F87171;
 }
