@@ -748,105 +748,10 @@ body {
   overflow: hidden;
 }
 
-/* กล่องกลางของ section */
-.timeline-container {
-  max-width: 1100px;
-  margin: 0 auto;
-}
 
-/* Make the timeline container more fluid on small screens */
-@media (max-width: 768px) {
-  .timeline-container {
-    max-width: none;
-    margin: 0;
-    padding: 0 12px;
-    box-sizing: border-box;
-  }
-}
 
-.timeline-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
 
-.timeline-title {
-  font-size: clamp(1.8rem, 3vw, 2.2rem);
-  font-weight: 800;
-  letter-spacing: 0.05em;
-}
 
-.timeline-subtitle {
-  margin-top: 8px;
-  font-size: 0.95rem;
-  color: #e5e7eb;
-}
-
-/* โครงหลักของ timeline */
-.timeline {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  row-gap: 72px;
-  /* ระยะห่างแต่ละแถวในแนวตั้ง */
-  padding: 32px 0 64px;
-}
-
-/* เส้นแกนกลางสีส้ม */
-.timeline-line {
-  position: absolute;
-  top: 350px;
-  /* หัวเส้นเริ่มใกล้จุดส้มจุดที่ 2 */
-  bottom: 40px;
-  left: 50%;
-  width: 4px;
-  transform: translateX(-50%);
-  background: #f97316;
-  border-radius: 999px;
-}
-
-/* layout แต่ละแถว: ซ้าย | กลาง(จุด) | ขวา */
-.timeline .timeline-row {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  column-gap: 16px;
-}
-
-/* แถวแรก (อีสานโนซอรัส + จุดส้ม 1) ขยับขึ้นใกล้ Late Triassic */
-.timeline .timeline-row:first-of-type {
-  margin-top: -90px;
-  /* อยากขึ้น/ลงปรับตัวเลขนี้ */
-}
-
-.timeline-col {
-  min-height: 120px;
-}
-
-.timeline-col--left {
-  justify-self: end;
-}
-
-.timeline-col--right {
-  justify-self: start;
-}
-
-/* คอลัมน์กลางที่มี "จุดสีส้ม" และข้อความยุค */
-.timeline-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-/* จุดสีส้ม */
-.timeline-dot {
-  width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  background-color: #f97316;
-  box-shadow: 0 0 0 6px rgba(249, 115, 22, 0.25);
-}
 
 /* ข้อความชื่อยุค (Late Triassic / Early Cretaceous) */
 .timeline-era {
@@ -856,52 +761,30 @@ body {
   text-align: center;
 }
 
-/* แถวที่ 2 : ข้อความครีเทเชียสตอนต้นอยู่เหนือจุดส้ม */
-.timeline .timeline-row:nth-of-type(2) .timeline-era {
-  margin: 0 0 80px 0;
-}
 
-/* กล่องรูป+ข้อความ */
+/* กล่องรูป + ข้อความ */
 .timeline-item {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 0;             /* เอาระยะห่างออกทั้งหมด */
 }
 
-.timeline-image {
-  /* show the whole image without cropping */
-  width: auto;
-  max-width: 260px;
-  height: auto;
-  border-radius: 12px;
-  object-fit: contain;
-  display: block;
-}
 
-/* Mobile: allow images to be larger and responsive (stacked layout) */
+
+/* Mobile layout */
 @media (max-width: 768px) {
+  .timeline-item {
+    gap: 0;          /* ย้ำว่าห้ามมีช่องว่าง */
+  }
   .timeline-image {
-    width: 100%;
-    max-width: 360px;
+    margin: 0;
+    padding: 0;
+    max-width: 150px;
     height: auto;
     object-fit: contain;
   }
 }
 
-/* ข้อความซ้าย/ขวา */
-.timeline-text {
-  max-width: 300px;
-  font-size: 0.85rem;
-  line-height: 1.4;
-}
-
-.timeline-text--left {
-  text-align: left;
-}
-
-.timeline-text--right {
-  text-align: right;
-}
 
 /* ชื่อไดโนเสาร์ */
 .timeline-dino-name {
@@ -1559,10 +1442,11 @@ body {
     0 18px 40px rgba(15, 23, 42, 0.9),
     0 0 1px rgba(15, 23, 42, 0.9);
   padding: 14px 14px 12px;
-  display: grid;
-  grid-template-columns: 1.2fr;
-  gap: 10px;
+  display: flex;          /* เปลี่ยนจาก grid -> flex */
+  align-items: center;    /* จัดรูปกับข้อความให้อยู่ระดับเดียวกัน */
+  gap: 8px;               /* ถ้าอยากแนบสนิทเลยใส่ 0 ก็ได้ */
 }
+
 
 /* แบ่ง content / image */
 .timeline-card-content {
@@ -1603,8 +1487,13 @@ body {
 }
 
 /* IMAGE */
+/* IMAGE – จัดรูปให้อยู่กลางการ์ด */
 .timeline-image {
-  width: 100%;
+  flex: 0 0 220px;              /* ความกว้างกรอบรูป (ปรับเลขได้) */
+  display: flex;
+  align-items: center;          /* กลางแนวตั้ง */
+  justify-content: center;      /* กลางแนวนอน */
+  height: 180px;                /* ความสูงกรอบรูป (ปรับได้) */
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid rgba(15, 23, 42, 0.9);
@@ -1612,11 +1501,14 @@ body {
 }
 
 .timeline-image img {
-  display: block;
-  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
   height: auto;
-  object-fit: cover;
+  object-fit: contain;          /* เห็นทั้งตัวไดโนเสาร์ */
+  display: block;
 }
+
 
 /* HOVER เอฟเฟกต์ (desktop) */
 @media (hover: hover) {
