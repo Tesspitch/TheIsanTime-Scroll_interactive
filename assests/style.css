@@ -9,9 +9,17 @@ html {
   scroll-snap-type: y mandatory;
 }
 
+@font-face {
+  font-family: 'Oxygen';
+  src: url('../assests/fonts/Pesto-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+
 html,
 body {
-  font-family: 'Arial';
+  font-family: 'Oxygen';
   margin: 0;
   padding: 0;
   width: 100%;
@@ -19,134 +27,6 @@ body {
   overflow-x: hidden;
   background-color: rgb(0, 0, 0);
 }
-
-/* Main Navigation */
-.main-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1200;
-  background: linear-gradient(to bottom, rgba(2, 6, 23, 0.82), rgba(2, 6, 23, 0.2));
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-
-.nav-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 24px;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
-
-.logo {
-  flex-shrink: 0;
-}
-
-.logo img {
-  height: 44px;
-  display: block;
-}
-
-.menu {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-  justify-content: center;
-  flex: 1 1 auto;
-}
-
-.menu li {
-  display: inline-block;
-}
-
-.menu li a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1rem;
-  padding: 8px 12px;
-  border-radius: 8px;
-  transition: transform .18s ease, background .18s ease, color .18s ease;
-}
-
-.menu li a:hover {
-  background: rgba(255, 255, 255, 0.04);
-  transform: translateY(-2px);
-}
-
-/* Responsive navigation */
-@media (max-width: 1024px) {
-  .nav-container {
-    padding: 0 16px;
-    height: 60px;
-  }
-
-  .menu {
-    gap: 14px;
-  }
-
-  .menu li a {
-    font-size: .98rem;
-    padding: 8px 10px;
-  }
-}
-
-@media (max-width: 768px) {
-  .nav-container {
-    height: auto;
-    padding: 12px 16px;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-  }
-
-  .logo {
-    order: 0;
-  }
-
-  .menu {
-    order: 1;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .menu li a {
-    padding: 8px 10px;
-    font-size: .96rem;
-  }
-
-  .logo img {
-    height: 40px;
-  }
-}
-
-@media (max-width: 480px) {
-  .nav-container {
-    padding: 10px 12px;
-  }
-
-  .logo img {
-    height: 36px;
-  }
-
-  .menu {
-    gap: 8px;
-  }
-
-  .menu li a {
-    font-size: .92rem;
-    padding: 6px 8px;
-  }
-}
-
 
 .section1 {
   position: relative;
@@ -171,8 +51,6 @@ body {
   left: 0;
   width: 100%;
   height: 100px;
-
-
   animation: glowingBottom 3s infinite ease-in-out;
   pointer-events: none;
   z-index: 3;
@@ -212,18 +90,18 @@ body {
 }
 
 .section1 h1 {
-  font-size: clamp(2.5rem, 5vw, 4.0rem);
+  font-size: clamp(3rem, 10vw, 5.0rem);
   margin: 0;
   color: #D1D5DB;
   text-shadow: 0 0 15px rgba(0, 0, 0, 0.7),
     0 0 10px rgba(255, 255, 255, 0.3);
   font-weight: bold;
   letter-spacing: 1.5px;
-  line-height: 1.3;
+  line-height: 1.0;
 }
 
 .text-top {
-  margin-top: 15vh;
+  margin-top: 10vh;
   margin-left: 10px;
   margin-right: 10px;
   display: flex;
@@ -236,7 +114,7 @@ body {
   z-index: 2;
   padding: 15px 30px;
   margin-bottom: 20vh;
-  font-size: 1.2rem;
+  font-size: 1rem;
   background-color: #3f3c3c;
   color: white;
   border: none;
@@ -608,6 +486,7 @@ body {
   display: inline-block;
   margin-top: 4vh;
   background-color: #1F2937;
+  width: 50%;
 }
 
 .btn-section2 {
@@ -618,6 +497,7 @@ body {
   flex-direction: column;
   margin: 0px 20px 0px 20px;
   gap: 1rem;
+  
 
 }
 
@@ -649,10 +529,11 @@ body {
   /* Slightly reduce card padding and button size on medium screens */
   .border-section2 {
     padding: 32px 36px;
+    
   }
 
   .border-section2 h2 {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 
   .dino--fly--1 {
@@ -691,13 +572,13 @@ body {
   }
 
   .border-section2 {
-    width: 96%;
+    width: 80%;
     padding: 22px 18px;
     border-radius: 14px;
   }
 
   .border-section2 h2 {
-    font-size: 0.98rem;
+    font-size: 1.5rem;
   }
 
   .border-section2 button {
@@ -740,36 +621,13 @@ body {
    SECTION 3 – Fossil Timeline (ตาม Figma)
    ========================================================= */
 
-.section3 {
-  background: linear-gradient(to bottom, #020617, #020617);
-  color: #f9fafb;
-  padding: 64px 16px 96px;
-  position: relative;
-  overflow: hidden;
-}
-
-
-
-
-
-
-/* ข้อความชื่อยุค (Late Triassic / Early Cretaceous) */
-.timeline-era {
-  font-size: 1rem;
-  white-space: nowrap;
-  color: #f9fafb;
-  text-align: center;
-}
-
 
 /* กล่องรูป + ข้อความ */
 .timeline-item {
   display: flex;
   align-items: center;
-  gap: 0;             /* เอาระยะห่างออกทั้งหมด */
+  gap: 2;             /* เอาระยะห่างออกทั้งหมด */
 }
-
-
 
 /* Mobile layout */
 @media (max-width: 768px) {
@@ -785,203 +643,6 @@ body {
   }
 }
 
-
-/* ชื่อไดโนเสาร์ */
-.timeline-dino-name {
-  margin-bottom: 6px;
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.timeline-dino-name-en {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #fbbf77;
-}
-
-/* meta (ปีที่ค้นพบ ฯลฯ) */
-.timeline-dino-meta {
-  margin: 0;
-  color: #e5e7eb;
-}
-
-/* ======================
-   ปรับตำแหน่งเฉพาะแถว
-   ====================== */
-
-/* 1) แถว "ภูเวียงโทซอรัส สิรินธรเน" 
-      (ตอนนี้คือ timeline-row ลำดับที่ 2 ใน .timeline)
-      ขยับบล็อกซ้ายลงมาให้อยู่กลางระหว่างจุดส้ม 1 กับ 2 */
-.timeline .timeline-row:nth-of-type(2) .timeline-col--left {
-  margin-top: 10px;
-  /* เพิ่มเลข = ลงอีก, ลดเลข = ขึ้น */
-}
-
-.timeline>.timeline-row:nth-child(3) .timeline-col--left {
-  margin-top: 30px;
-  /* ปรับ 30 / 50 แล้วดูระยะที่ชอบ */
-}
-
-/* ขยับข้อความ "ครีเทเซียสตอนต้น (Early Cretaceous)"
-   ให้ลอยขึ้นเหนือกล่องภูเวียงฯ แต่จุดส้มยังอยู่ที่เดิม */
-.timeline>.timeline-row:nth-child(3) .timeline-era {
-  font-size: 18px;
-  margin: 0 0 6px 0;
-  /* เคลียร์ margin เดิมก่อน */
-  transform: translateY(-80px);
-  /* เลื่อนขึ้น 40px (ปรับเลขได้) */
-}
-
-.late-end {
-  position: relative;
-  margin-top: 20px;
-}
-
-
-
-/* ขยับหัวข้อ + จุดส้ม "Late Cretaceous" ลงมาให้ตรงกับภาพ */
-.late-end>.timeline-center {
-  transform: translateY(10px);
-  /* ปรับ 24–48px ตามภาพจริงของคุณ */
-}
-
-/* แถว Compsognathus: จัดดอทกลางให้ไม่แสดง (กันเหลือช่องเปล่า) */
-.comps-row>.timeline-center {
-  display: none;
-}
-
-/* ให้เส้นแกนอยู่ชั้นล่าง เพื่อให้ .cut-line ทับได้แน่นอน */
-.section3 .timeline-line {
-  z-index: 1;
-}
-
-.section3 .late-end>.timeline-center {
-  font-size: 18px;
-  position: relative;
-  transform: translateY(-10px);
-  /* ค่าติดลบ = ขยับขึ้น, ค่าบวก = ขยับลง */
-  z-index: 3;
-  /* กันไม่ให้โดนแผ่นทับเส้นบัง */
-  padding: 20px;
-}
-
-.section3 .late-end>.timeline-center .timeline-era {
-  margin-bottom: 100px;
-  /* มากขึ้น = ข้อความห่างจุดมากขึ้น */
-}
-
-.section3 .late-end .timeline-row:first-of-type .timeline-col--left {
-  transform: translateY(10px);
-  /* ลอง 10–20px แล้วดูระดับที่พอดีบนจอจริง */
-}
-
-.section3 .late-end .timeline-row:first-of-type .timeline-item {
-  align-items: center;
-  /* กันเคสข้อความดันให้รูป/บล็อกลอย */
-}
-
-/* ===== Late Cretaceous (เฉพาะส่วนเพิ่มใหม่) ===== */
-.late-end {
-  position: relative;
-}
-
-/* ซ่อนเส้นแกนที่อยู่ถัดจาก Minimocursor ลงมา (ให้เส้นสิ้นสุดที่จุดนั้นจริง ๆ) */
-.late-end .cut-line {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  /* ถ้าบล็อค Late Cretaceous อยู่ทันทีหลัง Minimocursor ใช้ค่าประมาณนี้ */
-  top: -154px;
-  /* ขยับให้เริ่มซ่อนตั้งแต่ใต้จุด Minimocursor ลงมานิดหน่อย */
-  height: 1200px;
-  /* ยาวพอให้ปิดเส้นถึงท้าย section; ปรับได้ */
-  width: 6px;
-  /* กว้างกว่าเส้นจริง (4px) เล็กน้อยพอปิดสนิท */
-  background: #020617;
-  /* ★ สีเดียวกับพื้นหลัง section3 เพื่อไม่เห็นเป็นแท่งดำ */
-  z-index: 3;
-  pointer-events: none;
-  border-radius: 3px;
-}
-
-.timeline-row--late1 {
-  margin-top: -10px;
-  /* ลอง -20 / -36 / -48 แล้วจูนให้พอดีกับจุดส้ม */
-}
-
-.timeline-row--late1 .timeline-col--left .timeline-item {
-  transform: translateY(-117px);
-  /* ปรับ -10 ถึง +10 ตามที่เห็นพอดี */
-}
-
-/* ระยะระหว่างหัวข้อยุคกับแถวแรก */
-.late-end>.timeline-center {
-  margin-top: 8px;
-}
-
-/* แถว Late1 = วางฝั่งซ้ายเหมือนรายการฝั่งซ้ายทั่วไป */
-.timeline-row--late1 .timeline-item {
-  align-items: center;
-  gap: 16px;
-}
-
-
-.late-end .timeline-era {
-  font-size: 18px;
-  /* ใส่ขนาดที่ต้องการ */
-  line-height: 1.2;
-  white-space: nowrap;
-  /* กันตัดบรรทัด */
-  font-weight: 700;
-  /* ถ้าอยากหนาขึ้น */
-  letter-spacing: 0.3px;
-  /* ถ้าอยากเพิ่มช่องไฟตัวอักษรนิดหน่อย */
-}
-
-/* ไม่มีจุดกลางของแถว Late1 */
-.timeline-row--late1>.timeline-center {
-  display: none;
-}
-
-
-/* =========================
-   Responsive จอเล็ก
-   ========================= */
-@media (max-width: 900px) {
-  .timeline .timeline-row {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 16px;
-  }
-
-  .timeline-line {
-    left: 24px;
-    transform: none;
-  }
-
-  .timeline-center {
-    align-items: flex-start;
-    margin-left: 16px;
-  }
-
-  .timeline-col--left,
-  .timeline-col--right {
-    justify-self: stretch;
-  }
-
-  .timeline-item {
-    text-align: left;
-  }
-
-  .timeline-image {
-    width: 120px;
-    height: 120px;
-  }
-}
-
-
-
-
-
 /* SECTION */
 .timeline-section {
   padding: 96px 16px;
@@ -991,6 +652,7 @@ body {
 .timeline-container {
   max-width: 1100px;
   margin: 0 auto;
+  
 }
 
 /* HEADER */
@@ -1016,7 +678,7 @@ body {
 /* ERA BLOCK */
 .era-block {
   position: relative;
-  padding-left: 18px;
+  padding-left: 6vw;
   margin-bottom: 40px;
 }
 
@@ -1024,7 +686,7 @@ body {
 .era-block::before {
   content: "";
   position: absolute;
-  left: 6px;
+  left: 5vw;
   top: 10px;
   bottom: -10px;
   width: 2px;
@@ -1046,7 +708,7 @@ body {
   display: inline-flex;
   align-items: center;
   padding: 4px 10px;
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   border-radius: 999px;
@@ -1056,7 +718,7 @@ body {
 }
 
 .era-sub {
-  font-size: 0.85rem;
+  font-size: 1.2rem;
   color: #6b7280;
 }
 
@@ -1113,13 +775,14 @@ body {
 
 /* หัวชื่อไดโนเสาร์ */
 .timeline-card-header .th-name {
-  font-size: 1.0rem;
-  font-weight: 600;
+  font-size: 2.0rem;
+  font-weight: 800;
   color: #f9fafb;
+  margin-bottom: 5px;
 }
 
 .timeline-card-header .latin-name {
-  font-size: 0.85rem;
+  font-size: 1.0rem;
   color: #9ca3af;
 }
 
@@ -1136,7 +799,7 @@ body {
   align-items: center;
   border-radius: 999px;
   padding: 3px 9px;
-  font-size: 0.78rem;
+  font-size: 1rem;
   background: rgba(15, 23, 42, 0.9);
   border: 1px solid rgba(148, 163, 184, 0.35);
   color: #d1d5db;
@@ -1248,6 +911,11 @@ body {
 
 .titans-subtitle {
   margin-top: 16px;
+  font-size: 20px;
+  color: var(--text-sub);
+}
+.titans-subtitle-desc {
+  margin-top: 16px;
   font-size: 16px;
   color: var(--text-sub);
 }
@@ -1302,11 +970,17 @@ body {
 .titans-grid {
   margin-top: 48px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
 }
 
+/* การ์ดแต่ละใบ */
 .titan-card {
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 320px;
+
   background: linear-gradient(to bottom, var(--bg-card) 0%, var(--bg-card-soft) 60%);
   border-radius: 24px;
   overflow: hidden;
@@ -1318,6 +992,7 @@ body {
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
+
 .titan-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 24px 60px rgba(15, 23, 42, 1);
@@ -1325,11 +1000,12 @@ body {
 }
 
 .titan-thumb {
-  height: 140px;
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: radial-gradient(circle at top, #0b1120, #020617 70%);
+  
 }
 
 .titan-thumb img {
@@ -1345,12 +1021,19 @@ body {
 
 .titan-name {
   margin: 0 0 4px;
-  font-size: 16px;
+  font-size: 28px;
 }
+
+.titan-name-en {
+  margin: 0 0 4px;
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
 
 .titan-desc {
   margin: 0;
-  font-size: 13px;
+  font-size: 16px;
   color: var(--text-sub);
 }
 
@@ -1362,7 +1045,7 @@ body {
 }
 
 .tag {
-  font-size: 11px;
+  font-size: 16px;
   border-radius: 999px;
   padding: 4px 10px;
   display: inline-flex;
@@ -1380,12 +1063,14 @@ body {
   background: rgba(34, 197, 94, 0.15);
   border: 1px solid rgba(34, 197, 94, 0.7);
   color: #bbf7d0;
+  margin-left: auto;
 }
 
 .tag-carnivore {
   background: rgba(248, 113, 113, 0.15);
   border: 1px solid rgba(248, 113, 113, 0.7);
   color: #fecaca;
+  margin-left: auto;
 }
 
 /* RESPONSIVE */
