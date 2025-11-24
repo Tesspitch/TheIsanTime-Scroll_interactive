@@ -1,725 +1,707 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Isan Time-Scroll: A Journey Through a Million Years</title>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../assests/style.css" />
-    <script src="../assests/script.js"></script>
-  </head>
-  <body>
-    <!-- 
-    section1
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Isan Time-Scroll: A Journey Through a Million Years</title>
+  <!-- AOS animation library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <!-- Main stylesheet for the page -->
+  <link rel="stylesheet" href="assests/style.css" />
+  <!-- The model‑viewer component for rendering 3D models -->
+  <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/model-viewer/3.2.1/model-viewer.min.js"></script>
+</head>
+
+<body>
+  <!--
+      Section1 – Hero
+      This section welcomes visitors with a full‑screen video and animated flying dinosaurs.
     -->
-
-    <div class="section1">
-      <div class="fade">
-        <header>
-          <div class="text-top" data-aos="fade-up" data-aos-duration="1200">
-            <h1>ย้อนรอยกาลเวลา</h1>
-            <h1 style="color: #ff781f">อีสานดินแดนมหัศจรรย์ฟอสซิล</h1>
-            <h3>A Journey Through Time: Isan’s Fossil Wonderland</h3>
-            <h3>
-              ใต้เท้าของคุณคือไทม์แมชชีน ผืนดินที่คุณยืนอยู่
-              คือพิพิธภัณฑ์ธรรมชาติ
-            </h3>
-            <h3>
-            <h3>
-              คือหนังสือประวัติศาสตร์โลกที่ยังมีชีวิต ทุกย่างก้าวที่เหยียบลงไป
-            </h3>
+  <div class="section1">
+    <div class="fade">
+      <header>
+        <div class="text-top" data-aos="fade-up" data-aos-duration="1200">
+          <h1>ย้อนรอยกาลเวลา</h1>
+          <h1 style="color: #ff781f">อีสานดินแดนมหัศจรรย์ฟอสซิล</h1>
+          <h3>A Journey Through Time: Isan’s Fossil Wonderland</h3>
+          <h3>
+            ใต้เท้าของคุณคือไทม์แมชชีน ผืนดินที่คุณยืนอยู่ คือพิพิธภัณฑ์ธรรมชาติ
+          </h3>
+          <h3>
+            <h3>คือหนังสือประวัติศาสตร์โลกที่ยังมีชีวิต ทุกย่างก้าวที่เหยียบลงไป</h3>
             <h3>คือการเหยียบลงบนชั้นของกาลเวลา</h3>
-          </div>
-        </header>
-        <button data-aos="fade-up" data-aos-duration="1200">
-          <b>เริ่มต้นการเดินทาง</b>
-        </button>
-        <div class="scroll-arrow">▼</div>
-        <video autoplay muted loop playsinline webkit-playsinline>
-          <source src="/assests/video/bg_section1.mp4" type="video/mp4" />
-        </video>
+        </div>
+      </header>
+      <!-- Start journey button scrolls to the next section -->
+      <button data-aos="fade-up" data-aos-duration="1200">
+        <b>เริ่มต้นการเดินทาง</b>
+      </button>
+      <!-- Bouncing arrow indicates more content below -->
+      <div class="scroll-arrow">▼</div>
+      <video autoplay muted loop playsinline webkit-playsinline>
+        <source src="assests/video/bg_section1.mp4" type="video/mp4" />
+      </video>
 
-        <img
-          src="/assests/img/fly_loop_transparent.gif"
-          alt="เทอโรซอร์บิน"
-          class="dino dino--fly--1"
-        />
-        <img
-          src="/assests/img/fly_loop_transparent.gif"
-          alt="เทอโรซอร์บิน"
-          class="dino dino--fly--2"
-        />
-        <img
-          src="/assests/img/fly_loop_transparent.gif"
-          alt="เทอโรซอร์บิน"
-          class="dino dino--fly--3"
-        />
+      <!-- Flying dinosaurs (gif placeholders) -->
+      <img src="assests/img/fly_loop_transparent.gif" alt="เทอโรซอร์บิน" class="dino dino--fly--1" />
+      <img src="assests/img/fly_loop_transparent.gif" alt="เทอโรซอร์บิน" class="dino dino--fly--2" />
+      <img src="assests/img/fly_loop_transparent.gif" alt="เทอโรซอร์บิน" class="dino dino--fly--3" />
+    </div>
+  </div>
+
+
+
+  <!--
+      Section2 – Interactive question section
+      This section presents three buttons to let the user choose what Isan looked like 100 million years ago.
+    -->
+  <section class="section2" id="section2">
+    <div class="bg-section2">
+      <div class="border-section2">
+        <h2>หากเราย้อนเวลากลับไปได้ 100 ล้านปี ผืนดินที่เรายืนอยู่จะเป็นอย่างไร ?</h2>
+        <div class="btn-section2">
+          <button type="button" id="dino">อาณาจักรไดโนเสาร์ ?</button>
+          <button type="button" id="sea">มหาสมุทรโบราณ ?</button>
+          <button type="button" id="neature">พื้นที่โล่ง ?</button>
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- 
-    section2 
+  <!--
+      Section Introduce
+      "Isan Paleontopolis" content
     -->
-
-    <section class="section2" id="section2">
-      <div class="bg-section2">
-        <div class="border-section2">
-          <h2>หากเราย้อนเวลากลับไปได้ 100 ล้านปี ผืนดินที่เรายืนอยู่จะเป็นอย่างไร ?</h2>
-          
-          <div class="btn-section2">
-            <button type="button" id="dino">อาณาจักรไดโนเสาร์ ?</button>
-            <button type="button" id="sea">มหาสมุทรโบราณ ?</button>
-            <button type="button" id="neature">พื้นที่โล่ง ?</button>
-          </div>
+  <section class="section-introduce" id="introduce">
+    <div class="intro-container">
+      <div class="intro-content">
+        <h2 class="intro-title">ISAN PALEONTOPOLIS</h2>
+        <h3 class="intro-subtitle">มหานครแห่งสัตว์ดึกดำบรรพ์</h3>
+        <div class="intro-body">
+          <p>
+            ภาคอีสานเคยเป็นดินแดนดึกดำบรรพ์เมื่อกว่า <span class="highlight">150 ล้านปีก่อน</span>
+            ใต้ชั้นหินโคราชที่หนาแน่นคือแคปซูลกาลเวลาที่เก็บความลับของโลกยุคมีโซโซอิกไว้ครบถ้วน
+            จากฟอสซิลอีสานโนซอรัสอายุเก่าแก่ระดับโลก ไปจนถึงสยามราปเตอร์นักล่าฟันคม
+            ทุกชิ้นคือหลักฐานสำคัญต่อวิวัฒนาการชีวิต
+          </p>
+          <p>
+            ปัจจุบันอีสานกำลังก้าวสู่การเป็น <span class="highlight">“Paleontopolis”</span>
+            มหานครแห่งสัตว์ดึกดำบรรพ์
+            เปิดประสบการณ์ท่องเที่ยวเชิงธรณีที่เชื่อมอดีตสู่อาณาจักรใหม่ของการเรียนรู้และการค้นพบ
+          </p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- 
-    section 3
+  <!--
+      Section3 – Timeline of Isan dinosaur fossils
+      Displays different eras with cards showing dinosaur species discovered in each period.
     -->
+  <section id="section-3" class="timeline-section">
+    <div class="timeline-container">
+      <header class="timeline-header">
+        <h2>เส้นเวลาฟอสซิลไดโนเสาร์อีสาน</h2>
+      </header>
 
-    <!-- SECTION 3 : TIMELINE -->
-    <section id="section-3" class="timeline-section">
-      <div class="timeline-container">
-        <header class="timeline-header">
-          <h2>เส้นเวลาฟอสซิลไดโนเสาร์อีสาน</h2>
-        </header>
-
-        <!-- ERA 1 : Late Triassic -->
-        <div class="era-block">
-          <div class="era-header">
-            <span class="era-chip">ไทรแอสซิกตอนปลาย</span>
-            <span class="era-sub">Late Triassic</span>
-          </div>
-
-          <div class="timeline-list">
-            <!-- Isanosaurus -->
-            <article class="timeline-item">
-              <div class="timeline-marker"></div>
-
-              <div class="timeline-card">
-                <div class="timeline-image">
-                  <!-- TODO: เปลี่ยน src เป็นรูปจริงภายหลัง -->
-                  <img
-                    src="../assests/img/dino_png/Isanosaurus.png"
-                    alt="Isanosaurus attavipatchi"
-                  />
-                </div>
-                <div class="timeline-card-content">
-                  <div class="timeline-card-header">
-                    <h3 class="th-name">อีสานโนซอรัส อรรถวิภัชน์ซี</h3>
-                    <p class="latin-name"><em>Isanosaurus attavipatchi</em></p>
-                  </div>
-
-                  <div class="timeline-meta">
-                    <span class="meta-tag">ค้นพบปี 2531 (1988)</span>
-                    <span class="meta-tag">รายงานปี 2000</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
+      <!-- ERA 1 : Late Triassic -->
+      <div class="era-block">
+        <div class="era-header">
+          <span class="era-chip">ไทรแอสซิกตอนปลาย</span>
+          <span class="era-sub">Late Triassic</span>
         </div>
-
-        <!-- ERA 2 : Late Jurassic -->
-        <div class="era-block">
-          <div class="era-header">
-            <span class="era-chip">จูแรสซิกตอนปลาย</span>
-            <span class="era-sub">Late Jurassic</span>
-          </div>
-          <div class="timeline-list">
-            <!-- Isanosaurus -->
-            <article class="timeline-item">
-              <div class="timeline-marker"></div>
-
-              <div class="timeline-card">
-                <div class="timeline-image">
-                  <!-- TODO: เปลี่ยน src เป็นรูปจริงภายหลัง -->
-                  <img
-                    src="..//assests/img/dino_png/Minimocursor.png"
-                    alt="Minimocursor phunoiensis"
-                  />
-                </div>
-                <div class="timeline-card-content">
-                  <div class="timeline-card-header">
-                    <h3 class="th-name">มินิโมเคอร์เซอร์ ภูน้อยเอนซิส</h3>
-                    <p class="latin-name"><em>Minimocursor phunoiensis</em></p>
-                  </div>
-
-                  <div class="timeline-meta">
-                    <span class="meta-tag">ค้นพบที่ภูน้อย จ.กาฬสินธุ์</span>
-                    <span class="meta-tag"
-                      >ประกาศเป็นสายพันธุ์ใหม่ 25 กรกฎาคม 2566 (2023)</span
-                    >
-                  </div>
-                </div>
+        <div class="timeline-list">
+          <!-- Isanosaurus -->
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-image">
+                <img src="assests/img/dino_png/Isanosaurus.png" alt="Isanosaurus attavipatchi" />
               </div>
-            </article>
-          </div>
-        </div>
-
-        <!-- ERA 3 : Early Cretaceous -->
-        <div class="era-block">
-          <div class="era-header">
-            <span class="era-chip">ครีเทเซียสตอนต้น</span>
-            <span class="era-sub">Early Cretaceous</span>
-          </div>
-
-          <div class="timeline-list">
-            <!-- Phuwiangosaurus sirindhornae -->
-            <article class="timeline-item">
-              <div class="timeline-marker"></div>
-
-              <div class="timeline-card">
-                <div class="timeline-image">
-                  <img
-                  src="../assests/img/dino_png/Phuwiangosaurus_sirindhornae.png""
-                  alt="Phuwiangosaurus sirindhornae" />
+              <div class="timeline-card-content">
+                <div class="timeline-card-header">
+                  <h3 class="th-name">อีสานโนซอรัส อรรถวิภัชน์ซี</h3>
+                  <p class="latin-name"><em>Isanosaurus attavipatchi</em></p>
                 </div>
-                <div class="timeline-card-content">
-                  <div class="timeline-card-header">
-                    <h3 class="th-name">ภูเวียงโทซอรัส สิรินธรเน</h3>
-                    <p class="latin-name">
-                      <em>Phuwiangosaurus sirindhornae</em>
-                    </p>
-                  </div>
-
-                  <div class="timeline-meta">
-                    <span class="meta-tag"
-                      >ค้นพบปี 2519 (1976) ที่ อ.ภูเวียง จ.ขอนแก่น</span
-                    >
-                    <span class="meta-tag"
-                      >ประกาศชื่อทางวิทยาศาสตร์ปี 1994</span
-                    >
-                  </div>
+                <div class="timeline-meta">
+                  <span class="meta-tag">ค้นพบปี 2531 (1988)</span>
+                  <span class="meta-tag">รายงานปี 2000</span>
                 </div>
-              </div>
-            </article>
-
-            <!-- Siamosaurus suteethorni -->
-            <article class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-card">
-                <div class="timeline-image">
-                  <img
-                    src="../assests/img/dino_png/Siamosaurus.png"
-                    alt="Siamosaurus suteethorni"
-                  />
-                </div>
-                <div class="timeline-card-content">
-                  <div class="timeline-card-header">
-                    <h3 class="th-name">สยามโมซอรัส สุธีธรนี</h3>
-                    <p class="latin-name"><em>Siamosaurus suteethorni</em></p>
-                  </div>
-                  <div class="timeline-meta">
-                    <span class="meta-tag">ค้นพบปลายปี 2526 (1983)</span>
-                    <span class="meta-tag"
-                      >ประกาศชื่อทางวิทยาศาสตร์ปี 1986 และ 1997</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- Prittacosaurus sattayaraki -->
-            <article class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-card">
-                <div class="timeline-image">
-                  <img
-                    src="../assests/img/dino_png/Psittacosaurus.png"
-                    alt="Prittacosaurus sattayaraki"
-                  />
-                </div>
-                <div class="timeline-card-content">
-                  <div class="timeline-card-header">
-                    <h3 class="th-name">ชิตตะโกซอรัส สัตยารักษ์กิ</h3>
-                    <p class="latin-name">
-                      <em>Prittacosaurus sattayaraki</em>
-                    </p>
-                  </div>
-                  <div class="timeline-meta">
-                    <span class="meta-tag"
-                      >ค้นพบปี 2535 (1992) ที่คอนสวรรค์ จ.ชัยภูมิ</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- Kinnareemimus khonkaennsis -->
-            <article class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-card">
-                <div class="timeline-image">
-                  <img
-                    src="../assests/img/dino_png/Kinnareemimus.png"
-                    alt="Kinnareemimus khonkaennsis"
-                  />
-                </div>
-                <div class="timeline-card-content">
-                  <div class="timeline-card-header">
-                    <h3 class="th-name">กินรีมิมัส ขอนแก่นเอนซิส</h3>
-                    <p class="latin-name">
-                      <em>Kinnareemimus khonkaennsis</em>
-                    </p>
-                  </div>
-                  <div class="timeline-meta">
-                    <span class="meta-tag">ค้นพบปี 2537 (1994)</span>
-                    <span class="meta-tag">รายงานทางวิทยาศาสตร์ปี 2001</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- Siamotyrannus isanensis -->
-            <article class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-card">
-                <div class="timeline-image">
-                  <img
-                    src="../assests/img/dino_png/Siamotyrannus.png"
-                    alt="Siamotyrannus isanensis"
-                  />
-                </div>
-                <div class="timeline-card-content">
-                  <div class="timeline-card-header">
-                    <h3 class="th-name">สยามโมไทรันนัส อิสานเอนซิส</h3>
-                    <p class="latin-name"><em>Siamotyrannus isanensis</em></p>
-                  </div>
-                  <div class="timeline-meta">
-                    <span class="meta-tag"
-                      >ค้นพบเดือนสิงหาคม ปี 2536 (1993)</span
-                    >
-                    <span class="meta-tag"
-                      >ประกาศชื่อทางวิทยาศาสตร์ปี 1996</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- Ratchasimasaurus suranareae -->
-            <article class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-card">
-                <div class="timeline-image">
-                  <img
-                    src="../assests/img/dino_png/Ratchasimasaurus.png"
-                    alt="Ratchasimasaurus suranareae"
-                  />
-                </div>
-                <div class="timeline-card-content">
-                  <div class="timeline-card-header">
-                    <h3 class="th-name">ราชสีมาซอรัส สุรนารีเอ</h3>
-                    <p class="latin-name">
-                      <em>Ratchasimasaurus suranareae</em>
-                    </p>
-                  </div>
-                  <div class="timeline-meta">
-                    <span class="meta-tag">ค้นพบปี 2550 (2007)</span>
-                    <span class="meta-tag"
-                      >ตีพิมพ์ประกาศชื่อทางวิทยาศาสตร์ปี 2011</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- Sirindhorna khoratensis -->
-            <article class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-card">
-                <div class="timeline-image">
-                  <img
-                    src="../assests/img/dino_png/Sirindhorna.png"
-                    alt="Sirindhorna khoratensis"
-                  />
-                </div>
-                <div class="timeline-card-content">
-                  <div class="timeline-card-header">
-                    <h3 class="th-name">สิรินธรนา โคราชเอนซิส</h3>
-                    <p class="latin-name"><em>Sirindhorna khoratensis</em></p>
-                  </div>
-                  <div class="timeline-meta">
-                    <span class="meta-tag">ค้นพบปี 2550 (2007)</span>
-                    <span class="meta-tag">ประกาศชื่อ 20 มกราคม 2559</span>
-                    <span class="meta-tag"
-                      >ตีพิมพ์ทางวิทยาศาสตร์ปี 2558 (2015)</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- Siamodon nimngami -->
-            <article class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-card">
-                <div class="timeline-image">
-                  <img
-                    src="../assests/img/dino_png/Siamodon.png"
-                    alt="Siamodon nimngami"
-                  />
-                </div>
-                <div class="timeline-card-content">
-                  <div class="timeline-card-header">
-                    <h3 class="th-name">สยามโมดอน นิ่มงามมิ</h3>
-                    <p class="latin-name"><em>Siamodon nimngami</em></p>
-                  </div>
-                  <div class="timeline-meta">
-                    <span class="meta-tag">พบโดย นายวิทยา นิ่มงาม</span>
-                    <span class="meta-tag"
-                      >ตีพิมพ์ประกาศชื่อทางวิทยาศาสตร์ปี 2011</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- Phuwiangvenator yeamniyomi -->
-            <article class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-card">
-                <div class="timeline-image">
-                  <img
-                    src="../assests/img/dino_png/Phuwiangvenator.png"
-                    alt="Phuwiangvenator yeamniyomi"
-                  />
-                </div>
-                <div class="timeline-card-content">
-                  <div class="timeline-card-header">
-                    <h3 class="th-name">ภูเวียงเวเนเตอร์ แย้มนิยมมิ</h3>
-                    <p class="latin-name">
-                      <em>Phuwiangvenator yeamniyomi</em>
-                    </p>
-                  </div>
-                  <div class="timeline-meta">
-                    <span class="meta-tag">ค้นพบปี 2562 (2019)</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- Vayuraptor nongbualamphuensis -->
-            <article class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-card">
-                <div class="timeline-image">
-                  <img
-                    src="../assests/img/dino_png/Vayuraptor.png"
-                    alt="Vayuraptor nongbualamphuensis"
-                  />
-                </div>
-                <div class="timeline-card-content">
-                  <div class="timeline-card-header">
-                    <h3 class="th-name">วายุแรปเตอร์ หนองบัวลำภูเอนซิส</h3>
-                    <p class="latin-name">
-                      <em>Vayuraptor nongbualamphuensis</em>
-                    </p>
-                  </div>
-                  <div class="timeline-meta">
-                    <span class="meta-tag">ค้นพบปี 2562</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <!-- Siamraptor suwat -->
-            <article class="timeline-item">
-              <div class="timeline-marker"></div>
-              <div class="timeline-card">
-                <div class="timeline-image">
-                  <img
-                    src="../assests/img/dino_png/Siamraptor.png"
-                    alt="Siamraptor suwat"
-                  />
-                </div>
-                <div class="timeline-card-content">
-                  <div class="timeline-card-header">
-                    <h3 class="th-name">สยามแรปเตอร์ สุวัจน์ต</h3>
-                    <p class="latin-name"><em>Siamraptor suwat</em></p>
-                  </div>
-                  <div class="timeline-meta">
-                    <span class="meta-tag"
-                      >ค้นพบจากแหล่งขุดค้นบ้านสะพานหิน จ.นครราชสีมา</span
-                    >
-                    <span class="meta-tag">ประกาศวันที่ 9 ตุลาคม 2562</span>
-                    <span class="meta-tag">เผยแพร่ 21–22 พฤศจิกายน 2562</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!--
-    Section 4
-    -->
-
-    <section class="section4">
-      <div class="titans-container">
-        <h2 class="titans-title">MEET THE TIANS OF ISAN</h2>
-        <h2 class="titans-title">FROM FOSSIL TO MUSEUM</h2>
-        <h3 class="titans-subtitle">พบกับยักษ์ใหญ่แห่งอีสาน</h3>
-        <h4 class="titans-subtitle-desc">( Click เพื่อดูรายละเอียด )</h4>
-
-        <!-- ปุ่มกรอง -->
-        <div class="diet-filter">
-          <div class="diet-group">
-            <button class="diet-btn" data-filter="herbivore">กินพืช</button>
-            <button class="diet-btn" data-filter="carnivore">กินเนื้อ</button>
-          </div>
-        </div>
-
-        <!-- การ์ดไดโนเสาร์ -->
-        <div class="titans-grid">
-          <!-- กินพืช -->
-          <article class="titan-card" data-diet="herbivore">
-            <div class="titan-thumb">
-              <img src="../assests/img/dino_section4/Phuwiangosaurus.png" alt="ภูเวียงโกซอรัส" />
-            </div>
-            <div class="titan-body">
-              <h3 class="titan-name">ภูเวียงโกซอรัส สิรินธรเน</h3>
-              <h3 class="titan-name-en">Phuwiangosaurus sirindhornae</h3>
-              <p class="titan-desc">
-                ซอโรพอดขนาดใหญ่ คอยาว หางยาว ลำตัวแข็งแรง เดินสี่ขา สัดส่วนคล้ายไททาโนซอร์ มีลักษณะสง่างามและปราดเปรียวกว่าไดโนเสาร์คอยาวรุ่นหลัง
-              </p>
-              <div class="titan-tags">
-                <span class="tag tag-length">12–14 เมตร</span>
-                <span class="tag tag-herbivore">กินพืช</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- การ์ดตัวอย่าง กินพืช -->
-          <article class="titan-card" data-diet="herbivore">
-            <div class="titan-thumb">
-              <img src="img/isanosaurus.jpg" alt="กินรีมิมัส ขอนแก่นเอนซิส" />
-            </div>
-            <div class="titan-body">
-              <h3 class="titan-name">กินรีมิมัส ขอนแก่นเอนซิส</h3>
-              <h3 class="titan-name-en">Kinnareemimus khonkaennsis</h3>
-              <p class="titan-desc">
-                รูปร่างคล้ายนกกระจอกเทศโบราณ ขายาวมาก ตัวเบา ฟุตสปีดดี ไม่มีฟันหรือมีน้อย คอยาว ศีรษะเล็ก
-              </p>
-              <div class="titan-tags">
-                <span class="tag tag-length">2–2.5 เมตร</span>
-                <span class="tag tag-herbivore">กินพืช</span>
-              </div>
-            </div>
-          </article>
-
-          
-          <!-- การ์ดตัวอย่าง กินพืช -->
-          <article class="titan-card" data-diet="herbivore">
-            <div class="titan-thumb">
-              <img src="img/phuwiangosaurus.jpg" alt="ซิตตะโกซอรัส สัตยารักษ์กิ" />
-            </div>
-            <div class="titan-body">
-              <h3 class="titan-name">ซิตตะโกซอรัส สัตยารักษ์กิ</h3>
-              <h3 class="titan-name-en">Sittakosaurus satyarakki</h3>
-              <p class="titan-desc">
-                ตัวขนาดเล็ก หน้าแหลมคล้ายนกแก้ว หางยาว เดินสองขาเป็นหลัก มีลักษณะเด่นคือกะโหลกหน้าโค้งมน และบางชนิดมีปุ่มขนแข็ง ๆ
-              </p>
-              <div class="titan-tags">
-                <span class="tag tag-length">0.8–1เมตร</span>
-                <span class="tag tag-herbivore">กินพืช</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- การ์ดตัวอย่าง กินพืช -->
-          <article class="titan-card" data-diet="herbivore">
-            <div class="titan-thumb">
-              <img src="img/isanosaurus.jpg" alt="ราชสีมาซอรัส สุรนารีเอ" />
-            </div>
-            <div class="titan-body">
-              <h3 class="titan-name">ราชสีมาซอรัส สุรนารีเอ</h3>
-              <h3 class="titan-name-en">Ratchasimasaurus suranareae</h3>
-              <p class="titan-desc">
-                ไดโนเสาร์ออร์นิโธพอดขนาดกลาง ขาหลังแข็งแรง เดินสองขาเป็นหลัก ปากคล้ายเป็ด ลำตัวยาวปราดเปรียว
-              </p>
-              <div class="titan-tags">
-                <span class="tag tag-length">2–3 เมตร</span>
-                <span class="tag tag-herbivore">กินพืช</span>
-              </div>
-            </div>
-          </article>
-
-          
-          <!-- การ์ดตัวอย่าง กินพืช -->
-          <article class="titan-card" data-diet="herbivore">
-            <div class="titan-thumb">
-              <img src="img/phuwiangosaurus.jpg" alt="สยามโมดอน นิ่มงามมิ" />
-            </div>
-            <div class="titan-body">
-              <h3 class="titan-name">สยามโมดอน นิ่มงามมิ</h3>
-              <h3 class="titan-name-en">Siamodon nimngami</h3>
-              <p class="titan-desc">
-                ออร์นิโธพอดยุคต้น มีกะโหลกแข็งแรง รูปทรงปากกว้าง ขาหลังค่อนข้างแข็งแรง ลำตัวคล้ายไดโนเสาร์ปากเป็ดรุ่นเริ่มต้น
-              </p>
-              <div class="titan-tags">
-                <span class="tag tag-length">2 เมตร</span>
-                <span class="tag tag-herbivore">กินพืช</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- การ์ดตัวอย่าง กินพืช -->
-          <article class="titan-card" data-diet="herbivore">
-            <div class="titan-thumb">
-              <img src="img/isanosaurus.jpg" alt="สิรินธรนา โคราชเอนซิส" />
-            </div>
-            <div class="titan-body">
-              <h3 class="titan-name">สิรินธรนา โคราชเอนซิส</h3>
-              <h3 class="titan-name-en">Sirindhorna khoratensis</h3>
-              <p class="titan-desc">
-                ลักษณะออร์นิโธพอดขนาดเล็กถึงกลาง กะโหลกหน้ามีโครงสร้างเฉพาะตัว ลำตัวเพรียว หางยาว ช่วงขาหลังปราดเปรียว
-              </p>
-              <div class="titan-tags">
-                <span class="tag tag-length">1.5-2 เมตร</span>
-                <span class="tag tag-herbivore">กินพืช</span>
-              </div>
-            </div>
-          </article>
-
-          
-          <!-- การ์ดตัวอย่าง กินพืช -->
-          <article class="titan-card" data-diet="herbivore">
-            <div class="titan-thumb">
-              <img src="../assests/img/dino_section4/Isanosaurus.png" alt="อีสานโนซอรัส อรรถวิภัชน์ชี" />
-            </div>
-            <div class="titan-body">
-              <h3 class="titan-name">อีสานโนซอรัส อรรถวิภัชน์ชี</h3>
-              <h3 class="titan-name-en">Isanosaurus attavipatchi</h3>
-              <p class="titan-desc">
-                หนึ่งในซอโรพอดยุคต้น รูปร่างยังไม่ใหญ่เท่าซอโรพอดสมัยหลัง ขาเรียวยาว คอและลำตัวยาว กะโหลกเล็กกว่าลำตัวมาก
-              </p>
-              <div class="titan-tags">
-                <span class="tag tag-length">3-4 เมตร</span>
-                <span class="tag tag-herbivore">กินพืช</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- การ์ดตัวอย่าง กินพืช -->
-          <article class="titan-card" data-diet="herbivore">
-            <div class="titan-thumb">
-              <img src="img/isanosaurus.jpg" alt="มินิโมเคอร์เซอร์ ภูน้อยเอนซิส" />
-            </div>
-            <div class="titan-body">
-              <h3 class="titan-name">มินิโมเคอร์เซอร์ ภูน้อยเอนซิส</h3>
-              <h3 class="titan-name-en">Minimocursor phunoiensis
-              <p class="titan-desc">
-                หนึ่งในไดโนเสาร์ซอโรพอดยุคไทรแอสซิกตอนปลาย
-              </p>
-              <div class="titan-tags">
-                <span class="tag tag-length">0.6-1 เมตร</span>
-                <span class="tag tag-herbivore">กินพืช</span>
-              </div>
-            </div>
-          </article>
-
-
-
-          <!-- การ์ดตัวอย่าง กินเนื้อ -->
-          <article class="titan-card" data-diet="carnivore">
-            <div class="titan-thumb">
-              <img src="../assests/img/dino_section4/Siamotyrannus.png" alt="สยามโมไทรันนัส อิสานเอนซิส" />
-            </div>
-            <div class="titan-body">
-              <h3 class="titan-name">สยามโมไทรันนัส อิสานเอนซิส</h3>
-              <h3 class="titan-name-en">Siamotyrannus isanensis</h3>
-              <p class="titan-desc">
-                เทโรพอดขนาดใหญ่ รูปร่างเพรียว หัวใหญ่แต่ยังไม่เท่า T. rex แขนยาวกว่าแชมป์ T. rex ความคล่องตัวสูง
-              </p>
-              <div class="titan-tags">
-                <span class="tag tag-length">3-4 เมตร</span>
-                <span class="tag tag-carnivore">กินเนื้อ</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="titan-card" data-diet="carnivore">
-            <div class="titan-thumb">
-              <img src="../assests/img/dino_section4/Siamosaurus.png" alt="สยามโมซอรัส" />
-            </div>
-            <div class="titan-body">
-              <h3 class="titan-name">สยามโมซอรัส สุธีธรนิ</h3>
-              <h3 class="titan-name-en">Siamosaurus suteethorni</h3>
-              <p class="titan-desc">
-                ลำตัวยาว หัวเรียวยื่น รูปร่างคล้ายสไปโนซอริดยุคแรก มีสันหลังสูงเล็กน้อย กะโหลกยาวคล้ายจระเข้
-              </p>
-              <div class="titan-tags">
-                <span class="tag tag-length">2.5-3 เมตร</span>
-                <span class="tag tag-carnivore">กินเนื้อ</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="titan-card" data-diet="carnivore">
-            <div class="titan-thumb">
-              <img src="img/siamosaurus.jpg" alt="ภูเวียงเวเนเตอร์ แย้มนิยมมิ" />
-            </div>
-            <div class="titan-body">
-              <h3 class="titan-name">ภูเวียงเวเนเตอร์ แย้มนิยมมิ</h3>
-              <h3 class="titan-name-en">Phuwiangvenator yaemniyomi</h3>
-              <p class="titan-desc">
-                เมกะราปเตอร์ รูปร่างเพรียว กระฉับกระเฉง มีกรงเล็บมือขนาดใหญ่ ขาทรงพลัง ขนาดลำตัวไม่ใหญ่มากแต่คล่องแคล่วสูง
-              </p>
-              <div class="titan-tags">
-                <span class="tag tag-length">2-2.5 เมตร</span>
-                <span class="tag tag-carnivore">กินเนื้อ</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="titan-card" data-diet="carnivore">
-            <div class="titan-thumb">
-              <img src="img/siamosaurus.jpg" alt="สยามโมซอรัส" />
-            </div>
-            <div class="titan-body">
-              <h3 class="titan-name">วายุแรปเตอร์ หนองบัวลำภูเอนซิส</h3>
-              <h3 class="titan-name-en">Vayuraptor nongbualamphuensis</h3>
-              <p class="titan-desc">
-                กลุ่มราปเตอร์ รูปร่างเบาและเร็ว กะโหลกเรียว ขาหน้าและมือมีกงเล็บโค้งแหลม ขาหลังทรงพลังสำหรับการวิ่งล่า
-              </p>
-              <div class="titan-tags">
-                <span class="tag tag-length">1.5-2 เมตร</span>
-                <span class="tag tag-carnivore">กินเนื้อ</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- การ์ดตัวอย่าง กินเนื้อ -->
-          <article class="titan-card" data-diet="carnivore">
-            <div class="titan-thumb">
-              <img src="../assests/img/dino_section4/Siamraptor.png" alt="สยามแรปเตอร์ สุวัจน์ติ" />
-            </div>
-            <div class="titan-body">
-              <h3 class="titan-name">สยามแรปเตอร์ สุวัจน์ติ</h3>
-              <h3 class="titan-name-en">Siamraptor suwati</h3>
-              <p class="titan-desc">
-                อัลโลซอรอยด์ขนาดใหญ่ โครงสร้างแข็งแรง หัวใหญ่ คอยาวสั้น กล้ามเนื้อขาเด่น ทำให้เป็นหนึ่งในนักล่าที่ทรงพลังของยุคครีเทเชียสตอนต้น
-              </p>
-              <div class="titan-tags">
-                <span class="tag tag-length">4-5 เมตร</span>
-                <span class="tag tag-carnivore">กินเนื้อ</span>
               </div>
             </div>
           </article>
         </div>
       </div>
-    </section>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init();
-    </script>
-  </body>
+      <!-- ERA 2 : Late Jurassic -->
+      <div class="era-block">
+        <div class="era-header">
+          <span class="era-chip">จูแรสซิกตอนปลาย</span>
+          <span class="era-sub">Late Jurassic</span>
+        </div>
+        <div class="timeline-list">
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-image">
+                <img src="assests/img/dino_png/Minimocursor.png" alt="Minimocursor phunoiensis" />
+              </div>
+              <div class="timeline-card-content">
+                <div class="timeline-card-header">
+                  <h3 class="th-name">มินิโมเคอร์เซอร์ ภูน้อยเอนซิส</h3>
+                  <p class="latin-name"><em>Minimocursor phunoiensis</em></p>
+                </div>
+                <div class="timeline-meta">
+                  <span class="meta-tag">ค้นพบที่ภูน้อย จ.กาฬสินธุ์</span>
+                  <span class="meta-tag">ประกาศเป็นสายพันธุ์ใหม่ 25 กรกฎาคม 2566 (2023)</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- ERA 3 : Early Cretaceous -->
+      <div class="era-block">
+        <div class="era-header">
+          <span class="era-chip">ครีเทเซียสตอนต้น</span>
+          <span class="era-sub">Early Cretaceous</span>
+        </div>
+        <div class="timeline-list">
+          <!-- Phuwiangosaurus sirindhornae -->
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-image">
+                <img src="assests/img/dino_png/Phuwiangosaurus_sirindhornae.png" alt="Phuwiangosaurus sirindhornae" />
+              </div>
+              <div class="timeline-card-content">
+                <div class="timeline-card-header">
+                  <h3 class="th-name">ภูเวียงโทซอรัส สิรินธรเน</h3>
+                  <p class="latin-name"><em>Phuwiangosaurus sirindhornae</em></p>
+                </div>
+                <div class="timeline-meta">
+                  <span class="meta-tag">ค้นพบปี 2519 (1976) ที่ อ.ภูเวียง จ.ขอนแก่น</span>
+                  <span class="meta-tag">ประกาศชื่อทางวิทยาศาสตร์ปี 1994</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Siamosaurus suteethorni -->
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-image">
+                <img src="assests/img/dino_png/Siamosaurus.png" alt="Siamosaurus suteethorni" />
+              </div>
+              <div class="timeline-card-content">
+                <div class="timeline-card-header">
+                  <h3 class="th-name">สยามโมซอรัส สุธีธรนี</h3>
+                  <p class="latin-name"><em>Siamosaurus suteethorni</em></p>
+                </div>
+                <div class="timeline-meta">
+                  <span class="meta-tag">ค้นพบปลายปี 2526 (1983)</span>
+                  <span class="meta-tag">ประกาศชื่อทางวิทยาศาสตร์ปี 1986 และ 1997</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Prittacosaurus sattayaraki -->
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-image">
+                <img src="assests/img/dino_png/Psittacosaurus.png" alt="Prittacosaurus sattayaraki" />
+              </div>
+              <div class="timeline-card-content">
+                <div class="timeline-card-header">
+                  <h3 class="th-name">ชิตตะโกซอรัส สัตยารักษ์กิ</h3>
+                  <p class="latin-name"><em>Prittacosaurus sattayaraki</em></p>
+                </div>
+                <div class="timeline-meta">
+                  <span class="meta-tag">ค้นพบปี 2535 (1992) ที่คอนสวรรค์ จ.ชัยภูมิ</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Kinnareemimus khonkaennsis -->
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-image">
+                <img src="assests/img/dino_png/Kinnareemimus.png" alt="Kinnareemimus khonkaennsis" />
+              </div>
+              <div class="timeline-card-content">
+                <div class="timeline-card-header">
+                  <h3 class="th-name">กินรีมิมัส ขอนแก่นเอนซิส</h3>
+                  <p class="latin-name"><em>Kinnareemimus khonkaennsis</em></p>
+                </div>
+                <div class="timeline-meta">
+                  <span class="meta-tag">ค้นพบปี 2537 (1994)</span>
+                  <span class="meta-tag">รายงานทางวิทยาศาสตร์ปี 2001</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Siamotyrannus isanensis -->
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-image">
+                <img src="assests/img/dino_png/Siamotyrannus.png" alt="Siamotyrannus isanensis" />
+              </div>
+              <div class="timeline-card-content">
+                <div class="timeline-card-header">
+                  <h3 class="th-name">สยามโมไทรันนัส อิสานเอนซิส</h3>
+                  <p class="latin-name"><em>Siamotyrannus isanensis</em></p>
+                </div>
+                <div class="timeline-meta">
+                  <span class="meta-tag">ค้นพบเดือนสิงหาคม ปี 2536 (1993)</span>
+                  <span class="meta-tag">ประกาศชื่อทางวิทยาศาสตร์ปี 1996</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Ratchasimasaurus suranareae -->
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-image">
+                <img src="assests/img/dino_png/Ratchasimasaurus.png" alt="Ratchasimasaurus suranareae" />
+              </div>
+              <div class="timeline-card-content">
+                <div class="timeline-card-header">
+                  <h3 class="th-name">ราชสีมาซอรัส สุรนารีเอ</h3>
+                  <p class="latin-name"><em>Ratchasimasaurus suranareae</em></p>
+                </div>
+                <div class="timeline-meta">
+                  <span class="meta-tag">ค้นพบปี 2550 (2007)</span>
+                  <span class="meta-tag">ตีพิมพ์ประกาศชื่อทางวิทยาศาสตร์ปี 2011</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Sirindhorna khoratensis -->
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-image">
+                <img src="assests/img/dino_png/Sirindhorna.png" alt="Sirindhorna khoratensis" />
+              </div>
+              <div class="timeline-card-content">
+                <div class="timeline-card-header">
+                  <h3 class="th-name">สิรินธรนา โคราชเอนซิส</h3>
+                  <p class="latin-name"><em>Sirindhorna khoratensis</em></p>
+                </div>
+                <div class="timeline-meta">
+                  <span class="meta-tag">ค้นพบปี 2550 (2007)</span>
+                  <span class="meta-tag">ประกาศชื่อ 20 มกราคม 2559</span>
+                  <span class="meta-tag">ตีพิมพ์ทางวิทยาศาสตร์ปี 2558 (2015)</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Siamodon nimngami -->
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-image">
+                <img src="assests/img/dino_png/Siamodon.png" alt="Siamodon nimngami" />
+              </div>
+              <div class="timeline-card-content">
+                <div class="timeline-card-header">
+                  <h3 class="th-name">สยามโมดอน นิ่มงามมิ</h3>
+                  <p class="latin-name"><em>Siamodon nimngami</em></p>
+                </div>
+                <div class="timeline-meta">
+                  <span class="meta-tag">พบโดย นายวิทยา นิ่มงาม</span>
+                  <span class="meta-tag">ตีพิมพ์ประกาศชื่อทางวิทยาศาสตร์ปี 2011</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Phuwiangvenator yeamniyomi -->
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-image">
+                <img src="assests/img/dino_png/Phuwiangvenator.png" alt="Phuwiangvenator yeamniyomi" />
+              </div>
+              <div class="timeline-card-content">
+                <div class="timeline-card-header">
+                  <h3 class="th-name">ภูเวียงเวเนเตอร์ แย้มนิยมมิ</h3>
+                  <p class="latin-name"><em>Phuwiangvenator yeamniyomi</em></p>
+                </div>
+                <div class="timeline-meta">
+                  <span class="meta-tag">ค้นพบปี 2562 (2019)</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Vayuraptor nongbualamphuensis -->
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-image">
+                <img src="assests/img/dino_png/Vayuraptor.png" alt="Vayuraptor nongbualamphuensis" />
+              </div>
+              <div class="timeline-card-content">
+                <div class="timeline-card-header">
+                  <h3 class="th-name">วายุแรปเตอร์ หนองบัวลำภูเอนซิส</h3>
+                  <p class="latin-name"><em>Vayuraptor nongbualamphuensis</em></p>
+                </div>
+                <div class="timeline-meta">
+                  <span class="meta-tag">ค้นพบปี 2562</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Siamraptor suwat -->
+          <article class="timeline-item">
+            <div class="timeline-marker"></div>
+            <div class="timeline-card">
+              <div class="timeline-image">
+                <img src="assests/img/dino_png/Siamraptor.png" alt="Siamraptor suwat" />
+              </div>
+              <div class="timeline-card-content">
+                <div class="timeline-card-header">
+                  <h3 class="th-name">สยามแรปเตอร์ สุวัจน์ต</h3>
+                  <p class="latin-name"><em>Siamraptor suwat</em></p>
+                </div>
+                <div class="timeline-meta">
+                  <span class="meta-tag">ค้นพบจากแหล่งขุดค้นบ้านสะพานหิน จ.นครราชสีมา</span>
+                  <span class="meta-tag">ประกาศวันที่ 9 ตุลาคม 2562</span>
+                  <span class="meta-tag">เผยแพร่ 21–22 พฤศจิกายน 2562</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+      Section4 – Meet the Titans
+      Cards for each major dinosaur discovered in Isan. Clicking a card opens a detailed popup with
+      interactive features: scratch to reveal a footprint, view a 3D model and follow a timeline.
+    -->
+  <section class="section4">
+    <div class="titans-container">
+      <h2 class="titans-title">MEET THE TIANS OF ISAN</h2>
+      <h2 class="titans-title">FROM FOSSIL TO MUSEUM</h2>
+      <h3 class="titans-subtitle">พบกับยักษ์ใหญ่แห่งอีสาน</h3>
+      <h4 class="titans-subtitle-desc">( Click เพื่อดูรายละเอียด )</h4>
+
+      <!-- Filter buttons for herbivores and carnivores -->
+      <div class="diet-filter">
+        <div class="diet-group">
+          <button class="diet-btn" data-filter="herbivore">กินพืช</button>
+          <button class="diet-btn" data-filter="carnivore">กินเนื้อ</button>
+        </div>
+      </div>
+
+      <!-- Grid of dinosaur cards -->
+      <div class="titans-grid">
+        <!-- Herbivores -->
+        <article class="titan-card" data-diet="herbivore">
+          <div class="titan-thumb">
+            <img src="assests/img/dino_section4/Phuwiangosaurus.png" alt="ภูเวียงโกซอรัส" />
+          </div>
+          <div class="titan-body">
+            <h3 class="titan-name">ภูเวียงโกซอรัส สิรินธรเน</h3>
+            <h3 class="titan-name-en">Phuwiangosaurus sirindhornae</h3>
+            <p class="titan-desc">
+              ซอโรพอดขนาดใหญ่ คอยาว หางยาว ลำตัวแข็งแรง เดินสี่ขา สัดส่วนคล้ายไททาโนซอร์
+            </p>
+            <div class="titan-tags">
+              <span class="tag tag-length">12–14 เมตร</span>
+              <span class="tag tag-herbivore">กินพืช</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Example herbivore card -->
+        <article class="titan-card" data-diet="herbivore">
+          <div class="titan-thumb">
+            <img src="assests/img/dino_section4/Kinnareemimus.png" alt="กินรีมิมัส ขอนแก่นเอนซิส" />
+          </div>
+          <div class="titan-body">
+            <h3 class="titan-name">กินรีมิมัส ขอนแก่นเอนซิส</h3>
+            <h3 class="titan-name-en">Kinnareemimus khonkaennsis</h3>
+            <p class="titan-desc">
+              รูปร่างคล้ายนกกระจอกเทศโบราณ ขายาวมาก ตัวเบา ฟุตสปีดดี ไม่มีฟันหรือมีน้อย
+            </p>
+            <div class="titan-tags">
+              <span class="tag tag-length">2–2.5 เมตร</span>
+              <span class="tag tag-herbivore">กินพืช</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Example herbivore card -->
+        <article class="titan-card" data-diet="herbivore">
+          <div class="titan-thumb">
+            <img src="assests/img/dino_section4/Sittakosaurus.png" alt="ซิตตะโกซอรัส สัตยารักษ์กิ" />
+          </div>
+          <div class="titan-body">
+            <h3 class="titan-name">ซิตตะโกซอรัส สัตยารักษ์กิ</h3>
+            <h3 class="titan-name-en">Sittakosaurus satyarakki</h3>
+            <p class="titan-desc">
+              ตัวขนาดเล็ก หน้าแหลมคล้ายนกแก้ว หางยาว เดินสองขาเป็นหลัก
+            </p>
+            <div class="titan-tags">
+              <span class="tag tag-length">0.8–1 เมตร</span>
+              <span class="tag tag-herbivore">กินพืช</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Example herbivore card -->
+        <article class="titan-card" data-diet="herbivore">
+          <div class="titan-thumb">
+            <img src="assests/img/dino_section4/Ratchasimasaurus.png" alt="ราชสีมาซอรัส สุรนารีเอ" />
+          </div>
+          <div class="titan-body">
+            <h3 class="titan-name">ราชสีมาซอรัส สุรนารีเอ</h3>
+            <h3 class="titan-name-en">Ratchasimasaurus suranareae</h3>
+            <p class="titan-desc">
+              ไดโนเสาร์ออร์นิโธพอดขนาดกลาง ขาหลังแข็งแรง เดินสองขาเป็นหลัก ปากคล้ายเป็ด
+            </p>
+            <div class="titan-tags">
+              <span class="tag tag-length">2–3 เมตร</span>
+              <span class="tag tag-herbivore">กินพืช</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Example herbivore card -->
+        <article class="titan-card" data-diet="herbivore">
+          <div class="titan-thumb">
+            <img src="assests/img/dino_section4/Siamodon.png" alt="สยามโมดอน นิ่มงามมิ" />
+          </div>
+          <div class="titan-body">
+            <h3 class="titan-name">สยามโมดอน นิ่มงามมิ</h3>
+            <h3 class="titan-name-en">Siamodon nimngami</h3>
+            <p class="titan-desc">
+              ออร์นิโธพอดยุคต้น มีกะโหลกแข็งแรง รูปทรงปากกว้าง ขาหลังค่อนข้างแข็งแรง
+            </p>
+            <div class="titan-tags">
+              <span class="tag tag-length">2 เมตร</span>
+              <span class="tag tag-herbivore">กินพืช</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Example herbivore card -->
+        <article class="titan-card" data-diet="herbivore">
+          <div class="titan-thumb">
+            <img src="assests/img/dino_section4/Sirindhorna.png" alt="สิรินธรนา โคราชเอนซิส" />
+          </div>
+          <div class="titan-body">
+            <h3 class="titan-name">สิรินธรนา โคราชเอนซิส</h3>
+            <h3 class="titan-name-en">Sirindhorna khoratensis</h3>
+            <p class="titan-desc">
+              ลักษณะออร์นิโธพอดขนาดเล็กถึงกลาง กะโหลกหน้ามีโครงสร้างเฉพาะตัว
+            </p>
+            <div class="titan-tags">
+              <span class="tag tag-length">1.5–2 เมตร</span>
+              <span class="tag tag-herbivore">กินพืช</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Example herbivore card -->
+        <article class="titan-card" data-diet="herbivore">
+          <div class="titan-thumb">
+            <img src="assests/img/dino_section4/Isanosaurus.png" alt="อีสานโนซอรัส อรรถวิภัชน์ชี" />
+          </div>
+          <div class="titan-body">
+            <h3 class="titan-name">อีสานโนซอรัส อรรถวิภัชน์ชี</h3>
+            <h3 class="titan-name-en">Isanosaurus attavipatchi</h3>
+            <p class="titan-desc">
+              หนึ่งในซอโรพอดยุคต้น รูปร่างยังไม่ใหญ่เท่าซอโรพอดสมัยหลัง ขาเรียวยาว คอและลำตัวยาว
+            </p>
+            <div class="titan-tags">
+              <span class="tag tag-length">3–4 เมตร</span>
+              <span class="tag tag-herbivore">กินพืช</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Example herbivore card -->
+        <article class="titan-card" data-diet="herbivore">
+          <div class="titan-thumb">
+            <img src="assests/img/dino_section4/Minimocursor.png" alt="มินิโมเคอร์เซอร์ ภูน้อยเอนซิส" />
+          </div>
+          <div class="titan-body">
+            <h3 class="titan-name">มินิโมเคอร์เซอร์ ภูน้อยเอนซิส</h3>
+            <h3 class="titan-name-en">Minimocursor phunoiensis</h3>
+            <p class="titan-desc">
+              หนึ่งในไดโนเสาร์ซอโรพอดยุคไทรแอสซิกตอนปลาย
+            </p>
+            <div class="titan-tags">
+              <span class="tag tag-length">0.6–1 เมตร</span>
+              <span class="tag tag-herbivore">กินพืช</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Carnivores -->
+        <article class="titan-card" data-diet="carnivore">
+          <div class="titan-thumb">
+            <img src="assests/img/dino_section4/Siamotyrannus.png" alt="สยามโมไทรันนัส อิสานเอนซิส" />
+          </div>
+          <div class="titan-body">
+            <h3 class="titan-name">สยามโมไทรันนัส อิสานเอนซิส</h3>
+            <h3 class="titan-name-en">Siamotyrannus isanensis</h3>
+            <p class="titan-desc">
+              เทโรพอดขนาดใหญ่ รูปร่างเพรียว หัวใหญ่แต่ยังไม่เท่า T. rex แขนยาวกว่าแชมป์ T. rex
+            </p>
+            <div class="titan-tags">
+              <span class="tag tag-length">3–4 เมตร</span>
+              <span class="tag tag-carnivore">กินเนื้อ</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="titan-card" data-diet="carnivore">
+          <div class="titan-thumb">
+            <img src="assests/img/dino_section4/Siamosaurus.png" alt="สยามโมซอรัส" />
+          </div>
+          <div class="titan-body">
+            <h3 class="titan-name">สยามโมซอรัส สุธีธรนิ</h3>
+            <h3 class="titan-name-en">Siamosaurus suteethorni</h3>
+            <p class="titan-desc">
+              ลำตัวยาว หัวเรียวยื่น รูปร่างคล้ายสไปโนซอริดยุคแรก มีสันหลังสูงเล็กน้อย
+            </p>
+            <div class="titan-tags">
+              <span class="tag tag-length">2.5–3 เมตร</span>
+              <span class="tag tag-carnivore">กินเนื้อ</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="titan-card" data-diet="carnivore">
+          <div class="titan-thumb">
+            <img src="assests/img/dino_section4/Phuwiangvenator.png" alt="ภูเวียงเวเนเตอร์ แย้มนิยมมิ" />
+          </div>
+          <div class="titan-body">
+            <h3 class="titan-name">ภูเวียงเวเนเตอร์ แย้มนิยมมิ</h3>
+            <h3 class="titan-name-en">Phuwiangvenator yaemniyomi</h3>
+            <p class="titan-desc">
+              เมกะราปเตอร์ รูปร่างเพรียว กระฉับกระเฉง มีกรงเล็บมือขนาดใหญ่ ขาทรงพลัง
+            </p>
+            <div class="titan-tags">
+              <span class="tag tag-length">2–2.5 เมตร</span>
+              <span class="tag tag-carnivore">กินเนื้อ</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="titan-card" data-diet="carnivore">
+          <div class="titan-thumb">
+            <img src="assests/img/dino_section4/Vayuraptor.png" alt="วายุแรปเตอร์ หนองบัวลำภูเอนซิส" />
+          </div>
+          <div class="titan-body">
+            <h3 class="titan-name">วายุแรปเตอร์ หนองบัวลำภูเอนซิส</h3>
+            <h3 class="titan-name-en">Vayuraptor nongbualamphuensis</h3>
+            <p class="titan-desc">
+              กลุ่มราปเตอร์ รูปร่างเบาและเร็ว กะโหลกเรียว ขาหน้าและมือมีกงเล็บโค้งแหลม
+            </p>
+            <div class="titan-tags">
+              <span class="tag tag-length">1.5–2 เมตร</span>
+              <span class="tag tag-carnivore">กินเนื้อ</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="titan-card" data-diet="carnivore">
+          <div class="titan-thumb">
+            <img src="assests/img/dino_section4/Siamraptor.png" alt="สยามแรปเตอร์ สุวัจน์ติ" />
+          </div>
+          <div class="titan-body">
+            <h3 class="titan-name">สยามแรปเตอร์ สุวัจน์ติ</h3>
+            <h3 class="titan-name-en">Siamraptor suwati</h3>
+            <p class="titan-desc">
+              อัลโลซอรอยด์ขนาดใหญ่ โครงสร้างแข็งแรง หัวใหญ่ คอยาวสั้น กล้ามเนื้อขาเด่น
+            </p>
+            <div class="titan-tags">
+              <span class="tag tag-length">4–5 เมตร</span>
+              <span class="tag tag-carnivore">กินเนื้อ</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!--
+      Modal for interactive dino details
+      When a card in the "Meet the Titans" section is clicked, this modal appears.
+      It includes a scratch‑off footprint, a 3D model, and a horizontal timeline.
+    -->
+  <div id="dinoModal" class="dino-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalDinoName" class="modal-dino-name">Dinosaur Name</h2>
+        <button class="close-modal" aria-label="Close" title="Close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-grid">
+          <!-- Section: Footprint Scratch -->
+          <div class="modal-section section-scratch">
+            <h3 class="section-title">รอยเท้า (Footprint)</h3>
+            <div class="scratch-container">
+              <img id="underlayImage" src="" alt="Dinosaur footprint" />
+              <canvas id="scratchCanvas"></canvas>
+            </div>
+            <p class="instruction-text">ขูดเพื่อดูรอยเท้า</p>
+          </div>
+
+          <!-- Section: 3D Model -->
+          <div class="modal-section section-model">
+            <h3 class="section-title">โมเดล 3 มิติ (3D Model)</h3>
+            <div class="model-wrapper">
+              <model-viewer id="dinoModel" src="" alt="Dinosaur model" exposure="1.0" camera-controls auto-rotate ar
+                shadow-intensity="1" camera-orbit="45deg 55deg 2.5m" field-of-view="30deg"></model-viewer>
+            </div>
+          </div>
+
+          <!-- Section: Timeline -->
+          <div class="modal-section section-timeline">
+            <h3 class="section-title">ไทม์ไลน์ (Timeline)</h3>
+            <div class="horizontal-timeline" id="timelineContainer">
+              <!-- Timeline items will be injected dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AOS initialization -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  <!-- GSAP and ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Main JavaScript file for interactions -->
+  <script src="assests/script.js"></script>
+</body>
+
 </html>
+```

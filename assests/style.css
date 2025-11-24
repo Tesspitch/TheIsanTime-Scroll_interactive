@@ -1,3 +1,4 @@
+/* Reset margins and paddings */
 * {
   margin: 0;
   padding: 0;
@@ -16,16 +17,15 @@ html {
   font-style: normal;
 }
 
-
 html,
 body {
-  font-family: 'Oxygen';
+  font-family: 'Oxygen', sans-serif;
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
-  background-color: rgb(0, 0, 0);
+  background-color: #000;
 }
 
 .section1 {
@@ -64,8 +64,6 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.65);
-  /* เพิ่มความมืดขึ้น */
-
   z-index: 1;
 }
 
@@ -77,27 +75,24 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: 0;
-
 }
 
 .section1 header {
   position: relative;
   z-index: 3;
-  /* ให้ header อยู่เหนือไดโนเสาร์ */
   color: white;
   margin-bottom: 2rem;
   padding-top: 15vh;
 }
 
 .section1 h1 {
-  font-size: clamp(3rem, 10vw, 5.0rem);
+  font-size: clamp(3rem, 10vw, 5rem);
   margin: 0;
-  color: #D1D5DB;
-  text-shadow: 0 0 15px rgba(0, 0, 0, 0.7),
-    0 0 10px rgba(255, 255, 255, 0.3);
+  color: #d1d5db;
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.7), 0 0 10px rgba(255, 255, 255, 0.3);
   font-weight: bold;
   letter-spacing: 1.5px;
-  line-height: 1.0;
+  line-height: 1;
 }
 
 .text-top {
@@ -125,32 +120,7 @@ body {
 
 .section1 button:hover {
   transform: scale(1.05);
-  background: linear-gradient(to right, #8B4513, #D2691E);
-}
-
-.section1 {
-  position: relative;
-  height: 100vh;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  /* กันรูปทะลุ */
-  color: #fff;
-}
-
-.hero::before {
-  /* ถ้ามีพื้นหลังวิดีโอ/ภาพ */
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, .35);
-  /* layer มืดเพื่ออ่านหัวข้อชัด */
-}
-
-.hero-inner {
-  position: relative;
-  text-align: center;
-  z-index: 1;
+  background: linear-gradient(to right, #8b4513, #d2691e);
 }
 
 .dino {
@@ -160,40 +130,14 @@ body {
   will-change: transform;
 }
 
-
-
-/* บินจากขวาไปซ้าย พร้อมโค้งขึ้นลงนิด ๆ */
+/* Animations for the flying dinosaurs */
 .dino--fly--1 {
   position: absolute;
   top: 4vh;
   right: -20vw;
   width: min(22vw, 380px);
-  /* ขยายขึ้นเล็กน้อย */
   animation: fly 15s linear infinite;
   z-index: 2;
-  /* ต่ำกว่า header (3) แต่สูงกว่า overlay (1) */
-}
-
-@keyframes fly {
-  0% {
-    transform: translateX(0) translateY(0)
-  }
-
-  25% {
-    transform: translateX(-40vw) translateY(-3vh)
-  }
-
-  50% {
-    transform: translateX(-80vw) translateY(0)
-  }
-
-  75% {
-    transform: translateX(-120vw) translateY(2vh)
-  }
-
-  100% {
-    transform: translateX(-160vw) translateY(0)
-  }
 }
 
 .dino--fly--2 {
@@ -201,31 +145,8 @@ body {
   top: 17vh;
   right: -5vw;
   width: min(22vw, 330px);
-  /* ขยายขึ้นเล็กน้อย */
   animation: fly 18s linear infinite;
   z-index: 4;
-}
-
-@keyframes fly {
-  0% {
-    transform: translateX(0) translateY(0)
-  }
-
-  25% {
-    transform: translateX(-40vw) translateY(-3vh)
-  }
-
-  50% {
-    transform: translateX(-80vw) translateY(0)
-  }
-
-  75% {
-    transform: translateX(-120vw) translateY(2vh)
-  }
-
-  100% {
-    transform: translateX(-160vw) translateY(0)
-  }
 }
 
 .dino--fly--3 {
@@ -233,45 +154,29 @@ body {
   top: 60vh;
   right: -15vw;
   width: min(22vw, 300px);
-  /* ขยายขึ้นเล็กน้อย */
   animation: fly 12s linear infinite;
   z-index: 4;
 }
 
 @keyframes fly {
   0% {
-    transform: translateX(0) translateY(0)
+    transform: translateX(0) translateY(0);
   }
 
   25% {
-    transform: translateX(-40vw) translateY(-3vh)
+    transform: translateX(-40vw) translateY(-3vh);
   }
 
   50% {
-    transform: translateX(-80vw) translateY(0)
+    transform: translateX(-80vw) translateY(0);
   }
 
   75% {
-    transform: translateX(-120vw) translateY(2vh)
+    transform: translateX(-120vw) translateY(2vh);
   }
 
   100% {
-    transform: translateX(-160vw) translateY(0)
-  }
-}
-
-/* มือถือ: ลดขนาด + ช้าลง */
-@media (max-width: 768px) {
-  .dino--fly {
-    width: 34vw;
-    animation-duration: 26s;
-  }
-}
-
-/* เข้าถึงได้: ผู้ใช้ที่ปิด motion */
-@media (prefers-reduced-motion: reduce) {
-  .dino {
-    animation: none !important;
+    transform: translateX(-160vw) translateY(0);
   }
 }
 
@@ -299,20 +204,19 @@ body {
   cursor: pointer;
 }
 
+/* Section2 styling */
 .section2 {
   height: 100vh;
   color: white;
   text-align: center;
   padding-top: 25vh;
-  background: linear-gradient(to bottom, #1A1A1A, #111827);
+  background: linear-gradient(to bottom, #000000, #111827);
   position: relative;
   overflow: hidden;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  /* contain background video */
 }
 
-/* section2 background video (inserted by JS) */
 .section2 video.bgvideo {
   position: absolute;
   top: 0;
@@ -340,7 +244,6 @@ body {
   z-index: 3;
 }
 
-/* typing mode: hide card, make background (video) fully visible and text large */
 .section2.typing-mode .border-section2 {
   display: none;
 }
@@ -371,7 +274,7 @@ body {
   font-size: clamp(1.2rem, 2.4vw, 1.6rem);
   text-align: center;
   text-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
-  background: linear-gradient(120deg, rgba(17, 24, 39, 0.64), rgba(31, 41, 55, 0.40));
+  background: linear-gradient(120deg, rgba(17, 24, 39, 0.64), rgba(31, 41, 55, 0.4));
   border-radius: 14px;
   position: relative;
   overflow: hidden;
@@ -385,6 +288,11 @@ body {
 .typing-line {
   display: inline;
   min-height: 1.4em;
+  transition: transform 0.22s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.22s ease;
+}
+
+.typing-line.pop {
+  transform: translateY(-6px) scale(1.02);
 }
 
 .typing-cursor {
@@ -394,61 +302,12 @@ body {
   background: #fff;
   margin-left: 0;
   vertical-align: bottom;
-  animation: blink .9s steps(1) infinite;
+  animation: blink 0.9s steps(1) infinite;
 }
 
 @keyframes blink {
   50% {
-    opacity: 0
-  }
-}
-
-/* Animated layered glow & subtle noise for typing box */
-.typing-inner::before {
-  content: '';
-  position: absolute;
-  inset: -25%;
-  background:
-    radial-gradient(600px 200px at 10% 20%, rgba(210, 140, 60, 0.14), transparent 10%),
-    radial-gradient(500px 160px at 90% 80%, rgba(210, 100, 30, 0.10), transparent 12%),
-    linear-gradient(90deg, rgba(139, 69, 19, 0.06), rgba(210, 105, 30, 0.04));
-  filter: blur(40px) saturate(1.05);
-  mix-blend-mode: screen;
-  opacity: 0.95;
-  animation: gradientShift 10s linear infinite;
-  pointer-events: none;
-}
-
-.typing-inner::after {
-  /* subtle grain/noise overlay to add texture */
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px);
-  background-size: 6px 6px;
-  opacity: 0.06;
-  pointer-events: none;
-}
-
-@keyframes gradientShift {
-  0% {
-    transform: translateX(0) rotate(0deg);
-  }
-
-  25% {
-    transform: translateX(6%) rotate(-1deg);
-  }
-
-  50% {
-    transform: translateX(12%) rotate(0deg);
-  }
-
-  75% {
-    transform: translateX(6%) rotate(1deg);
-  }
-
-  100% {
-    transform: translateX(0) rotate(0deg);
+    opacity: 0;
   }
 }
 
@@ -470,49 +329,34 @@ body {
   }
 }
 
-/* Slight emphasis for each newly-typed line (works even without JS toggles) */
-.typing-line {
-  transition: transform .22s cubic-bezier(.2, .9, .3, 1), opacity .22s ease;
-}
-
-.typing-line.pop {
-  transform: translateY(-6px) scale(1.02);
-}
-
 .border-section2 {
   box-shadow: 0 0px 2px rgba(255, 227, 186, 0.5);
   border-radius: 8px;
   padding: 2rem;
   display: inline-block;
   margin-top: 4vh;
-  background-color: #1F2937;
+  background-color: #1f2937;
   width: 50%;
 }
 
 .btn-section2 {
-
   padding-top: 3vh;
   margin: 10px;
   display: flex;
   flex-direction: column;
   margin: 0px 20px 0px 20px;
   gap: 1rem;
-  
-
 }
 
 .btn-section2 button {
-  /* brown -> orange gradient to right as requested */
-  background: linear-gradient(to right, #8B4513, #D2691E);
+  background: linear-gradient(to right, #8b4513, #d2691e);
   color: #fff;
   border: none;
   padding: 12px 22px;
   border-radius: 10px;
   font-weight: 1000;
   cursor: pointer;
-
-  transition: transform .16s ease, box-shadow .16s ease, filter .12s ease;
-
+  transition: transform 0.16s ease, box-shadow 0.16s ease, filter 0.12s ease;
   display: inline-block;
 }
 
@@ -521,15 +365,10 @@ body {
   box-shadow: 0 14px 30px rgba(139, 69, 19, 0.22);
 }
 
-/* =========================
-     Responsive tweaks
-     ========================= */
+/* Responsive tweaks for Section2 */
 @media (max-width: 1024px) {
-
-  /* Slightly reduce card padding and button size on medium screens */
   .border-section2 {
     padding: 32px 36px;
-    
   }
 
   .border-section2 h2 {
@@ -550,8 +389,6 @@ body {
 }
 
 @media (max-width: 768px) {
-
-  /* Mobile / tablet: simplify visuals, increase tap targets */
   .section1 header {
     padding-top: 10vh;
   }
@@ -560,7 +397,6 @@ body {
     margin-top: 8vh;
   }
 
-  /* hide flying dinos on smaller screens to reduce clutter and improve performance */
   .dino--fly--1,
   .dino--fly--2,
   .dino--fly--3 {
@@ -589,8 +425,6 @@ body {
 }
 
 @media (max-width: 480px) {
-
-  /* Small phones: compact spacing, readable sizes */
   .section1 h1 {
     font-size: clamp(1.6rem, 7.5vw, 2rem);
   }
@@ -617,45 +451,126 @@ body {
   }
 }
 
-/* =========================================================
-   SECTION 3 – Fossil Timeline (ตาม Figma)
-   ========================================================= */
-
-
-/* กล่องรูป + ข้อความ */
-.timeline-item {
+/* Section Introduce */
+.section-introduce {
+  min-height: 80vh;
+  background: linear-gradient(to bottom, #111827, #0f172a);
   display: flex;
   align-items: center;
-  gap: 2;             /* เอาระยะห่างออกทั้งหมด */
+  justify-content: center;
+  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
-/* Mobile layout */
+.section-introduce::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.intro-container {
+  max-width: 900px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.intro-content {
+  text-align: center;
+  color: #f3f4f6;
+}
+
+.intro-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  background: linear-gradient(to right, #fbbf24, #d97706);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  filter: drop-shadow(0 0 20px rgba(217, 119, 6, 0.3));
+}
+
+.intro-subtitle {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  color: #9ca3af;
+  margin-bottom: 40px;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+.intro-body {
+  font-size: clamp(1.1rem, 2vw, 1.3rem);
+  line-height: 1.8;
+  color: #d1d5db;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.intro-body p {
+  margin-bottom: 24px;
+}
+
+.intro-body .highlight {
+  color: #fbbf24;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+}
+
+.intro-body .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #fbbf24;
+  opacity: 0.6;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.6s ease;
+}
+
+.section-introduce:hover .highlight::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
 @media (max-width: 768px) {
-  .timeline-item {
-    gap: 0;          /* ย้ำว่าห้ามมีช่องว่าง */
+  .section-introduce {
+    padding: 60px 20px;
   }
-  .timeline-image {
-    margin: 0;
-    padding: 0;
-    max-width: 150px;
-    height: auto;
-    object-fit: contain;
+
+  .intro-body {
+    text-align: left;
   }
 }
 
-/* SECTION */
+
+/* Timeline section */
 .timeline-section {
   padding: 96px 16px;
-  background: radial-gradient(circle at top left, #0f172a 0, #020617 55%, #000 100%);
+  background: linear-gradient(to bottom, #0f172a, #020617);
 }
 
 .timeline-container {
   max-width: 1100px;
   margin: 0 auto;
-  
 }
 
-/* HEADER */
 .timeline-header {
   text-align: center;
   margin-bottom: 40px;
@@ -669,20 +584,12 @@ body {
   color: #f9fafb;
 }
 
-.timeline-header p {
-  margin-top: 8px;
-  font-size: 0.95rem;
-  color: #9ca3af;
-}
-
-/* ERA BLOCK */
 .era-block {
   position: relative;
   padding-left: 6vw;
   margin-bottom: 40px;
 }
 
-/* เส้นไทม์ไลน์กลาง */
 .era-block::before {
   content: "";
   position: absolute;
@@ -694,7 +601,6 @@ body {
   opacity: 0.4;
 }
 
-/* หัวข้อยุค */
 .era-header {
   margin-bottom: 20px;
   display: flex;
@@ -722,20 +628,20 @@ body {
   color: #6b7280;
 }
 
-/* LIST */
 .timeline-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-/* ITEM */
 .timeline-item {
   position: relative;
   padding-left: 18px;
+  display: flex;
+  align-items: center;
+  gap: 2;
 }
 
-/* จุดบนเส้นไทม์ไลน์ */
 .timeline-marker {
   position: absolute;
   left: 0;
@@ -745,48 +651,41 @@ body {
   border-radius: 999px;
   border: 2px solid #22c55e;
   background: radial-gradient(circle, #22d3ee 0, #14b8a6 45%, #0f172a 60%);
-  box-shadow:
-    0 0 0 4px rgba(34, 197, 94, 0.12),
-    0 0 20px rgba(45, 212, 191, 0.4);
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.12), 0 0 20px rgba(45, 212, 191, 0.4);
 }
 
-/* CARD หลัก */
 .timeline-card {
   position: relative;
   border-radius: 20px;
   background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
   border: 1px solid rgba(148, 163, 184, 0.25);
-  box-shadow:
-    0 18px 40px rgba(15, 23, 42, 0.9),
-    0 0 1px rgba(15, 23, 42, 0.9);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.9), 0 0 1px rgba(15, 23, 42, 0.9);
   padding: 14px 14px 12px;
-  display: flex;          /* เปลี่ยนจาก grid -> flex */
-  align-items: center;    /* จัดรูปกับข้อความให้อยู่ระดับเดียวกัน */
-  gap: 8px;               /* ถ้าอยากแนบสนิทเลยใส่ 0 ก็ได้ */
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-
-/* แบ่ง content / image */
 .timeline-card-content {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  flex: 1;
+  min-width: 0;
 }
 
-/* หัวชื่อไดโนเสาร์ */
 .timeline-card-header .th-name {
-  font-size: 2.0rem;
+  font-size: 2rem;
   font-weight: 800;
   color: #f9fafb;
   margin-bottom: 5px;
 }
 
 .timeline-card-header .latin-name {
-  font-size: 1.0rem;
+  font-size: 1rem;
   color: #9ca3af;
 }
 
-/* META TAG */
 .timeline-meta {
   display: flex;
   flex-wrap: wrap;
@@ -805,14 +704,12 @@ body {
   color: #d1d5db;
 }
 
-/* IMAGE */
-/* IMAGE – จัดรูปให้อยู่กลางการ์ด */
 .timeline-image {
-  flex: 0 0 220px;              /* ความกว้างกรอบรูป (ปรับเลขได้) */
+  flex: 0 0 220px;
   display: flex;
-  align-items: center;          /* กลางแนวตั้ง */
-  justify-content: center;      /* กลางแนวนอน */
-  height: 180px;                /* ความสูงกรอบรูป (ปรับได้) */
+  align-items: center;
+  justify-content: center;
+  height: 180px;
   border-radius: 14px;
   overflow: hidden;
   border: 1px solid rgba(15, 23, 42, 0.9);
@@ -824,37 +721,59 @@ body {
   max-height: 100%;
   width: auto;
   height: auto;
-  object-fit: contain;          /* เห็นทั้งตัวไดโนเสาร์ */
+  object-fit: contain;
   display: block;
 }
 
-
-/* HOVER เอฟเฟกต์ (desktop) */
 @media (hover: hover) {
   .timeline-card {
-    transition:
-      transform 180ms ease-out,
-      box-shadow 180ms ease-out,
-      border-color 180ms ease-out,
-      background 180ms ease-out;
+    transition: transform 180ms ease-out, box-shadow 180ms ease-out, border-color 180ms ease-out, background 180ms ease-out;
   }
 
   .timeline-card:hover {
     transform: translateY(-3px);
     border-color: rgba(45, 212, 191, 0.7);
-    box-shadow:
-      0 22px 50px rgba(15, 23, 42, 0.98),
-      0 0 24px rgba(45, 212, 191, 0.24);
+    box-shadow: 0 22px 50px rgba(15, 23, 42, 0.98), 0 0 24px rgba(45, 212, 191, 0.24);
     background: radial-gradient(circle at top left, rgba(15, 23, 42, 1), rgba(15, 23, 42, 0.96));
   }
 }
 
-/* RESPONSIVE */
-/* Tablet ขึ้นไป: ขยาย card + จัดรูป/ตัวหนังสือคู่กัน */
+@media (max-width: 640px) {
+  .timeline-card {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 12px;
+  }
+
+  .timeline-image {
+    flex: 0 0 100px;
+    height: 100px;
+    border-radius: 10px;
+  }
+
+  .timeline-card-header .th-name {
+    font-size: 1.1rem;
+    margin-bottom: 2px;
+  }
+
+  .timeline-card-header .latin-name {
+    font-size: 0.85rem;
+  }
+
+  .meta-tag {
+    font-size: 0.8rem;
+    padding: 2px 6px;
+  }
+
+  .timeline-card-content {
+    gap: 4px;
+  }
+}
+
 @media (min-width: 640px) {
   .timeline-card {
     padding: 16px 18px 14px;
-    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
+    /* grid-template-columns is not needed for flex layout */
     align-items: center;
   }
 
@@ -863,7 +782,6 @@ body {
   }
 }
 
-/* Desktop: ขยาย section หน่อย */
 @media (min-width: 1024px) {
   .timeline-section {
     padding: 112px 24px;
@@ -878,15 +796,10 @@ body {
   }
 }
 
-
-/* โทนสีคล้ายภาพ: น้ำเงินเข้ม / ตัวหนังสือขาว */
-
-
-
-/* SECTION 4 */
+/* Section4 – Titans grid and modal */
 .section4 {
   padding: 120px 0 80px;
-  background: radial-gradient(circle at top, #020617 0, #020617 35%, #000000 100%);
+  background: linear-gradient(to bottom, #020617, #000000);
   color: white;
 }
 
@@ -905,29 +818,28 @@ body {
   line-height: 1.1;
 }
 
-.titans-title + .titans-title {
+.titans-title+.titans-title {
   margin-top: 4px;
 }
 
 .titans-subtitle {
   margin-top: 16px;
   font-size: 20px;
-  color: var(--text-sub);
+  color: #cbd5e1;
 }
+
 .titans-subtitle-desc {
   margin-top: 16px;
   font-size: 16px;
-  color: var(--text-sub);
+  color: #94a3b8;
 }
 
-/* ปุ่มกรอง กินพืช / กินเนื้อ */
 .diet-filter {
   margin-top: 32px;
   display: flex;
   justify-content: center;
 }
 
-/* กล่องครอบ 2 ปุ่ม */
 .diet-group {
   display: flex;
   background: rgba(255, 255, 255, 0.05);
@@ -948,25 +860,19 @@ body {
 }
 
 .diet-btn:hover {
-  background: rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.diet-btn.active[data-filter="herbivore"] {
+.diet-btn.active[data-filter='herbivore'] {
   background: #16a34a;
   color: #ffffff;
 }
 
-.diet-btn.active[data-filter="carnivore"] {
+.diet-btn.active[data-filter='carnivore'] {
   background: #ef4444;
   color: #ffffff;
 }
 
-/* ปิดการ์ดจนกว่าจะเลือก */
-.titan-card.hidden {
-  display: none !important;
-}
-
-/* การ์ด */
 .titans-grid {
   margin-top: 48px;
   display: grid;
@@ -974,24 +880,25 @@ body {
   gap: 24px;
 }
 
-/* การ์ดแต่ละใบ */
 .titan-card {
-
   width: 100%;
   max-width: 100%;
   min-width: 320px;
-
-  background: linear-gradient(to bottom, var(--bg-card) 0%, var(--bg-card-soft) 60%);
+  background: linear-gradient(to bottom, #0b1120 0%, #020617 60%);
   border-radius: 24px;
   overflow: hidden;
-  border: 1px solid var(--border-soft);
+  border: 1px solid #334155;
   display: flex;
   flex-direction: column;
   min-height: 260px;
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  cursor: pointer;
 }
 
+.titan-card.hidden {
+  display: none !important;
+}
 
 .titan-card:hover {
   transform: translateY(-6px);
@@ -1005,7 +912,6 @@ body {
   align-items: center;
   justify-content: center;
   background: radial-gradient(circle at top, #0b1120, #020617 70%);
-  
 }
 
 .titan-thumb img {
@@ -1025,16 +931,14 @@ body {
 }
 
 .titan-name-en {
-  margin: 0 0 4px;
-  margin-bottom: 10px;
+  margin: 0 0 10px;
   font-size: 22px;
 }
-
 
 .titan-desc {
   margin: 0;
   font-size: 16px;
-  color: var(--text-sub);
+  color: #94a3b8;
 }
 
 .titan-tags {
@@ -1073,11 +977,11 @@ body {
   margin-left: auto;
 }
 
-/* RESPONSIVE */
 @media (max-width: 960px) {
   .titans-title {
     font-size: 30px;
   }
+
   .titans-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1087,11 +991,282 @@ body {
   .section4 {
     padding-top: 96px;
   }
+
   .titans-title {
     font-size: 24px;
     letter-spacing: 0.12em;
   }
+
   .titans-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Modal styles */
+.dino-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.dino-modal .modal-content {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 24px;
+  max-width: 1200px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 32px;
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid #334155;
+}
+
+.modal-dino-name {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0;
+}
+
+.close-modal {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  color: #f1f5f9;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.close-modal:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.modal-body {
+  padding: 32px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 24px;
+}
+
+.modal-section {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  color: #94a3b8;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 8px;
+}
+
+/* Scratch Section */
+.section-scratch {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.scratch-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #1e293b;
+  cursor: crosshair;
+}
+
+.scratch-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 20px;
+}
+
+.scratch-container canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.instruction-text {
+  text-align: center;
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+/* Model Section */
+.section-model {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.model-wrapper {
+  flex: 1;
+  min-height: 300px;
+  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+model-viewer {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+}
+
+/* Timeline Section */
+.section-timeline {
+  grid-column: 1 / -1;
+  grid-row: 2;
+}
+
+.horizontal-timeline {
+  display: flex;
+  overflow-x: auto;
+  padding: 20px 0;
+  gap: 40px;
+  scrollbar-width: thin;
+  scrollbar-color: #4ade80 #1e293b;
+}
+
+.horizontal-timeline::-webkit-scrollbar {
+  height: 8px;
+}
+
+.horizontal-timeline::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 4px;
+}
+
+.horizontal-timeline::-webkit-scrollbar-thumb {
+  background: #4ade80;
+  border-radius: 4px;
+}
+
+.tl-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 200px;
+  position: relative;
+}
+
+.tl-item::after {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: #334155;
+  z-index: 0;
+}
+
+.tl-item:last-child::after {
+  display: none;
+}
+
+.tl-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #10b981;
+  border: 4px solid #0f172a;
+  z-index: 1;
+  margin-bottom: 16px;
+  box-shadow: 0 0 0 2px #10b981;
+}
+
+.tl-content {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 16px;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.tl-content:hover {
+  transform: translateY(-4px);
+  border-color: #4ade80;
+}
+
+.tl-content h3 {
+  font-size: 1rem;
+  color: #f1f5f9;
+  margin-bottom: 4px;
+}
+
+.tl-content p {
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+@media (max-width: 768px) {
+  .modal-grid {
+    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-timeline {
+    grid-column: 1;
+  }
+
+  .modal-header {
+    padding: 16px;
+  }
+
+  .modal-body {
+    padding: 16px;
+  }
+
+  .modal-dino-name {
+    font-size: 1.4rem;
   }
 }
