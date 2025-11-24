@@ -5,6 +5,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Isan Time-Scroll: A Journey Through a Million Years</title>
+
+  <!-- Google Fonts: Kanit (Thai) & Outfit (English) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&family=Outfit:wght@300;400;700&display=swap"
+    rel="stylesheet">
+
   <!-- AOS animation library -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <!-- Main stylesheet for the page -->
@@ -18,40 +26,55 @@
       Section1 – Hero
       This section welcomes visitors with a full‑screen video and animated flying dinosaurs.
     -->
-  <div class="section1">
-    <div class="fade">
-      <header>
-        <div class="text-top" data-aos="fade-up" data-aos-duration="1200">
-          <h1>ย้อนรอยกาลเวลา</h1>
-          <h1 style="color: #ff781f">อีสานดินแดนมหัศจรรย์ฟอสซิล</h1>
-          <h3>A Journey Through Time: Isan’s Fossil Wonderland</h3>
-          <h3>
-            ใต้เท้าของคุณคือไทม์แมชชีน ผืนดินที่คุณยืนอยู่ คือพิพิธภัณฑ์ธรรมชาติ
-          </h3>
-          <h3>
-            <h3>คือหนังสือประวัติศาสตร์โลกที่ยังมีชีวิต ทุกย่างก้าวที่เหยียบลงไป</h3>
-            <h3>คือการเหยียบลงบนชั้นของกาลเวลา</h3>
+  <!--
+      Section1 – Hero
+      This section welcomes visitors with a full‑screen video and animated flying dinosaurs.
+    -->
+  <header class="section1">
+    <div class="hero-overlay"></div>
+    <video autoplay muted loop playsinline webkit-playsinline class="hero-video">
+      <source src="assests/video/bg_section1.mp4" type="video/mp4" />
+    </video>
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title-th">ย้อนรอยกาลเวลา</h1>
+        <h1 class="hero-title-highlight">อีสานดินแดนมหัศจรรย์ฟอสซิล</h1>
+        <h2 class="hero-subtitle-en">A Journey Through Time: Isan’s Fossil Wonderland</h2>
+        <div class="hero-description">
+          <p>ใต้เท้าของคุณคือไทม์แมชชีน ผืนดินที่คุณยืนอยู่ คือพิพิธภัณฑ์ธรรมชาติ</p>
+          <p>คือหนังสือประวัติศาสตร์โลกที่ยังมีชีวิต ทุกย่างก้าวที่เหยียบลงไป</p>
+          <p>คือการเหยียบลงบนชั้นของกาลเวลา</p>
         </div>
-      </header>
-      <!-- Start journey button scrolls to the next section -->
-      <button data-aos="fade-up" data-aos-duration="1200">
-        <b>เริ่มต้นการเดินทาง</b>
+      </div>
+
+      <button class="btn-primary-glow">
+        <span>เริ่มต้นการเดินทาง</span>
       </button>
-      <!-- Bouncing arrow indicates more content below -->
-      <div class="scroll-arrow">▼</div>
-      <video autoplay muted loop playsinline webkit-playsinline>
-        <source src="assests/video/bg_section1.mp4" type="video/mp4" />
-      </video>
-
-      <!-- Flying dinosaurs (gif placeholders) -->
-      <img src="assests/img/fly_loop_transparent.gif" alt="เทอโรซอร์บิน" class="dino dino--fly--1" />
-      <img src="assests/img/fly_loop_transparent.gif" alt="เทอโรซอร์บิน" class="dino dino--fly--2" />
-      <img src="assests/img/fly_loop_transparent.gif" alt="เทอโรซอร์บิน" class="dino dino--fly--3" />
     </div>
-  </div>
+
+    <!-- Bouncing arrow indicates more content below -->
+    <div class="scroll-indicator">
+      <div class="mouse">
+        <div class="wheel"></div>
+      </div>
+      <div class="arrow-span">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+
+    <!-- Flying dinosaurs (gif placeholders) -->
+    <img src="assests/img/fly_loop_transparent.gif" alt="เทอโรซอร์บิน" class="dino dino--fly--1" />
+    <img src="assests/img/fly_loop_transparent.gif" alt="เทอโรซอร์บิน" class="dino dino--fly--2" />
+    <img src="assests/img/fly_loop_transparent.gif" alt="เทอโรซอร์บิน" class="dino dino--fly--3" />
+  </header>
 
 
 
+  <!--
+      Section2 – Interactive question section
+      This section presents three buttons to let the user choose what Isan looked like 100 million years ago.
+    -->
   <!--
       Section2 – Interactive question section
       This section presents three buttons to let the user choose what Isan looked like 100 million years ago.
@@ -61,9 +84,18 @@
       <div class="border-section2">
         <h2>หากเราย้อนเวลากลับไปได้ 100 ล้านปี ผืนดินที่เรายืนอยู่จะเป็นอย่างไร ?</h2>
         <div class="btn-section2">
-          <button type="button" id="dino">อาณาจักรไดโนเสาร์ ?</button>
-          <button type="button" id="sea">มหาสมุทรโบราณ ?</button>
-          <button type="button" id="neature">พื้นที่โล่ง ?</button>
+          <button type="button" id="dino" class="choice-card">
+            <span class="choice-icon">🦖</span>
+            <span class="choice-text">อาณาจักรไดโนเสาร์ ?</span>
+          </button>
+          <button type="button" id="sea" class="choice-card">
+            <span class="choice-icon">🌊</span>
+            <span class="choice-text">มหาสมุทรโบราณ ?</span>
+          </button>
+          <button type="button" id="nature" class="choice-card">
+            <span class="choice-icon">🌿</span>
+            <span class="choice-text">พื้นที่โล่ง ?</span>
+          </button>
         </div>
       </div>
     </div>
@@ -90,6 +122,17 @@
             มหานครแห่งสัตว์ดึกดำบรรพ์
             เปิดประสบการณ์ท่องเที่ยวเชิงธรณีที่เชื่อมอดีตสู่อาณาจักรใหม่ของการเรียนรู้และการค้นพบ
           </p>
+        </div>
+      </div>
+
+      <!-- YouTube Video -->
+      <div class="intro-video-container">
+        <div class="video-glow"></div>
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/AaxmsSIS6OU" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
         </div>
       </div>
     </div>
@@ -660,16 +703,6 @@
       </div>
       <div class="modal-body">
         <div class="modal-grid">
-          <!-- Section: Footprint Scratch -->
-          <div class="modal-section section-scratch">
-            <h3 class="section-title">รอยเท้า (Footprint)</h3>
-            <div class="scratch-container">
-              <img id="underlayImage" src="" alt="Dinosaur footprint" />
-              <canvas id="scratchCanvas"></canvas>
-            </div>
-            <p class="instruction-text">ขูดเพื่อดูรอยเท้า</p>
-          </div>
-
           <!-- Section: 3D Model -->
           <div class="modal-section section-model">
             <h3 class="section-title">โมเดล 3 มิติ (3D Model)</h3>

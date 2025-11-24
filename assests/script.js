@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.documentElement.style.scrollBehavior = 'smooth';
 
   const section2 = document.getElementById('section2');
-  const startButton = document.querySelector('.section1 button');
+  const startButton = document.querySelector('.btn-primary-glow');
 
   // Scroll to Section2 when the hero button is clicked
   if (startButton) {
@@ -20,20 +20,43 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize GSAP ScrollTrigger
   gsap.registerPlugin(ScrollTrigger);
 
-  // Section 1: Parallax Video & Text
-  gsap.to('.section1 video', {
-    yPercent: 30,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.section1',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: true
-    }
-  });
-  
+  // Section 1: Hero Text Reveal
+  const heroTl = gsap.timeline();
+  heroTl
+    .from('.hero-title-th', {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out',
+      delay: 0.5
+    })
+    .from('.hero-title-highlight', {
+      y: 50,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out'
+    }, '-=0.8')
+    .from('.hero-subtitle-en', {
+      y: 30,
+      opacity: 0,
+      duration: 1,
+      ease: 'power3.out'
+    }, '-=0.8')
+    .from('.hero-description p', {
+      y: 20,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: 'power3.out'
+    }, '-=0.6')
+    .fromTo('.btn-primary-glow', 
+      { y: 20, opacity: 0, visibility: 'hidden' },
+      { y: 0, opacity: 1, visibility: 'visible', duration: 0.8, ease: 'back.out(1.7)' },
+      '-=0.4'
+    );
+
   // Section 1: Parallax Video
-  gsap.to('.section1 video', {
+  gsap.to('.hero-video', {
     yPercent: 30,
     ease: 'none',
     scrollTrigger: {
@@ -69,13 +92,26 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleActions: 'play none none reverse'
     }
   });
+  
+  // Intro Video Glow Animation
+  gsap.from('.video-wrapper', {
+    scale: 0.9,
+    opacity: 0,
+    duration: 1,
+    ease: 'power2.out',
+    scrollTrigger: {
+      trigger: '.intro-video-container',
+      start: 'top 80%',
+      toggleActions: 'play none none reverse'
+    }
+  });
 
   // Section 3: Timeline Items Animation
   const timelineItems = document.querySelectorAll('.timeline-item');
   timelineItems.forEach((item, i) => {
     gsap.from(item, {
       opacity: 0,
-      y: 50,
+      x: -50,
       duration: 0.8,
       ease: 'power2.out',
       scrollTrigger: {
@@ -101,12 +137,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ---------------------------------------------
-   * Section2 background video and typing sequence
+   * Section2 background image and typing sequence
    * --------------------------------------------- */
   const bgMap = {
     dino: 'assests/video/bg_dino.mp4',
     sea: 'assests/video/bg_sea.mp4',
-    neature: 'assests/video/bg_neature.mp4',
+    nature: 'assests/video/bg_nature.mp4',
   };
 
   /**
@@ -114,55 +150,54 @@ document.addEventListener('DOMContentLoaded', () => {
    * Creates the video element if it doesn't exist and fades it in/out.
    * @param {string} src Path to the video file
    */
-  function setSection2Video(src) {
+  function setSection2Image(src) {
     if (!section2) return;
-    let vid = section2.querySelector('video.bgvideo');
+    let vid = section2.querySelector('.bg-video');
+    
     // If a video already exists, fade it out and swap source
     if (vid) {
       vid.classList.remove('visible');
       setTimeout(() => {
-        const source = vid.querySelector('source');
-        if (source && source.src !== src) {
-          source.src = src;
+        if (vid.src !== src) {
+          vid.src = src;
           vid.load();
           vid.play().catch(() => {});
         }
+        // Force reflow to restart animation
+        void vid.offsetWidth;
         vid.classList.add('visible');
-      }, 360);
+      }, 800);
       return;
     }
+    
     // Otherwise create a new video element
     vid = document.createElement('video');
-    vid.className = 'bgvideo';
+    vid.className = 'bg-video';
+    vid.src = src;
     vid.autoplay = true;
     vid.muted = true;
     vid.loop = true;
     vid.playsInline = true;
-    const source = document.createElement('source');
-    source.src = src;
-    source.type = 'video/mp4';
-    vid.appendChild(source);
+    
+    // Insert before content
     section2.insertBefore(vid, section2.firstChild);
-    requestAnimationFrame(() => {
-      vid.play().catch(() => {});
-      setTimeout(() => vid.classList.add('visible'), 50);
-    });
+    
+    // Wait for data to load to fade in
+    vid.onloadeddata = () => {
+      requestAnimationFrame(() => {
+        vid.classList.add('visible');
+        vid.play().catch(() => {});
+      });
+    };
   }
 
-  // Sentences for the typing sequence in Section2
   const typingSentences = [
     'นี่ใช่โลกที่คุณจินตนาการไว้หรือไม่',
     'ความจริงจะเป็นอย่างไร',
     'มาหาคำตอบพร้อมกันกับพวกเรา',
   ];
 
-  /**
-   * Runs a simple typing animation, looping through an array of sentences.
-   * It creates a typing box if one does not already exist.
-   * @param {Function} onComplete Called when all sentences have been typed
-   */
   function runTypingSequence(onComplete) {
-    // Create a typing box overlay if it doesn't exist
     let box = section2.querySelector('.typing-box');
     if (!box) {
       box = document.createElement('div');
@@ -177,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
       lineEl.textContent = '';
       lineEl.classList.add('pop');
       let i = 0;
-      const speed = 80;
+      const speed = 60; // Faster typing
       function step() {
         if (i < sentence.length) {
           lineEl.textContent += sentence.charAt(i);
@@ -187,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
           setTimeout(() => {
             lineEl.classList.remove('pop');
             cb();
-          }, 700);
+          }, 1000); // Wait a bit before next sentence
         }
       }
       step();
@@ -205,45 +240,47 @@ document.addEventListener('DOMContentLoaded', () => {
     next();
   }
 
-  // Hook up the Section2 buttons to switch backgrounds and run the typing sequence
-  const btns = document.querySelectorAll('#section2 .btn-section2 button');
+  const btns = document.querySelectorAll('.choice-card');
   btns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      // Prevent triggering multiple times while the typing sequence runs
       if (section2.classList.contains('typing-mode')) return;
       const id = btn.id;
       const src = bgMap[id];
       if (src) {
-        setSection2Video(src);
+        setSection2Image(src);
         section2.classList.add('typing-mode');
+        
+        // Fade out buttons
+        gsap.to('.border-section2', { opacity: 0, scale: 0.9, duration: 0.5 });
+
         setTimeout(() => {
           runTypingSequence(() => {
             // Remove the video once the typing sequence completes
-            const vid = section2.querySelector('video.bgvideo');
+            const vid = section2.querySelector('.bg-video');
             if (vid) {
               vid.classList.remove('visible');
               setTimeout(() => {
                 try {
                   vid.remove();
                 } catch (err) {}
-              }, 420);
+              }, 800);
             }
             const box = section2.querySelector('.typing-box');
             if (box) box.remove();
             section2.classList.remove('typing-mode');
             
-            // Refresh ScrollTrigger to account for layout changes
+            // Bring buttons back
+            gsap.to('.border-section2', { opacity: 1, scale: 1, duration: 0.5 });
+            
             ScrollTrigger.refresh();
             
-            // Scroll to the next section (Introduce) after the sequence
             const nextSection = document.getElementById('introduce');
             if (nextSection) {
-              // Force the animation to play immediately
-              if (introTween) introTween.play();
+              if (introTween) introTween.restart();
               nextSection.scrollIntoView({ behavior: 'smooth' });
             }
           });
-        }, 420);
+        }, 800);
       }
     });
   });
@@ -253,29 +290,42 @@ document.addEventListener('DOMContentLoaded', () => {
    * --------------------------------------------- */
   const dietButtons = document.querySelectorAll('.diet-btn');
   const titanCards = document.querySelectorAll('.titan-card');
-  // Hide all cards initially
-  titanCards.forEach((card) => card.classList.add('hidden'));
-  function hideAllCards() {
-    titanCards.forEach((card) => card.classList.add('hidden'));
-  }
+  
+  // Show all cards initially or hide? The original code hid them.
+  // Let's show all by default or keep the "click to filter" behavior.
+  // The original code had them hidden. Let's keep it consistent but maybe show all if no filter is active?
+  // Actually, let's make it so clicking a filter toggles it. If none active, show all? 
+  // Or stick to the original behavior: buttons act as toggles for categories.
+  
+  // Let's modify: Show ALL by default, filter when clicked.
+  titanCards.forEach((card) => card.classList.remove('hidden'));
+
   dietButtons.forEach((button) => {
     button.addEventListener('click', () => {
       const filter = button.dataset.filter;
-      // If the current button is active, deactivate and hide all cards
+      
+      // If clicking already active button, deactivate it and show all
       if (button.classList.contains('active')) {
         button.classList.remove('active');
-        hideAllCards();
+        titanCards.forEach((card) => {
+           card.classList.remove('hidden');
+           // Animate back in
+           gsap.fromTo(card, {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.4});
+        });
         return;
       }
-      // Remove active state from all buttons
+      
+      // Remove active from others
       dietButtons.forEach((btn) => btn.classList.remove('active'));
-      // Activate the clicked button
       button.classList.add('active');
-      hideAllCards();
-      // Show cards that match the filter
+      
+      // Filter
       titanCards.forEach((card) => {
         if (card.dataset.diet === filter) {
           card.classList.remove('hidden');
+          gsap.fromTo(card, {opacity: 0, scale: 0.9}, {opacity: 1, scale: 1, duration: 0.4});
+        } else {
+          card.classList.add('hidden');
         }
       });
     });
@@ -287,16 +337,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('dinoModal');
   const closeModalBtn = document.querySelector('.close-modal');
   const dinoModel = document.getElementById('dinoModel');
-  const underlayImage = document.getElementById('underlayImage');
-  const scratchCanvas = document.getElementById('scratchCanvas');
   const timelineContainer = document.getElementById('timelineContainer');
-  const ctx = scratchCanvas.getContext('2d');
 
-  // Data for each dinosaur card: placeholder 3D models, footprint images and timeline events
   const dinoData = {
     'Phuwiangosaurus sirindhornae': {
       model: '../assests/model/Phuwiangosaurus_sirindhornae.glb',
-      footprint: 'https://via.placeholder.com/600x300?text=Footprint+Phuwiangosaurus',
+      footprint: 'assests/img/dino_section4/Phuwiangosaurus.png',
       timeline: [
         { title: 'ค้นพบรอยเท้า', year: '1976' },
         { title: 'ขุดค้นฟอสซิล', year: '1977' },
@@ -426,10 +472,6 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   };
 
-  /**
-   * Populate the horizontal timeline in the modal.
-   * @param {Array<{title: string, year: string}>} events An array of events to display
-   */
   function buildTimeline(events) {
     timelineContainer.innerHTML = '';
     events.forEach((event) => {
@@ -446,68 +488,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /**
-   * Initialize the scratch off effect on the canvas. A sand‑colored layer is drawn on the canvas,
-   * and removing parts of it via the destination-out composite operation reveals the footprint underneath.
-   */
-  function initDusting() {
-    const container = scratchCanvas.parentElement;
-    const width = container.offsetWidth;
-    const height = container.offsetHeight;
-    scratchCanvas.width = width;
-    scratchCanvas.height = height;
-    // Fill with dust color
-    ctx.fillStyle = '#C2B280';
-    ctx.fillRect(0, 0, width, height);
-    // Add some random speckles to simulate sand
-    for (let i = 0; i < 500; i++) {
-      ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.5})`;
-      ctx.fillRect(Math.random() * width, Math.random() * height, 2, 2);
-    }
-    let isDrawing = false;
-    function getPos(e) {
-      const rect = scratchCanvas.getBoundingClientRect();
-      let x, y;
-      if (e.touches) {
-        x = e.touches[0].clientX - rect.left;
-        y = e.touches[0].clientY - rect.top;
-      } else {
-        x = e.clientX - rect.left;
-        y = e.clientY - rect.top;
-      }
-      return { x, y };
-    }
-    function scratch(e) {
-      if (!isDrawing) return;
-      e.preventDefault();
-      const { x, y } = getPos(e);
-      ctx.globalCompositeOperation = 'destination-out';
-      ctx.beginPath();
-      ctx.arc(x, y, 20, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    scratchCanvas.onmousedown = (e) => {
-      isDrawing = true;
-      scratch(e);
-    };
-    scratchCanvas.onmousemove = scratch;
-    scratchCanvas.onmouseup = () => {
-      isDrawing = false;
-    };
-    scratchCanvas.onmouseleave = () => {
-      isDrawing = false;
-    };
-    scratchCanvas.ontouchstart = (e) => {
-      isDrawing = true;
-      scratch(e);
-    };
-    scratchCanvas.ontouchmove = scratch;
-    scratchCanvas.ontouchend = () => {
-      isDrawing = false;
-    };
+  function openModal() {
+    modal.style.display = 'flex';
+    // Small delay to allow display:flex to apply before adding opacity class
+    requestAnimationFrame(() => {
+      modal.classList.add('open');
+    });
   }
 
-  // Add click listeners to each titan card to open the modal
+  function closeModal() {
+    modal.classList.remove('open');
+    setTimeout(() => {
+      modal.style.display = 'none';
+    }, 300); // Match transition duration
+  }
+
   titanCards.forEach((card) => {
     card.addEventListener('click', () => {
       const nameEnEl = card.querySelector('.titan-name-en');
@@ -518,7 +513,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const nameTh = nameThEl ? nameThEl.textContent.trim() : '';
       const data = dinoData[nameEn];
       
-      // Update modal header
       const modalTitle = document.getElementById('modalDinoName');
       if (modalTitle) {
         modalTitle.textContent = `${nameTh} (${nameEn})`;
@@ -526,31 +520,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Fallback values if no data is defined
       const modelSrc = data ? data.model : 'https://modelviewer.dev/shared-assets/models/Astronaut.glb';
-      const footprintSrc = data ? data.footprint : 'https://via.placeholder.com/600x300?text=Footprint';
       const timelineEvents = data ? data.timeline : [
         { title: 'ค้นพบรอยเท้า', year: '—' },
         { title: 'ขุดค้นฟอสซิล', year: '—' },
         { title: 'ประกาศชื่อ', year: '—' },
         { title: 'จัดแสดงพิพิธภัณฑ์', year: '—' },
       ];
-      // Set the 3D model source and footprint image
+      
       dinoModel.src = modelSrc;
-      underlayImage.src = footprintSrc;
-      // Build timeline and initialize scratch
+      
       buildTimeline(timelineEvents);
-      initDusting();
-      // Show the modal
-      modal.style.display = 'flex';
+      
+      openModal();
     });
   });
 
-  // Close the modal when the close button or backdrop is clicked
-  closeModalBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
+  closeModalBtn.addEventListener('click', closeModal);
   window.addEventListener('click', (e) => {
     if (e.target === modal) {
-      modal.style.display = 'none';
+      closeModal();
     }
   });
 });
