@@ -375,8 +375,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
     },
     'Kinnareemimus khonkaennsis': {
-      model: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
-      footprint: 'https://via.placeholder.com/600x300?text=Footprint+Kinnareemimus',
+      model: '../assests/model/Kinnareemimus khonkaenensis.glb',
+      footprint: './assests/img/dino_section4/Kinnareemimus.png',
       timeline: [
         { title: 'ค้นพบรอยเท้า', year: '1994' },
         { title: 'ขุดค้นฟอสซิล', year: '1995' },
@@ -385,8 +385,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
     },
     'Sittakosaurus satyarakki': {
-      model: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
-      footprint: 'https://via.placeholder.com/600x300?text=Footprint+Sittakosaurus',
+      model: '../assests/model/Psittacosaurus_sattayaraki.glb',
+      footprint: '../assests/img/dino_section4/Sittakosaurus.png',
       timeline: [
         { title: 'ค้นพบรอยเท้า', year: '1992' },
         { title: 'ขุดค้นฟอสซิล', year: '1993' },
@@ -395,8 +395,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
     },
     'Ratchasimasaurus suranareae': {
-      model: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
-      footprint: 'https://via.placeholder.com/600x300?text=Footprint+Ratchasimasaurus',
+      model: '../assests/model/Ratchasimasaurus.glb',
+      footprint: '../assests/img/dino_section4/Ratchasimasaurus.png',
       timeline: [
         { title: 'ค้นพบรอยเท้า', year: '2007' },
         { title: 'ขุดค้นฟอสซิล', year: '2008' },
@@ -405,8 +405,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
     },
     'Siamodon nimngami': {
-      model: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
-      footprint: 'https://via.placeholder.com/600x300?text=Footprint+Siamodon',
+      model: '../assests/model/Siamodon.glb',
+      footprint: '../assests/img/dino_section4/Siamodon.png',
       timeline: [
         { title: 'ค้นพบรอยเท้า', year: '2010' },
         { title: 'ขุดค้นฟอสซิล', year: '2011' },
@@ -415,8 +415,8 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
     },
     'Sirindhorna khoratensis': {
-      model: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
-      footprint: 'https://via.placeholder.com/600x300?text=Footprint+Sirindhorna',
+      model: '../assests/model/Sirindhorna.glb',
+      footprint: '../assests/img/dino_section4/Sirindhorna.png',
       timeline: [
         { title: 'ค้นพบรอยเท้า', year: '2007' },
         { title: 'ขุดค้นฟอสซิล', year: '2008' },
@@ -425,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
     },
     'Isanosaurus attavipatchi': {
-      model: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
+      model: '../assests/model/Isanosaurus.glb',
       footprint: 'https://via.placeholder.com/600x300?text=Footprint+Isanosaurus',
       timeline: [
         { title: 'ค้นพบรอยเท้า', year: '1988' },
@@ -435,7 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
     },
     'Minimocursor phunoiensis': {
-      model: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
+      model: '../assests/model/Minimocursor.glb',
       footprint: 'https://via.placeholder.com/600x300?text=Footprint+Minimocursor',
       timeline: [
         { title: 'ค้นพบรอยเท้า', year: '2023' },
@@ -445,7 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
     },
     'Siamotyrannus isanensis': {
-      model: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
+      model: '../assests/model/Siamotyrannus.glb',
       footprint: 'https://via.placeholder.com/600x300?text=Footprint+Siamotyrannus',
       timeline: [
         { title: 'ค้นพบรอยเท้า', year: '1993' },
@@ -455,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
     },
     'Siamosaurus suteethorni': {
-      model: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
+      model: '../assests/model/Siamosaurus.glb',
       footprint: 'https://via.placeholder.com/600x300?text=Footprint+Siamosaurus',
       timeline: [
         { title: 'ค้นพบรอยเท้า', year: '1983' },
@@ -475,7 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
     },
     'Vayuraptor nongbualamphuensis': {
-      model: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
+      model: '../assests/model/Vayuraptor.glb',
       footprint: 'https://via.placeholder.com/600x300?text=Footprint+Vayuraptor',
       timeline: [
         { title: 'ค้นพบรอยเท้า', year: '2019' },
@@ -574,6 +574,164 @@ document.addEventListener('DOMContentLoaded', () => {
  * Section5 – Thailand map (SVG)
  * --------------------------------------------- */
 const mapSvg = document.querySelector('.th-map');
+
+// Data for map provinces (Ported from update_map.py)
+const provinceData = {
+  'kkn': {
+    'data-name': 'ขอนแก่น',
+    'data-summary': 'ศูนย์กลางฟอสซิลไดโนเสาร์อีสาน',
+    'data-museum': 'พิพิธภัณฑ์สิรินธร, พิพิธภัณฑ์ไดโนเสาร์ภูเวียง',
+    'data-geopark': 'อุทยานธรณีขอนแก่น (Khon Kaen Geopark)'
+  },
+  'ksn': {
+    'data-name': 'กาฬสินธุ์',
+    'data-summary': 'ดินแดนภูน้อยและไดโนเสาร์หลายชนิด',
+    'data-museum': 'พิพิธภัณฑ์สิรินธร',
+    'data-geopark': 'อุทยานธรณีกาฬสินธุ์ (Kalasin Geopark)'
+  },
+  'nma': {
+    'data-name': 'นครราชสีมา',
+    'data-summary': 'บ้านของสยามแรปเตอร์ ราชสีมาซอรัส และ Sirindhorna',
+    'data-museum': 'พิพิธภัณฑ์ไม้กลายเป็นหินเฉลิมพระเกียรติฯ',
+    'data-geopark': 'อุทยานธรณีโลกโคราช (Khorat Geopark)'
+  },
+  'stn': {
+    'data-name': 'สตูล',
+    'data-summary': 'อุทยานธรณีโลกสตูลได้ประกาศเป็นอุทยานธรณีท้องถิ่น เมื่อวันที่ 14 สิงหาคม พ.ศ. 2557 ครอบคลุมพื้นที่ 4 อำเภอ ได้แก่ อำเภอทุ่งหว้า อำเภอมะนัง อำเภอละงู และอำเภอเมืองสตูล (อุทยานแห่งชาติตะรุเตา) รวมพื้นที่ 2,597 ตารางกิโลเมตร',
+    'data-museum': '-',
+    'data-geopark': 'อุทยานธรณีโลกสตูล (Satun Geopark)'
+  },
+  'ubn' : {
+    'data-name': 'อุบลราชธานี',
+    'data-summary': 'อุทยานธรณีผาชัน สามพันโบก จังหวัดอุบลราชธานี ได้จัดตั้งและประกาศเป็นอุทยานธรณีท้องถิ่นเมื่อวันที่ 9 พฤษภาคม 2554 ครอบคลุม 4 อำเภอ ได้แก่ อำเภอสิรินธร อำเภอโขงเจียม อำเภอศรีเมืองใหม่ และอำเภอโพธิ์ไทร มีพื้นที่ 1,994 ตารางกิโลเมตร',
+    'data-museum': '-',
+    'data-geopark': 'อุทยานธรณีอุบลราชธานี (Ubon Ratchathani Geopark)'
+  },
+  'cpm' : {
+    'data-name': 'ชัยภูมิ',
+    'data-summary': 'จังหวัดชัยภูมิ ได้ประกาศจัดตั้งอุทยานธรณีชัยภูมิเป็นอุทยานธรณีในระดับท้องถิ่น เมื่อวันที่ 11 สิงหาคม 2564 ครอบคลุม 8 อำเภอ ได้แก่ อำเภอเมืองชัยภูมิ อำเภอบ้านเขว้า อำเภอหนองบัวระเหว อำเภอเทพสถิต อำเภอภักดีชุมพล อำเภอเกษตรสมบูรณ์ อำเภอหนองบัวแดง และอำเภอคอนสาร รวมพื้นที่ 8,732 ตารางกิโลเมตร',
+    'data-museum': '-',
+    'data-geopark': 'อุทยานธรณีชัยภูมิ (Chaiyaphum Geopark)'
+  }
+
+};
+
+// Initialize map data
+function initializeMapData() {
+  for (const [id, data] of Object.entries(provinceData)) {
+    const path = document.getElementById(id);
+    if (path) {
+      path.classList.add('province');
+      for (const [key, value] of Object.entries(data)) {
+        path.setAttribute(key, value);
+      }
+    }
+  }
+}
+
+// Run initialization
+initializeMapData();
+
+/* Create map pins for provinces: museum (yellow) and geopark (blue).
+   Pins are SVG circles appended into the same SVG using each province bbox.
+*/
+function createMapPins() {
+  if (!mapSvg || !(mapSvg instanceof SVGElement)) return;
+
+  // Ensure there's a group for pins
+  let pinsGroup = mapSvg.querySelector('#mapPins');
+  if (!pinsGroup) {
+    pinsGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    pinsGroup.setAttribute('id', 'mapPins');
+    mapSvg.appendChild(pinsGroup);
+  }
+
+  provinces.forEach((prov) => {
+    const id = prov.id;
+    if (!id) return;
+
+    const hasMuseum = prov.dataset && prov.dataset.museum && prov.dataset.museum.trim() !== '-' && prov.dataset.museum.trim() !== '';
+    const hasGeopark = prov.dataset && prov.dataset.geopark && prov.dataset.geopark.trim() !== '-' && prov.dataset.geopark.trim() !== '';
+
+    // compute a simple anchor point using bbox center
+    let bbox;
+    try {
+      bbox = prov.getBBox();
+    } catch (err) {
+      // getBBox can fail if element not rendered yet
+      return;
+    }
+    const cx = bbox.x + bbox.width / 2;
+    const cy = bbox.y + bbox.height / 2;
+
+    // If both features exist, render two small pins slightly offset
+    if (hasMuseum) {
+      const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g.classList.add('map-pin', 'museum-pin');
+      g.dataset.province = id;
+      g.dataset.type = 'museum';
+
+      // head (circle)
+      const head = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      head.classList.add('pin-head');
+      head.setAttribute('cx', String(cx - (hasGeopark ? 6 : 0)));
+      head.setAttribute('cy', String(cy - bbox.height * 0.12));
+      head.setAttribute('r', '6');
+
+      // tail (teardrop path)
+      const tail = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      tail.classList.add('pin-tail');
+      // small teardrop pointing down from head center
+      const tx = cx - (hasGeopark ? 6 : 0);
+      const ty = cy - bbox.height * 0.12;
+      const tailD = `M ${tx - 4} ${ty + 2} C ${tx - 4} ${ty + 10} ${tx} ${ty + 16} ${tx} ${ty + 20} C ${tx} ${ty + 16} ${tx + 4} ${ty + 10} ${tx + 4} ${ty + 2} Z`;
+      tail.setAttribute('d', tailD);
+
+      g.appendChild(tail);
+      g.appendChild(head);
+      pinsGroup.appendChild(g);
+
+      g.addEventListener('click', () => {
+        prov.dispatchEvent(new Event('click'));
+      });
+    }
+
+    if (hasGeopark) {
+      const g2 = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      g2.classList.add('map-pin', 'geopark-pin');
+      g2.dataset.province = id;
+      g2.dataset.type = 'geopark';
+
+      const head2 = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      head2.classList.add('pin-head');
+      head2.setAttribute('cx', String(cx + (hasMuseum ? 6 : 0)));
+      head2.setAttribute('cy', String(cy - bbox.height * 0.12));
+      head2.setAttribute('r', '6');
+
+      const tail2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      tail2.classList.add('pin-tail');
+      const tx2 = cx + (hasMuseum ? 6 : 0);
+      const ty2 = cy - bbox.height * 0.12;
+      const tailD2 = `M ${tx2 - 4} ${ty2 + 2} C ${tx2 - 4} ${ty2 + 10} ${tx2} ${ty2 + 16} ${tx2} ${ty2 + 20} C ${tx2} ${ty2 + 16} ${tx2 + 4} ${ty2 + 10} ${tx2 + 4} ${ty2 + 2} Z`;
+      tail2.setAttribute('d', tailD2);
+
+      g2.appendChild(tail2);
+      g2.appendChild(head2);
+      pinsGroup.appendChild(g2);
+
+      g2.addEventListener('click', () => {
+        prov.dispatchEvent(new Event('click'));
+      });
+    }
+  });
+}
+
+// Create pins after initialization and a short delay to ensure SVG rendered
+setTimeout(() => {
+  createMapPins();
+}, 80);
+
+// Re-select provinces after initialization (since class might have been added)
 const provinces = document.querySelectorAll('.th-map .province');
 const mapNameEl = document.getElementById('mapProvinceName');
 const mapSummaryEl = document.getElementById('mapProvinceSummary');
@@ -628,6 +786,85 @@ if (mapSvg && provinces.length && mapNameEl && mapSummaryEl && mapMuseumEl && ma
     provinces.forEach((p) => p.classList.remove('active'));
     resetPanel();
   });
+
+  /* ---------------------------------------------
+   * Section5: Filter UI wiring (Museum / Geopark)
+   * --------------------------------------------- */
+  const mapFilterBtns = document.querySelectorAll('.map-filter-btn');
+  if (mapFilterBtns && mapFilterBtns.length) {
+    function applyMapFilter(filter) {
+      provinces.forEach((prov) => {
+        // clear any previous state
+        prov.classList.remove('highlight-museum', 'highlight-geopark', 'dim');
+
+        const hasMuseum = prov.dataset && prov.dataset.museum && prov.dataset.museum.trim() !== '-' && prov.dataset.museum.trim() !== '';
+        const hasGeopark = prov.dataset && prov.dataset.geopark && prov.dataset.geopark.trim() !== '-' && prov.dataset.geopark.trim() !== '';
+
+        if (filter === 'all') {
+          // show all
+          return;
+        }
+
+        if (filter === 'museum') {
+          if (hasMuseum) prov.classList.add('highlight-museum');
+          else prov.classList.add('dim');
+        }
+
+        if (filter === 'geopark') {
+          if (hasGeopark) prov.classList.add('highlight-geopark');
+          else prov.classList.add('dim');
+        }
+      });
+
+      // If filter is 'all' show pins; otherwise hide all pins entirely per user request
+      const pinsGroup = mapSvg ? mapSvg.querySelector('#mapPins') : null;
+      if (pinsGroup) {
+        if (filter === 'all') {
+          pinsGroup.classList.remove('hidden');
+          pinsGroup.querySelectorAll('.map-pin').forEach((p) => p.classList.remove('hidden'));
+        } else {
+          pinsGroup.classList.add('hidden');
+        }
+      }
+    }
+
+    mapFilterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter || 'all';
+
+        // toggle behavior: if clicked button is active, reset to all
+        const isActive = btn.classList.contains('active');
+        mapFilterBtns.forEach((b) => {
+          b.classList.remove('active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+
+        if (isActive || filter === 'all') {
+          // reset
+          const allBtn = document.querySelector('.map-filter-btn[data-filter="all"]');
+          if (allBtn) {
+            allBtn.classList.add('active');
+            allBtn.setAttribute('aria-pressed', 'true');
+          }
+          applyMapFilter('all');
+          return;
+        }
+
+        // set active
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+
+        applyMapFilter(filter);
+      });
+    });
+
+    // Ensure default state is 'all'
+    const defaultBtn = document.querySelector('.map-filter-btn[data-filter="all"]');
+    if (defaultBtn) {
+      defaultBtn.classList.add('active');
+      defaultBtn.setAttribute('aria-pressed', 'true');
+    }
+  }
 }
 
 // เล็ก ๆ น้อย ๆ: แอนิเมชันตอน section-map โผล่
@@ -642,3 +879,6 @@ gsap.from('.section-map .map-layout', {
     toggleActions: 'play none none reverse',
   },
 });
+
+
+
