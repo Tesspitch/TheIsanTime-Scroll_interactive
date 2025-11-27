@@ -1760,6 +1760,103 @@ model-viewer {
   }
 }
 
+
+  /* Map legend (top-right overlay) */
+  .map-legend {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 40;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+  }
+  .map-legend .legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+  .legend-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex: 0 0 12px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.12) inset;
+  }
+  .legend-dot.museum { background: #f4c542; }
+  .legend-dot.geopark { background: #4aa3ff; }
+
+  /* Region toggle button in the header */
+  .map-region-toggle {
+    margin-left: 8px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: linear-gradient(180deg,#1b1f2b,#0f1220);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .map-region-toggle[aria-pressed="true"] {
+    background: linear-gradient(180deg,#285aeb,#1a3fb8);
+    box-shadow: 0 6px 18px rgba(40,90,235,0.18);
+  }
+
+  /* Region coloring swatches and rules */
+  .map-region-legend { margin-top: 6px; display:flex; flex-direction:column; gap:6px; }
+  .legend-region { display:flex; align-items:center; gap:8px; font-size:12px; }
+  .region-swatch { width:12px; height:12px; border-radius:3px; display:inline-block; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12); }
+  .region-northeast-swatch { background:#20c997; }
+  .region-north-swatch { background:#4caf50; }
+  .region-central-swatch { background:#ff6b8a; }
+  .region-east-swatch { background:#9b59b6; }
+  .region-south-swatch { background:#ff7043; }
+
+  /* Apply fill colors to provinces when region classes are present */
+  .th-map .province { transition: fill 240ms ease, fill-opacity 240ms ease; }
+  .th-map .province.region-northeast { fill: #20c997 !important; fill-opacity: 0.95; }
+  .th-map .province.region-north { fill: #4caf50 !important; fill-opacity: 0.95; }
+  .th-map .province.region-central { fill: #ff6b8a !important; fill-opacity: 0.95; }
+  .th-map .province.region-east { fill: #9b59b6 !important; fill-opacity: 0.95; }
+  .th-map .province.region-south { fill: #ff7043 !important; fill-opacity: 0.95; }
+
+  /* Filter highlight/dim overrides - placed after region rules so they take precedence when active */
+  .th-map .province.dim {
+    opacity: 0.06;
+    filter: grayscale(100%);
+    transition: opacity 240ms ease, filter 240ms ease;
+    pointer-events: none;
+  }
+
+  .th-map .province.highlight-museum {
+    fill: #f4c542 !important;
+    fill-opacity: 0.95 !important;
+    opacity: 1 !important;
+    pointer-events: auto;
+  }
+
+  .th-map .province.highlight-geopark {
+    fill: #4aa3ff !important;
+    fill-opacity: 0.95 !important;
+    opacity: 1 !important;
+    pointer-events: auto;
+  }
+
+  /* When region coloring is off, revert to default styles (no region- classes) */
+
+
+  @media (max-width: 640px) {
+    .map-legend { top: 8px; right: 8px; font-size: 12px; padding: 6px 8px; }
+  }
 /* ---------------------------------------------
  * Section 5: Thailand Fossil Map Styling
  * --------------------------------------------- */

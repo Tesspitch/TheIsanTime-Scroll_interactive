@@ -612,6 +612,18 @@ const provinceData = {
     'data-summary': 'จังหวัดชัยภูมิ ได้ประกาศจัดตั้งอุทยานธรณีชัยภูมิเป็นอุทยานธรณีในระดับท้องถิ่น เมื่อวันที่ 11 สิงหาคม 2564 ครอบคลุม 8 อำเภอ ได้แก่ อำเภอเมืองชัยภูมิ อำเภอบ้านเขว้า อำเภอหนองบัวระเหว อำเภอเทพสถิต อำเภอภักดีชุมพล อำเภอเกษตรสมบูรณ์ อำเภอหนองบัวแดง และอำเภอคอนสาร รวมพื้นที่ 8,732 ตารางกิโลเมตร',
     'data-museum': '-',
     'data-geopark': 'อุทยานธรณีชัยภูมิ (Chaiyaphum Geopark)'
+  },
+  'tak' : {
+    'data-name' : 'ตาก',
+    'data-summary' : 'จังหวัดตากได้ประกาศจัดตั้งอุทยานธรณีไม้กลายเป็นหินตาก เป็นอุทยานธรณีในระดับท้องถิ่น เมื่อวันที่ 30 มีนาคม พ.ศ. 2560 ครอบคลุมพื้นที่ 4 อำเภอของจังหวัดตาก ได้แก่ อำเภอสามเงา อำเภอบ้านตาก อำเภอเมืองตาก และอำเภอวังเจ้า รวมพื้นที่ 5,671 ตารางกิโลเมตร',
+    'data-museum' : '-',
+    'data-geopark' : 'อุทยานธรณีตาก (Tak Geopark)'
+  },
+  'lpg' :{
+    'data-name' : 'ลำปาง',
+    'data-summary' : 'ประกาศจัดตั้งอุทยานธรณีลำปางเป็นอุทยานธรณีในระดับท้องถิ่นเมื่อวันที่ 23 สิงหาคม 2565 ครอบคลุม 7 อำเภอ ได้แก่ อำเภอเมืองลำปางอำเภอเกาะคา อำเภอแม่เมาะ อำเภอแจ้ห่ม อำเภองาว อำเภอแม่ทะ และอำเภอเมืองปาน รวมพื้นที่ 2,012 ตารางกิโลเมตร',
+    'data-museum' : '',
+    'data-geopark' : 'อุทยานธรณีลำปาง (Lampang Geopark)'
   }
 
 };
@@ -737,6 +749,76 @@ const mapNameEl = document.getElementById('mapProvinceName');
 const mapSummaryEl = document.getElementById('mapProvinceSummary');
 const mapMuseumEl = document.getElementById('mapProvinceMuseum');
 const mapGeoparkEl = document.getElementById('mapProvinceGeopark');
+
+/* ---------------------------------------------
+ * Region coloring: full province->region mapping
+ * --------------------------------------------- */
+// Map of SVG path id -> region key
+const regionMapping = {
+  /* Central */
+  bkk: 'central', nbi: 'central', pte: 'central', aya: 'central', atg: 'central', lri: 'central', sbr: 'central', cnt: 'central', sri: 'central',
+  rbr: 'central', kri: 'central', spb: 'central', npt: 'central', skn: 'central', skm: 'central', pbi: 'central', nsn: 'north', uti: 'central',
+
+  /* East */
+  cbi: 'east', ryg: 'east', cti: 'east', trt: 'east', cco: 'east', pri: 'east', nyk: 'east', skw: 'east',
+
+  /* Northeast (อีสาน) */
+  nma: 'northeast', brm: 'northeast', srn: 'northeast', ssk: 'northeast', ubn: 'northeast', yst: 'northeast', cpm: 'northeast', acr: 'northeast',
+  bkn: 'northeast', nbp: 'northeast', kkn: 'northeast', udn: 'northeast', lei: 'northeast', nki: 'northeast', mkm: 'northeast', ret: 'northeast',
+  ksn: 'northeast', snk: 'northeast', npm: 'northeast', mdh: 'northeast',
+
+  /* North */
+  cmi: 'north', lpn: 'north', lpg: 'north', utd: 'north', pre: 'north', nan: 'north', pyo: 'north', cri: 'north', msn: 'north', kpt: 'north', tak: 'north',
+  sti: 'north', plk: 'north', pct: 'north', pnb: 'north', nsn: 'north',
+
+  /* South */
+  nrt: 'south', kbi: 'south', pna: 'south', pkt: 'south', sni: 'south', rng: 'south', cpn: 'south', ska: 'south', stn: 'south', trg: 'south', plg: 'south', ptn: 'south', yla: 'south', nwt: 'south',
+
+  /* Others / special */
+  lksg: 'other'
+};
+
+const regionToggleBtn = document.getElementById('mapRegionToggle');
+
+function applyRegionColoring(enabled) {
+  provinces.forEach((prov) => {
+    const id = prov.id;
+    // remove any previous region classes
+    prov.classList.remove('region-northeast', 'region-north', 'region-central', 'region-east', 'region-south');
+    const region = regionMapping[id] || 'other';
+    if (!enabled) return; // leave without region classes
+    if (region === 'northeast') prov.classList.add('region-northeast');
+    else if (region === 'north') prov.classList.add('region-north');
+    else if (region === 'central') prov.classList.add('region-central');
+    else if (region === 'east') prov.classList.add('region-east');
+    else if (region === 'south') prov.classList.add('region-south');
+    // unknown/other -> no class
+  });
+
+  // show/hide the small region legend inside map-legend
+  const regionLegend = document.querySelector('.map-region-legend');
+  if (regionLegend) regionLegend.style.display = enabled ? 'flex' : 'none';
+}
+
+// initialize region legend hidden by default
+if (document.querySelector('.map-region-legend')) document.querySelector('.map-region-legend').style.display = 'none';
+
+if (regionToggleBtn) {
+  regionToggleBtn.addEventListener('click', () => {
+    const pressed = regionToggleBtn.getAttribute('aria-pressed') === 'true';
+    const newState = !pressed;
+    regionToggleBtn.setAttribute('aria-pressed', String(newState));
+    if (newState) regionToggleBtn.classList.add('active'); else regionToggleBtn.classList.remove('active');
+    applyRegionColoring(newState);
+  });
+}
+
+// Enable region coloring by default (standard full mapping)
+if (regionToggleBtn) {
+  regionToggleBtn.setAttribute('aria-pressed', 'true');
+  regionToggleBtn.classList.add('active');
+}
+applyRegionColoring(true);
 
 if (mapSvg && provinces.length && mapNameEl && mapSummaryEl && mapMuseumEl && mapGeoparkEl) {
   const defaultState = {
