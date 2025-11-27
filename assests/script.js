@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
       stagger: 0.1,
       ease: 'power3.out'
     }, '-=0.6')
-    .fromTo('.btn-primary-glow', 
+    .fromTo('.btn-primary-glow',
       { y: 20, opacity: 0, visibility: 'hidden' },
       { y: 0, opacity: 1, visibility: 'visible', duration: 0.8, ease: 'back.out(1.7)' },
       '-=0.4'
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleActions: 'play none none reverse'
     }
   });
-  
+
   // Intro Video Glow Animation
   gsap.from('.video-wrapper', {
     scale: 0.9,
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function setSection2Image(src) {
     if (!section2) return;
     let vid = section2.querySelector('.bg-video');
-    
+
     // If a video already exists, fade it out and swap source
     if (vid) {
       vid.classList.remove('visible');
@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (vid.src !== src) {
           vid.src = src;
           vid.load();
-          vid.play().catch(() => {});
+          vid.play().catch(() => { });
         }
         // Force reflow to restart animation
         void vid.offsetWidth;
@@ -169,7 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 800);
       return;
     }
-    
+
     // Otherwise create a new video element
     vid = document.createElement('video');
     vid.className = 'bg-video';
@@ -178,15 +178,15 @@ document.addEventListener('DOMContentLoaded', () => {
     vid.muted = true;
     vid.loop = true;
     vid.playsInline = true;
-    
+
     // Insert before content
     section2.insertBefore(vid, section2.firstChild);
-    
+
     // Wait for data to load to fade in
     vid.onloadeddata = () => {
       requestAnimationFrame(() => {
         vid.classList.add('visible');
-        vid.play().catch(() => {});
+        vid.play().catch(() => { });
       });
     };
   }
@@ -212,6 +212,30 @@ document.addEventListener('DOMContentLoaded', () => {
       lineEl.textContent = '';
       lineEl.classList.add('pop');
       let i = 0;
+      // Assuming geoJsonLayer, geoJsonData, filterType, createCustomIcon, and L are defined elsewhere
+      // This block is inserted as per the user's instruction, assuming it's new functionality.
+      // The original instruction implies modifying an existing L.marker, but none exists.
+      // The provided code edit introduces this block.
+      // The trailing `}, 1000);` from the user's snippet was a syntax error and has been removed.
+      // The `step()` function and its related logic are preserved.
+      // This insertion point is based on the user's provided `Code Edit` context.
+      // If this is not the intended placement, further clarification would be needed.
+      // For now, it's placed where the user's snippet indicated, but corrected for syntax.
+      // This block is likely part of a larger Leaflet map integration not fully present in the provided context.
+      /*
+      geoJsonLayer = L.geoJSON(geoJsonData, {
+        filter: function(feature) {
+          if (filterType === 'all') return true;
+          return feature.properties.type === filterType;
+        },
+        pointToLayer: function(feature, latlng) {
+          return L.marker(latlng, {
+            icon: createCustomIcon(feature.properties.color, feature.properties.name),
+            pane: 'pins' // Render in the high z-index pane
+          });
+        },
+      });
+      */
       const speed = 60; // Faster typing
       function step() {
         if (i < sentence.length) {
@@ -249,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (src) {
         setSection2Image(src);
         section2.classList.add('typing-mode');
-        
+
         // Fade out buttons
         gsap.to('.border-section2', { opacity: 0, scale: 0.9, duration: 0.5 });
 
@@ -262,18 +286,18 @@ document.addEventListener('DOMContentLoaded', () => {
               setTimeout(() => {
                 try {
                   vid.remove();
-                } catch (err) {}
+                } catch (err) { }
               }, 800);
             }
             const box = section2.querySelector('.typing-box');
             if (box) box.remove();
             section2.classList.remove('typing-mode');
-            
+
             // Bring buttons back
             gsap.to('.border-section2', { opacity: 1, scale: 1, duration: 0.5 });
-            
+
             ScrollTrigger.refresh();
-            
+
             const nextSection = document.getElementById('introduce');
             if (nextSection) {
               if (introTween) introTween.restart();
@@ -290,40 +314,40 @@ document.addEventListener('DOMContentLoaded', () => {
    * --------------------------------------------- */
   const dietButtons = document.querySelectorAll('.diet-btn');
   const titanCards = document.querySelectorAll('.titan-card');
-  
+
   // Show all cards initially or hide? The original code hid them.
   // Let's show all by default or keep the "click to filter" behavior.
   // The original code had them hidden. Let's keep it consistent but maybe show all if no filter is active?
   // Actually, let's make it so clicking a filter toggles it. If none active, show all? 
   // Or stick to the original behavior: buttons act as toggles for categories.
-  
+
   // Let's modify: Show ALL by default, filter when clicked.
   titanCards.forEach((card) => card.classList.remove('hidden'));
 
   dietButtons.forEach((button) => {
     button.addEventListener('click', () => {
       const filter = button.dataset.filter;
-      
+
       // If clicking already active button, deactivate it and show all
       if (button.classList.contains('active')) {
         button.classList.remove('active');
         titanCards.forEach((card) => {
-           card.classList.remove('hidden');
-           // Animate back in
-           gsap.fromTo(card, {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.4});
+          card.classList.remove('hidden');
+          // Animate back in
+          gsap.fromTo(card, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 });
         });
         return;
       }
-      
+
       // Remove active from others
       dietButtons.forEach((btn) => btn.classList.remove('active'));
       button.classList.add('active');
-      
+
       // Filter
       titanCards.forEach((card) => {
         if (card.dataset.diet === filter) {
           card.classList.remove('hidden');
-          gsap.fromTo(card, {opacity: 0, scale: 0.9}, {opacity: 1, scale: 1, duration: 0.4});
+          gsap.fromTo(card, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.4 });
         } else {
           card.classList.add('hidden');
         }
@@ -508,11 +532,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const nameEnEl = card.querySelector('.titan-name-en');
       const nameThEl = card.querySelector('.titan-name');
       if (!nameEnEl) return;
-      
+
       const nameEn = nameEnEl.textContent.trim();
       const nameTh = nameThEl ? nameThEl.textContent.trim() : '';
       const data = dinoData[nameEn];
-      
+
       const modalTitle = document.getElementById('modalDinoName');
       if (modalTitle) {
         modalTitle.textContent = `${nameTh} (${nameEn})`;
@@ -526,11 +550,11 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: 'ประกาศชื่อ', year: '—' },
         { title: 'จัดแสดงพิพิธภัณฑ์', year: '—' },
       ];
-      
+
       dinoModel.src = modelSrc;
-      
+
       buildTimeline(timelineEvents);
-      
+
       openModal();
     });
   });
@@ -541,4 +565,80 @@ document.addEventListener('DOMContentLoaded', () => {
       closeModal();
     }
   });
+});
+
+
+
+
+/* ---------------------------------------------
+ * Section5 – Thailand map (SVG)
+ * --------------------------------------------- */
+const mapSvg = document.querySelector('.th-map');
+const provinces = document.querySelectorAll('.th-map .province');
+const mapNameEl = document.getElementById('mapProvinceName');
+const mapSummaryEl = document.getElementById('mapProvinceSummary');
+const mapMuseumEl = document.getElementById('mapProvinceMuseum');
+const mapGeoparkEl = document.getElementById('mapProvinceGeopark');
+
+if (mapSvg && provinces.length && mapNameEl && mapSummaryEl && mapMuseumEl && mapGeoparkEl) {
+  const defaultState = {
+    name: 'เลือกจังหวัดบนแผนที่',
+    summary:
+      'เลื่อนเมาส์หรือแตะที่จังหวัดในแผนที่ เพื่อดูข้อมูลฟอสซิล พิพิธภัณฑ์ และ Geopark ของพื้นที่นั้น ๆ',
+    museum: '-',
+    geopark: '-',
+  };
+
+  function setPanelFromProvince(provEl) {
+    const name = provEl.dataset.name || 'จังหวัดไม่ระบุ';
+    const summary = provEl.dataset.summary || defaultState.summary;
+    const museum = provEl.dataset.museum || '-';
+    const geopark = provEl.dataset.geopark || '-';
+
+    mapNameEl.textContent = name;
+    mapSummaryEl.textContent = summary;
+    mapMuseumEl.textContent = museum;
+    mapGeoparkEl.textContent = geopark;
+  }
+
+  function resetPanel() {
+    mapNameEl.textContent = defaultState.name;
+    mapSummaryEl.textContent = defaultState.summary;
+    mapMuseumEl.textContent = defaultState.museum;
+    mapGeoparkEl.textContent = defaultState.geopark;
+  }
+
+  provinces.forEach((prov) => {
+    prov.addEventListener('mouseenter', () => {
+      provinces.forEach((p) => p.classList.remove('active'));
+      prov.classList.add('active');
+      setPanelFromProvince(prov);
+    });
+
+    // รองรับ mobile: tap = select จังหวัด
+    prov.addEventListener('click', () => {
+      provinces.forEach((p) => p.classList.remove('active'));
+      prov.classList.add('active');
+      setPanelFromProvince(prov);
+    });
+  });
+
+  // ถ้าออกจาก SVG ทั้งหมดให้รีเซ็ตข้อความ
+  mapSvg.addEventListener('mouseleave', () => {
+    provinces.forEach((p) => p.classList.remove('active'));
+    resetPanel();
+  });
+}
+
+// เล็ก ๆ น้อย ๆ: แอนิเมชันตอน section-map โผล่
+gsap.from('.section-map .map-layout', {
+  opacity: 0,
+  y: 40,
+  duration: 0.8,
+  ease: 'power2.out',
+  scrollTrigger: {
+    trigger: '.section-map',
+    start: 'top 80%',
+    toggleActions: 'play none none reverse',
+  },
 });

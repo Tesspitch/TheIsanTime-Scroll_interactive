@@ -125,6 +125,7 @@ button,
   justify-content: center;
   align-items: center;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .hero-video {
@@ -299,6 +300,61 @@ button,
   }
 }
 
+/* Map Display (Leaflet) */
+.map-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 600px;
+  /* Ensure minimum height */
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  background: rgba(15, 23, 42, 0.3);
+  /* Subtle backdrop */
+}
+
+.leaflet-map-container {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  /* Let the dark tiles show */
+  z-index: 1;
+}
+
+/* Customize Leaflet Controls for Dark Theme */
+.leaflet-control-zoom {
+  border: none !important;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+.leaflet-control-zoom a {
+  background-color: rgba(15, 23, 42, 0.9) !important;
+  color: #22d3ee !important;
+  border-color: rgba(34, 211, 238, 0.3) !important;
+  border-radius: 4px !important;
+  margin-bottom: 4px !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: rgba(34, 211, 238, 0.2) !important;
+  color: #fff !important;
+}
+
+.leaflet-container {
+  font-family: 'Rajdhani', sans-serif !important;
+  background: #020617 !important;
+  /* Match section bg */
+}
+
+/* Province Polygon Styles */
+.province-poly {
+  transition: all 0.3s ease;
+}
+
 /* Flying Dinos */
 .dino {
   position: absolute;
@@ -369,6 +425,7 @@ button,
   position: relative;
   overflow: hidden;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .section2 .bg-image {
@@ -555,6 +612,7 @@ button,
   position: relative;
   overflow: hidden;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .section-introduce::before {
@@ -707,6 +765,8 @@ button,
   padding: 120px 24px;
   background: linear-gradient(to bottom, #0f172a, #020617);
   position: relative;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .timeline-container {
@@ -941,6 +1001,8 @@ button,
   background: linear-gradient(to bottom, #020617, #000000);
   color: white;
   position: relative;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .titans-container {
@@ -1390,5 +1452,156 @@ model-viewer {
 
   .modal-dino-name {
     font-size: 1.4rem;
+  }
+}
+
+
+
+
+/* Section5 – Thailand Map */
+.section-map {
+  min-height: 100vh;
+  padding: 96px 24px 120px;
+  background: #fdf7eb;
+  /* โทนสว่างตัดกับ section ด้านบน */
+  color: #0f172a;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.map-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.map-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.map-header h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.map-header p {
+  margin-top: 8px;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+  gap: 32px;
+  align-items: stretch;
+}
+
+.map-svg-wrapper {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+  padding: 18px;
+  position: relative;
+}
+
+.th-map {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Province styles */
+.th-map path {
+  fill: #9b9bf0;
+  stroke: #ffffff;
+  stroke-width: 1px;
+  transition: fill 0.3s ease;
+}
+
+.th-map .province {
+  cursor: pointer;
+}
+
+.th-map .province:hover,
+.th-map .province.active {
+  fill: #7a7ad0;
+  stroke: #ffffff;
+  transform: none;
+  /* Reset transform if not needed, or keep it */
+}
+
+/* Info panel */
+.map-info-panel {
+  background: #0f172a;
+  color: #e5e7eb;
+  border-radius: 24px;
+  padding: 24px 24px 28px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.map-info-panel h3 {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+
+.map-info-summary {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+}
+
+.map-info-detail {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.info-block {
+  background: #020617;
+  border-radius: 16px;
+  padding: 12px 14px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.info-block h4 {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fbbf24;
+  margin-bottom: 4px;
+}
+
+.info-block p {
+  font-size: 0.9rem;
+  color: #e5e7eb;
+}
+
+.map-hint {
+  margin-top: auto;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+.map-hint code {
+  background: rgba(148, 163, 184, 0.2);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .map-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .map-svg-wrapper,
+  .map-info-panel {
+    border-radius: 20px;
   }
 }
