@@ -368,40 +368,40 @@ document.addEventListener('DOMContentLoaded', () => {
       model: '../assests/model/Phuwiangosaurus_sirindhornae.glb',
       footprint: 'assests/img/dino_section4/Phuwiangosaurus.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1976' },
-        { title: 'ขุดค้นฟอสซิล', year: '1977' },
+        { title: 'ค้นพบรอยเท้า', year: '1982' }, //
+        { title: 'ขุดค้นฟอสซิล', year: '1982' },
         { title: 'ประกาศชื่อวิทยาศาสตร์', year: '1994' },
-        { title: 'จัดแสดงในพิพิธภัณฑ์', year: '1997' },
+        { title: 'จัดแสดงในพิพิธภัณฑ์', year: '2001' },
       ],
     },
     'Kinnareemimus khonkaennsis': {
       model: '../assests/model/Kinnareemimus khonkaenensis.glb',
       footprint: './assests/img/dino_section4/Kinnareemimus.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1994' },
-        { title: 'ขุดค้นฟอสซิล', year: '1995' },
-        { title: 'รายงานการค้นพบ', year: '2001' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: '2002' },
+        { title: 'ค้นพบรอยเท้า', year: '1995' }, 
+        { title: 'ขุดค้นฟอสซิล', year: '1990' },
+        { title: 'รายงานการค้นพบ', year: '1994' },
+        { title: 'จัดแสดงพิพิธภัณฑ์', year: 'ไม่มีข้อมูลชัดเจน' }, 
       ],
     },
     'Sittakosaurus satyarakki': {
       model: '../assests/model/Psittacosaurus_sattayaraki.glb',
       footprint: '../assests/img/dino_section4/Sittakosaurus.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1992' },
-        { title: 'ขุดค้นฟอสซิล', year: '1993' },
-        { title: 'ประกาศสายพันธุ์', year: '1996' },
-        { title: 'เข้าสู่พิพิธภัณฑ์', year: '1998' },
+        { title: 'ค้นพบรอยเท้า', year: '1992' }, 
+        { title: 'ขุดค้นฟอสซิล', year: '1980-1990' }, // 
+        { title: 'ประกาศสายพันธุ์', year: '1992' }, 
+        { title: 'เข้าสู่พิพิธภัณฑ์', year: 'ไม่มีข้อมูลชัดเจน' }, //
       ],
     },
     'Ratchasimasaurus suranareae': {
       model: '../assests/model/Ratchasimasaurus.glb',
       footprint: '../assests/img/dino_section4/Ratchasimasaurus.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '2007' },
-        { title: 'ขุดค้นฟอสซิล', year: '2008' },
+        { title: 'ค้นพบรอยเท้า', year: '2011' }, 
+        { title: 'ขุดค้นฟอสซิล', year: '2010' }, 
         { title: 'ตีพิมพ์ชื่อวิทยาศาสตร์', year: '2011' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: '2012' },
+        { title: 'จัดแสดงพิพิธภัณฑ์', year: 'ไม่มีข้อมูลชัดเจน' },
       ],
     },
     'Siamodon nimngami': {
@@ -409,89 +409,89 @@ document.addEventListener('DOMContentLoaded', () => {
       footprint: '../assests/img/dino_section4/Siamodon.png',
       timeline: [
         { title: 'ค้นพบรอยเท้า', year: '2010' },
-        { title: 'ขุดค้นฟอสซิล', year: '2011' },
+        { title: 'ขุดค้นฟอสซิล', year: '2011' },//
         { title: 'ประกาศชื่อวิทยาศาสตร์', year: '2011' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: '2013' },
+        { title: 'จัดแสดงพิพิธภัณฑ์', year: 'ไม่มีข้อมูลชัดเจน' },//
       ],
     },
     'Sirindhorna khoratensis': {
       model: '../assests/model/Sirindhorna.glb',
       footprint: '../assests/img/dino_section4/Sirindhorna.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '2007' },
-        { title: 'ขุดค้นฟอสซิล', year: '2008' },
+        { title: 'ค้นพบรอยเท้า', year: '2007' }, 
+        { title: 'ขุดค้นฟอสซิล', year: '2007' },
         { title: 'ตีพิมพ์ทางวิทยาศาสตร์', year: '2015' },
-        { title: 'ประกาศชื่อ', year: '2016' },
+        { title: 'ประกาศชื่อ', year: '2010' },
       ],
     },
     'Isanosaurus attavipatchi': {
       model: '../assests/model/Isanosaurus.glb',
       footprint: 'https://via.placeholder.com/600x300?text=Footprint+Isanosaurus',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1988' },
-        { title: 'ขุดค้นฟอสซิล', year: '1989' },
+        { title: 'ค้นพบรอยเท้า', year: '1998' }, 
+        { title: 'ขุดค้นฟอสซิล', year: '1998' },
         { title: 'รายงานทางวิทยาศาสตร์', year: '2000' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: '2001' },
+        { title: 'จัดแสดงพิพิธภัณฑ์', year: 'ไม่มีข้อมูลชัดเจน' },//
       ],
     },
     'Minimocursor phunoiensis': {
       model: '../assests/model/Minimocursor.glb',
       footprint: 'https://via.placeholder.com/600x300?text=Footprint+Minimocursor',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '2023' },
+        { title: 'ค้นพบรอยเท้า', year: '2013' }, //
         { title: 'ขุดค้นฟอสซิล', year: '2023' },
         { title: 'ประกาศสายพันธุ์ใหม่', year: '2023' },
-        { title: 'เข้าสู่พิพิธภัณฑ์', year: '2024' },
+        { title: 'เข้าสู่พิพิธภัณฑ์', year: '2024' }, //
       ],
     },
     'Siamotyrannus isanensis': {
       model: '../assests/model/Siamotyrannus.glb',
       footprint: 'https://via.placeholder.com/600x300?text=Footprint+Siamotyrannus',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1993' },
-        { title: 'ขุดค้นฟอสซิล', year: '1994' },
+        { title: 'ค้นพบรอยเท้า', year: '1993' }, //
+        { title: 'ขุดค้นฟอสซิล', year: '1993' },
         { title: 'ประกาศชื่อวิทยาศาสตร์', year: '1996' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: '1997' },
+        { title: 'จัดแสดงพิพิธภัณฑ์', year: '1990' },
       ],
     },
     'Siamosaurus suteethorni': {
       model: '../assests/model/Siamosaurus.glb',
       footprint: 'https://via.placeholder.com/600x300?text=Footprint+Siamosaurus',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1983' },
-        { title: 'ขุดค้นฟอสซิล', year: '1984' },
+        { title: 'ค้นพบรอยเท้า', year: '1976' }, 
+        { title: 'ขุดค้นฟอสซิล', year: '1970-1980' },
         { title: 'ประกาศชื่อวิทยาศาสตร์', year: '1986' },
-        { title: 'การทบทวนชื่อ', year: '1997' },
+        { title: 'การทบทวนชื่อ', year: 'ไม่มีข้อมูลชัดเจน' },//
       ],
     },
     'Phuwiangvenator yaemniyomi': {
       model: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
       footprint: 'https://via.placeholder.com/600x300?text=Footprint+Phuwiangvenator',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '2019' },
-        { title: 'ขุดค้นฟอสซิล', year: '2019' },
-        { title: 'รายงานการค้นพบ', year: '2020' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: '2021' },
+        { title: 'ค้นพบรอยเท้า', year: '1993' }, 
+        { title: 'ขุดค้นฟอสซิล', year: '1993' },
+        { title: 'รายงานการค้นพบ', year: '2019' },
+        { title: 'จัดแสดงพิพิธภัณฑ์', year: '2011' }, //
       ],
     },
     'Vayuraptor nongbualamphuensis': {
       model: '../assests/model/Vayuraptor.glb',
       footprint: 'https://via.placeholder.com/600x300?text=Footprint+Vayuraptor',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '2019' },
-        { title: 'ขุดค้นฟอสซิล', year: '2019' },
-        { title: 'ประกาศชื่อวิทยาศาสตร์', year: '2020' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: '2021' },
+        { title: 'ค้นพบรอยเท้า', year: '1988' }, 
+        { title: 'ขุดค้นฟอสซิล', year: '1988' },
+        { title: 'ประกาศชื่อวิทยาศาสตร์', year: '2019' },
+        { title: 'จัดแสดงพิพิธภัณฑ์', year: '2017' },
       ],
     },
     'Siamraptor suwati': {
       model: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
       footprint: 'https://via.placeholder.com/600x300?text=Footprint+Siamraptor',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '2019' },
-        { title: 'ขุดค้นฟอสซิล', year: '2019' },
+        { title: 'ค้นพบรอยเท้า', year: '2007' },
+        { title: 'ขุดค้นฟอสซิล', year: '2007-2009' },
         { title: 'ประกาศชื่อวิทยาศาสตร์', year: '2019' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: '2020' },
+        { title: 'จัดแสดงพิพิธภัณฑ์', year: '2019' },
       ],
     },
   };
