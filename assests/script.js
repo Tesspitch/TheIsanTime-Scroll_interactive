@@ -111,13 +111,14 @@ document.addEventListener('DOMContentLoaded', () => {
   timelineItems.forEach((item, i) => {
     gsap.from(item, {
       opacity: 0,
-      x: -50,
+      y: 30,
       duration: 0.8,
       ease: 'power2.out',
       scrollTrigger: {
         trigger: item,
-        start: 'top 85%',
-        toggleActions: 'play none none reverse'
+        start: 'top 90%',
+        toggleActions: 'play none none reverse',
+        fastScrollEnd: true
       }
     });
   });
@@ -565,6 +566,12 @@ document.addEventListener('DOMContentLoaded', () => {
       closeModal();
     }
   });
+  // Force refresh ScrollTrigger on window load to ensure correct positions
+  window.addEventListener('load', () => {
+    ScrollTrigger.refresh();
+    // Double check after a short delay for any late layout shifts
+    setTimeout(() => ScrollTrigger.refresh(), 500);
+  });
 });
 
 
@@ -641,7 +648,7 @@ const provinceData = {
     'data-name': 'เพรชบูรณ์',
     'data-summary': 'จังหวัดเพชรบูรณ์ได้มีประกาศ เรื่อง จัดตั้งอุทยานธรณีเพชรบูรณ์ เมื่อวันที่ 10 พฤษภาคม 2561 อุทยานธรณีเพชรบูรณ์ครอบคลุมพื้นที่ ๓ อำเภอ ทางตอนเหนือของจังหวัดเพชรบูรณ์ ได้แก่ อำเภอน้ำหนาว หล่มสัก และเมืองเพชรบูรณ์ มีพื้นที่ ๔,๔๓๖ ตารางกิโลเมตร',
     'data-museum': '-',
-    'data-geopark': 'อุทยานธรณีเพชรบูรณ์ (Phetchabun Geopark)'
+    'data-geopark': 'อุทยานธรณีเพชรบูรณ์ (Phetchburi Geopark)'
   }
 
 };
