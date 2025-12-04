@@ -1528,6 +1528,7 @@ model-viewer {
   margin-bottom: 40px;
 }
 
+
 .map-header h2 {
   font-size: clamp(2rem, 4vw, 3rem);
   font-weight: 800;
@@ -2331,4 +2332,112 @@ model-viewer {
   height: 40px;
   margin-left: 4px;
   /* Optical adjustment */
+}
+
+/* ---------------------------------------------
+ * Site Footer
+ * --------------------------------------------- */
+.site-footer {
+  background: #020617;
+  color: #94a3b8;
+  padding: 40px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: var(--font-en);
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-right: 24px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+.footer-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-text h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0;
+}
+
+.footer-text p {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.footer-right {
+  font-size: 0.85rem;
+  color: #64748b;
+  text-align: right;
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+  }
+
+  .footer-left {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-logos {
+    padding-right: 0;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 20px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footer-right {
+    text-align: center;
+  }
+}
+
+/* ---------------------------------------------
+ * Performance Optimizations
+ * --------------------------------------------- */
+.hero-title-th,
+.hero-title-highlight,
+.hero-subtitle-en,
+.intro-title,
+.intro-subtitle,
+.intro-body p,
+.timeline-item,
+.titan-card {
+  will-change: transform, opacity;
+}
+}
 }

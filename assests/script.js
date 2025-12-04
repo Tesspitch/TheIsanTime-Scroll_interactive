@@ -622,8 +622,26 @@ const provinceData = {
   'lpg': {
     'data-name': 'ลำปาง',
     'data-summary': 'ประกาศจัดตั้งอุทยานธรณีลำปางเป็นอุทยานธรณีในระดับท้องถิ่นเมื่อวันที่ 23 สิงหาคม 2565 ครอบคลุม 7 อำเภอ ได้แก่ อำเภอเมืองลำปางอำเภอเกาะคา อำเภอแม่เมาะ อำเภอแจ้ห่ม อำเภองาว อำเภอแม่ทะ และอำเภอเมืองปาน รวมพื้นที่ 2,012 ตารางกิโลเมตร',
-    'data-museum': '',
+    'data-museum': '-',
     'data-geopark': 'อุทยานธรณีลำปาง (Lampang Geopark)'
+  },
+  'cri': {
+    'data-name': 'เชียงราย',
+    'data-summary': 'จังหวัดเชียงราย ได้มีประกาศจังหวัดเชียงราย ลงวันที่ 21 กุมภาพันธ์ 2567 เรื่อง จัดตั้งอุทยานธรณีเชียงราย (Chiang Rai Geopark) โดยประกาศให้พื้นที่ในเขตอำเภอแม่สาย อำเภอแม่จัน และอำเภอเชียงแสน จังหวัดเชียงราย ซึ่งมีพื้นที่รวมทั้งหมด 1,434 ตารางกิโลเมตร เป็นอุทยานธรณีระดับท้องถิ่น',
+    'data-museum': '-',
+    'data-geopark': 'อุทยานธรณีเชียงราย (Chiang Rai Geopark)'
+  },
+  'spb': {
+    'data-name': 'สุพรรณบุรี',
+    'data-summary': 'จังหวัดสุพรรณบุรีได้ประกาศจัดตั้งอุทยานธรณีพุหางนาค เป็นอุทยานธรณีในระดับท้องถิ่นเมื่อวันที่ 17 มกราคม 2565 ครอบคลุม 4 อำเภอ ได้แก่ อำเภอเมืองสุพรรณบุรี อำเภออู่ทอง อำเภอดอนเจดีย์ และอำเภอหนองหญ้าไซรวมพื้นที่ ๑,๒๖๘ ตารางกิโลเมตร',
+    'data-museum': '-',
+    'data-geopark': 'อุทยานธรณีพุหางนาค'
+  },
+  'pnb': {
+    'data-name': 'เพรชบูรณ์',
+    'data-summary': 'จังหวัดเพชรบูรณ์ได้มีประกาศ เรื่อง จัดตั้งอุทยานธรณีเพชรบูรณ์ เมื่อวันที่ 10 พฤษภาคม 2561 อุทยานธรณีเพชรบูรณ์ครอบคลุมพื้นที่ ๓ อำเภอ ทางตอนเหนือของจังหวัดเพชรบูรณ์ ได้แก่ อำเภอน้ำหนาว หล่มสัก และเมืองเพชรบูรณ์ มีพื้นที่ ๔,๔๓๖ ตารางกิโลเมตร',
+    'data-museum': '-',
+    'data-geopark': 'อุทยานธรณีเพชรบูรณ์ (Phetchabun Geopark)'
   }
 
 };
@@ -868,6 +886,26 @@ if (mapSvg && provinces.length && mapNameEl && mapSummaryEl && mapMuseumEl && ma
     provinces.forEach((p) => p.classList.remove('active'));
     resetPanel();
   });
+
+  // Support touch drag to highlight provinces (Mobile "Hover" effect)
+  mapSvg.addEventListener('touchmove', (e) => {
+    if (e.touches.length === 1) {
+      // Prevent scrolling to allow dragging across the map
+      if (e.cancelable) e.preventDefault();
+
+      const touch = e.touches[0];
+      const target = document.elementFromPoint(touch.clientX, touch.clientY);
+
+      if (target && target.classList.contains('province')) {
+        // Only update if different to avoid thrashing
+        if (!target.classList.contains('active')) {
+          provinces.forEach((p) => p.classList.remove('active'));
+          target.classList.add('active');
+          setPanelFromProvince(target);
+        }
+      }
+    }
+  }, { passive: false });
 
   /* ---------------------------------------------
    * Section5: Filter UI wiring (Museum / Geopark)
