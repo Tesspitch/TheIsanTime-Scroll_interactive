@@ -1553,27 +1553,27 @@ model-viewer {
 .map-filter-btn {
   padding: 10px 18px;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.06);
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
   color: #e6f7ff;
   font-weight: 800;
   font-size: 1rem;
   letter-spacing: 0.02em;
   cursor: pointer;
   transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
-  box-shadow: 0 6px 18px rgba(2,6,23,0.45);
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.45);
 }
 
 .map-filter-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 26px rgba(2,6,23,0.55);
+  box-shadow: 0 10px 26px rgba(2, 6, 23, 0.55);
 }
 
 .map-filter-btn.active {
   background: linear-gradient(90deg, #fbbf24, #f59e0b);
   color: #07122a;
   box-shadow: 0 12px 30px rgba(247, 149, 33, 0.28);
-  border-color: rgba(251,191,36,0.28);
+  border-color: rgba(251, 191, 36, 0.28);
   transform: translateY(-4px) scale(1.02);
 }
 
@@ -1592,13 +1592,13 @@ model-viewer {
 .th-map .province.highlight-museum {
   fill: #fbbf24 !important;
   stroke: #fff7e6 !important;
-  filter: drop-shadow(0 0 12px rgba(251,191,36,0.45));
+  filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.45));
 }
 
 .th-map .province.highlight-geopark {
   fill: #22d3ee !important;
   stroke: #e0f7ff !important;
-  filter: drop-shadow(0 0 12px rgba(34,211,238,0.45));
+  filter: drop-shadow(0 0 12px rgba(34, 211, 238, 0.45));
 }
 
 /* Map pin styles (SVG circles) */
@@ -1624,21 +1624,21 @@ model-viewer {
 .th-map .museum-pin .pin-head {
   fill: #fbbf24;
   stroke: #fff7e6;
-  filter: drop-shadow(0 6px 12px rgba(251,191,36,0.25));
+  filter: drop-shadow(0 6px 12px rgba(251, 191, 36, 0.25));
 }
 
 .th-map .museum-pin .pin-tail {
-  fill: rgba(251,191,36,0.95);
+  fill: rgba(251, 191, 36, 0.95);
 }
 
 .th-map .geopark-pin .pin-head {
   fill: #22d3ee;
   stroke: #e6fbff;
-  filter: drop-shadow(0 6px 12px rgba(34,211,238,0.25));
+  filter: drop-shadow(0 6px 12px rgba(34, 211, 238, 0.25));
 }
 
 .th-map .geopark-pin .pin-tail {
-  fill: rgba(34,211,238,0.95);
+  fill: rgba(34, 211, 238, 0.95);
 }
 
 .th-map .map-pin.hidden {
@@ -1761,102 +1761,172 @@ model-viewer {
 }
 
 
-  /* Map legend (top-right overlay) */
+/* Map legend (top-right overlay) */
+.map-legend {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 40;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.map-legend .legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex: 0 0 12px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12) inset;
+}
+
+.legend-dot.museum {
+  background: #f4c542;
+}
+
+.legend-dot.geopark {
+  background: #4aa3ff;
+}
+
+/* Region toggle button in the header */
+.map-region-toggle {
+  margin-left: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #1b1f2b, #0f1220);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.map-region-toggle[aria-pressed="true"] {
+  background: linear-gradient(180deg, #285aeb, #1a3fb8);
+  box-shadow: 0 6px 18px rgba(40, 90, 235, 0.18);
+}
+
+/* Region coloring swatches and rules */
+.map-region-legend {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.legend-region {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.region-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.region-northeast-swatch {
+  background: #20c997;
+}
+
+.region-north-swatch {
+  background: #4caf50;
+}
+
+.region-central-swatch {
+  background: #ff6b8a;
+}
+
+.region-east-swatch {
+  background: #9b59b6;
+}
+
+.region-south-swatch {
+  background: #ff7043;
+}
+
+/* Apply fill colors to provinces when region classes are present */
+.th-map .province {
+  transition: fill 240ms ease, fill-opacity 240ms ease;
+}
+
+.th-map .province.region-northeast {
+  fill: #20c997 !important;
+  fill-opacity: 0.95;
+}
+
+.th-map .province.region-north {
+  fill: #4caf50 !important;
+  fill-opacity: 0.95;
+}
+
+.th-map .province.region-central {
+  fill: #ff6b8a !important;
+  fill-opacity: 0.95;
+}
+
+.th-map .province.region-east {
+  fill: #9b59b6 !important;
+  fill-opacity: 0.95;
+}
+
+.th-map .province.region-south {
+  fill: #ff7043 !important;
+  fill-opacity: 0.95;
+}
+
+/* Filter highlight/dim overrides - placed after region rules so they take precedence when active */
+.th-map .province.dim {
+  opacity: 0.06;
+  filter: grayscale(100%);
+  transition: opacity 240ms ease, filter 240ms ease;
+  pointer-events: none;
+}
+
+.th-map .province.highlight-museum {
+  fill: #f4c542 !important;
+  fill-opacity: 0.95 !important;
+  opacity: 1 !important;
+  pointer-events: auto;
+}
+
+.th-map .province.highlight-geopark {
+  fill: #4aa3ff !important;
+  fill-opacity: 0.95 !important;
+  opacity: 1 !important;
+  pointer-events: auto;
+}
+
+/* When region coloring is off, revert to default styles (no region- classes) */
+
+
+@media (max-width: 640px) {
   .map-legend {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    background: rgba(0,0,0,0.55);
-    color: #fff;
-    padding: 8px 10px;
-    border-radius: 8px;
-    font-size: 13px;
-    line-height: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    z-index: 40;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    top: 8px;
+    right: 8px;
+    font-size: 12px;
+    padding: 6px 8px;
   }
-  .map-legend .legend-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    white-space: nowrap;
-  }
-  .legend-dot {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    flex: 0 0 12px;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.12) inset;
-  }
-  .legend-dot.museum { background: #f4c542; }
-  .legend-dot.geopark { background: #4aa3ff; }
+}
 
-  /* Region toggle button in the header */
-  .map-region-toggle {
-    margin-left: 8px;
-    padding: 6px 10px;
-    border-radius: 6px;
-    background: linear-gradient(180deg,#1b1f2b,#0f1220);
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.06);
-    cursor: pointer;
-    font-size: 13px;
-  }
-  .map-region-toggle[aria-pressed="true"] {
-    background: linear-gradient(180deg,#285aeb,#1a3fb8);
-    box-shadow: 0 6px 18px rgba(40,90,235,0.18);
-  }
-
-  /* Region coloring swatches and rules */
-  .map-region-legend { margin-top: 6px; display:flex; flex-direction:column; gap:6px; }
-  .legend-region { display:flex; align-items:center; gap:8px; font-size:12px; }
-  .region-swatch { width:12px; height:12px; border-radius:3px; display:inline-block; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12); }
-  .region-northeast-swatch { background:#20c997; }
-  .region-north-swatch { background:#4caf50; }
-  .region-central-swatch { background:#ff6b8a; }
-  .region-east-swatch { background:#9b59b6; }
-  .region-south-swatch { background:#ff7043; }
-
-  /* Apply fill colors to provinces when region classes are present */
-  .th-map .province { transition: fill 240ms ease, fill-opacity 240ms ease; }
-  .th-map .province.region-northeast { fill: #20c997 !important; fill-opacity: 0.95; }
-  .th-map .province.region-north { fill: #4caf50 !important; fill-opacity: 0.95; }
-  .th-map .province.region-central { fill: #ff6b8a !important; fill-opacity: 0.95; }
-  .th-map .province.region-east { fill: #9b59b6 !important; fill-opacity: 0.95; }
-  .th-map .province.region-south { fill: #ff7043 !important; fill-opacity: 0.95; }
-
-  /* Filter highlight/dim overrides - placed after region rules so they take precedence when active */
-  .th-map .province.dim {
-    opacity: 0.06;
-    filter: grayscale(100%);
-    transition: opacity 240ms ease, filter 240ms ease;
-    pointer-events: none;
-  }
-
-  .th-map .province.highlight-museum {
-    fill: #f4c542 !important;
-    fill-opacity: 0.95 !important;
-    opacity: 1 !important;
-    pointer-events: auto;
-  }
-
-  .th-map .province.highlight-geopark {
-    fill: #4aa3ff !important;
-    fill-opacity: 0.95 !important;
-    opacity: 1 !important;
-    pointer-events: auto;
-  }
-
-  /* When region coloring is off, revert to default styles (no region- classes) */
-
-
-  @media (max-width: 640px) {
-    .map-legend { top: 8px; right: 8px; font-size: 12px; padding: 6px 8px; }
-  }
 /* ---------------------------------------------
  * Section 5: Thailand Fossil Map Styling
  * --------------------------------------------- */
@@ -2021,4 +2091,244 @@ model-viewer {
   .map-info-panel {
     position: static;
   }
+}
+
+/* ---------------------------------------------
+ * Stone Layer Section
+ * --------------------------------------------- */
+.stone-layer-container {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  perspective: 1000px;
+  min-height: 500px;
+  /* Reserve space */
+}
+
+.stone-layer-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  max-width: 1100px;
+  width: 100%;
+  transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.stone-image-wrapper {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.stone-img {
+  max-width: 450px;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6));
+  transition: transform 0.5s ease;
+}
+
+.stone-image-wrapper:hover .stone-img {
+  transform: scale(1.02) translateY(-5px);
+}
+
+.stone-hint {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 12px 28px;
+  border-radius: 99px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(34, 211, 238, 0.4);
+  pointer-events: none;
+  animation: pulseHint 2.5s infinite;
+  opacity: 1;
+  transition: opacity 0.4s;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.hint-icon {
+  font-size: 1.5rem;
+}
+
+.hint-text {
+  font-family: var(--font-th);
+  font-size: 1.1rem;
+  color: #22d3ee;
+  font-weight: 600;
+}
+
+@keyframes pulseHint {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.4);
+  }
+
+  70% {
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 0 0 20px rgba(34, 211, 238, 0);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 0 0 rgba(34, 211, 238, 0);
+  }
+}
+
+.stone-text-wrapper {
+  flex: 1;
+  opacity: 0;
+  transform: translateX(50px);
+  pointer-events: none;
+  transition: all 0.8s ease;
+  max-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stone-title {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 24px;
+  font-family: var(--font-th);
+  font-weight: 700;
+  text-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+  white-space: nowrap;
+}
+
+.stone-desc {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #e2e8f0;
+  font-family: var(--font-th);
+  font-weight: 300;
+}
+
+/* Active State (Desktop) */
+.stone-layer-content.active .stone-image-wrapper {
+  transform: translateX(0);
+}
+
+.stone-layer-content.active .stone-hint {
+  opacity: 0;
+}
+
+.stone-layer-content.active .stone-text-wrapper {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+  max-width: 600px;
+  padding-left: 20px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+  .stone-layer-content {
+    flex-direction: column;
+    gap: 30px;
+    min-height: auto;
+  }
+
+  .stone-img {
+    max-width: 300px;
+  }
+
+  .stone-text-wrapper {
+    max-width: 100%;
+    transform: translateY(20px);
+    opacity: 1;
+    pointer-events: auto;
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .stone-layer-content.active .stone-text-wrapper {
+    padding-left: 0;
+  }
+
+  .stone-title {
+    white-space: normal;
+    font-size: 1.5rem;
+  }
+
+  .stone-hint {
+    display: none;
+  }
+
+  .stone-text-wrapper {
+    opacity: 1;
+    transform: none;
+    max-width: 100%;
+  }
+}
+
+/* ---------------------------------------------
+ * Video Facade
+ * --------------------------------------------- */
+.video-facade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.facade-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.video-facade:hover .facade-img {
+  opacity: 0.6;
+}
+
+.play-button {
+  position: absolute;
+  background: rgba(251, 191, 36, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0f172a;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 30px rgba(251, 191, 36, 0.4);
+}
+
+.video-facade:hover .play-button {
+  transform: scale(1.1);
+  background: #fff;
+  box-shadow: 0 0 50px rgba(251, 191, 36, 0.6);
+}
+
+.play-button svg {
+  width: 40px;
+  height: 40px;
+  margin-left: 4px;
+  /* Optical adjustment */
 }

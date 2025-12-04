@@ -378,19 +378,19 @@ document.addEventListener('DOMContentLoaded', () => {
       model: '../assests/model/Kinnareemimus khonkaenensis.glb',
       footprint: './assests/img/dino_section4/Kinnareemimus.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1995' }, 
+        { title: 'ค้นพบรอยเท้า', year: '1995' },
         { title: 'ขุดค้นฟอสซิล', year: '1990' },
         { title: 'รายงานการค้นพบ', year: '1994' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: 'ไม่มีข้อมูลชัดเจน' }, 
+        { title: 'จัดแสดงพิพิธภัณฑ์', year: 'ไม่มีข้อมูลชัดเจน' },
       ],
     },
     'Sittakosaurus satyarakki': {
       model: '../assests/model/Psittacosaurus_sattayaraki.glb',
       footprint: '../assests/img/dino_section4/Sittakosaurus.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1992' }, 
+        { title: 'ค้นพบรอยเท้า', year: '1992' },
         { title: 'ขุดค้นฟอสซิล', year: '1980-1990' }, // 
-        { title: 'ประกาศสายพันธุ์', year: '1992' }, 
+        { title: 'ประกาศสายพันธุ์', year: '1992' },
         { title: 'เข้าสู่พิพิธภัณฑ์', year: 'ไม่มีข้อมูลชัดเจน' }, //
       ],
     },
@@ -398,8 +398,8 @@ document.addEventListener('DOMContentLoaded', () => {
       model: '../assests/model/Ratchasimasaurus.glb',
       footprint: '../assests/img/dino_section4/Ratchasimasaurus.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '2011' }, 
-        { title: 'ขุดค้นฟอสซิล', year: '2010' }, 
+        { title: 'ค้นพบรอยเท้า', year: '2011' },
+        { title: 'ขุดค้นฟอสซิล', year: '2010' },
         { title: 'ตีพิมพ์ชื่อวิทยาศาสตร์', year: '2011' },
         { title: 'จัดแสดงพิพิธภัณฑ์', year: 'ไม่มีข้อมูลชัดเจน' },
       ],
@@ -418,7 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
       model: '../assests/model/Sirindhorna.glb',
       footprint: '../assests/img/dino_section4/Sirindhorna.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '2007' }, 
+        { title: 'ค้นพบรอยเท้า', year: '2007' },
         { title: 'ขุดค้นฟอสซิล', year: '2007' },
         { title: 'ตีพิมพ์ทางวิทยาศาสตร์', year: '2015' },
         { title: 'ประกาศชื่อ', year: '2010' },
@@ -428,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
       model: '../assests/model/Isanosaurus.glb',
       footprint: 'https://via.placeholder.com/600x300?text=Footprint+Isanosaurus',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1998' }, 
+        { title: 'ค้นพบรอยเท้า', year: '1998' },
         { title: 'ขุดค้นฟอสซิล', year: '1998' },
         { title: 'รายงานทางวิทยาศาสตร์', year: '2000' },
         { title: 'จัดแสดงพิพิธภัณฑ์', year: 'ไม่มีข้อมูลชัดเจน' },//
@@ -436,7 +436,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     'Minimocursor phunoiensis': {
       model: '../assests/model/Minimocursor.glb',
-      footprint: 'https://via.placeholder.com/600x300?text=Footprint+Minimocursor',
+      footprint: '../assests/img/dino_section4/Minimocursor.png',
       timeline: [
         { title: 'ค้นพบรอยเท้า', year: '2013' }, //
         { title: 'ขุดค้นฟอสซิล', year: '2023' },
@@ -458,17 +458,17 @@ document.addEventListener('DOMContentLoaded', () => {
       model: '../assests/model/Siamosaurus.glb',
       footprint: 'https://via.placeholder.com/600x300?text=Footprint+Siamosaurus',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1976' }, 
+        { title: 'ค้นพบรอยเท้า', year: '1976' },
         { title: 'ขุดค้นฟอสซิล', year: '1970-1980' },
         { title: 'ประกาศชื่อวิทยาศาสตร์', year: '1986' },
         { title: 'การทบทวนชื่อ', year: 'ไม่มีข้อมูลชัดเจน' },//
       ],
     },
     'Phuwiangvenator yaemniyomi': {
-      model: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
-      footprint: 'https://via.placeholder.com/600x300?text=Footprint+Phuwiangvenator',
+      model: '../assests/model/Phuwiangvenator.glb',
+      footprint: '../assests/img/dino_section4/Phuwiangvenator.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1993' }, 
+        { title: 'ค้นพบรอยเท้า', year: '1993' },
         { title: 'ขุดค้นฟอสซิล', year: '1993' },
         { title: 'รายงานการค้นพบ', year: '2019' },
         { title: 'จัดแสดงพิพิธภัณฑ์', year: '2011' }, //
@@ -476,17 +476,17 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     'Vayuraptor nongbualamphuensis': {
       model: '../assests/model/Vayuraptor.glb',
-      footprint: 'https://via.placeholder.com/600x300?text=Footprint+Vayuraptor',
+      footprint: '../assests/img/dino_section4/Vayuraptor.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1988' }, 
+        { title: 'ค้นพบรอยเท้า', year: '1988' },
         { title: 'ขุดค้นฟอสซิล', year: '1988' },
         { title: 'ประกาศชื่อวิทยาศาสตร์', year: '2019' },
         { title: 'จัดแสดงพิพิธภัณฑ์', year: '2017' },
       ],
     },
     'Siamraptor suwati': {
-      model: 'https://modelviewer.dev/shared-assets/models/Astronaut.glb',
-      footprint: 'https://via.placeholder.com/600x300?text=Footprint+Siamraptor',
+      model: '../assests/model/Siamraptor.glb',
+      footprint: '../assests/img/dino_section4/Siamraptor.png',
       timeline: [
         { title: 'ค้นพบรอยเท้า', year: '2007' },
         { title: 'ขุดค้นฟอสซิล', year: '2007-2009' },
@@ -601,29 +601,29 @@ const provinceData = {
     'data-museum': '-',
     'data-geopark': 'อุทยานธรณีโลกสตูล (Satun Geopark)'
   },
-  'ubn' : {
+  'ubn': {
     'data-name': 'อุบลราชธานี',
     'data-summary': 'อุทยานธรณีผาชัน สามพันโบก จังหวัดอุบลราชธานี ได้จัดตั้งและประกาศเป็นอุทยานธรณีท้องถิ่นเมื่อวันที่ 9 พฤษภาคม 2554 ครอบคลุม 4 อำเภอ ได้แก่ อำเภอสิรินธร อำเภอโขงเจียม อำเภอศรีเมืองใหม่ และอำเภอโพธิ์ไทร มีพื้นที่ 1,994 ตารางกิโลเมตร',
     'data-museum': '-',
     'data-geopark': 'อุทยานธรณีอุบลราชธานี (Ubon Ratchathani Geopark)'
   },
-  'cpm' : {
+  'cpm': {
     'data-name': 'ชัยภูมิ',
     'data-summary': 'จังหวัดชัยภูมิ ได้ประกาศจัดตั้งอุทยานธรณีชัยภูมิเป็นอุทยานธรณีในระดับท้องถิ่น เมื่อวันที่ 11 สิงหาคม 2564 ครอบคลุม 8 อำเภอ ได้แก่ อำเภอเมืองชัยภูมิ อำเภอบ้านเขว้า อำเภอหนองบัวระเหว อำเภอเทพสถิต อำเภอภักดีชุมพล อำเภอเกษตรสมบูรณ์ อำเภอหนองบัวแดง และอำเภอคอนสาร รวมพื้นที่ 8,732 ตารางกิโลเมตร',
     'data-museum': '-',
     'data-geopark': 'อุทยานธรณีชัยภูมิ (Chaiyaphum Geopark)'
   },
-  'tak' : {
-    'data-name' : 'ตาก',
-    'data-summary' : 'จังหวัดตากได้ประกาศจัดตั้งอุทยานธรณีไม้กลายเป็นหินตาก เป็นอุทยานธรณีในระดับท้องถิ่น เมื่อวันที่ 30 มีนาคม พ.ศ. 2560 ครอบคลุมพื้นที่ 4 อำเภอของจังหวัดตาก ได้แก่ อำเภอสามเงา อำเภอบ้านตาก อำเภอเมืองตาก และอำเภอวังเจ้า รวมพื้นที่ 5,671 ตารางกิโลเมตร',
-    'data-museum' : '-',
-    'data-geopark' : 'อุทยานธรณีตาก (Tak Geopark)'
+  'tak': {
+    'data-name': 'ตาก',
+    'data-summary': 'จังหวัดตากได้ประกาศจัดตั้งอุทยานธรณีไม้กลายเป็นหินตาก เป็นอุทยานธรณีในระดับท้องถิ่น เมื่อวันที่ 30 มีนาคม พ.ศ. 2560 ครอบคลุมพื้นที่ 4 อำเภอของจังหวัดตาก ได้แก่ อำเภอสามเงา อำเภอบ้านตาก อำเภอเมืองตาก และอำเภอวังเจ้า รวมพื้นที่ 5,671 ตารางกิโลเมตร',
+    'data-museum': '-',
+    'data-geopark': 'อุทยานธรณีตาก (Tak Geopark)'
   },
-  'lpg' :{
-    'data-name' : 'ลำปาง',
-    'data-summary' : 'ประกาศจัดตั้งอุทยานธรณีลำปางเป็นอุทยานธรณีในระดับท้องถิ่นเมื่อวันที่ 23 สิงหาคม 2565 ครอบคลุม 7 อำเภอ ได้แก่ อำเภอเมืองลำปางอำเภอเกาะคา อำเภอแม่เมาะ อำเภอแจ้ห่ม อำเภองาว อำเภอแม่ทะ และอำเภอเมืองปาน รวมพื้นที่ 2,012 ตารางกิโลเมตร',
-    'data-museum' : '',
-    'data-geopark' : 'อุทยานธรณีลำปาง (Lampang Geopark)'
+  'lpg': {
+    'data-name': 'ลำปาง',
+    'data-summary': 'ประกาศจัดตั้งอุทยานธรณีลำปางเป็นอุทยานธรณีในระดับท้องถิ่นเมื่อวันที่ 23 สิงหาคม 2565 ครอบคลุม 7 อำเภอ ได้แก่ อำเภอเมืองลำปางอำเภอเกาะคา อำเภอแม่เมาะ อำเภอแจ้ห่ม อำเภองาว อำเภอแม่ทะ และอำเภอเมืองปาน รวมพื้นที่ 2,012 ตารางกิโลเมตร',
+    'data-museum': '',
+    'data-geopark': 'อุทยานธรณีลำปาง (Lampang Geopark)'
   }
 
 };
@@ -964,3 +964,64 @@ gsap.from('.section-map .map-layout', {
 
 
 
+
+/* ---------------------------------------------
+ * Stone Layer Interaction
+ * --------------------------------------------- */
+const stoneContainer = document.querySelector('.stone-layer-content');
+const stoneDesc = document.getElementById('stoneDesc');
+let stoneTyped = false;
+
+const stoneText = `กลุ่มหินโคราช (Khorat Group) ในภาคตะวันออกเฉียงเหนือของไทย เปรียบเสมือนบันทึกทางธรณีวิทยาที่เผยให้เห็นสภาพแวดล้อมโบราณ ตั้งแต่ยุคไทรแอสซิกตอนปลายจนถึงยุคปัจจุบัน โดยชั้นที่อยู่ล่างสุดคือ หินทรายแดงน้ำพอง (Nam Phong red sandstone) ซึ่งเป็นจุดเริ่มต้นของลำดับชั้น ตามด้วย หินดินดานภูเก้า (Phu Kradung shale) ที่มีสีม่วงเข้ม ซึ่งสะท้อนการสะสมตัวในสภาพแวดล้อมที่เปลี่ยนแปลง ถัดขึ้นมาคือ หินทรายสีอ่อนพระวิหาร (Phra Wiharn pale sandstone) ที่มีความแข็งแกร่งและมีความบริสุทธิ์สูง ต่อเนื่องด้วยชั้นที่สำคัญอย่าง หินทราย/หินทรายแป้งเสาขัว (Sao Khua sandstone/siltstone) ซึ่งเป็นแหล่งค้นพบซากดึกดำบรรพ์ไดโนเสาร์และสัตว์มีกระดูกสันหลังโบราณจำนวนมาก จากนั้นเป็น หินทรายภูพาน (Phu Phan sandstone) ที่แข็งแกร่งและมักพบเป็นโครงสร้างภูเขาสูง ปิดท้ายด้วยชั้นบนสุดคือ หินกรวด (Gravel Burrsed) ซึ่งเป็นตะกอนยุคควอเทอร์นารีที่สะสมตัวล่าสุด แสดงให้เห็นถึงประวัติศาสตร์การสะสมตะกอนอย่างต่อเนื่องยาวนานนับร้อยล้านปีของแผ่นดินไทย`;
+
+function typeStoneText() {
+  if (stoneTyped) return;
+  stoneTyped = true;
+  if (stoneDesc) stoneDesc.innerHTML = '';
+
+  let i = 0;
+  const speed = 15;
+
+  function type() {
+    if (stoneDesc && i < stoneText.length) {
+      stoneDesc.innerHTML += stoneText.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+  type();
+}
+
+if (stoneContainer) {
+  const triggerInteraction = () => {
+    stoneContainer.classList.add('active');
+    // Delay typing slightly to allow transition to start
+    setTimeout(typeStoneText, 300);
+  };
+
+  stoneContainer.addEventListener('mouseenter', triggerInteraction);
+  stoneContainer.addEventListener('click', triggerInteraction);
+  stoneContainer.addEventListener('touchstart', triggerInteraction, { passive: true });
+}
+
+/* ---------------------------------------------
+ * Video Facade Logic
+ * --------------------------------------------- */
+const videoFacade = document.getElementById('videoFacade');
+const videoWrapper = document.getElementById('videoWrapper');
+
+if (videoFacade && videoWrapper) {
+  videoFacade.addEventListener('click', () => {
+    // Create iframe
+    const iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube.com/embed/AaxmsSIS6OU?autoplay=1';
+    iframe.title = 'YouTube video player';
+    iframe.frameBorder = '0';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+
+    // Replace facade
+    videoWrapper.innerHTML = '';
+    videoWrapper.appendChild(iframe);
+  });
+}

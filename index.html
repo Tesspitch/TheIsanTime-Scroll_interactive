@@ -128,11 +128,19 @@
       <!-- YouTube Video -->
       <div class="intro-video-container">
         <div class="video-glow"></div>
-        <div class="video-wrapper">
-          <iframe src="https://www.youtube.com/embed/AaxmsSIS6OU" title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-          </iframe>
+        <div class="video-wrapper" id="videoWrapper">
+          <div class="video-facade" id="videoFacade">
+            <img src="https://img.youtube.com/vi/AaxmsSIS6OU/maxresdefault.jpg" alt="Video Thumbnail"
+              class="facade-img">
+            <button class="play-button" aria-label="Play Video">
+              <svg viewBox="0 0 24 24" width="64" height="64" fill="currentColor">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </button>
+          </div>
+
+
+
         </div>
       </div>
     </div>
@@ -160,7 +168,7 @@
             <div class="timeline-marker"></div>
             <div class="timeline-card">
               <div class="timeline-image">
-                <img src="assests/img/dino_png/Isanosaurus.png" alt="Isanosaurus attavipatchi" />
+                <img src="assests/img/dino_png/Isanosaurus.png" alt="Isanosaurus attavipatchi" loading="lazy" />
               </div>
               <div class="timeline-card-content">
                 <div class="timeline-card-header">
@@ -188,7 +196,7 @@
             <div class="timeline-marker"></div>
             <div class="timeline-card">
               <div class="timeline-image">
-                <img src="assests/img/dino_png/Minimocursor.png" alt="Minimocursor phunoiensis" />
+                <img src="assests/img/dino_png/Minimocursor.png" alt="Minimocursor phunoiensis" loading="lazy" />
               </div>
               <div class="timeline-card-content">
                 <div class="timeline-card-header">
@@ -217,7 +225,8 @@
             <div class="timeline-marker"></div>
             <div class="timeline-card">
               <div class="timeline-image">
-                <img src="assests/img/dino_png/Phuwiangosaurus_sirindhornae.png" alt="Phuwiangosaurus sirindhornae" />
+                <img src="assests/img/dino_png/Phuwiangosaurus_sirindhornae.png" alt="Phuwiangosaurus sirindhornae"
+                  loading="lazy" />
               </div>
               <div class="timeline-card-content">
                 <div class="timeline-card-header">
@@ -237,7 +246,7 @@
             <div class="timeline-marker"></div>
             <div class="timeline-card">
               <div class="timeline-image">
-                <img src="assests/img/dino_png/Siamosaurus.png" alt="Siamosaurus suteethorni" />
+                <img src="assests/img/dino_png/Siamosaurus.png" alt="Siamosaurus suteethorni" loading="lazy" />
               </div>
               <div class="timeline-card-content">
                 <div class="timeline-card-header">
@@ -257,7 +266,7 @@
             <div class="timeline-marker"></div>
             <div class="timeline-card">
               <div class="timeline-image">
-                <img src="assests/img/dino_png/Psittacosaurus.png" alt="Prittacosaurus sattayaraki" />
+                <img src="assests/img/dino_png/Psittacosaurus.png" alt="Prittacosaurus sattayaraki" loading="lazy" />
               </div>
               <div class="timeline-card-content">
                 <div class="timeline-card-header">
@@ -276,7 +285,7 @@
             <div class="timeline-marker"></div>
             <div class="timeline-card">
               <div class="timeline-image">
-                <img src="assests/img/dino_png/Kinnareemimus.png" alt="Kinnareemimus khonkaennsis" />
+                <img src="assests/img/dino_png/Kinnareemimus.png" alt="Kinnareemimus khonkaennsis" loading="lazy" />
               </div>
               <div class="timeline-card-content">
                 <div class="timeline-card-header">
@@ -296,7 +305,7 @@
             <div class="timeline-marker"></div>
             <div class="timeline-card">
               <div class="timeline-image">
-                <img src="assests/img/dino_png/Siamotyrannus.png" alt="Siamotyrannus isanensis" />
+                <img src="assests/img/dino_png/Siamotyrannus.png" alt="Siamotyrannus isanensis" loading="lazy" />
               </div>
               <div class="timeline-card-content">
                 <div class="timeline-card-header">
@@ -316,7 +325,7 @@
             <div class="timeline-marker"></div>
             <div class="timeline-card">
               <div class="timeline-image">
-                <img src="assests/img/dino_png/Ratchasimasaurus.png" alt="Ratchasimasaurus suranareae" />
+                <img src="assests/img/dino_png/Ratchasimasaurus.png" alt="Ratchasimasaurus suranareae" loading="lazy" />
               </div>
               <div class="timeline-card-content">
                 <div class="timeline-card-header">
@@ -336,7 +345,7 @@
             <div class="timeline-marker"></div>
             <div class="timeline-card">
               <div class="timeline-image">
-                <img src="assests/img/dino_png/Sirindhorna.png" alt="Sirindhorna khoratensis" />
+                <img src="assests/img/dino_png/Sirindhorna.png" alt="Sirindhorna khoratensis" loading="lazy" />
               </div>
               <div class="timeline-card-content">
                 <div class="timeline-card-header">
@@ -357,7 +366,7 @@
             <div class="timeline-marker"></div>
             <div class="timeline-card">
               <div class="timeline-image">
-                <img src="assests/img/dino_png/Siamodon.png" alt="Siamodon nimngami" />
+                <img src="assests/img/dino_png/Siamodon.png" alt="Siamodon nimngami" loading="lazy" />
               </div>
               <div class="timeline-card-content">
                 <div class="timeline-card-header">
@@ -377,7 +386,7 @@
             <div class="timeline-marker"></div>
             <div class="timeline-card">
               <div class="timeline-image">
-                <img src="assests/img/dino_png/Phuwiangvenator.png" alt="Phuwiangvenator yeamniyomi" />
+                <img src="assests/img/dino_png/Phuwiangvenator.png" alt="Phuwiangvenator yeamniyomi" loading="lazy" />
               </div>
               <div class="timeline-card-content">
                 <div class="timeline-card-header">
@@ -396,7 +405,7 @@
             <div class="timeline-marker"></div>
             <div class="timeline-card">
               <div class="timeline-image">
-                <img src="assests/img/dino_png/Vayuraptor.png" alt="Vayuraptor nongbualamphuensis" />
+                <img src="assests/img/dino_png/Vayuraptor.png" alt="Vayuraptor nongbualamphuensis" loading="lazy" />
               </div>
               <div class="timeline-card-content">
                 <div class="timeline-card-header">
@@ -415,7 +424,7 @@
             <div class="timeline-marker"></div>
             <div class="timeline-card">
               <div class="timeline-image">
-                <img src="assests/img/dino_png/Siamraptor.png" alt="Siamraptor suwat" />
+                <img src="assests/img/dino_png/Siamraptor.png" alt="Siamraptor suwat" loading="lazy" />
               </div>
               <div class="timeline-card-content">
                 <div class="timeline-card-header">
@@ -430,6 +439,25 @@
               </div>
             </div>
           </article>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stone Layer Interactive Section -->
+    <div class="stone-layer-container">
+      <div class="stone-layer-content">
+        <div class="stone-image-wrapper">
+          <img src="assests/img/stone_layer.png" alt="ชั้นหินโคราช" class="stone-img" />
+          <div class="stone-hint">
+            <span class="hint-icon">👆</span>
+            <span class="hint-text">แตะเพื่อสำรวจชั้นหิน</span>
+          </div>
+        </div>
+        <div class="stone-text-wrapper">
+          <h3 class="stone-title">หน้าประวัติศาสตร์ธรณีวิทยาไทย</h3>
+          <div class="stone-desc" id="stoneDesc">
+            <!-- Text will be typed here via JS -->
+          </div>
         </div>
       </div>
     </div>
@@ -460,7 +488,7 @@
         <!-- Herbivores -->
         <article class="titan-card" data-diet="herbivore">
           <div class="titan-thumb">
-            <img src="assests/img/dino_section4/Phuwiangosaurus.png" alt="ภูเวียงโกซอรัส" />
+            <img src="assests/img/dino_section4/Phuwiangosaurus.png" alt="ภูเวียงโกซอรัส" loading="lazy" />
           </div>
           <div class="titan-body">
             <h3 class="titan-name">ภูเวียงโกซอรัส สิรินธรเน</h3>
@@ -478,7 +506,7 @@
         <!-- Example herbivore card -->
         <article class="titan-card" data-diet="herbivore">
           <div class="titan-thumb">
-            <img src="assests/img/dino_section4/Kinnareemimus.png" alt="กินรีมิมัส ขอนแก่นเอนซิส" />
+            <img src="assests/img/dino_section4/Kinnareemimus.png" alt="กินรีมิมัส ขอนแก่นเอนซิส" loading="lazy" />
           </div>
           <div class="titan-body">
             <h3 class="titan-name">กินรีมิมัส ขอนแก่นเอนซิส</h3>
@@ -496,7 +524,7 @@
         <!-- Example herbivore card -->
         <article class="titan-card" data-diet="herbivore">
           <div class="titan-thumb">
-            <img src="assests/img/dino_section4/Sittakosaurus.png" alt="ซิตตะโกซอรัส สัตยารักษ์กิ" />
+            <img src="assests/img/dino_section4/Sittakosaurus.png" alt="ซิตตะโกซอรัส สัตยารักษ์กิ" loading="lazy" />
           </div>
           <div class="titan-body">
             <h3 class="titan-name">ซิตตะโกซอรัส สัตยารักษ์กิ</h3>
@@ -514,7 +542,7 @@
         <!-- Example herbivore card -->
         <article class="titan-card" data-diet="herbivore">
           <div class="titan-thumb">
-            <img src="assests/img/dino_section4/Ratchasimasaurus.png" alt="ราชสีมาซอรัส สุรนารีเอ" />
+            <img src="assests/img/dino_section4/Ratchasimasaurus.png" alt="ราชสีมาซอรัส สุรนารีเอ" loading="lazy" />
           </div>
           <div class="titan-body">
             <h3 class="titan-name">ราชสีมาซอรัส สุรนารีเอ</h3>
@@ -532,7 +560,7 @@
         <!-- Example herbivore card -->
         <article class="titan-card" data-diet="herbivore">
           <div class="titan-thumb">
-            <img src="assests/img/dino_section4/Siamodon.png" alt="สยามโมดอน นิ่มงามมิ" />
+            <img src="assests/img/dino_section4/Siamodon.png" alt="สยามโมดอน นิ่มงามมิ" loading="lazy" />
           </div>
           <div class="titan-body">
             <h3 class="titan-name">สยามโมดอน นิ่มงามมิ</h3>
@@ -550,7 +578,7 @@
         <!-- Example herbivore card -->
         <article class="titan-card" data-diet="herbivore">
           <div class="titan-thumb">
-            <img src="assests/img/dino_section4/Sirindhorna.png" alt="สิรินธรนา โคราชเอนซิส" />
+            <img src="assests/img/dino_section4/Sirindhorna.png" alt="สิรินธรนา โคราชเอนซิส" loading="lazy" />
           </div>
           <div class="titan-body">
             <h3 class="titan-name">สิรินธรนา โคราชเอนซิส</h3>
@@ -568,7 +596,7 @@
         <!-- Example herbivore card -->
         <article class="titan-card" data-diet="herbivore">
           <div class="titan-thumb">
-            <img src="assests/img/dino_section4/Isanosaurus.png" alt="อีสานโนซอรัส อรรถวิภัชน์ชี" />
+            <img src="assests/img/dino_section4/Isanosaurus.png" alt="อีสานโนซอรัส อรรถวิภัชน์ชี" loading="lazy" />
           </div>
           <div class="titan-body">
             <h3 class="titan-name">อีสานโนซอรัส อรรถวิภัชน์ชี</h3>
@@ -586,7 +614,7 @@
         <!-- Example herbivore card -->
         <article class="titan-card" data-diet="herbivore">
           <div class="titan-thumb">
-            <img src="assests/img/dino_section4/Minimocursor.png" alt="มินิโมเคอร์เซอร์ ภูน้อยเอนซิส" />
+            <img src="assests/img/dino_section4/Minimocursor.png" alt="มินิโมเคอร์เซอร์ ภูน้อยเอนซิส" loading="lazy" />
           </div>
           <div class="titan-body">
             <h3 class="titan-name">มินิโมเคอร์เซอร์ ภูน้อยเอนซิส</h3>
@@ -604,7 +632,7 @@
         <!-- Carnivores -->
         <article class="titan-card" data-diet="carnivore">
           <div class="titan-thumb">
-            <img src="assests/img/dino_section4/Siamotyrannus.png" alt="สยามโมไทรันนัส อิสานเอนซิส" />
+            <img src="assests/img/dino_section4/Siamotyrannus.png" alt="สยามโมไทรันนัส อิสานเอนซิส" loading="lazy" />
           </div>
           <div class="titan-body">
             <h3 class="titan-name">สยามโมไทรันนัส อิสานเอนซิส</h3>
@@ -621,7 +649,7 @@
 
         <article class="titan-card" data-diet="carnivore">
           <div class="titan-thumb">
-            <img src="assests/img/dino_section4/Siamosaurus.png" alt="สยามโมซอรัส" />
+            <img src="assests/img/dino_section4/Siamosaurus.png" alt="สยามโมซอรัส" loading="lazy" />
           </div>
           <div class="titan-body">
             <h3 class="titan-name">สยามโมซอรัส สุธีธรนิ</h3>
@@ -638,7 +666,7 @@
 
         <article class="titan-card" data-diet="carnivore">
           <div class="titan-thumb">
-            <img src="assests/img/dino_section4/Phuwiangvenator.png" alt="ภูเวียงเวเนเตอร์ แย้มนิยมมิ" />
+            <img src="assests/img/dino_section4/Phuwiangvenator.png" alt="ภูเวียงเวเนเตอร์ แย้มนิยมมิ" loading="lazy" />
           </div>
           <div class="titan-body">
             <h3 class="titan-name">ภูเวียงเวเนเตอร์ แย้มนิยมมิ</h3>
@@ -655,7 +683,7 @@
 
         <article class="titan-card" data-diet="carnivore">
           <div class="titan-thumb">
-            <img src="assests/img/dino_section4/Vayuraptor.png" alt="วายุแรปเตอร์ หนองบัวลำภูเอนซิส" />
+            <img src="assests/img/dino_section4/Vayuraptor.png" alt="วายุแรปเตอร์ หนองบัวลำภูเอนซิส" loading="lazy" />
           </div>
           <div class="titan-body">
             <h3 class="titan-name">วายุแรปเตอร์ หนองบัวลำภูเอนซิส</h3>
@@ -672,7 +700,7 @@
 
         <article class="titan-card" data-diet="carnivore">
           <div class="titan-thumb">
-            <img src="assests/img/dino_section4/Siamraptor.png" alt="สยามแรปเตอร์ สุวัจน์ติ" />
+            <img src="assests/img/dino_section4/Siamraptor.png" alt="สยามแรปเตอร์ สุวัจน์ติ" loading="lazy" />
           </div>
           <div class="titan-body">
             <h3 class="titan-name">สยามแรปเตอร์ สุวัจน์ติ</h3>
@@ -713,29 +741,39 @@
       <div class="map-layout">
         <!-- ฝั่งซ้าย: แผนที่ SVG -->
         <div class="map-svg-wrapper">
-              <!-- Legend: top-right of the map (simple dots) -->
-              <div class="map-legend" role="note" aria-label="Legend: map pins">
-                <div class="legend-item">
-                  <span class="legend-dot museum" aria-hidden="true"></span>
-                  <span>พิพิธภัณฑ์</span>
-                </div>
-                <div class="legend-item">
-                  <span class="legend-dot geopark" aria-hidden="true"></span>
-                  <span>Geopark</span>
-                </div>
-                <div class="map-region-legend" aria-hidden="true">
-                  <div class="legend-region"><span class="region-swatch region-northeast-swatch"></span><span>อีสาน</span></div>
-                  <div class="legend-region"><span class="region-swatch region-north-swatch"></span><span>ภาคเหนือ</span></div>
-                  <div class="legend-region"><span class="region-swatch region-central-swatch"></span><span>ภาคกลาง</span></div>
-                  <div class="legend-region"><span class="region-swatch region-east-swatch"></span><span>ภาคตะวันออก</span></div>
-                  <div class="legend-region"><span class="region-swatch region-south-swatch"></span><span>ภาคใต้</span></div>
-                </div>
+          <!-- Legend: top-right of the map (simple dots) -->
+          <div class="map-legend" role="note" aria-label="Legend: map pins">
+            <div class="legend-item">
+              <span class="legend-dot museum" aria-hidden="true"></span>
+              <span>พิพิธภัณฑ์</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-dot geopark" aria-hidden="true"></span>
+              <span>Geopark</span>
+            </div>
+            <div class="map-region-legend" aria-hidden="true">
+              <div class="legend-region"><span class="region-swatch region-northeast-swatch"></span><span>อีสาน</span>
               </div>
+              <div class="legend-region"><span class="region-swatch region-north-swatch"></span><span>ภาคเหนือ</span>
+              </div>
+              <div class="legend-region"><span class="region-swatch region-central-swatch"></span><span>ภาคกลาง</span>
+              </div>
+              <div class="legend-region"><span class="region-swatch region-east-swatch"></span><span>ภาคตะวันออก</span>
+              </div>
+              <div class="legend-region"><span class="region-swatch region-south-swatch"></span><span>ภาคใต้</span>
+              </div>
+            </div>
+          </div>
           <!-- NOTE: ตรง SVG นี้ดุ๊กดิ๊กเอาไปแทนด้วยแผนที่ประเทศไทยจริงของตัวเองได้เลย -->
           <svg class="th-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 1025" aria-label="Map of Thailand">
             <path id="bkk" aria-label="Bangkok"
               d="m 217.28844,457.46255 0.7,-0.33 2,0.66 0.51,-0.71 0.92,0.42 0.02,0.76 0.97,0.03 0.04,0.41 3.31,0.12 1.17,0.83 1.47,0.08 6.19,-1.38 6.29,-0.59 0,0 -0.52,5.83 -0.26,0.81 -0.69,-0.1 3.08,2.5 -1.91,1.66 -3.67,6.17 0.39,0.25 0,0 -0.12,0.53 -4.77,-1.85 -5.27,-0.12 0.13,1.57 -0.9,2.71 -2.11,-0.72 -0.07,-0.64 -0.79,0.33 -0.52,1.32 -4.51,-1.14 0.54,-1.65 -2.15,-0.97 -0.62,2.33 -0.8,0.2 -0.91,-0.7 -0.28,0.43 -0.19,3.13 0.4,1.56 -0.76,0.26 -1.92,-0.44 -0.75,0.99 -0.34,-0.82 -0.7,0.04 -0.68,3.38 0.54,3.67 0,0 -3.01,0.59 0,0 -0.23,-1.22 1.03,-2.14 -0.14,-1.23 -1.56,0.21 -0.69,-2.14 -0.54,0.19 0.35,-0.35 -0.76,-2.66 -0.99,-0.74 -1.08,-0.06 -0.55,-6.38 0,0 -0.14,-4.58 -0.67,-1.54 0,0 0.72,1.26 8.74,0.44 0.75,0.59 2.05,-0.77 1.01,-0.87 -0.58,-0.31 0.13,-0.52 2.35,-1.71 z" />
-              d="m 209.74844,488.28255 -0.54,-3.67 0.68,-3.38 0.7,-0.04 0.34,0.82 0.75,-0.99 1.92,0.44 0.76,-0.26 -0.4,-1.56 0.19,-3.13 0.28,-0.43 0.91,0.7 0.8,-0.2 0.62,-2.33 2.15,0.97 -0.54,1.65 4.51,1.14 0.52,-1.32 0.79,-0.33 0.07,0.64 2.11,0.72 0.9,-2.71 -0.13,-1.57 5.27,0.12 4.77,1.85 0.12,-0.53 0,0 6.34,2.32 -0.47,0.72 1.01,0.67 -0.2,0.75 -2.43,2.66 -1.11,0.17 0.52,1.44 -0.69,1.09 -1.04,-0.61 -1.14,2.73 -0.05,2.27 -1.3,-0.32 -0.24,1.09 0,0 -3.58,-0.91 -7.76,-0.98 -3.33,-0.96 -3.59,-2.68 -0.06,-0.69 1.14,-1.55 -0.15,-1.18 -2.19,-0.48 -0.18,0.27 2.11,0.53 -1.07,2.66 1.01,2.09 -0.33,0.76 -0.73,0.66 -2.77,0.59 z" />
+            d="m 209.74844,488.28255 -0.54,-3.67 0.68,-3.38 0.7,-0.04 0.34,0.82 0.75,-0.99 1.92,0.44 0.76,-0.26
+            -0.4,-1.56 0.19,-3.13 0.28,-0.43 0.91,0.7 0.8,-0.2 0.62,-2.33 2.15,0.97 -0.54,1.65 4.51,1.14 0.52,-1.32
+            0.79,-0.33 0.07,0.64 2.11,0.72 0.9,-2.71 -0.13,-1.57 5.27,0.12 4.77,1.85 0.12,-0.53 0,0 6.34,2.32 -0.47,0.72
+            1.01,0.67 -0.2,0.75 -2.43,2.66 -1.11,0.17 0.52,1.44 -0.69,1.09 -1.04,-0.61 -1.14,2.73 -0.05,2.27 -1.3,-0.32
+            -0.24,1.09 0,0 -3.58,-0.91 -7.76,-0.98 -3.33,-0.96 -3.59,-2.68 -0.06,-0.69 1.14,-1.55 -0.15,-1.18
+            -2.19,-0.48 -0.18,0.27 2.11,0.53 -1.07,2.66 1.01,2.09 -0.33,0.76 -0.73,0.66 -2.77,0.59 z" />
             <path id="nbi" aria-label="Nonthaburi"
               d="m 202.47844,446.04255 -0.84,4.15 2.08,4.32 4.53,0.73 1.64,1.02 0.6,-0.32 2.51,2.39 2.11,-0.56 0.59,-0.75 1.59,0.44 0,0 -1.35,6.88 -2.35,1.71 -0.13,0.52 0.58,0.31 -1.01,0.87 -2.05,0.77 -0.75,-0.59 -8.74,-0.44 -0.72,-1.26 0,0 -2.82,-6.08 -0.88,-0.73 2.27,-2.89 -1.87,-1.69 0.37,-0.96 -0.69,-0.52 0.97,-8.03 0,0 1.44,-1.01 2.31,0.87 z" />
             <path id="pte" aria-label="Pathum Thani"
