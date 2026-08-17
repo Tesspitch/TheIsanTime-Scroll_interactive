@@ -56,6 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
   // --- Loading Screen Logic ---
+  // Preload ALL videos (hero + section2 choice videos) during loading screen
+  // so they play instantly when the user interacts.
   const loaderOverlay = document.getElementById('loader-overlay');
   const loaderBar = document.getElementById('loaderBar');
   const loaderPercent = document.getElementById('loader-percent');
@@ -63,20 +65,59 @@ document.addEventListener('DOMContentLoaded', () => {
   const loaderCanvas = document.getElementById('loaderCanvas');
 
   let loadProgress = 0;
-  let isVideoReady = false;
+  let loadingComplete = false;
 
-  // Animate the bar gradually
-  const progressInterval = setInterval(() => {
-    if (loadProgress < 90) {
-      loadProgress += Math.floor(Math.random() * 5) + 2;
-      if (loadProgress > 90) loadProgress = 90;
+  // Track loading state for all videos: hero + 3 section2 choice videos
+  const videoLoadTracker = {
+    hero: false,
+    dino: false,
+    sea: false,
+    nature: false,
+  };
+  const totalVideos = Object.keys(videoLoadTracker).length;
+
+  function getLoadedCount() {
+    return Object.values(videoLoadTracker).filter(Boolean).length;
+  }
+
+  function updateRealProgress() {
+    const loaded = getLoadedCount();
+    // Map loaded count to 0–95% range (leave 5% for final transition)
+    const realProgress = Math.round((loaded / totalVideos) * 95);
+    if (realProgress > loadProgress) {
+      loadProgress = realProgress;
       updateLoader(loadProgress);
     }
-  }, 150);
+  }
+
+  // Simulate gradual progress so the bar doesn't sit idle while loading
+  const progressInterval = setInterval(() => {
+    const maxSimulated = Math.round((getLoadedCount() / totalVideos) * 95);
+    if (loadProgress < maxSimulated) {
+      loadProgress += Math.floor(Math.random() * 3) + 1;
+      if (loadProgress > maxSimulated) loadProgress = maxSimulated;
+      updateLoader(loadProgress);
+    }
+  }, 120);
 
   function updateLoader(progress) {
     if (loaderBar) loaderBar.style.width = `${progress}%`;
     if (loaderPercent) loaderPercent.textContent = `${progress}%`;
+  }
+
+  function markVideoReady(key) {
+    if (videoLoadTracker[key]) return; // already marked
+    videoLoadTracker[key] = true;
+    updateRealProgress();
+    checkAllVideosReady();
+  }
+
+  function checkAllVideosReady() {
+    if (loadingComplete) return;
+    if (getLoadedCount() >= totalVideos) {
+      loadingComplete = true;
+      completeLoading();
+    }
   }
 
   // --- Particle system logic ---
@@ -199,32 +240,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 500);
   }
 
+  // --- Track hero video loading ---
   if (heroVideo) {
-    if (heroVideo.readyState >= 3) { // Already loaded or enough data cached
-      isVideoReady = true;
-      completeLoading();
+    if (heroVideo.readyState >= 3) {
+      markVideoReady('hero');
     } else {
-      const onVideoLoad = () => {
-        if (!isVideoReady) {
-          isVideoReady = true;
-          completeLoading();
-        }
-      };
-      heroVideo.addEventListener('loadeddata', onVideoLoad);
-      heroVideo.addEventListener('canplay', onVideoLoad);
-      heroVideo.addEventListener('canplaythrough', onVideoLoad);
-
-      // Fallback: If it takes too long (e.g. 5 seconds), proceed anyway so user isn't stuck
-      setTimeout(() => {
-        if (!isVideoReady) {
-          console.warn('Video load timeout. Proceeding...');
-          completeLoading();
-        }
-      }, 5000);
+      const onHeroReady = () => markVideoReady('hero');
+      heroVideo.addEventListener('canplaythrough', onHeroReady);
+      heroVideo.addEventListener('canplay', onHeroReady);
+      heroVideo.addEventListener('loadeddata', onHeroReady);
     }
   } else {
-    completeLoading();
+    markVideoReady('hero'); // no hero video, mark as ready
   }
+
+  // Fallback timeout: If loading takes too long (10 seconds), proceed anyway
+  // so the user isn't stuck on the loading screen
+  setTimeout(() => {
+    if (!loadingComplete) {
+      console.warn('Video preload timeout. Proceeding with available videos...');
+      loadingComplete = true;
+      completeLoading();
+    }
+  }, 10000);
 
   // Section 1: Parallax Video
   gsap.to('.hero-video', {
@@ -346,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
     nature: 'assests/video/bg_nature.mp4',
   };
 
-  // Preload all Section 2 videos
+  // Preload all Section 2 videos and track their loading for the loading screen
   const preloadedVideos = {};
   if (section2) {
     Object.keys(bgMap).forEach((id) => {
@@ -363,8 +401,21 @@ document.addEventListener('DOMContentLoaded', () => {
       section2.insertBefore(vid, section2.firstChild);
       
       preloadedVideos[id] = vid;
+
+      // Track loading progress for loading screen
+      if (vid.readyState >= 3) {
+        markVideoReady(id); // Already cached
+      } else {
+        const onReady = () => markVideoReady(id);
+        vid.addEventListener('canplaythrough', onReady);
+        vid.addEventListener('canplay', onReady);
+      }
+
       vid.load(); // Start loading
     });
+  } else {
+    // No section2, mark all choice videos as ready
+    ['dino', 'sea', 'nature'].forEach((id) => markVideoReady(id));
   }
 
   /**
