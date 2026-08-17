@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
   // Section 1: Hero Text Reveal
-  const heroTl = gsap.timeline();
+  const heroTl = gsap.timeline({ paused: true });
   heroTl
     .from('.hero-title-th', {
       y: 50,
@@ -54,6 +54,177 @@ document.addEventListener('DOMContentLoaded', () => {
       { y: 0, opacity: 1, visibility: 'visible', duration: 0.8, ease: 'back.out(1.7)' },
       '-=0.4'
     );
+
+  // --- Loading Screen Logic ---
+  const loaderOverlay = document.getElementById('loader-overlay');
+  const loaderBar = document.getElementById('loaderBar');
+  const loaderPercent = document.getElementById('loader-percent');
+  const heroVideo = document.querySelector('.hero-video');
+  const loaderCanvas = document.getElementById('loaderCanvas');
+
+  let loadProgress = 0;
+  let isVideoReady = false;
+
+  // Animate the bar gradually
+  const progressInterval = setInterval(() => {
+    if (loadProgress < 90) {
+      loadProgress += Math.floor(Math.random() * 5) + 2;
+      if (loadProgress > 90) loadProgress = 90;
+      updateLoader(loadProgress);
+    }
+  }, 150);
+
+  function updateLoader(progress) {
+    if (loaderBar) loaderBar.style.width = `${progress}%`;
+    if (loaderPercent) loaderPercent.textContent = `${progress}%`;
+  }
+
+  // --- Particle system logic ---
+  let animationFrameId = null;
+  if (loaderCanvas) {
+    const ctx = loaderCanvas.getContext('2d');
+    
+    // Set internal canvas resolution
+    loaderCanvas.width = 200;
+    loaderCanvas.height = 200;
+
+    const numParticles = 25;
+    const particles = [];
+    
+    // Core colors: fossil gold, light gold, neon cyan (matching primary and secondary theme colors)
+    const colors = ['#fbbf24', '#f59e0b', '#22d3ee', '#38bdf8', '#fbbf24'];
+
+    for (let i = 0; i < numParticles; i++) {
+      particles.push({
+        x: Math.random() * loaderCanvas.width,
+        y: Math.random() * loaderCanvas.height,
+        vx: (Math.random() - 0.5) * 2,
+        vy: (Math.random() - 0.5) * 2,
+        size: Math.random() * 3 + 2,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        speedFactor: Math.random() * 0.05 + 0.03, // Easing speed
+        friction: Math.random() * 0.05 + 0.9 // Friction/drag
+      });
+    }
+
+    let mouseX = loaderCanvas.width / 2;
+    let mouseY = loaderCanvas.height / 2;
+    let isMouseIn = false;
+    let circleAngle = 0;
+    const circleRadius = 45;
+
+    // Track mouse movement relative to canvas
+    if (loaderOverlay) {
+      loaderOverlay.addEventListener('mousemove', (e) => {
+        const rect = loaderCanvas.getBoundingClientRect();
+        mouseX = ((e.clientX - rect.left) / rect.width) * loaderCanvas.width;
+        mouseY = ((e.clientY - rect.top) / rect.height) * loaderCanvas.height;
+        isMouseIn = true;
+      });
+
+      loaderOverlay.addEventListener('mouseenter', () => {
+        isMouseIn = true;
+      });
+
+      loaderOverlay.addEventListener('mouseleave', () => {
+        isMouseIn = false;
+      });
+    }
+
+    function animateParticles() {
+      // Clear canvas with a very slight alpha for trail effect
+      ctx.fillStyle = 'rgba(2, 6, 23, 0.2)'; // matching --bg-dark color #020617
+      ctx.fillRect(0, 0, loaderCanvas.width, loaderCanvas.height);
+
+      let targetX, targetY;
+      if (isMouseIn) {
+        targetX = mouseX;
+        targetY = mouseY;
+      } else {
+        // Circular motion path
+        circleAngle += 0.03;
+        targetX = loaderCanvas.width / 2 + Math.cos(circleAngle) * circleRadius;
+        targetY = loaderCanvas.height / 2 + Math.sin(circleAngle) * circleRadius;
+      }
+
+      particles.forEach((p) => {
+        // Accelerate towards target
+        const dx = targetX - p.x;
+        const dy = targetY - p.y;
+        
+        p.vx += dx * p.speedFactor;
+        p.vy += dy * p.speedFactor;
+        
+        // Apply friction
+        p.vx *= p.friction;
+        p.vy *= p.friction;
+
+        // Move particle
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Draw particle with subtle glow
+        ctx.save();
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = p.color;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+
+      animationFrameId = requestAnimationFrame(animateParticles);
+    }
+    
+    // Start animation loop
+    animateParticles();
+  }
+
+  function completeLoading() {
+    clearInterval(progressInterval);
+    updateLoader(100);
+    setTimeout(() => {
+      if (loaderOverlay) {
+        loaderOverlay.classList.add('fade-out');
+        // Stop animation loop to save resources
+        if (animationFrameId) {
+          cancelAnimationFrame(animationFrameId);
+        }
+        // Play Hero text animation once loading finishes
+        if (heroTl) {
+          heroTl.play();
+        }
+      }
+    }, 500);
+  }
+
+  if (heroVideo) {
+    if (heroVideo.readyState >= 3) { // Already loaded or enough data cached
+      isVideoReady = true;
+      completeLoading();
+    } else {
+      const onVideoLoad = () => {
+        if (!isVideoReady) {
+          isVideoReady = true;
+          completeLoading();
+        }
+      };
+      heroVideo.addEventListener('loadeddata', onVideoLoad);
+      heroVideo.addEventListener('canplay', onVideoLoad);
+      heroVideo.addEventListener('canplaythrough', onVideoLoad);
+
+      // Fallback: If it takes too long (e.g. 5 seconds), proceed anyway so user isn't stuck
+      setTimeout(() => {
+        if (!isVideoReady) {
+          console.warn('Video load timeout. Proceeding...');
+          completeLoading();
+        }
+      }, 5000);
+    }
+  } else {
+    completeLoading();
+  }
 
   // Section 1: Parallax Video
   gsap.to('.hero-video', {
@@ -175,50 +346,57 @@ document.addEventListener('DOMContentLoaded', () => {
     nature: 'assests/video/bg_nature.mp4',
   };
 
+  // Preload all Section 2 videos
+  const preloadedVideos = {};
+  if (section2) {
+    Object.keys(bgMap).forEach((id) => {
+      const src = bgMap[id];
+      const vid = document.createElement('video');
+      vid.className = 'bg-video';
+      vid.src = src;
+      vid.muted = true;
+      vid.loop = true;
+      vid.playsInline = true;
+      vid.preload = 'auto'; // Request browser to preload
+      
+      // Append to section2 before content
+      section2.insertBefore(vid, section2.firstChild);
+      
+      preloadedVideos[id] = vid;
+      vid.load(); // Start loading
+    });
+  }
+
   /**
-   * Set or update the background video in Section2.
-   * Creates the video element if it doesn't exist and fades it in/out.
-   * @param {string} src Path to the video file
+   * Set or update the background video in Section2 using preloaded elements.
+   * Plays and fades in the selected video instantly.
+   * @param {string} id The id of the chosen video ('dino', 'sea', or 'nature')
    */
-  function setSection2Image(src) {
+  function setSection2PreloadedVideo(id) {
     if (!section2) return;
-    let vid = section2.querySelector('.bg-video');
+    const targetVid = preloadedVideos[id];
+    if (!targetVid) return;
 
-    // If a video already exists, fade it out and swap source
-    if (vid) {
-      vid.classList.remove('visible');
-      setTimeout(() => {
-        if (vid.src !== src) {
-          vid.src = src;
-          vid.load();
-          vid.play().catch(() => { });
-        }
-        // Force reflow to restart animation
-        void vid.offsetWidth;
-        vid.classList.add('visible');
-      }, 800);
-      return;
-    }
+    // Pause and hide all other preloaded videos
+    Object.keys(preloadedVideos).forEach((key) => {
+      const vid = preloadedVideos[key];
+      if (key !== id) {
+        vid.classList.remove('visible');
+        setTimeout(() => {
+          if (!vid.classList.contains('visible')) {
+            vid.pause();
+          }
+        }, 800);
+      }
+    });
 
-    // Otherwise create a new video element
-    vid = document.createElement('video');
-    vid.className = 'bg-video';
-    vid.src = src;
-    vid.autoplay = true;
-    vid.muted = true;
-    vid.loop = true;
-    vid.playsInline = true;
-
-    // Insert before content
-    section2.insertBefore(vid, section2.firstChild);
-
-    // Wait for data to load to fade in
-    vid.onloadeddata = () => {
-      requestAnimationFrame(() => {
-        vid.classList.add('visible');
-        vid.play().catch(() => { });
-      });
-    };
+    // Play and fade in the selected video instantly
+    targetVid.play().then(() => {
+      targetVid.classList.add('visible');
+    }).catch((err) => {
+      console.warn("Instant play failed, making visible anyway:", err);
+      targetVid.classList.add('visible');
+    });
   }
 
   const typingSentences = [
@@ -299,9 +477,8 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       if (section2.classList.contains('typing-mode')) return;
       const id = btn.id;
-      const src = bgMap[id];
-      if (src) {
-        setSection2Image(src);
+      if (bgMap[id]) {
+        setSection2PreloadedVideo(id);
         section2.classList.add('typing-mode');
 
         // Fade out buttons
@@ -309,13 +486,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
           runTypingSequence(() => {
-            // Remove the video once the typing sequence completes
-            const vid = section2.querySelector('.bg-video');
+            // Fade out the video instead of removing it from the DOM
+            const vid = preloadedVideos[id];
             if (vid) {
               vid.classList.remove('visible');
               setTimeout(() => {
                 try {
-                  vid.remove();
+                  if (!vid.classList.contains('visible')) {
+                    vid.pause();
+                  }
                 } catch (err) { }
               }, 800);
             }

@@ -22,6 +22,19 @@
 </head>
 
 <body>
+  <!-- Loading Screen Overlay -->
+  <div id="loader-overlay" class="loader-overlay">
+    <div class="loader-content">
+      <canvas id="loaderCanvas" class="loader-canvas"></canvas>
+      <h2 class="loader-title">ยินดีต้อนรับสู่โลกบรรพชีวิน</h2>
+      <p class="loader-subtitle">อีสานดินแดนมหัศจรรย์ฟอสซิล</p>
+      <div class="loader-bar-container">
+        <div class="loader-bar" id="loaderBar"></div>
+      </div>
+      <div class="loader-text">กำลังฟื้นคืนชีพอดีตกาล... <span id="loader-percent">0%</span></div>
+    </div>
+  </div>
+
   <!-- Interactive Ambient Background Particles -->
   <canvas id="bgParticles" class="bg-particles-canvas" aria-hidden="true"></canvas>
 
