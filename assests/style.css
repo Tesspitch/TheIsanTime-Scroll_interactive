@@ -3403,9 +3403,6 @@ model-viewer {
   }
 }
 
-/* ---------------------------------------------
- * Performance Optimizations
- * --------------------------------------------- */
 .hero-title-th,
 .hero-title-highlight,
 .hero-subtitle-en,
@@ -3415,4 +3412,115 @@ model-viewer {
 .timeline-item,
 .titan-card {
   will-change: transform, opacity;
+}
+
+/* ============================================================
+   COMPACT AMBIENT DINOSAUR SOUND TOGGLE BUTTON
+   ============================================================ */
+.ambient-audio-widget {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  font-family: var(--font-th);
+  user-select: none;
+}
+
+.audio-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  border-radius: 9999px;
+  padding: 6px 13px;
+  color: #f8fafc;
+  font-size: 0.84rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), 0 0 10px rgba(251, 191, 36, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.audio-toggle-btn:hover {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: rgba(251, 191, 36, 0.85);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5), 0 0 16px rgba(251, 191, 36, 0.35);
+  transform: translateY(-2px);
+}
+
+.ambient-audio-widget.playing .audio-toggle-btn {
+  border-color: #22d3ee;
+  background: rgba(15, 23, 42, 0.92);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4), 0 0 16px rgba(34, 211, 238, 0.35);
+}
+
+.audio-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Soundwave Equalizer Bars */
+.audio-equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+  width: 14px;
+}
+
+.audio-equalizer .bar {
+  width: 2.5px;
+  height: 3px;
+  background: #64748b;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.ambient-audio-widget.playing .audio-equalizer .bar {
+  background: linear-gradient(to top, #fbbf24, #22d3ee);
+  animation: bounceBars 1.1s ease-in-out infinite alternate;
+}
+
+.ambient-audio-widget.playing .audio-equalizer .bar-1 {
+  animation-delay: 0.1s;
+}
+.ambient-audio-widget.playing .audio-equalizer .bar-2 {
+  animation-delay: 0.35s;
+}
+.ambient-audio-widget.playing .audio-equalizer .bar-3 {
+  animation-delay: 0.2s;
+}
+
+@keyframes bounceBars {
+  0% {
+    height: 3px;
+  }
+  50% {
+    height: 11px;
+  }
+  100% {
+    height: 5px;
+  }
+}
+
+.audio-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.2px;
+}
+
+@media (max-width: 768px) {
+  .ambient-audio-widget {
+    top: auto;
+    bottom: 18px;
+    right: 14px;
+  }
+
+  .audio-toggle-btn {
+    padding: 6px 11px;
+    font-size: 0.78rem;
+  }
 }

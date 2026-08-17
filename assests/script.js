@@ -1797,3 +1797,541 @@ if (videoFacade && videoWrapper) {
   // Initial load
   loadStage(0);
 })();
+
+/* ============================================================
+ * PREHISTORIC PALEONTOLOGICAL ECOSYSTEM SOUNDSCAPE (SURROUNDED BY DINOSAURS)
+ * ============================================================ */
+class PrehistoricEcosystemEngine {
+  constructor() {
+    this.ctx = null;
+    this.isPlaying = false;
+    this.masterGain = null;
+    this.reverbBus = null;
+    this.volume = 0.75;
+    this.nodes = [];
+    this.eventIntervals = [];
+  }
+
+  makeDistortionCurve(amount = 20) {
+    const k = amount;
+    const n_samples = 44100;
+    const curve = new Float32Array(n_samples);
+    const deg = Math.PI / 180;
+    for (let i = 0; i < n_samples; ++i) {
+      const x = (i * 2) / n_samples - 1;
+      curve[i] = ((3 + k) * x * 20 * deg) / (Math.PI + k * Math.abs(x));
+    }
+    return curve;
+  }
+
+  init() {
+    if (this.ctx) return;
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    this.ctx = new AudioCtx();
+
+    // Master Output Gain
+    this.masterGain = this.ctx.createGain();
+    this.masterGain.gain.setValueAtTime(this.volume, this.ctx.currentTime);
+    this.masterGain.connect(this.ctx.destination);
+
+    // Cavernous Valley Echo / Primeval Space Reverb Bus
+    this.reverbBus = this.ctx.createGain();
+    this.reverbBus.gain.setValueAtTime(0.5, this.ctx.currentTime);
+
+    const delay1 = this.ctx.createDelay();
+    delay1.delayTime.setValueAtTime(0.24, this.ctx.currentTime);
+    const delay2 = this.ctx.createDelay();
+    delay2.delayTime.setValueAtTime(0.48, this.ctx.currentTime);
+
+    const feedback = this.ctx.createGain();
+    feedback.gain.setValueAtTime(0.48, this.ctx.currentTime);
+
+    const dampFilter = this.ctx.createBiquadFilter();
+    dampFilter.type = 'lowpass';
+    dampFilter.frequency.setValueAtTime(1600, this.ctx.currentTime);
+
+    this.reverbBus.connect(delay1);
+    delay1.connect(dampFilter);
+    dampFilter.connect(delay2);
+    delay2.connect(feedback);
+    feedback.connect(delay1);
+
+    delay1.connect(this.masterGain);
+    delay2.connect(this.masterGain);
+  }
+
+  start() {
+    this.init();
+    if (!this.ctx) return;
+    if (this.ctx.state === 'suspended') {
+      this.ctx.resume();
+    }
+    this.stopImmediate();
+    this.isPlaying = true;
+
+    // Smooth master gain ramp up
+    const now = this.ctx.currentTime;
+    this.masterGain.gain.cancelScheduledValues(now);
+    this.masterGain.gain.setValueAtTime(0.001, now);
+    this.masterGain.gain.exponentialRampToValueAtTime(this.volume, now + 0.5);
+
+    // 1. Start continuous living primeval jungle (wind, ancient insects, earth hum)
+    this.createLivingJungleEcosystem();
+
+    // 2. Play welcoming opening dinosaur calls (distant sauropod bellow + predatory response)
+    this.playDistantSauropodChorus(0.4);
+    setTimeout(() => {
+      if (this.isPlaying) this.playPredatorEchoRoar(0.42);
+    }, 900);
+
+    // 3. Start active surround dinosaur communication schedules
+    this.startSurroundDinosaurChorus();
+  }
+
+  stop() {
+    if (!this.ctx || !this.isPlaying) return;
+    const now = this.ctx.currentTime;
+    this.masterGain.gain.cancelScheduledValues(now);
+    this.masterGain.gain.setValueAtTime(Math.max(0.001, this.masterGain.gain.value), now);
+    this.masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.4);
+
+    setTimeout(() => {
+      this.stopImmediate();
+    }, 400);
+  }
+
+  stopImmediate() {
+    this.nodes.forEach(node => {
+      try { node.stop(); } catch (e) { }
+      try { node.disconnect(); } catch (e) { }
+    });
+    this.nodes = [];
+    this.eventIntervals.forEach(id => clearTimeout(id));
+    this.eventIntervals = [];
+    this.isPlaying = false;
+  }
+
+  // ==========================================
+  // 1. LIVING PRIMEVAL JUNGLE ECOSYSTEM BACKDROP
+  // ==========================================
+  createLivingJungleEcosystem() {
+    const ctx = this.ctx;
+    const dest = this.masterGain;
+
+    // --- Ancient Forest Canopy Breeze ---
+    const bufferSize = ctx.sampleRate * 2;
+    const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const output = noiseBuffer.getChannelData(0);
+    let lastOut = 0.0;
+    for (let i = 0; i < bufferSize; i++) {
+      const white = Math.random() * 2 - 1;
+      output[i] = (lastOut + 0.02 * white) / 1.02;
+      lastOut = output[i];
+      output[i] *= 2.5;
+    }
+
+    const windNoise = ctx.createBufferSource();
+    windNoise.buffer = noiseBuffer;
+    windNoise.loop = true;
+
+    const windFilter = ctx.createBiquadFilter();
+    windFilter.type = 'bandpass';
+    windFilter.frequency.setValueAtTime(320, ctx.currentTime);
+    windFilter.Q.setValueAtTime(1.4, ctx.currentTime);
+
+    const windLFO = ctx.createOscillator();
+    const windLFOGain = ctx.createGain();
+    windLFO.frequency.setValueAtTime(0.08, ctx.currentTime);
+    windLFOGain.gain.setValueAtTime(160, ctx.currentTime);
+    windLFO.connect(windLFOGain);
+    windLFOGain.connect(windFilter.frequency);
+
+    const windGain = ctx.createGain();
+    windGain.gain.setValueAtTime(0.1, ctx.currentTime);
+
+    windNoise.connect(windFilter);
+    windFilter.connect(windGain);
+    windGain.connect(dest);
+
+    windNoise.start();
+    windLFO.start();
+    this.nodes.push(windNoise, windLFO);
+
+    // --- Deep Primordial Earth Resonance (Tectonic Low Drone) ---
+    const earthOsc = ctx.createOscillator();
+    const earthGain = ctx.createGain();
+    const earthFilter = ctx.createBiquadFilter();
+
+    earthOsc.type = 'sine';
+    earthOsc.frequency.setValueAtTime(48, ctx.currentTime);
+
+    earthFilter.type = 'lowpass';
+    earthFilter.frequency.setValueAtTime(100, ctx.currentTime);
+
+    earthGain.gain.setValueAtTime(0.08, ctx.currentTime);
+
+    earthOsc.connect(earthFilter);
+    earthFilter.connect(earthGain);
+    earthGain.connect(dest);
+
+    earthOsc.start();
+    this.nodes.push(earthOsc);
+
+    // --- Ancient Primeval Insect / Cicada Ambient Texture ---
+    const insectNoise = ctx.createBufferSource();
+    insectNoise.buffer = noiseBuffer;
+    insectNoise.loop = true;
+
+    const insectFilter = ctx.createBiquadFilter();
+    insectFilter.type = 'bandpass';
+    insectFilter.frequency.setValueAtTime(3800, ctx.currentTime);
+    insectFilter.Q.setValueAtTime(6.0, ctx.currentTime);
+
+    const insectLFO = ctx.createOscillator();
+    const insectLFOGain = ctx.createGain();
+    insectLFO.frequency.setValueAtTime(4.5, ctx.currentTime);
+    insectLFOGain.gain.setValueAtTime(0.015, ctx.currentTime);
+
+    const insectGain = ctx.createGain();
+    insectGain.gain.setValueAtTime(0.018, ctx.currentTime);
+
+    insectLFO.connect(insectLFOGain);
+    insectLFOGain.connect(insectGain.gain);
+
+    insectNoise.connect(insectFilter);
+    insectFilter.connect(insectGain);
+    insectGain.connect(dest);
+
+    insectNoise.start();
+    insectLFO.start();
+    this.nodes.push(insectNoise, insectLFO);
+  }
+
+  // ==========================================
+  // 2. DYNAMIC SURROUND DINOSAUR CALLS SCHEDULE
+  // ==========================================
+  startSurroundDinosaurChorus() {
+    const triggerRandomDinoEvent = () => {
+      if (!this.isPlaying) return;
+      const roll = Math.random();
+      if (roll < 0.28) {
+        this.playDistantSauropodChorus(0.38 + Math.random() * 0.1); // เสียงกู่ร้องก้องหุบเขาของฝูงคอยาว
+      } else if (roll < 0.52) {
+        this.playPredatorEchoRoar(0.40 + Math.random() * 0.12); // เสียงคำรามกึกก้องของนักล่า
+      } else if (roll < 0.72) {
+        this.playNearbyHerbivoreBreathAndGrunt(0.35 + Math.random() * 0.1); // เสียงลมหายใจและขู่ต่ำของไดโนเสาร์ใกล้ๆ
+      } else if (roll < 0.88) {
+        this.playPterosaurCanopyCall(0.28 + Math.random() * 0.08); // เสียงสัตว์ปีกดึกดำบรรพ์บินผ่าน
+      } else {
+        this.playDistantHeavyFootsteps(0.32 + Math.random() * 0.1); // เสียงก้าวย่างสะเทือนพื้นดิน
+      }
+    };
+
+    const scheduleNext = () => {
+      if (!this.isPlaying) return;
+      const delay = 1800 + Math.random() * 2200; // Trigger every 1.8 - 4.0s
+      const timer = setTimeout(() => {
+        triggerRandomDinoEvent();
+        scheduleNext();
+      }, delay);
+      this.eventIntervals.push(timer);
+    };
+
+    scheduleNext();
+  }
+
+  // --- 1. Distant Sauropod Chorus (เสียงฝูงไดโนเสาร์คอยาวก้องข้ามหุบเขา) ---
+  playDistantSauropodChorus(intensity = 0.4) {
+    if (!this.ctx || !this.isPlaying) return;
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+
+    const osc1 = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
+    const filter = ctx.createBiquadFilter();
+    const gain = ctx.createGain();
+
+    osc1.type = 'sawtooth';
+    osc1.frequency.setValueAtTime(64, now);
+    osc1.frequency.linearRampToValueAtTime(105, now + 0.7);
+    osc1.frequency.exponentialRampToValueAtTime(42, now + 2.6);
+
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(128, now);
+    osc2.frequency.linearRampToValueAtTime(210, now + 0.7);
+    osc2.frequency.exponentialRampToValueAtTime(84, now + 2.4);
+
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(280, now);
+    filter.frequency.linearRampToValueAtTime(480, now + 0.7);
+    filter.frequency.exponentialRampToValueAtTime(140, now + 2.5);
+    filter.Q.setValueAtTime(2.8, now);
+
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.exponentialRampToValueAtTime(intensity, now + 0.5);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.8);
+
+    osc1.connect(filter);
+    osc2.connect(filter);
+    filter.connect(gain);
+
+    gain.connect(this.masterGain);
+    if (this.reverbBus) gain.connect(this.reverbBus);
+
+    osc1.start(now);
+    osc2.start(now);
+    osc1.stop(now + 2.9);
+    osc2.stop(now + 2.9);
+  }
+
+  // --- 2. Predator Echo Roar (เสียงคำรามกึกก้องของไดโนเสาร์นักล่า สยามโมไทรันนัส) ---
+  playPredatorEchoRoar(intensity = 0.45) {
+    if (!this.ctx || !this.isPlaying) return;
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+
+    const osc = ctx.createOscillator();
+    const sub = ctx.createOscillator();
+    const fm = ctx.createOscillator();
+    const fmGain = ctx.createGain();
+    const dist = ctx.createWaveShaper();
+    dist.curve = this.makeDistortionCurve(25);
+
+    fm.frequency.setValueAtTime(38, now);
+    fm.frequency.exponentialRampToValueAtTime(16, now + 1.6);
+    fmGain.gain.setValueAtTime(70, now);
+    fm.connect(fmGain);
+    fmGain.connect(osc.frequency);
+
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(220, now);
+    osc.frequency.exponentialRampToValueAtTime(90, now + 0.4);
+    osc.frequency.exponentialRampToValueAtTime(32, now + 1.8);
+
+    sub.type = 'triangle';
+    sub.frequency.setValueAtTime(75, now);
+    sub.frequency.exponentialRampToValueAtTime(28, now + 1.6);
+
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(420, now);
+    filter.frequency.exponentialRampToValueAtTime(780, now + 0.3);
+    filter.frequency.exponentialRampToValueAtTime(160, now + 1.7);
+    filter.Q.setValueAtTime(3.8, now);
+
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.exponentialRampToValueAtTime(intensity, now + 0.18);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.0);
+
+    osc.connect(dist);
+    dist.connect(filter);
+    sub.connect(filter);
+    filter.connect(gain);
+
+    gain.connect(this.masterGain);
+    if (this.reverbBus) gain.connect(this.reverbBus);
+
+    osc.start(now);
+    sub.start(now);
+    fm.start(now);
+
+    osc.stop(now + 2.1);
+    sub.stop(now + 2.1);
+    fm.stop(now + 2.1);
+  }
+
+  // --- 3. Nearby Herbivore Breath & Grunt (เสียงพ่นลมหายใจและเสียงคำรามในลำคอของยักษ์ใหญ่ใกล้ๆ) ---
+  playNearbyHerbivoreBreathAndGrunt(intensity = 0.35) {
+    if (!this.ctx || !this.isPlaying) return;
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+
+    const osc = ctx.createOscillator();
+    const fm = ctx.createOscillator();
+    const fmGain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+    const gain = ctx.createGain();
+
+    fm.frequency.setValueAtTime(24, now);
+    fmGain.gain.setValueAtTime(45, now);
+    fm.connect(fmGain);
+    fmGain.connect(osc.frequency);
+
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(85, now);
+    osc.frequency.linearRampToValueAtTime(60, now + 0.5);
+    osc.frequency.exponentialRampToValueAtTime(35, now + 1.4);
+
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(320, now);
+    filter.frequency.exponentialRampToValueAtTime(120, now + 1.3);
+    filter.Q.setValueAtTime(4.0, now);
+
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.exponentialRampToValueAtTime(intensity, now + 0.25);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.5);
+
+    osc.connect(filter);
+    filter.connect(gain);
+
+    gain.connect(this.masterGain);
+    if (this.reverbBus) gain.connect(this.reverbBus);
+
+    osc.start(now);
+    fm.start(now);
+    osc.stop(now + 1.6);
+    fm.stop(now + 1.6);
+  }
+
+  // --- 4. Pterosaur & Raptor Canopy Screech (เสียงสัตว์ปีกโบราณและแรปเตอร์บนยอดไม้) ---
+  playPterosaurCanopyCall(intensity = 0.3) {
+    if (!this.ctx || !this.isPlaying) return;
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+
+    const osc = ctx.createOscillator();
+    const fm = ctx.createOscillator();
+    const fmGain = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+    const gain = ctx.createGain();
+
+    fm.frequency.setValueAtTime(60, now);
+    fmGain.gain.setValueAtTime(90, now);
+    fm.connect(fmGain);
+    fmGain.connect(osc.frequency);
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(540, now);
+    osc.frequency.exponentialRampToValueAtTime(820, now + 0.2);
+    osc.frequency.exponentialRampToValueAtTime(260, now + 0.9);
+
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(680, now);
+    filter.frequency.exponentialRampToValueAtTime(1100, now + 0.22);
+    filter.frequency.exponentialRampToValueAtTime(340, now + 0.9);
+    filter.Q.setValueAtTime(3.5, now);
+
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.exponentialRampToValueAtTime(intensity, now + 0.12);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.05);
+
+    osc.connect(filter);
+    filter.connect(gain);
+
+    gain.connect(this.masterGain);
+    if (this.reverbBus) gain.connect(this.reverbBus);
+
+    osc.start(now);
+    fm.start(now);
+    osc.stop(now + 1.1);
+    fm.stop(now + 1.1);
+  }
+
+  // --- 5. Distant Heavy Footsteps (เสียงก้าวย่างสั่นสะเทือนพื้นดินของฝูงสัตว์ยักษ์) ---
+  playDistantHeavyFootsteps(intensity = 0.35) {
+    if (!this.ctx || !this.isPlaying) return;
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+
+    const osc = ctx.createOscillator();
+    const filter = ctx.createBiquadFilter();
+    const gain = ctx.createGain();
+
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(60, now);
+    osc.frequency.exponentialRampToValueAtTime(28, now + 0.35);
+
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(110, now);
+
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.exponentialRampToValueAtTime(intensity, now + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.6);
+
+    osc.connect(filter);
+    filter.connect(gain);
+
+    gain.connect(this.masterGain);
+
+    osc.start(now);
+    osc.stop(now + 0.65);
+  }
+
+  // SFX: UI Feedback Chime
+  playClickChime(success = true) {
+    if (!this.ctx) this.init();
+    if (!this.ctx) return;
+    if (this.ctx.state === 'suspended') this.ctx.resume();
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = 'sine';
+    const freq = success ? 587.33 : 329.63;
+    osc.frequency.setValueAtTime(freq, now);
+    if (success) {
+      osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+    }
+
+    gain.gain.setValueAtTime(0.04, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.4);
+  }
+}
+
+// Global Prehistoric Ecosystem Sound Instance
+const dinosaurAudio = new PrehistoricEcosystemEngine();
+
+// Compact UI Bindings for Dinosaur Sound Toggle Button
+(function initDinosaurAudioUI() {
+  const widget = document.getElementById('ambientAudioWidget');
+  const toggleBtn = document.getElementById('audioToggleBtn');
+  const audioIcon = document.getElementById('audioIcon');
+  const audioLabel = document.getElementById('audioLabel');
+
+  if (!toggleBtn) return;
+
+  function updateAudioUI(playing) {
+    if (playing) {
+      widget.classList.add('playing');
+      if (audioIcon) audioIcon.textContent = '🔊';
+      // if (audioLabel) audioLabel.textContent = '';
+    } else {
+      widget.classList.remove('playing');
+      if (audioIcon) audioIcon.textContent = '🦖';
+      // if (audioLabel) audioLabel.textContent = '';
+    }
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    if (dinosaurAudio.isPlaying) {
+      dinosaurAudio.stop();
+      updateAudioUI(false);
+    } else {
+      dinosaurAudio.start();
+      updateAudioUI(true);
+    }
+  });
+
+  // Sound effects on dinosaur titan cards & buttons
+  document.querySelectorAll('.titan-card, .btn-titan').forEach((card) => {
+    card.addEventListener('click', () => {
+      dinosaurAudio.playPredatorEchoRoar(0.55);
+    });
+  });
+
+  document.querySelectorAll('.quiz-option-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      dinosaurAudio.playClickChime(true);
+    });
+  });
+})();
