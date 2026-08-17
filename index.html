@@ -1307,6 +1307,20 @@
           <div class="modal-section section-model">
             <h3 class="section-title">โมเดล 3 มิติ (3D Model)</h3>
             <div class="model-wrapper">
+              <!-- 3D Model Loading Overlay -->
+              <div class="model-loader-overlay" id="modelLoaderOverlay">
+                <div class="model-loader-content">
+                  <div class="model-loader-spinner">
+                    <div class="spinner-ring"></div>
+                    <span class="spinner-icon">🦴</span>
+                  </div>
+                  <p class="model-loader-title">กำลังโหลดโมเดล 3D</p>
+                  <div class="model-loader-bar-container">
+                    <div class="model-loader-bar" id="modelLoaderBar"></div>
+                  </div>
+                  <p class="model-loader-text">กรุณารอสักครู่... <span id="modelLoaderPercent">0%</span></p>
+                </div>
+              </div>
               <model-viewer id="dinoModel" src="" alt="Dinosaur 3D Model" exposure="1.1" camera-controls auto-rotate
                 shadow-intensity="1.2" shadow-softness="0.8" camera-orbit="45deg 75deg auto" ar
                 interaction-prompt="auto"></model-viewer>

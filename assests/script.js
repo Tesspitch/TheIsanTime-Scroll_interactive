@@ -892,6 +892,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- 3D Model Loading Overlay ---
+  const modelLoaderOverlay = document.getElementById('modelLoaderOverlay');
+  const modelLoaderBar = document.getElementById('modelLoaderBar');
+  const modelLoaderPercent = document.getElementById('modelLoaderPercent');
+  let modelLoadTimeout = null;
+
+  function showModelLoader() {
+    if (modelLoaderOverlay) {
+      modelLoaderOverlay.classList.remove('loaded');
+    }
+    if (modelLoaderBar) modelLoaderBar.style.width = '0%';
+    if (modelLoaderPercent) modelLoaderPercent.textContent = '0%';
+  }
+
+  function hideModelLoader() {
+    if (modelLoaderOverlay) {
+      modelLoaderOverlay.classList.add('loaded');
+    }
+    if (modelLoadTimeout) {
+      clearTimeout(modelLoadTimeout);
+      modelLoadTimeout = null;
+    }
+  }
+
+  function updateModelProgress(percent) {
+    const p = Math.round(percent);
+    if (modelLoaderBar) modelLoaderBar.style.width = `${p}%`;
+    if (modelLoaderPercent) modelLoaderPercent.textContent = `${p}%`;
+  }
+
+  // Listen to model-viewer events for loading progress
+  if (dinoModel) {
+    dinoModel.addEventListener('progress', (e) => {
+      const progress = e.detail.totalProgress * 100;
+      updateModelProgress(progress);
+    });
+
+    dinoModel.addEventListener('load', () => {
+      updateModelProgress(100);
+      setTimeout(() => hideModelLoader(), 300);
+    });
+
+    dinoModel.addEventListener('error', () => {
+      hideModelLoader();
+    });
+  }
+
   function openModal() {
     modal.style.display = 'flex';
     requestAnimationFrame(() => {
@@ -903,6 +950,9 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.classList.remove('open');
     setTimeout(() => {
       modal.style.display = 'none';
+      // Reset model loader for next open
+      showModelLoader();
+      if (dinoModel) dinoModel.removeAttribute('src');
     }, 300);
   }
 
@@ -929,9 +979,17 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: 'จัดแสดงพิพิธภัณฑ์', year: '—' },
       ];
 
+      // Show model loader and set src to trigger loading
+      showModelLoader();
       dinoModel.setAttribute('src', modelSrc);
       buildTimeline(timelineEvents);
       openModal();
+
+      // Fallback timeout: hide loader after 15 seconds if model fails to load
+      if (modelLoadTimeout) clearTimeout(modelLoadTimeout);
+      modelLoadTimeout = setTimeout(() => {
+        hideModelLoader();
+      }, 15000);
     });
   });
 
