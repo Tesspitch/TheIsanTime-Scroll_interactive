@@ -54,10 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
       { y: 0, opacity: 1, visibility: 'visible', duration: 0.8, ease: 'back.out(1.7)' },
       '-=0.4'
     );
-
   // --- Loading Screen Logic ---
-  // Preload ALL videos (hero + section2 choice videos) during loading screen
-  // so they play instantly when the user interacts.
+  // Preload ALL assets (videos + images) during loading screen
+  // so everything displays instantly when the user scrolls or interacts.
   const loaderOverlay = document.getElementById('loader-overlay');
   const loaderBar = document.getElementById('loaderBar');
   const loaderPercent = document.getElementById('loader-percent');
@@ -67,32 +66,74 @@ document.addEventListener('DOMContentLoaded', () => {
   let loadProgress = 0;
   let loadingComplete = false;
 
-  // Track loading state for all videos: hero + 3 section2 choice videos
-  const videoLoadTracker = {
-    hero: false,
-    dino: false,
-    sea: false,
-    nature: false,
-  };
-  const totalVideos = Object.keys(videoLoadTracker).length;
+  // --- Universal Asset Preloader ---
+  // Collect ALL images on the page and remove lazy loading so they start immediately
+  const allImages = document.querySelectorAll('img[loading="lazy"]');
+  allImages.forEach((img) => {
+    img.removeAttribute('loading'); // Force eager loading
+  });
 
-  function getLoadedCount() {
-    return Object.values(videoLoadTracker).filter(Boolean).length;
+  // Total assets = 4 videos (hero + 3 section2) + all page images
+  const allPageImages = document.querySelectorAll('img');
+  let totalAssets = 4; // 4 videos
+  let loadedAssets = 0;
+
+  // Count images that need to load (exclude already complete ones)
+  const imagesToTrack = [];
+  allPageImages.forEach((img) => {
+    if (img.complete && img.naturalWidth > 0) {
+      // Already loaded/cached
+      loadedAssets++;
+      totalAssets++;
+    } else if (img.src && img.src !== '') {
+      totalAssets++;
+      imagesToTrack.push(img);
+    }
+  });
+
+  function onAssetLoaded() {
+    loadedAssets++;
+    updateRealProgress();
+    checkAllAssetsReady();
+  }
+
+  // Attach load/error handlers to all pending images
+  imagesToTrack.forEach((img) => {
+    img.addEventListener('load', onAssetLoaded, { once: true });
+    img.addEventListener('error', onAssetLoaded, { once: true }); // count errors too so we don't get stuck
+  });
+
+  // Video load tracking (keyed to prevent double-counting)
+  const videoLoadTracker = { hero: false, dino: false, sea: false, nature: false };
+
+  function markVideoReady(key) {
+    if (videoLoadTracker[key]) return;
+    videoLoadTracker[key] = true;
+    loadedAssets++;
+    updateRealProgress();
+    checkAllAssetsReady();
   }
 
   function updateRealProgress() {
-    const loaded = getLoadedCount();
-    // Map loaded count to 0–95% range (leave 5% for final transition)
-    const realProgress = Math.round((loaded / totalVideos) * 95);
+    // Map loaded assets to 0–95% range (leave 5% for final transition)
+    const realProgress = Math.min(95, Math.round((loadedAssets / totalAssets) * 95));
     if (realProgress > loadProgress) {
       loadProgress = realProgress;
       updateLoader(loadProgress);
     }
   }
 
+  function checkAllAssetsReady() {
+    if (loadingComplete) return;
+    if (loadedAssets >= totalAssets) {
+      loadingComplete = true;
+      completeLoading();
+    }
+  }
+
   // Simulate gradual progress so the bar doesn't sit idle while loading
   const progressInterval = setInterval(() => {
-    const maxSimulated = Math.round((getLoadedCount() / totalVideos) * 95);
+    const maxSimulated = Math.min(95, Math.round((loadedAssets / totalAssets) * 95));
     if (loadProgress < maxSimulated) {
       loadProgress += Math.floor(Math.random() * 3) + 1;
       if (loadProgress > maxSimulated) loadProgress = maxSimulated;
