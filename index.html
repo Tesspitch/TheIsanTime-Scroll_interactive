@@ -22,10 +22,9 @@
 </head>
 
 <body>
-  <!--
-      Section1 – Hero
-      This section welcomes visitors with a full‑screen video and animated flying dinosaurs.
-    -->
+  <!-- Interactive Ambient Background Particles -->
+  <canvas id="bgParticles" class="bg-particles-canvas" aria-hidden="true"></canvas>
+
   <!--
       Section1 – Hero
       This section welcomes visitors with a full‑screen video and animated flying dinosaurs.
@@ -443,20 +442,44 @@
       </div>
     </div>
 
-    <!-- Stone Layer Interactive Section -->
-    <div class="stone-layer-container">
+    <!-- Stone Layer Interactive Section: Khorat Group Stratigraphy Explorer -->
+    <div class="stone-layer-container" id="stone-layer-explorer">
       <div class="stone-layer-content">
         <div class="stone-image-wrapper">
           <img src="assests/img/stone_layer.png" alt="ชั้นหินโคราช" class="stone-img" />
           <div class="stone-hint">
-            <span class="hint-icon">👆</span>
-            <span class="hint-text">แตะเพื่อสำรวจชั้นหิน</span>
+            <span class="hint-icon">🔍</span>
+            <span class="hint-text">คลิกเลือกหมวดหินด้านขวาเพื่อสำรวจ</span>
           </div>
         </div>
         <div class="stone-text-wrapper">
-          <h3 class="stone-title">หน้าประวัติศาสตร์ธรณีวิทยาไทย</h3>
+          <div class="stone-badge">KHORAT GROUP STRATIGRAPHY</div>
+          <h3 class="stone-title">หน้าประวัติศาสตร์ธรณีวิทยา: กลุ่มหินโคราช</h3>
+          <p class="stone-subtitle">ชั้นหินตะกอนมหายุคมีโซโซอิก ความหนากว่า 4,000 เมตร
+            แคปซูลกาลเวลาบันทึกวิวัฒนาการสิ่งมีชีวิตโบราณ</p>
+
+          <!-- Stratigraphy Nav Chips -->
+          <div class="stratigraphy-chips" role="tablist" aria-label="หมวดหินโคราช">
+            <button type="button" class="strat-chip active" data-formation="khok-kruat">หมวดหินโคกกรวด</button>
+            <button type="button" class="strat-chip" data-formation="sao-khua">หมวดหินเสาขัว</button>
+            <button type="button" class="strat-chip" data-formation="phu-kradung">หมวดหินภูกระดึง</button>
+            <button type="button" class="strat-chip" data-formation="nam-phong">หมวดหินน้ำพอง/ห้วยหินลาด</button>
+            <button type="button" class="strat-chip" data-formation="all-formations">9 หมวดหินทั้งหมด</button>
+          </div>
+
           <div class="stone-desc" id="stoneDesc">
-            <!-- Text will be typed here via JS -->
+            <div class="formation-card">
+              <div class="formation-header">
+                <span class="formation-epoch">ยุคครีเทเชียสตอนต้น (~100–115 ล้านปีก่อน)</span>
+                <h4 class="formation-name">หมวดหินโคกกรวด (Khok Kruat Formation)</h4>
+              </div>
+              <p class="formation-environment"><strong>สภาพแวดล้อมโบราณ:</strong> ที่ราบน้ำท่วมถึงและแม่น้ำคดเคี้ยว
+                สภาพอากาศแบบกึ่งแห้งแล้งสลับมรสุม</p>
+              <div class="formation-fossils">
+                <strong>ฟอสซิลเด่น:</strong> สยามแรปเตอร์ (<em>Siamraptor</em>), สิรินธรนา (<em>Sirindhorna</em>),
+                ราชสีมาซอรัส, สยามโมดอน, จระเข้โคราชซูคัส, เต่าโบราณ และฉลามน้ำจืด
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -468,249 +491,282 @@
       Cards for each major dinosaur discovered in Isan. Clicking a card opens a detailed popup with
       interactive features: scratch to reveal a footprint, view a 3D model and follow a timeline.
     -->
-  <section class="section4">
+  <section class="section4" id="section-titans">
     <div class="titans-container">
-      <h2 class="titans-title">MEET THE TIANS OF ISAN</h2>
-      <h2 class="titans-title">FROM FOSSIL TO MUSEUM</h2>
-      <h3 class="titans-subtitle">พบกับยักษ์ใหญ่แห่งอีสาน</h3>
-      <h4 class="titans-subtitle-desc">( Click เพื่อดูรายละเอียด )</h4>
+      <div class="section-badge">FOSSIL RECORD OF THAILAND</div>
+      <h2 class="titans-title">MEET THE TITANS OF ISAN</h2>
+      <h3 class="titans-subtitle">พบกับ 13 ไดโนเสาร์พันธุ์เด่นแห่งผืนดินอีสาน</h3>
+      <h4 class="titans-subtitle-desc">( คลิกที่การ์ดไดโนเสาร์เพื่อดูโมเดล 3D และเส้นทางประวัติศาสตร์การค้นพบ )</h4>
 
-      <!-- Filter buttons for herbivores and carnivores -->
-      <div class="diet-filter">
-        <div class="diet-group">
-          <button class="diet-btn" data-filter="herbivore">กินพืช</button>
-          <button class="diet-btn" data-filter="carnivore">กินเนื้อ</button>
+      <!-- Comprehensive Filters: Diet & Epoch -->
+      <div class="filter-controls-wrapper">
+        <div class="diet-filter">
+          <div class="filter-label">ประเภทอาหาร:</div>
+          <div class="diet-group">
+            <button type="button" class="diet-btn active" data-filter="all">ทั้งหมด</button>
+            <button type="button" class="diet-btn" data-filter="herbivore">กินพืช (Herbivore)</button>
+            <button type="button" class="diet-btn" data-filter="carnivore">กินเนื้อ (Carnivore)</button>
+          </div>
+        </div>
+
+        <div class="epoch-filter">
+          <div class="filter-label">ยุคทางธรณีวิทยา:</div>
+          <div class="epoch-group">
+            <button type="button" class="epoch-btn active" data-epoch="all">ทุกยุค</button>
+            <button type="button" class="epoch-btn" data-epoch="triassic">ไทรแอสซิก (~210 Ma)</button>
+            <button type="button" class="epoch-btn" data-epoch="jurassic">จูแรสซิก (~150 Ma)</button>
+            <button type="button" class="epoch-btn" data-epoch="cretaceous">ครีเทเชียส (~100–130 Ma)</button>
+          </div>
         </div>
       </div>
 
       <!-- Grid of dinosaur cards -->
       <div class="titans-grid">
         <!-- Herbivores -->
-        <article class="titan-card" data-diet="herbivore">
+        <article class="titan-card" data-diet="herbivore" data-epoch="cretaceous">
           <div class="titan-thumb">
             <img src="assests/img/dino_section4/Phuwiangosaurus.png" alt="ภูเวียงโกซอรัส" loading="lazy" />
           </div>
           <div class="titan-body">
+            <div class="titan-formation-tag">หมวดหินเสาขัว (ขอนแก่น/กาฬสินธุ์)</div>
             <h3 class="titan-name">ภูเวียงโกซอรัส สิรินธรเน</h3>
             <h3 class="titan-name-en">Phuwiangosaurus sirindhornae</h3>
             <p class="titan-desc">
-              ซอโรพอดขนาดใหญ่ คอยาว หางยาว ลำตัวแข็งแรง เดินสี่ขา สัดส่วนคล้ายไททาโนซอร์
+              ซอโรพอดกินพืชคอยาวขนาดใหญ่ เดินสี่ขา กระดูกคอและหางกลวงน้ำหนักเบา บรรพบุรุษของไททาโนซอร์ระดับโลก
             </p>
             <div class="titan-tags">
-              <span class="tag tag-length">12–14 เมตร</span>
+              <span class="tag tag-length">15–20 เมตร</span>
               <span class="tag tag-herbivore">กินพืช</span>
+              <span class="tag tag-epoch">ครีเทเชียสตอนต้น</span>
             </div>
           </div>
         </article>
 
-        <!-- Example herbivore card -->
-        <article class="titan-card" data-diet="herbivore">
+        <article class="titan-card" data-diet="herbivore" data-epoch="cretaceous">
           <div class="titan-thumb">
             <img src="assests/img/dino_section4/Kinnareemimus.png" alt="กินรีมิมัส ขอนแก่นเอนซิส" loading="lazy" />
           </div>
           <div class="titan-body">
+            <div class="titan-formation-tag">หมวดหินเสาขัว (ขอนแก่น)</div>
             <h3 class="titan-name">กินรีมิมัส ขอนแก่นเอนซิส</h3>
             <h3 class="titan-name-en">Kinnareemimus khonkaennsis</h3>
             <p class="titan-desc">
-              รูปร่างคล้ายนกกระจอกเทศโบราณ ขายาวมาก ตัวเบา ฟุตสปีดดี ไม่มีฟันหรือมีน้อย
+              ออร์นิโธมิโมซอร์คล้ายนกกระจอกเทศยุคแรกเริ่ม วิ่งเร็ว ปากไร้ฟัน ตัวเบาและปราดเปรียวที่สุดในเอเชีย
             </p>
             <div class="titan-tags">
-              <span class="tag tag-length">2–2.5 เมตร</span>
-              <span class="tag tag-herbivore">กินพืช</span>
+              <span class="tag tag-length">1.5–2 เมตร</span>
+              <span class="tag tag-herbivore">กินพืช/กินพืชปนแมลง</span>
+              <span class="tag tag-epoch">ครีเทเชียสตอนต้น</span>
             </div>
           </div>
         </article>
 
-        <!-- Example herbivore card -->
-        <article class="titan-card" data-diet="herbivore">
+        <article class="titan-card" data-diet="herbivore" data-epoch="cretaceous">
           <div class="titan-thumb">
             <img src="assests/img/dino_section4/Sittakosaurus.png" alt="ซิตตะโกซอรัส สัตยารักษ์กิ" loading="lazy" />
           </div>
           <div class="titan-body">
+            <div class="titan-formation-tag">หมวดหินโคกกรวด (ชัยภูมิ)</div>
             <h3 class="titan-name">ซิตตะโกซอรัส สัตยารักษ์กิ</h3>
             <h3 class="titan-name-en">Sittakosaurus satyarakki</h3>
             <p class="titan-desc">
-              ตัวขนาดเล็ก หน้าแหลมคล้ายนกแก้ว หางยาว เดินสองขาเป็นหลัก
+              ไดโนเสาร์ปากนกแก้วขนาดเล็ก บรรพบุรุษไดโนเสาร์มีเขา (เซอราทอปเซียน) เดินสองขาเป็นหลัก
             </p>
             <div class="titan-tags">
-              <span class="tag tag-length">0.8–1 เมตร</span>
+              <span class="tag tag-length">1–1.5 เมตร</span>
               <span class="tag tag-herbivore">กินพืช</span>
+              <span class="tag tag-epoch">ครีเทเชียสตอนต้น</span>
             </div>
           </div>
         </article>
 
-        <!-- Example herbivore card -->
-        <article class="titan-card" data-diet="herbivore">
+        <article class="titan-card" data-diet="herbivore" data-epoch="cretaceous">
           <div class="titan-thumb">
             <img src="assests/img/dino_section4/Ratchasimasaurus.png" alt="ราชสีมาซอรัส สุรนารีเอ" loading="lazy" />
           </div>
           <div class="titan-body">
+            <div class="titan-formation-tag">หมวดหินโคกกรวด (นครราชสีมา)</div>
             <h3 class="titan-name">ราชสีมาซอรัส สุรนารีเอ</h3>
             <h3 class="titan-name-en">Ratchasimasaurus suranareae</h3>
             <p class="titan-desc">
-              ไดโนเสาร์ออร์นิโธพอดขนาดกลาง ขาหลังแข็งแรง เดินสองขาเป็นหลัก ปากคล้ายเป็ด
+              อิกัวโนดอนต์ขนาดกลาง มีกระดูกขากรรไกรล่างแบนโค้งเฉพาะตัว ใช้บดเคี้ยวพืชใบเหนียวในป่าโบราณ
             </p>
             <div class="titan-tags">
-              <span class="tag tag-length">2–3 เมตร</span>
+              <span class="tag tag-length">5–6 เมตร</span>
               <span class="tag tag-herbivore">กินพืช</span>
+              <span class="tag tag-epoch">ครีเทเชียสตอนต้น</span>
             </div>
           </div>
         </article>
 
-        <!-- Example herbivore card -->
-        <article class="titan-card" data-diet="herbivore">
+        <article class="titan-card" data-diet="herbivore" data-epoch="cretaceous">
           <div class="titan-thumb">
             <img src="assests/img/dino_section4/Siamodon.png" alt="สยามโมดอน นิ่มงามมิ" loading="lazy" />
           </div>
           <div class="titan-body">
+            <div class="titan-formation-tag">หมวดหินโคกกรวด (นครราชสีมา)</div>
             <h3 class="titan-name">สยามโมดอน นิ่มงามมิ</h3>
             <h3 class="titan-name-en">Siamodon nimngami</h3>
             <p class="titan-desc">
-              ออร์นิโธพอดยุคต้น มีกะโหลกแข็งแรง รูปทรงปากกว้าง ขาหลังค่อนข้างแข็งแรง
+              อิกัวโนดอนต์ขากรรไกรบนรูปทรงคล้ายสามเหลี่ยม มีฟันบดพืชคล้ายฟันของพืชตระกูลอิกัวโนดอนเทีย
             </p>
             <div class="titan-tags">
-              <span class="tag tag-length">2 เมตร</span>
+              <span class="tag tag-length">4–5 เมตร</span>
               <span class="tag tag-herbivore">กินพืช</span>
+              <span class="tag tag-epoch">ครีเทเชียสตอนต้น</span>
             </div>
           </div>
         </article>
 
-        <!-- Example herbivore card -->
-        <article class="titan-card" data-diet="herbivore">
+        <article class="titan-card" data-diet="herbivore" data-epoch="cretaceous">
           <div class="titan-thumb">
             <img src="assests/img/dino_section4/Sirindhorna.png" alt="สิรินธรนา โคราชเอนซิส" loading="lazy" />
           </div>
           <div class="titan-body">
+            <div class="titan-formation-tag">หมวดหินโคกกรวด (นครราชสีมา)</div>
             <h3 class="titan-name">สิรินธรนา โคราชเอนซิส</h3>
             <h3 class="titan-name-en">Sirindhorna khoratensis</h3>
             <p class="titan-desc">
-              ลักษณะออร์นิโธพอดขนาดเล็กถึงกลาง กะโหลกหน้ามีโครงสร้างเฉพาะตัว
+              ฮาโดรซอรอยด์ (ไดโนเสาร์ปากเป็ด) ดึกดำบรรพ์ กะโหลกศีรษะสมบูรณ์ที่สุดในเอเชียตะวันออกเฉียงใต้
             </p>
             <div class="titan-tags">
-              <span class="tag tag-length">1.5–2 เมตร</span>
+              <span class="tag tag-length">6 เมตร</span>
               <span class="tag tag-herbivore">กินพืช</span>
+              <span class="tag tag-epoch">ครีเทเชียสตอนต้น</span>
             </div>
           </div>
         </article>
 
-        <!-- Example herbivore card -->
-        <article class="titan-card" data-diet="herbivore">
+        <article class="titan-card" data-diet="herbivore" data-epoch="triassic">
           <div class="titan-thumb">
             <img src="assests/img/dino_section4/Isanosaurus.png" alt="อีสานโนซอรัส อรรถวิภัชน์ชี" loading="lazy" />
           </div>
           <div class="titan-body">
+            <div class="titan-formation-tag">หมวดหินน้ำพอง (ชัยภูมิ)</div>
             <h3 class="titan-name">อีสานโนซอรัส อรรถวิภัชน์ชี</h3>
             <h3 class="titan-name-en">Isanosaurus attavipatchi</h3>
             <p class="titan-desc">
-              หนึ่งในซอโรพอดยุคต้น รูปร่างยังไม่ใหญ่เท่าซอโรพอดสมัยหลัง ขาเรียวยาว คอและลำตัวยาว
+              หนึ่งในไดโนเสาร์ซอโรพอดแท้ (Sauropod) ที่เก่าแก่ที่สุดในโลก ยุคไทรแอสซิกตอนปลาย อายุ 210 ล้านปี
             </p>
             <div class="titan-tags">
-              <span class="tag tag-length">3–4 เมตร</span>
+              <span class="tag tag-length">6.5 เมตร</span>
               <span class="tag tag-herbivore">กินพืช</span>
+              <span class="tag tag-epoch">ไทรแอสซิกตอนปลาย</span>
             </div>
           </div>
         </article>
 
-        <!-- Example herbivore card -->
-        <article class="titan-card" data-diet="herbivore">
+        <article class="titan-card" data-diet="herbivore" data-epoch="jurassic">
           <div class="titan-thumb">
             <img src="assests/img/dino_section4/Minimocursor.png" alt="มินิโมเคอร์เซอร์ ภูน้อยเอนซิส" loading="lazy" />
           </div>
           <div class="titan-body">
+            <div class="titan-formation-tag">หมวดหินภูกระดึง (กาฬสินธุ์)</div>
             <h3 class="titan-name">มินิโมเคอร์เซอร์ ภูน้อยเอนซิส</h3>
             <h3 class="titan-name-en">Minimocursor phunoiensis</h3>
             <p class="titan-desc">
-              หนึ่งในไดโนเสาร์ซอโรพอดยุคไทรแอสซิกตอนปลาย
+              ออร์นิธิสเชียนขนาดเล็กตัวแรกของเอเชียตะวันออกเฉียงใต้ โครงกระดูกสมบูรณ์กว่า 50% วิ่งเร็วและปราดเปรียว
             </p>
             <div class="titan-tags">
               <span class="tag tag-length">0.6–1 เมตร</span>
               <span class="tag tag-herbivore">กินพืช</span>
+              <span class="tag tag-epoch">จูแรสซิกตอนปลาย</span>
             </div>
           </div>
         </article>
 
         <!-- Carnivores -->
-        <article class="titan-card" data-diet="carnivore">
+        <article class="titan-card" data-diet="carnivore" data-epoch="cretaceous">
           <div class="titan-thumb">
             <img src="assests/img/dino_section4/Siamotyrannus.png" alt="สยามโมไทรันนัส อิสานเอนซิส" loading="lazy" />
           </div>
           <div class="titan-body">
+            <div class="titan-formation-tag">หมวดหินเสาขัว (ขอนแก่น)</div>
             <h3 class="titan-name">สยามโมไทรันนัส อิสานเอนซิส</h3>
             <h3 class="titan-name-en">Siamotyrannus isanensis</h3>
             <p class="titan-desc">
-              เทโรพอดขนาดใหญ่ รูปร่างเพรียว หัวใหญ่แต่ยังไม่เท่า T. rex แขนยาวกว่าแชมป์ T. rex
+              เทโรพอดนักล่าขนาดใหญ่ยุคแรก กระดูกสะโพกแข็งแกร่ง ต้นตระกูลไทรันโนซอรอยด์แห่งดินแดนเอเชีย
             </p>
             <div class="titan-tags">
-              <span class="tag tag-length">3–4 เมตร</span>
+              <span class="tag tag-length">6.5–7 เมตร</span>
               <span class="tag tag-carnivore">กินเนื้อ</span>
+              <span class="tag tag-epoch">ครีเทเชียสตอนต้น</span>
             </div>
           </div>
         </article>
 
-        <article class="titan-card" data-diet="carnivore">
+        <article class="titan-card" data-diet="carnivore" data-epoch="cretaceous">
           <div class="titan-thumb">
             <img src="assests/img/dino_section4/Siamosaurus.png" alt="สยามโมซอรัส" loading="lazy" />
           </div>
           <div class="titan-body">
+            <div class="titan-formation-tag">หมวดหินเสาขัว (ขอนแก่น)</div>
             <h3 class="titan-name">สยามโมซอรัส สุธีธรนิ</h3>
             <h3 class="titan-name-en">Siamosaurus suteethorni</h3>
             <p class="titan-desc">
-              ลำตัวยาว หัวเรียวยื่น รูปร่างคล้ายสไปโนซอริดยุคแรก มีสันหลังสูงเล็กน้อย
+              สไปโนซอริดตัวแรกของเอเชีย ฟันรูปกรวยมีร่องสันตามยาวคล้ายฟันจระเข้ เชี่ยวชาญการจับปลาน้ำจืดโบราณ
             </p>
             <div class="titan-tags">
-              <span class="tag tag-length">2.5–3 เมตร</span>
-              <span class="tag tag-carnivore">กินเนื้อ</span>
+              <span class="tag tag-length">8–9 เมตร</span>
+              <span class="tag tag-carnivore">กินเนื้อ/กินปลา</span>
+              <span class="tag tag-epoch">ครีเทเชียสตอนต้น</span>
             </div>
           </div>
         </article>
 
-        <article class="titan-card" data-diet="carnivore">
+        <article class="titan-card" data-diet="carnivore" data-epoch="cretaceous">
           <div class="titan-thumb">
             <img src="assests/img/dino_section4/Phuwiangvenator.png" alt="ภูเวียงเวเนเตอร์ แย้มนิยมมิ" loading="lazy" />
           </div>
           <div class="titan-body">
+            <div class="titan-formation-tag">หมวดหินเสาขัว (ขอนแก่น)</div>
             <h3 class="titan-name">ภูเวียงเวเนเตอร์ แย้มนิยมมิ</h3>
             <h3 class="titan-name-en">Phuwiangvenator yaemniyomi</h3>
             <p class="titan-desc">
-              เมกะราปเตอร์ รูปร่างเพรียว กระฉับกระเฉง มีกรงเล็บมือขนาดใหญ่ ขาทรงพลัง
+              เมการาปเตอร์นักล่า กรงเล็บมือโค้งใหญ่ คมกริบ ขายาวทรงพลัง วิ่งล่าเหยื่อด้วยความเร็วสูง
             </p>
             <div class="titan-tags">
-              <span class="tag tag-length">2–2.5 เมตร</span>
+              <span class="tag tag-length">5–6 เมตร</span>
               <span class="tag tag-carnivore">กินเนื้อ</span>
+              <span class="tag tag-epoch">ครีเทเชียสตอนต้น</span>
             </div>
           </div>
         </article>
 
-        <article class="titan-card" data-diet="carnivore">
+        <article class="titan-card" data-diet="carnivore" data-epoch="cretaceous">
           <div class="titan-thumb">
             <img src="assests/img/dino_section4/Vayuraptor.png" alt="วายุแรปเตอร์ หนองบัวลำภูเอนซิส" loading="lazy" />
           </div>
           <div class="titan-body">
+            <div class="titan-formation-tag">หมวดหินเสาขัว (หนองบัวลำภู)</div>
             <h3 class="titan-name">วายุแรปเตอร์ หนองบัวลำภูเอนซิส</h3>
             <h3 class="titan-name-en">Vayuraptor nongbualamphuensis</h3>
             <p class="titan-desc">
-              กลุ่มราปเตอร์ รูปร่างเบาและเร็ว กะโหลกเรียว ขาหน้าและมือมีกงเล็บโค้งแหลม
+              ฉายา 'จ้าวสายลม' บาซอลซีลูโรซอร์ขนาดกลาง โครงสร้างเบา ขาเพรียวยาว คล่องแคล่วและล่าเป็นฝูง
             </p>
             <div class="titan-tags">
-              <span class="tag tag-length">1.5–2 เมตร</span>
+              <span class="tag tag-length">4–4.5 เมตร</span>
               <span class="tag tag-carnivore">กินเนื้อ</span>
+              <span class="tag tag-epoch">ครีเทเชียสตอนต้น</span>
             </div>
           </div>
         </article>
 
-        <article class="titan-card" data-diet="carnivore">
+        <article class="titan-card" data-diet="carnivore" data-epoch="cretaceous">
           <div class="titan-thumb">
             <img src="assests/img/dino_section4/Siamraptor.png" alt="สยามแรปเตอร์ สุวัจน์ติ" loading="lazy" />
           </div>
           <div class="titan-body">
+            <div class="titan-formation-tag">หมวดหินโคกกรวด (นครราชสีมา)</div>
             <h3 class="titan-name">สยามแรปเตอร์ สุวัจน์ติ</h3>
             <h3 class="titan-name-en">Siamraptor suwati</h3>
             <p class="titan-desc">
-              อัลโลซอรอยด์ขนาดใหญ่ โครงสร้างแข็งแรง หัวใหญ่ คอยาวสั้น กล้ามเนื้อขาเด่น
+              คาร์คาโรดอนโตซอร์ตัวแรกของเอเชียตะวันออกเฉียงใต้ นักล่าระดับบนสุด ฟันหยักคมเหมือนมีดโกนสำหรับเฉือนเนื้อ
             </p>
             <div class="titan-tags">
-              <span class="tag tag-length">4–5 เมตร</span>
+              <span class="tag tag-length">7.5–8 เมตร</span>
               <span class="tag tag-carnivore">กินเนื้อ</span>
+              <span class="tag tag-epoch">ครีเทเชียสตอนต้น</span>
             </div>
           </div>
         </article>
@@ -718,6 +774,241 @@
     </div>
   </section>
 
+  <!--
+      Section 4.5 – Beyond Dinosaurs: Ancient Isan Ecosystem & Cenozoic Megafauna
+      เพื่อนร่วมยุคไดโนเสาร์และสัตว์ดึกดำบรรพ์ในภาคอีสาน
+    -->
+  <section class="section-beyond" id="beyond-dinosaurs">
+    <div class="beyond-container">
+      <div class="section-badge">BEYOND DINOSAURS</div>
+      <h2 class="beyond-title">เพื่อนร่วมยุค &amp; สัตว์ดึกดำบรรพ์แห่งอีสาน</h2>
+      <p class="beyond-subtitle">
+        อีสานไม่ได้มีเพียงไดโนเสาร์ แต่คือระบบนิเวศดึกดำบรรพ์ที่สมบูรณ์ที่สุด
+        ตั้งแต่สัตว์เลื้อยคลานน้ำจืดมหายุคมีโซโซอิก จนถึงมหาสัตว์เลี้ยงลูกด้วยนมยุคซีโนโซอิก
+      </p>
+
+      <!-- Category 1: Mesozoic Reptiles & Aquatic Life -->
+      <div class="beyond-category" data-aos="fade-up">
+        <div class="category-header">
+          <div class="cat-icon">🐊</div>
+          <div class="cat-title-group">
+            <h3>สัตว์เลื้อยคลานโบราณ &amp; ปลาน้ำจืดยุคมีโซโซอิก</h3>
+            <p>ผู้ปกครองสายนทีและหนองน้ำโบราณร่วมยุคกับไดโนเสาร์ (150–100 ล้านปีก่อน)</p>
+          </div>
+        </div>
+        <div class="beyond-grid">
+          <div class="beyond-card">
+            <div class="beyond-card-badge">จระเข้โบราณ</div>
+            <h4>ชาลาวัน ทับเที่ยงงิ (<em>Chalawan thailandicus</em>)</h4>
+            <p class="beyond-meta">หมวดหินภูกระดึง (จูแรสซิกตอนปลาย) • ค้นพบที่ อ.หนองบัวลำภู</p>
+            <p class="beyond-text">
+              จระเข้กินปลาและสัตว์บกขนาดใหญ่ ขากรรไกรยาวแข็งแรง มีฟันแหลมคมขอบหยัก เป็นจระเข้ดึกดำบรรพ์ในวงศ์
+              Sunosuchidae ที่สมบูรณ์ที่สุดชนิดหนึ่งในเอเชีย
+            </p>
+          </div>
+
+          <div class="beyond-card">
+            <div class="beyond-card-badge">จระเข้แคระบก</div>
+            <h4>โคราชซูคัส จินตสกุลลิ (<em>Khoratosuchus jintasakuli</em>)</h4>
+            <p class="beyond-meta">หมวดหินโคกกรวด (ครีเทเชียสตอนต้น) • ค้นพบที่ อ.เมือง จ.นครราชสีมา</p>
+            <p class="beyond-text">
+              จระเข้ขนาดเล็กอาศัยบนบก ความยาวไม่เกิน 1 เมตร กะโหลกสั้นแบน ฟันหลากหลายรูปแบบ
+              วิ่งล่าแมลงและสัตว์มีกระดูกสันหลังขนาดเล็กบนที่ราบน้ำท่วมถึง
+            </p>
+          </div>
+
+          <div class="beyond-card">
+            <div class="beyond-card-badge">ปลากระดูกแข็งโบราณ</div>
+            <h4>ปลาเลปิโดเทส &amp; อีสานอิคธิส (<em>Lepidotes &amp; Isanichthys</em>)</h4>
+            <p class="beyond-meta">หมวดหินภูกระดึง (จูแรสซิกตอนปลาย) • แหล่งภูน้อย / ภูกุ้มข้าว จ.กาฬสินธุ์</p>
+            <p class="beyond-text">
+              ปลากระดูกแข็งเกล็ดหนารูปสี่เหลี่ยมขนมเปียกปูนเคลือบสารกานอยด์แวววาวเหมือนเพชร
+              มีฟันทรงกลมมนสำหรับบดเปลือกหอยและกุ้งปูน้ำจืดดึกดำบรรพ์
+            </p>
+          </div>
+
+          <div class="beyond-card">
+            <div class="beyond-card-badge">เต่าดึกดำบรรพ์</div>
+            <h4>ภูเวียงเชลิส &amp; กาฬสินธุ์เอมิส (<em>Phuwiangchelys &amp; Kalasinemys</em>)</h4>
+            <p class="beyond-meta">หมวดหินเสาขัวและภูกระดึง • ขอนแก่นและกาฬสินธุ์</p>
+            <p class="beyond-text">
+              เต่าน้ำจืดดึกดำบรรพ์กระดองแข็งแกร่ง มีร่องรอยการเชื่อมต่อของกระดูกเฉพาะตัว
+              บ่งชี้ความอุดมสมบูรณ์ของระบบลำน้ำและทะเลสาบโบราณที่ราบสูงโคราช
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Category 2: Cenozoic Megafauna of Tha Chang Sand Pits -->
+      <div class="beyond-category" data-aos="fade-up">
+        <div class="category-header">
+          <div class="cat-icon">🦣</div>
+          <div class="cat-title-group">
+            <h3>มหาสัตว์เลี้ยงลูกด้วยนมยุคซีโนโซอิก (Cenozoic Megafauna)</h3>
+            <p>สมบัติโลกจาก "บ่อทรายท่าช้าง" อ.เฉลิมพระเกียรติ จ.นครราชสีมา (อายุ 16 ล้านปี ถึง 1 หมื่นปี)</p>
+          </div>
+        </div>
+        <div class="beyond-grid">
+          <div class="beyond-card highlight-card">
+            <div class="beyond-card-badge gold">เอปโคราช (มรดกโลก)</div>
+            <h4>โคราชพิเธคัส พิริยะอิ (<em>Khoratpithecus piriyai</em>)</h4>
+            <p class="beyond-meta">สมัยไมโอซีนตอนปลาย (7–9 ล้านปีก่อน) • จ.นครราชสีมา</p>
+            <p class="beyond-text">
+              ลิงไม่มีหางดึกดำบรรพ์สายพันธุ์ใหม่ของโลก ซึ่งเป็นบรรพบุรุษร่วมสายตรงของ 'อุรังอุตัง' ในปัจจุบัน
+              ทำให้ภาคอีสานกลายเป็นจุดหมุดหมายสำคัญในแผนที่วิวัฒนาการมนุษย์และวานรโลก
+            </p>
+          </div>
+
+          <div class="beyond-card">
+            <div class="beyond-card-badge">ช้างโบราณ 4 สกุล</div>
+            <h4>อาณาจักรช้างดึกดำบรรพ์ 4 ยุคแห่งโคราช</h4>
+            <p class="beyond-meta">ไดโนธีเรียม • กอมโฟธีเรียม • สเตโกดอน • ซิโนมาสโตดอน</p>
+            <p class="beyond-text">
+              นครราชสีมาเป็นพื้นที่เดียวในโลกที่พบฟอสซิลกะโหลกและงาของช้างโบราณถึง 4 สกุลจาก 8 สกุลที่พบบนโลก
+              มีทั้งช้างงากรรไกร ช้างสี่งา และช้างงาโค้งลง
+            </p>
+          </div>
+
+          <div class="beyond-card">
+            <div class="beyond-card-badge">นักล่า &amp; สัตว์กีบโบราณ</div>
+            <h4>ไฮยีนาลายจุด &amp; แรดโบราณไร้นอ</h4>
+            <p class="beyond-meta"><em>Crocuta crocuta ultima</em> &amp; <em>Aceratherium porpani</em></p>
+            <p class="beyond-text">
+              ฟอสซิลขากรรไกรไฮยีนาลายจุดดึกดำบรรพ์ที่มีแรงกัดบดกระดูกมหาศาล พร้อมด้วยซากแรดโบราณไร้นอ ชะนีโบราณ
+              ฮิปโปโปเตมัส และเสือเขี้ยวดาบ
+            </p>
+          </div>
+
+          <div class="beyond-card">
+            <div class="beyond-card-badge">มรดกพฤกษศาสตร์ธรณี</div>
+            <h4>ป่าไม้กลายเป็นหิน &amp; ป่าดึกดำบรรพ์ (Petrified Wood)</h4>
+            <p class="beyond-meta">Khorat UNESCO Global Geopark • ยุคมีโซโซอิก–ซีโนโซอิก</p>
+            <p class="beyond-text">
+              ท่อนไม้กลายเป็นหินหลากสีสันเนื้ออัญมณีโอปอลและคาลซิโดนี รวมถึงซากละอองเรณูของพืชตระกูลสนโบราณ
+              สะท้อนการเปลี่ยนแปลงสภาพภูมิอากาศโลกนับร้อยล้านปี
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+    Section 4.8 – Interactive Fossil Quest Game
+    เกมผจญภัยตอบคำถามผ่านด่าน: Isan Fossil Quest
+  -->
+  <section id="section-fossil-game" class="section-fossil-game" data-aos="fade-up">
+    <div class="game-wrapper">
+      <header class="game-header">
+        <span class="section-badge">INTERACTIVE EXPEDITION</span>
+        <h2 class="game-title">Isan Fossil Quest: ตะลุยภารกิจล่าฟอสซิลข้ามกาลเวลา</h2>
+        <p class="game-subtitle">
+          ทดสอบความรู้และออกเดินทางข้ามเวลา 210 ล้านปี สู่แหล่งค้นพบฟอสซิลสำคัญ 5 ด่านแห่งแผ่นดินอีสาน
+        </p>
+      </header>
+
+      <!-- Stage Map Progress -->
+      <div class="stage-track-container">
+        <div class="stage-track" id="stageTrack">
+          <div class="stage-step active" data-stage="0">
+            <span class="step-num">1</span>
+            <span class="step-label">ไทรแอสซิก</span>
+          </div>
+          <div class="stage-connector"></div>
+          <div class="stage-step" data-stage="1">
+            <span class="step-num">2</span>
+            <span class="step-label">จูแรสซิก</span>
+          </div>
+          <div class="stage-connector"></div>
+          <div class="stage-step" data-stage="2">
+            <span class="step-num">3</span>
+            <span class="step-label">ภูเวียง</span>
+          </div>
+          <div class="stage-connector"></div>
+          <div class="stage-step" data-stage="3">
+            <span class="step-num">4</span>
+            <span class="step-label">โคกกรวด</span>
+          </div>
+          <div class="stage-connector"></div>
+          <div class="stage-step" data-stage="4">
+            <span class="step-num">5</span>
+            <span class="step-label">ท่าช้าง</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- In-Game Animated Dino Emoji Progress Status Bar -->
+      <div class="in-game-progress-wrapper">
+        <div class="in-game-progress-header">
+          <span class="progress-title">🗺️ EXPEDITION PROGRESS (ความคืบหน้าการเดินทาง)</span>
+          <span class="progress-status-badge" id="inGameProgressText">ด่านที่ 1 / 5 (เริ่มต้น 0%)</span>
+        </div>
+        <div class="in-game-progress-track">
+          <div class="in-game-progress-fill" id="inGameProgressFill" style="width: 0%;"></div>
+          <div class="in-game-dino-runner" id="inGameDinoRunner" style="left: 0%;">
+            <span class="dino-emoji" id="inGameDinoEmoji">🦖</span>
+            <span class="dino-step-bubble" id="inGameDinoBubble">จุดเริ่มต้น: มุ่งสู่ไทรแอสซิก (~210 Ma)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Game Arena -->
+      <div class="game-arena" id="gameArena">
+        <div class="game-card">
+          <div class="game-card-header">
+            <div class="game-location-badge" id="gameLocation">📍 แหล่งขุดค้น: อ.หนองบัวระเหว จ.ชัยภูมิ</div>
+            <div class="game-score-badge">🏆 Fossil XP: <span id="gameScore">0</span></div>
+          </div>
+          <div class="game-question-box">
+            <span class="game-epoch-tag" id="gameEpoch">ยุคไทรแอสซิกตอนปลาย (~210 ล้านปีก่อน)</span>
+            <h3 class="game-question" id="gameQuestion">
+              ไดโนเสาร์ซอโรพอด (กินพืชคอยาว) ชนิดแรกของไทยและเก่าแก่ที่สุดในโลกที่พบในหมวดหินน้ำพองคือสายพันธุ์ใด?
+            </h3>
+          </div>
+          <div class="game-choices-grid" id="gameChoices">
+            <!-- Choice buttons injected by JS -->
+          </div>
+          <div class="game-feedback-box hidden" id="gameFeedback">
+            <div class="feedback-icon" id="feedbackIcon">💡</div>
+            <div class="feedback-content">
+              <h4 class="feedback-title" id="feedbackTitle">ถูกต้อง! (Correct)</h4>
+              <p class="feedback-text" id="feedbackText">ข้อมูลเกร็ดความรู้ทางวิทยาศาสตร์</p>
+              <button type="button" class="btn-next-stage" id="btnNextStage">ลุยด่านถัดไป ➔</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Victory Screen (Shown after Stage 5) -->
+      <div class="victory-screen hidden" id="victoryScreen">
+        <div class="victory-card">
+          <div class="victory-badge-icon" id="victoryBadgeIcon">🎖️</div>
+          <h3 class="victory-title" id="victoryTitle">ยินดีด้วย! คุณผ่านภารกิจข้ามกาลเวลาสำเร็จ</h3>
+          <p class="victory-desc" id="victoryDesc">คุณได้รับตราเกียรติยศ <strong>"สุดยอดนักบรรพชีวินวิทยาแห่งแผ่นดินอีสาน"</strong>
+            จากการพิชิตข้อมูลประวัติศาสตร์ธรรมชาติครบทั้ง 5 แหล่งสำคัญ</p>
+          <div class="victory-stats">
+            <div class="stat-item">
+              <span class="stat-num" id="finalScore">0</span>
+              <span class="stat-label">Total Fossil XP</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num" id="clearedStages">0 / 5</span>
+              <span class="stat-label">Stages Cleared</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num" id="accuracyRank">0%</span>
+              <span class="stat-label">Accuracy Rank</span>
+            </div>
+          </div>
+          <div class="victory-actions">
+            <button type="button" class="btn-restart-game" id="btnRestartGame">🔄 เล่นใหม่อีกครั้ง</button>
+            <a href="#section-map" class="btn-explore-map">🗺️ สำรวจแผนที่ธรณีวิทยาต่อ ➔</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <!--
     Section5 – Thailand Fossil Map
@@ -838,7 +1129,8 @@
               d="m 320.70844,159.97255 0.63,0.21 0,0 -0.26,3.58 -1.06,0.2 -1.2,1.15 -0.9,4.13 0,0 0.04,3.2 -1.16,1.2 0.24,2.35 -1.07,-0.14 -0.57,0.61 0.48,0.5 0.84,6.39 0.86,1.07 0.03,1.54 -0.32,2.03 -0.74,0.92 0.61,1.17 -1.06,0.27 -0.86,2.68 0.65,4.75 0.85,1.15 -0.56,0.38 0.44,0.66 1.46,-0.66 1.78,1.53 0,0 1.53,1.84 0.98,2.83 1.03,0.85 -0.02,3.34 -0.58,0.08 -0.02,1.17 -2.38,1.81 -2.7,1.11 -1.41,-0.67 -2.71,0.04 -0.47,1.58 0.53,1.09 -0.73,0.64 2.48,2.8 -0.37,0.71 0.49,1.46 -1.53,0.58 -0.51,0.86 0.49,1.5 1.15,0.77 -0.01,0.64 0.83,-0.1 0.53,1.32 0.63,0.02 0.5,0.73 1.17,-0.25 -0.63,1.47 1.03,1.54 -0.34,0.34 -1.1,0.15 -3.1,-0.83 -0.67,0.9 5.4,0.94 -0.11,0.49 -0.23,-0.31 -1.61,1.26 -0.22,1.01 -1.6,-0.86 -0.03,2.52 4.7,1.46 0.93,1.96 0,1.35 0.99,0.43 0.37,0.72 0,0 1.81,1.07 0,0 -0.53,0.98 0,0 -0.48,0.34 0,0 -2.67,0.67 -0.51,1.87 -1.09,0.85 -1.07,-0.12 -1.75,0.96 0.97,3.14 1.6,1.2 0,0 -0.89,1.01 0.3,0.33 -1.05,0.24 -0.23,0.64 -2.08,-0.8 -0.74,0.71 0.43,0.34 -0.65,0.34 -0.14,0.74 -3.38,-0.89 0.31,0.82 -2.95,1.86 -1.65,0.23 -1.27,1.43 -5.15,1.98 0,0 -4,0.72 -2.72,-3.13 0.99,-0.75 1.19,0.63 0.18,-0.53 -1.96,-2.01 -0.52,-0.79 0.11,-0.79 -0.56,-0.2 0.78,-5.27 -0.75,-0.16 -0.43,-1.01 0.26,-1.68 -2.06,-3.73 0.29,-0.74 -1.35,-0.33 -1.39,3.11 -1.48,0.33 -0.67,0.73 -0.75,-0.1 -1.03,-0.61 -0.44,-1.43 -0.62,-0.46 -0.21,-2.19 -1.51,-0.28 -1.49,-1.31 -0.32,0.34 -0.35,-1.03 -0.88,-0.58 -1.74,1.48 -0.61,-0.01 -1.72,-1.43 -1.15,0.96 -0.9,-0.68 -1.13,0.42 -1,-0.23 -0.86,1.07 -1.22,-1.52 -1.11,0.05 -0.87,0.63 -0.21,-0.78 -1.22,0.35 -1.74,-1.6 -0.73,-1.38 -1.51,0.7 -0.04,2.18 -2.02,2.65 -0.07,0.89 -2.19,0.58 -1.48,1.03 -0.36,1.23 0.37,4.49 -0.59,2.42 -0.86,0.58 -1.68,-0.76 0,0 0.09,-1.49 -2.46,-0.44 -0.46,-0.94 1.6,-0.96 -0.7,-2.18 1.21,-2.71 -0.03,-2.42 -0.49,-1.11 0.64,-0.51 -0.26,-0.6 0.63,-0.66 -0.21,-0.71 0.47,-0.12 0.61,-1.62 -0.1,-2.73 2.07,-2.67 0.09,-1.34 -1.1,-1.29 -0.67,-1.81 -2.23,-0.22 -1.54,-1.86 -1.01,-0.33 -0.42,-1.38 -0.93,-0.47 -2.5,0.45 -2.64,-0.53 -0.16,-2.46 0.74,-2.96 -0.63,-1.07 0.07,-1.17 -1.45,-0.95 -1.22,1.02 -1.29,-0.08 -1.52,-1.16 0.64,-2.43 1.96,-1.91 -0.81,-1.1 0.53,-1.67 0.81,-1.12 1.71,-0.5 0,0 0.63,1.1 1.18,0.56 1.75,-0.41 0,0 2.3,0.61 0.75,0.69 1.31,-0.1 1.12,1.15 0.44,0.8 0.93,0.21 1.33,1.71 0.91,0.44 0.87,0.26 0.2,0.73 1.46,0.54 1.06,-0.17 0.22,0.64 0.98,-0.1 0.41,-1.72 1.06,-0.26 -0.15,-2.03 3.27,-0.72 2.19,-4.33 3.1,-2.61 0.18,-1.16 2.84,-0.88 2.19,-2.28 1.18,0.96 0.38,-1.36 1.57,-1 -0.77,-0.64 -1.16,-0.04 0.08,-0.63 2.94,0.11 1.66,-0.95 1.05,0.12 -0.44,1.29 0.79,-0.05 0.63,-2.08 0.84,-0.81 1.58,-0.55 0.74,-0.95 1.77,0.28 -0.44,-1.25 -1.35,-0.73 1.71,-3.88 1.07,1.4 1,-0.86 0.98,-2.27 4.94,-1.32 1.06,0.7 1.51,-1.32 -0.22,-2.03 1.49,-3.63 0.34,-2.16 1.5,-2.52 0.32,-0.24 2.78,1.01 3.34,1.98 1.99,-0.08 3.45,-4.74 4.78,-3.69 1.23,-3.39 2.46,-1.44 z" />
             <path id="nki" aria-label="Nong Khai"
               d="m 408.52844,176.50255 -0.54,-0.32 -0.29,0.37 0.34,0.11 -0.23,1.5 1.3,0.56 -0.2,0.48 0.55,0.71 -1.3,0.21 0.41,1.82 0,0 -2.12,1.61 -1.43,0.35 -0.94,-0.54 -2.15,1.17 0.68,1.88 -0.61,0.93 -2.2,-1.5 -0.95,-1.89 -1.17,-0.99 -2.5,1.58 -0.97,-0.02 -0.81,0.98 -0.55,1.89 0,0 0.06,0.76 0,0 -0.21,0.63 -1.09,0.27 -0.37,-0.72 -0.77,-0.19 0.24,-0.63 -0.78,-0.34 0.28,-0.88 -0.77,-0.16 -0.16,-1.11 -0.5,0.01 0.1,0.46 -0.5,-0.14 -0.08,-0.95 -0.38,0.23 -1.06,-1.18 -1.31,0.48 -1.4,-1.14 0,0 0.19,0.68 0,0 -0.65,0.58 -1.2,-0.04 -0.17,0.89 -1.1,0.8 0,0 -0.37,0.62 0,0 -1.25,1.5 -2.78,-4.85 -2.07,0.31 -0.92,-0.74 -0.94,0.74 0.32,1.64 -0.5,0.82 0,0 0.1,0.41 0,0 -1.66,0.72 0.45,0.68 -1.04,0.35 0.23,0.75 -0.88,-0.11 1.1,0.48 -0.27,0.84 1.06,1.23 -0.78,2.27 0.48,1.04 -1.15,0.92 -0.24,1.51 -3.09,0.79 -0.74,1.45 0.07,0.98 -0.97,0.38 0.42,1.57 -1.69,-0.05 -0.63,1.14 -1.16,-0.08 -1.34,-1.09 -1.84,1.75 -1.25,0.2 -0.18,-1.54 -2.44,-0.75 -0.96,0.19 0.45,-1.97 -0.49,-1.51 1.28,-1.03 -5,-3.88 -0.75,-1.37 -4.11,0.6 -0.99,-0.55 -0.21,-0.73 -0.67,0.25 0.15,-1.11 -0.92,-0.73 0.87,-1.85 -1.14,-0.04 -0.99,-1.41 -0.67,-0.22 0.18,-0.9 -0.47,-0.55 0.34,-0.74 -0.91,-1.63 -1.52,-0.61 -0.52,-0.74 0,-0.6 -2.3,-0.77 -0.96,-0.83 -1.45,-2.92 -0.86,0.68 -0.86,-0.27 -1.59,-1.19 -2.28,-0.53 -0.08,-0.94 -1.15,0.66 -0.91,-0.36 -1.24,2.02 -0.99,-1.29 0.21,-1.95 -2.41,0.65 -0.22,-0.5 0.59,-1.18 -0.35,-0.89 -1.17,0.44 0,0 -1.42,-1.43 0,0 -0.86,-0.61 0,0 0.9,-4.13 1.2,-1.15 1.06,-0.2 0.26,-3.58 0,0 1.8,-0.17 0.76,0.7 1.33,0.2 1.41,3.82 3.75,3.07 3.26,3.56 4.09,0.83 4.76,3.74 2.73,1.3 3.32,0.03 1.43,0.55 1.71,-0.4 3.08,0.84 0.82,3.18 -1.81,4.5 0.56,0.87 2.79,0.29 2.74,1.97 1.2,-0.98 -0.06,-0.65 -1.22,-1.33 0.59,-1.64 4.77,-1.73 2,-2.89 2.3,-0.57 2.63,-2.13 6.87,-2.27 2.36,1.01 1.3,1.28 1.43,-0.35 2.87,-3.86 0.14,-1.33 -0.53,-1.64 0.59,-3.44 3.6,-2.4 1.04,-1.35 0.34,-1.54 -0.39,-2.27 0.84,-1.37 1.4,-1.04 7.43,-2.5 0,0 0.06,1.2 -1.64,1.31 -0.28,1.41 0.38,1.01 5.2,2.11 -0.29,2.62 -3.08,2.12 -0.39,1.3 0.39,2.82 1.83,2.12 4.62,2.81 z" />
-            <path id="mkm" aria-label="Maha Sarakham"
+            <path id="mkm" data-name="มหาสารคาม" data-summary="ศูนย์กลางงานวิจัยและการศึกษาบรรพชีวินวิทยาชั้นนำของเอเชียตะวันออกเฉียงใต้ โดยศูนย์วิจัยและการศึกษาบรรพชีวินวิทยา มมส. (PRC)"
+              data-museum="ศูนย์วิจัยและการศึกษาบรรพชีวินวิทยา มหาวิทยาลัยมหาสารคาม (PRC Museum)" data-geopark="แหล่งเรียนรู้และคลังตัวอย่างฟอสซิลอ้างอิงระดับนานาชาติ" class="province" aria-label="Maha Sarakham"
               d="m 391.84844,270.38255 2.52,0.13 0.38,0.87 -1.87,1.6 1.29,3.8 -1.93,4.17 0.51,1.79 1.19,1.3 0.07,0.91 -1.44,3.07 0.83,1.95 5.99,-1.03 1.79,-1.2 0.68,1.82 2.62,0.46 0.59,1.3 0,0 0.22,2.53 1.11,0.59 0,0 1.74,0.11 1.17,0.97 -0.46,1.93 0.67,1.19 1.23,0.47 0.36,0.98 0.62,-0.58 0.1,0.66 -0.36,0.1 0.35,0.24 -0.55,0.49 0.69,0.08 -0.41,0.48 0.77,0.42 -0.52,0.01 0.25,0.64 1.32,-0.63 0.5,-1.17 0.99,0.41 0.67,-0.46 -0.03,0.64 0,0 -1.2,1.04 0.3,0.9 -0.65,1.83 -1.71,2.03 -0.14,2.43 1.18,2.46 -0.69,1.72 0.2,3.47 1.07,1.39 0.1,1.7 -1.53,1.3 -0.87,2.78 -0.49,2.32 0.23,1.34 -0.4,0.56 0.36,0.6 -0.92,1.7 -0.47,3.78 -0.48,0.56 -1.48,0.25 -2.7,-1.17 -0.8,1.03 -2.27,0.55 -2.26,2.71 2.23,0.21 -1.09,2.93 -0.98,1.19 0.43,0.55 0.95,0.1 0.56,2.12 3.13,1.24 0.76,1.29 0.99,-0.72 2.56,-0.19 0.57,2.17 -1.56,5.06 0,0 -3.84,1.98 -0.74,-0.52 -4.08,-0.67 -1.3,-1.72 -1.72,-0.03 -0.68,-0.92 -6.93,-1.33 0,0 -2.69,-1.16 0.15,-1.03 1.09,-1.29 -0.71,-1.08 0,0 -0.92,-0.5 0,0 -1.38,-0.7 0.43,-1.98 -1.75,-0.54 -0.93,-1.03 -0.06,-0.88 -2.57,-2.3 0.09,-0.69 2.02,-1.01 0.36,-1.31 -0.52,-0.92 0.14,-0.82 -0.49,-0.75 -0.69,0.45 -1.08,-1.68 -2.03,-0.66 -0.71,-2.01 0,0 0.1,-1.22 -0.86,-0.73 0.38,-1.9 0.43,-0.2 -0.25,-1.75 -1.43,-1.28 -1.09,-2.48 0.3,-1.73 0.75,-0.95 -0.45,-2.06 -1.07,-0.86 0.74,-0.83 -1.46,-1 -0.93,-0.09 0.06,-1.35 -0.74,-0.76 1.27,-3.76 -0.9,-0.22 -0.61,-1.13 0.86,-1.2 -0.7,-1.27 -0.28,-2.2 0.44,-0.74 -0.37,-0.85 0.14,-2.62 1.77,-2.12 1.46,-0.86 0.12,-2.44 0.86,-0.01 -0.06,-0.83 0.6,-0.55 0.7,0.18 -0.46,-0.75 1.15,0.02 -0.11,-0.83 0.67,-0.13 0,0 0.75,-0.69 -0.71,-0.12 0.33,-0.47 0,0 0.44,-1.11 1.15,0.08 -0.85,-0.41 -0.59,-1.57 4.4,-1.54 0.95,-1.91 0.63,0.71 2.64,-1.41 1.54,-2.97 0.98,-0.85 0.13,-1.8 2.18,-1.3 z" />
             <path id="ret" aria-label="Roi Et"
               d="m 465.01844,285.39255 0.44,-0.55 1.64,-0.01 1.01,-0.82 0.49,-1.65 0.9,0.61 1,2.98 -0.2,2.08 0.95,3.44 -0.53,0.77 1.92,0.42 0,0 -1.25,3.61 -2.34,1.4 0.05,0.91 -1.4,0.99 -1.82,0.48 -0.13,1.15 -1.44,2.54 -0.78,0.64 -0.76,-0.41 -1.05,1.12 -1,-0.06 -2.34,2.59 -1.41,-0.29 -0.64,0.56 -0.92,2.27 0.44,1.68 0.78,0.7 -0.2,1.58 -0.65,0.88 0.42,0.77 -0.27,0.67 -0.73,0.49 -2.07,-0.76 -2.23,0.29 -1.15,1.75 0.27,0.67 0.77,-0.81 0.62,1.41 -0.85,1.98 -0.62,0.08 0.34,0.32 -0.3,0.92 0.41,0.12 -0.39,0.37 1.14,0.77 -0.54,0.35 0.85,0.14 -1.16,0.09 0.62,0.47 -0.09,0.57 -0.58,0.24 0.12,0.62 -0.56,-0.36 0.35,0.93 -0.69,0 0.4,0.97 -1.07,0.2 0.18,1.21 2.35,0.01 2.79,-1.55 0.14,-0.47 -0.55,-0.11 0.29,-0.85 2.5,2.29 1.41,0.42 0.37,1.11 -0.76,1.07 0.38,1.02 0.58,0.08 -0.59,0.78 0.63,0.93 -0.9,0.33 0.14,1.28 -0.84,0.16 0.67,0.48 1.31,-1.19 -0.35,0.46 0.68,1.09 1.6,1.33 -0.04,0.51 0.79,-0.1 -0.15,0.61 -0.87,-0.19 0.43,1.41 -0.6,0.37 1.45,0.21 -0.59,0.69 0.24,0.84 1.8,-0.48 -0.21,0.53 -3.29,0.44 -2.56,1.73 0.01,1 0,0 -1.54,-0.27 0.37,1.42 -1.57,-0.05 -0.53,0.59 0.03,1.08 -0.45,-0.3 -0.76,0.89 0.31,1.04 -2.23,0.94 -2.13,2.56 -0.59,2.96 0,0 -1.1,-0.01 0.13,-1.33 -0.82,0.26 0.06,0.53 -0.89,0.07 -0.49,-0.95 0.41,-0.44 -0.23,-0.35 -0.97,0.44 -0.54,-0.51 -0.86,0.26 -0.72,-0.42 -0.56,-1.9 -0.3,1.08 -0.58,-1 -1.21,1.37 -0.47,-1.23 -0.4,0.71 -0.98,-0.32 -0.26,0.64 -3.21,0.66 -0.18,0.48 -1.65,-0.23 -0.61,-0.67 -1.35,0.66 -0.56,-0.63 -0.74,0.38 -1.09,-0.5 -1.38,0.19 -3.77,-1.52 -3.13,0.43 -1.02,1.65 -0.45,-0.08 -0.78,0.91 -2.7,-0.82 -0.78,-0.95 -1.92,-0.26 -1.24,0.08 -2.37,1.4 0,0 1.56,-5.06 -0.57,-2.17 -2.56,0.19 -0.99,0.72 -0.76,-1.29 -3.13,-1.24 -0.56,-2.12 -0.95,-0.1 -0.43,-0.55 0.98,-1.19 1.09,-2.93 -2.23,-0.21 2.26,-2.71 2.27,-0.55 0.8,-1.03 2.7,1.17 1.48,-0.25 0.48,-0.56 0.47,-3.78 0.92,-1.7 -0.36,-0.6 0.4,-0.56 -0.23,-1.34 0.49,-2.32 0.87,-2.78 1.53,-1.3 -0.1,-1.7 -1.07,-1.39 -0.2,-3.47 0.69,-1.72 -1.18,-2.46 0.14,-2.43 1.71,-2.03 0.65,-1.83 -0.3,-0.9 1.2,-1.04 0,0 1.19,0.26 1.27,-1.88 -0.21,0.77 1.58,-0.46 -0.63,1.01 2.59,0.65 0.5,-0.56 0.2,0.67 1.29,-0.73 -0.41,-0.81 -0.84,0.09 0.79,-0.34 1.72,2.21 0.42,-0.44 0.49,0.28 0.12,-1.03 0.6,0.77 0.96,-0.65 -0.84,-0.44 0.08,-0.91 0.62,0.67 0.79,-0.41 0.02,0.48 0.79,-0.46 -0.44,-0.53 1.56,0.5 1.28,-0.28 0.2,-1.76 1.21,-1.37 0.14,-2.36 -2.11,-1.96 0.21,-1.06 -1.96,-2.32 7.26,-5.36 0.67,-1.03 1.86,0.48 1.44,-0.6 2.32,1.65 0.75,-0.4 0.27,0.95 0.92,0.29 1.36,-0.54 2.01,0.74 1.03,-0.9 2.47,0.11 0.52,0.47 -0.15,1.44 0.62,1.93 1.44,-0.74 0.37,-0.81 0.86,0.04 1.18,-0.84 2.31,-0.17 0.64,-0.34 0.07,-0.64 1.59,-0.52 1.28,1.09 2.08,-0.49 z" />
@@ -846,11 +1138,13 @@
               data-museum="พิพิธภัณฑ์สิรินธร" data-geopark="จังหวัดกาฬสินธุ์ – พื้นที่ฟอสซิลสำคัญ" class="province"
               aria-label="Kalasin"
               d="m 388.24844,251.52255 0.06,-1.46 0.78,-0.49 0.38,-1.47 3.09,1 0,0 0.44,-0.17 0,0 0.38,-0.37 0.48,0.55 1.1,-0.07 1.43,-1.33 0.6,0.66 1.53,-0.21 2.39,2.5 3.67,0.12 2,1.45 0.9,-0.04 1.85,2.7 -0.77,0.83 0.63,0.22 0.9,1.93 -0.87,0.97 0.72,0.47 1.9,-2.17 -0.42,-0.97 0.6,-0.62 0,0 0.54,-0.87 0,0 1.28,-1.31 0,0 0.36,-1.14 0.47,-0.01 0,0 0.17,-1.67 -0.47,-0.93 0.51,-2.04 1.71,-1.99 -0.08,-2.49 -0.71,-0.72 0.75,-0.42 0.07,-0.6 1.13,-0.47 0.79,-1.63 1.75,-0.22 0.26,-0.7 0.63,0.17 0,0 0.77,0.16 0,0 1.42,0.29 2.16,3.2 -0.36,1.63 1.05,0.32 0,0 2.12,-1.01 0.85,1.08 1.11,0.16 0.5,1 -0.6,0.74 0.16,0.66 0.81,-0.55 0.47,1.22 2.71,0.92 0.42,1.29 -1.27,1.13 0.64,0.03 0,0 0.17,1.05 0,0 0.68,0.81 -0.14,0.67 1.23,0.12 0.13,0.63 1.79,0.67 -0.05,1.22 0.54,0.66 1.67,0.57 0.27,0.99 3.17,1.53 1.28,1.67 0.96,-0.44 -0.29,-0.54 0.47,-2.26 0.31,-0.33 0.59,0.9 0.72,-1.8 0,0 1.17,0 0,0 2.03,-1.46 0.79,1.18 0.52,-0.52 1.26,0.77 0.36,1.07 0,0 0.8,0.9 0.67,-0.15 0.07,1.43 1.75,2.29 1.16,0.08 -0.27,1.55 1.22,1.22 0.2,1.18 1.12,0.26 -0.42,1.38 1.6,0.58 -0.79,1.47 0.3,1.69 -0.37,0.96 0.23,0.85 0.96,0.12 0.89,0.87 0.12,1.34 1.18,0.9 -0.24,1.57 1.22,0.76 -0.08,1.71 -0.78,1.4 0.79,1.26 -0.08,1.83 0,0 -1.17,-0.56 -2.08,0.49 -1.28,-1.09 -1.59,0.52 -0.07,0.64 -0.64,0.34 -2.31,0.17 -1.18,0.84 -0.86,-0.04 -0.37,0.81 -1.44,0.74 -0.62,-1.93 0.15,-1.44 -0.52,-0.47 -2.47,-0.11 -1.03,0.9 -2.01,-0.74 -1.36,0.54 -0.92,-0.29 -0.27,-0.95 -0.75,0.4 -2.32,-1.65 -1.44,0.6 -1.86,-0.48 -0.67,1.03 -7.26,5.36 1.96,2.32 -0.21,1.06 2.11,1.96 -0.14,2.36 -1.21,1.37 -0.2,1.76 -1.28,0.28 -1.56,-0.5 0.44,0.53 -0.79,0.46 -0.02,-0.48 -0.79,0.41 -0.62,-0.67 -0.08,0.91 0.84,0.44 -0.96,0.65 -0.6,-0.77 -0.12,1.03 -0.49,-0.28 -0.42,0.44 -1.72,-2.21 -0.79,0.34 0.84,-0.09 0.41,0.81 -1.29,0.73 -0.2,-0.67 -0.5,0.56 -2.59,-0.65 0.63,-1.01 -1.58,0.46 0.21,-0.77 -1.27,1.88 -1.19,-0.26 0,0 0.03,-0.64 -0.67,0.46 -0.99,-0.41 -0.5,1.17 -1.32,0.63 -0.25,-0.64 0.52,-0.01 -0.77,-0.42 0.41,-0.48 -0.69,-0.08 0.55,-0.49 -0.35,-0.24 0.36,-0.1 -0.1,-0.66 -0.62,0.58 -0.36,-0.98 -1.23,-0.47 -0.67,-1.19 0.46,-1.93 -1.17,-0.97 -1.74,-0.11 0,0 -1.08,-0.57 -0.25,-2.55 0,0 -0.59,-1.3 -2.62,-0.46 -0.68,-1.82 -1.79,1.2 -5.99,1.03 -0.83,-1.95 1.44,-3.07 -0.07,-0.91 -1.19,-1.3 -0.51,-1.79 1.93,-4.17 -1.29,-3.8 1.87,-1.6 -0.38,-0.87 -2.52,-0.13 0,0 -0.1,-1.12 0.53,-1 -0.87,-1.91 0.83,-2.25 -0.81,-1.45 1.75,-1.2 0.69,-1.07 0.21,-2.37 -0.86,-1.85 0.18,-1.11 -2.39,-0.4 0.55,0.8 -0.71,1.81 -0.98,0.85 -1.19,-0.52 -0.2,-1.01 0.79,-0.94 0.66,-2.73 -0.17,-0.6 z" />
-            <path id="snk" aria-label="Sakon Nakhon"
+            <path id="snk" data-name="สกลนคร" data-summary="แหล่งรอยเท้าไดโนเสาร์ท่าอุเทน-สกลนคร และฟอสซิลพืชโบราณบนเทือกเขาภูพาน"
+              data-museum="ศูนย์วัฒนธรรมและพิพิธภัณฑ์ภูพาน" data-geopark="พื้นที่ธรณีวิทยาภูพาน" class="province" aria-label="Sakon Nakhon"
               d="m 408.52844,176.50255 0.51,-0.83 2.65,1.86 0.36,-0.76 -0.88,-0.38 0.67,-0.79 1.1,0.38 0.41,-1.17 1.38,1.23 0.4,-0.15 0.44,-0.62 -0.86,-2.94 0.47,-0.23 -0.3,-1.26 0.22,-0.32 0.52,0.49 0.01,-0.69 0.73,-0.43 1.43,0.43 0.34,-1.46 0.38,0.79 -0.54,0.33 0.27,0.62 1.1,0.17 1.35,1.64 0.55,0.08 0.04,-0.66 0.47,-0.19 1.11,2.6 2,0.04 -1.35,0.76 0.26,2.4 0.83,-0.59 0.08,0.91 0.88,0.05 0.75,-0.71 0.32,0.46 -0.41,1.15 1.46,-0.38 1.42,0.82 -0.04,0.39 0.82,-0.23 0.36,1.13 1.68,1.08 1.29,-3.11 -0.56,2.35 1.71,-0.7 -0.48,1.67 0.8,1.13 -1.29,0.07 -0.21,0.52 2.04,2.91 1.11,-1.11 -1.12,-0.91 0.11,-0.44 2.61,0.49 1.37,-0.94 0.84,0.29 -0.2,1.06 0.7,-0.83 1.98,-0.36 -0.33,2.26 1.04,-0.74 0.47,0.27 0.17,1.58 -0.55,0.98 1.14,0.96 0.56,1.6 1.07,0.65 1.05,-0.67 -0.25,0.34 0.66,0.63 0.52,-1.3 0.82,-0.05 0.05,-1.34 1.09,-0.19 0,0 0.32,0.81 -0.77,0.38 0.91,2.33 0.29,0.19 0.09,-0.82 0.65,-0.07 1.24,0.83 -0.49,1.37 0.99,-0.62 0.22,1.58 -0.56,-0.04 1.2,1.38 -0.53,0.36 0.56,0.27 -0.72,0.37 0.18,0.82 0.91,-0.22 -0.34,0.62 0.32,0.22 -0.8,0.29 -0.26,1.47 -1.25,0.53 -0.39,-0.58 -0.98,0.52 0.5,0.29 -0.27,1.33 1.03,0.87 0.47,1.31 -0.26,0.92 -1.03,0.64 0.3,2.21 -0.44,1.22 -0.83,1.78 -0.76,0.15 0.48,1.85 2.82,4.93 1.08,0.93 0.38,-1.16 0.79,0.63 -0.22,0.57 0.46,0.06 0.45,-1.04 -0.56,0.12 -0.14,-0.94 1.11,-0.11 0.19,0.85 1.05,-0.54 0.41,1.29 0.63,-0.38 -0.07,-0.67 0.88,0.05 -0.6,-1.03 0.58,0.3 0.36,-0.81 1.2,0.25 -0.24,-1.07 0.68,0.42 1.14,-0.38 0.58,0.92 1.31,0.04 2.56,-0.39 1.41,-0.89 5.93,0.52 2.59,-0.31 0.24,0.41 -0.68,3.14 1.09,3.11 -0.42,1.49 -0.89,0.42 -0.07,0.59 0.27,1.51 1.17,2.14 0.76,0.49 -2.94,4.27 -0.19,2.26 0.81,0.79 -1.48,2.06 -0.95,0.22 -0.34,0.59 0.24,1.02 0,0 -0.12,0.44 0,0 -0.56,0.32 0,0.74 0.59,-0.36 0.21,0.63 1.35,0.73 0,0.6 0.76,0.04 0.05,1 -2.69,1.09 -0.41,1.51 -2.26,0.6 0.17,0.61 -1.29,2.82 -2,0.3 -1.26,1.11 0,0 -0.62,0.97 -1.46,0.07 -1.13,1.26 -0.75,-0.18 0,0 -0.95,-0.47 0,0 -1.21,-0.43 -2.49,0.15 -0.04,1.92 -1.04,1.41 -2.57,1.24 0,0 -0.36,-1.07 -1.26,-0.77 -0.52,0.52 -0.79,-1.18 -2.03,1.46 0,0 -1.17,0 0,0 -0.72,1.8 -0.59,-0.9 -0.31,0.33 -0.47,2.26 0.29,0.54 -0.96,0.44 -1.28,-1.67 -3.17,-1.53 -0.27,-0.99 -1.67,-0.57 -0.54,-0.66 0.05,-1.22 -1.79,-0.67 -0.13,-0.63 -1.23,-0.12 0.14,-0.67 -0.68,-0.81 0,0 -0.17,-1.05 0,0 -0.64,-0.03 1.27,-1.13 -0.42,-1.29 -2.71,-0.92 -0.47,-1.22 -0.81,0.55 -0.16,-0.66 0.6,-0.74 -0.5,-1 -1.11,-0.16 -0.85,-1.08 -2.12,1.01 0,0 -0.27,-0.66 0.43,-1.87 -0.65,-1.48 0.82,-2.06 -0.82,-0.69 -1.18,0.23 -1.11,-2.51 -1.42,-1.42 -0.6,-0.25 -1.39,1.01 -6.47,-4.22 -0.3,-0.86 -1.23,1.22 -1.59,-0.55 -0.75,0.55 -2.68,-1.64 -1.08,-0.01 -0.68,-1.33 -2.94,-1.09 -2.18,-0.04 -1.63,-2.95 0.3,-0.87 1.08,-0.47 0.08,-1.18 1.24,-1.76 0,0 0.73,-1.12 0,0 -1.38,-1.81 0.11,-0.95 -0.63,-0.78 1.1,-1.89 -0.23,-2.08 2.07,-1.82 0.32,-2.08 0.41,0.27 0.45,-0.59 0,0 0.1,-0.21 0,0 0.05,-1.09 0.9,-0.78 0.66,-0.27 0.95,0.81 0.16,-0.93 2.27,-0.23 -0.88,-1.5 0.36,-1.1 -0.25,-1.28 0.63,-1.17 -0.48,-1.21 0.41,-1.49 -0.37,-0.79 0.63,-0.81 -0.42,-0.24 0.28,-0.29 -0.55,-1.5 -1.15,0.27 -1.09,-2.55 0.6,-0.19 -0.12,-0.7 0.52,-0.45 -0.45,-0.29 0.98,-1.08 -0.51,-0.89 0.98,-0.12 0.21,0.83 0.13,-0.82 0.71,0.58 0.67,-0.49 -1.16,-0.57 -0.45,0.24 -0.27,-0.63 0.84,-0.3 -0.1,-1.26 0.81,-0.32 -0.3,-1.3 -0.88,-0.3 0,0 -0.41,-1.82 1.3,-0.21 -0.55,-0.71 0.2,-0.48 -1.3,-0.56 0.23,-1.5 -0.34,-0.11 0.29,-0.37 z" />
             <path id="npm" aria-label="Nakhon Phanom"
               d="m 461.83844,173.77255 1.85,2.09 3.89,9.43 1.44,1.17 2.64,0.84 1.48,1.12 3.06,5.92 3.46,4.81 5.49,2.74 10.71,6.58 3.62,5.64 1.4,1.16 1.5,2.23 0.76,5.15 0.04,6.9 -1.59,7.39 -0.94,2.84 -2.14,3.53 -0.38,1.77 0.24,6.72 1.68,4.16 -1.66,3.11 0,0 -0.75,-0.26 -0.56,-1.32 -0.81,0.02 -2.29,2.91 -2.07,-2.72 0.07,-1.54 -0.67,-1.15 -4.52,-0.01 -0.78,-0.36 -3.99,1.22 -1.37,-1.12 -1.74,0.05 -1.92,-1.83 -1.21,0.92 0,0 -0.46,-0.41 0,0 -1.96,-0.26 -0.63,-0.37 0.15,-0.46 -1.94,-0.1 -1.4,1.08 -1.43,2.11 -1.18,-1.62 0,0 -0.67,-1.47 0,0 -0.23,-0.38 0,0 1.26,-1.11 2,-0.3 1.29,-2.82 -0.17,-0.61 2.26,-0.6 0.41,-1.51 2.69,-1.09 -0.05,-1 -0.76,-0.04 0,-0.6 -1.35,-0.73 -0.21,-0.63 -0.59,0.36 0,-0.74 0.56,-0.32 0,0 0.12,-0.44 0,0 -0.24,-1.02 0.34,-0.59 0.95,-0.22 1.48,-2.06 -0.81,-0.79 0.19,-2.26 2.94,-4.27 -0.76,-0.49 -1.17,-2.14 -0.27,-1.51 0.07,-0.59 0.89,-0.42 0.42,-1.49 -1.09,-3.11 0.68,-3.14 -0.24,-0.41 -2.59,0.31 -5.93,-0.52 -1.41,0.89 -2.56,0.39 -1.31,-0.04 -0.58,-0.92 -1.14,0.38 -0.68,-0.42 0.24,1.07 -1.2,-0.25 -0.36,0.81 -0.58,-0.3 0.6,1.03 -0.88,-0.05 0.07,0.67 -0.63,0.38 -0.41,-1.29 -1.05,0.54 -0.19,-0.85 -1.11,0.11 0.14,0.94 0.56,-0.12 -0.45,1.04 -0.46,-0.06 0.22,-0.57 -0.79,-0.63 -0.38,1.16 -1.08,-0.93 -2.82,-4.93 -0.48,-1.85 0.76,-0.15 0.83,-1.78 0.44,-1.22 -0.3,-2.21 1.03,-0.64 0.26,-0.92 -0.47,-1.31 -1.03,-0.87 0.27,-1.33 -0.5,-0.29 0.98,-0.52 0.39,0.58 1.25,-0.53 0.26,-1.47 0.8,-0.29 -0.32,-0.22 0.34,-0.62 -0.91,0.22 -0.18,-0.82 0.72,-0.37 -0.56,-0.27 0.53,-0.36 -1.2,-1.38 0.56,0.04 -0.22,-1.58 -0.99,0.62 0.49,-1.37 -1.24,-0.83 -0.65,0.07 -0.09,0.82 -0.29,-0.19 -0.91,-2.33 0.77,-0.38 -0.32,-0.81 0,0 -0.45,-0.61 0.15,-0.83 -0.94,-0.79 0.28,-0.53 -1.38,-0.72 1.08,-2.31 1.2,-0.11 0.96,-1.13 0.81,0.1 0.56,0.38 -0.1,0.93 1.62,0.75 1.07,-1.52 2.57,-1.97 0.88,-1.62 -1.41,-1.6 -0.45,-2.01 2.22,-0.76 0.35,-0.66 1.46,1.47 0.11,-1.27 0.73,-0.46 0.29,0.32 0,0 z" />
-            <path id="mdh" aria-label="Mukdahan"
+            <path id="mdh" data-name="มุกดาหาร" data-summary="แหล่งค้นพบรอยทางเดินไดโนเสาร์กินเนื้อขนาดใหญ่กว่า 100 รอย บนลานหินทรายหมวดหินพระวิหาร ณ ภูแฝก-ภูหมู"
+              data-museum="แหล่งรอยเท้าไดโนเสาร์ภูหลวง ภูสระดอกบัว" data-geopark="อุทยานธรณีมุกดาหาร" class="province" aria-label="Mukdahan"
               d="m 466.02844,252.00255 0.23,0.38 0,0 0.67,1.47 0,0 1.18,1.62 1.43,-2.11 1.4,-1.08 1.94,0.1 -0.15,0.46 0.63,0.37 1.96,0.26 0,0 0.46,0.41 0,0 1.21,-0.92 1.92,1.83 1.74,-0.05 1.37,1.12 3.99,-1.22 0.78,0.36 4.52,0.01 0.67,1.15 -0.07,1.54 2.07,2.72 2.29,-2.91 0.81,-0.02 0.56,1.32 0.75,0.26 0,0 1.78,4.07 0.37,3.31 -1.44,4.62 -0.64,4.5 0.22,1.84 2.23,3.07 5.24,3.35 0.9,1.79 0.11,1.78 1.47,2.07 0.52,1.74 2.64,1.27 1.81,2.51 1.33,0.86 0,0 -1.36,-0.31 0,0 0.11,0.68 0,0 -1.92,1.43 -1.17,-0.14 -1.94,1.64 0,0 -0.12,0.86 0,0 -0.24,0.64 -1.69,0.68 -1.75,-0.21 -0.38,1.03 -0.62,0.28 -0.96,-0.22 -0.65,-0.76 -1.5,0.25 0,0 -1.45,-0.6 -2.88,-0.24 -0.72,-0.49 -0.13,-0.78 -1.3,-0.37 -0.35,-0.88 -0.55,1.28 -1,0.71 -1.03,0.3 -0.98,-0.38 -0.79,-0.69 -0.16,-0.96 -0.95,0.11 -0.55,-0.58 -0.11,-1.17 -0.9,-1.03 -0.75,-2.33 -1.11,-0.46 -1.61,0.09 -0.64,-1.76 -7.14,-0.52 -1.8,0.53 -1.2,1.18 0,0 -1.92,-0.42 0.53,-0.77 -0.95,-3.44 0.2,-2.08 -1,-2.98 -0.9,-0.61 -0.49,1.65 -1.01,0.82 -1.64,0.01 -0.44,0.55 0,0 0.08,-1.83 -0.79,-1.26 0.78,-1.4 0.08,-1.71 -1.22,-0.76 0.24,-1.57 -1.18,-0.9 -0.12,-1.34 -0.89,-0.87 -0.96,-0.12 -0.23,-0.85 0.37,-0.96 -0.3,-1.69 0.79,-1.47 -1.6,-0.58 0.42,-1.38 -1.12,-0.26 -0.2,-1.18 -1.22,-1.22 0.27,-1.55 -1.16,-0.08 -1.75,-2.29 -0.07,-1.43 -0.67,0.15 -0.8,-0.9 0,0 2.57,-1.24 1.04,-1.41 0.04,-1.92 2.49,-0.15 1.21,0.43 0,0 0.95,0.47 0,0 0.75,0.18 1.13,-1.26 1.46,-0.07 z" />
             <path id="cmi" aria-label="Chiang Mai"
               d="m 146.57844,23.10255 0.59,0.62 2.94,0.97 0.24,1.08 -5.17,2 0.06,1.1 1.93,1.12 0.15,0.56 -1.26,-0.92 -2.26,1.36 0,0 -0.24,0.31 0,0 -0.14,0.46 0.76,0.72 -0.85,0.61 -1.26,2.16 -0.93,0.84 -0.83,0.03 -0.45,1.86 0.38,1.33 -1.46,0.51 -1,1.4 0.29,1.97 1.66,1.38 -0.26,0.95 0.74,1.22 -1.92,0.08 -0.93,1.29 -0.09,0.98 -0.96,0.33 -0.16,3.51 -0.78,0.26 -0.25,0.87 -2.08,0.28 -1.33,2 -1.98,1.17 -0.4,1.13 0.57,2.63 1.18,0.51 0.94,2.86 1.26,0.68 0.54,0.99 -1.61,1.6 -0.45,1.5 0.17,0.53 0.78,0.09 -0.16,0.97 0.73,1.3 -0.51,1.89 1.25,1.98 0.27,2.82 -1.04,0.77 1.47,3.8 0.24,1.99 -2.14,3.1 0.25,1.15 -0.74,1.09 0.19,1.19 0.86,0.77 0.17,3 1.56,2.61 1.22,0.36 0.22,0.89 1.19,0.44 -0.12,1.05 1.3,3.4 0,0 -1.81,1.17 0.09,1.65 0.73,1.11 -0.54,1.54 0.85,2.6 -0.35,1.25 -2.26,1.51 -0.1,0.7 1.35,4 0.02,1.85 -1.55,1.45 -1.38,3.44 0.39,1.16 1.04,0.9 -1.37,0.99 0.02,1.69 1.18,0.1 0.89,0.82 -0.72,0.88 0.31,0.93 -1.57,0.54 -0.23,2.04 -0.65,0.7 0,0 -1.39,-0.35 -2.3,-2.42 -2.92,-1.44 0.32,-1.1 0.8,-0.68 -0.09,-2.32 -1.83,-0.64 -1.22,-1.41 -0.07,-1.96 -2.16,-0.21 -1.34,0.63 -0.68,1.16 -0.87,0.39 -2.48,-0.16 -1.65,0.93 -2.7,-0.39 -0.46,2.07 -1.82,0.64 -0.83,1.41 0.26,0.88 -2.46,3.44 0.15,0.81 -3.61,2.24 -0.93,-0.25 -0.77,1.05 -0.58,-0.51 -0.5,1.34 -1.370004,0.9 -0.43,0.87 -2.47,0.95 -0.78,1.03 -1.47,0.25 -1.12,-1.01 -0.54,0.83 -0.78,-0.44 -0.94,1.67 0.35,0.43 0.62,-0.41 0.02,0.35 -1.21,1.38 -0.62,1.62 1.53,2.37 -2.07,0.57 0.14,0.92 -0.67,0.85 2.94,1.09 4.5,2.57 -0.17,1.37 0.81,1.03 -0.14,2.59 0.6,1.26 0.85,0.46 0.33,2.76 -0.77,2 1.04,0.57 -1.08,1.53 -0.28,1.99 -1.06,1.86 2.04,-0.39 1.730004,1.42 -0.11,1.04 0.58,0.59 2.07,8.1 -0.65,-0.39 -0.52,0.53 0.09,2.41 -2.280004,1.2 -1.52,0 -0.26,-1.83 -0.78,-0.68 -1.39,2.16 -1.45,-0.2 -1.03,0.77 -0.62,-0.28 -2.13,0.48 0.36,0.99 0,0 -0.76,1.24 -2.82,1.58 -0.71,-2.53 -1.24,-0.84 -0.76,-1.24 -0.93,0.08 -0.73,-0.61 -0.86,0.98 -2.73,-2.01 -0.59,0.82 -1.09,-0.07 -0.01,1.16 1.09,0.6 -0.43,2.08 1.44,3.7 -0.23,1.67 0.68,4.35 2.08,0.37 1.55,2.54 -2.8,1.4 -1.72,3.45 0.36,1 -0.37,1.27 0.5,1.42 1.68,1.01 0.49,0.82 -0.24,2.57 -1.18,2.27 1.63,0.84 -0.49,0.95 0.41,1.2 -0.19,1.92 1.38,-0.28 -0.25,0.85 -2.84,0.72 -0.99,-0.41 -1.41,0.37 -0.64,-1.11 0.39,-0.72 -0.7,0.64 0.25,-0.65 -1.98,-0.89 -1.3,0.7 -2.73,-0.14 -1.7,0.52 -0.7,0.72 -2.11,-0.95 -0.88,-1.29 0.98,-0.59 0.11,-1.44 -1.05,-1.19 0.13,-0.87 -1.89,-2 2.04,-0.63 0.37,-0.89 -0.51,-1.17 0.62,-1.75 -1.02,-3.92 -0.52,-0.44 0.11,-0.72 -0.65,-0.86 0.28,-0.79 -0.38,-0.65 -1.96,-0.23 -2.03,2.08 -1.86,0.66 -2.08,0.2 -0.74,-0.67 -2.05,0.4 -0.74,-1.8 -1.26,-1.2 -0.14,-1.97 -1.01,-1.79 0,0 2.27,-1.56 1.37,-1.6 0.53,-3.4 -1.17,-2.02 0.75,-1.27 -0.93,-1.31 -1.55,0.08 -1.46,-0.99 -0.96,-1.36 -0.4,-1.83 -0.96,-1.1 -1.47,-0.44 -0.46,-1.02 -0.96,-0.29 0,-2.09 0.44,0.26 0.47,-1.16 4.37,-1.78 3.67,1.87 0.75,-1.7 1.01,-0.96 3.9,-1.17 1.12,0.07 -0.72,-2.65 1.56,-0.67 0.52,-0.84 0.63,0.28 1.03,-2.17 -0.18,-0.63 -1.3,-0.15 -1.32,0.69 -0.39,-0.8 -0.82,-0.14 0.08,-0.62 -0.75,0.68 -0.95,-0.01 -1,-1.78 -1.62,-0.31 0.09,-1.56 -0.75,-1.54 0.62,-0.33 0.1,-1.03 0.58,-0.57 -0.63,-0.96 0.38,-0.99 -1.66,-0.67 -0.8,-2.77 0.63,-1.21 3.19,-0.06 0.66,-0.47 -1.98,-0.62 0.05,-2.83 -0.7,-1.08 -1.15,-0.53 -1.51,-2.34 0.1,-0.74 -2.1,-1.02 -0.81,0.24 -0.55,-0.79 0.61,-1.26 1.55,-0.82 1.1,-3.14 2.14,-0.71 1.11,-0.94 0.3,-1.5 2.31,0.68 1.86,-2.28 -0.58,-1.14 -1.03,-0.35 -0.16,-1.2 -1.8,-0.14 -0.06,-0.99 -1.8,-0.38 -0.78,-0.7 -1.83,0.29 -0.79,-0.97 0.45,-1.52 -0.49,-0.54 -0.33,-1.79 0.46,-0.76 -0.72,-1.79 1.62,-1.36 0.06,-1.16 -0.86,-0.37 -0.73,0.33 -0.57,-0.61 -0.66,-2.64 0.65,-2.82 2.4,-3.31 2.19,-0.84 0.02,-1.25 0.58,-0.13 0.44,-0.86 -0.59,-2.15 0.41,-1.31 0.99,-0.93 0.38,-2 1.01,-0.49 1.42,-2.79 1.64,-1.45 -0.68,-2.28 0.83,-1.43 0.79,0.53 5.25,0.12 0.74,4.09 1.14,0.57 0.12,1.38 0.95,0.41 0.98,1.72 1.34,0.58 1.27,-1.4 3.45,0.51 2.52,1.11 1.2,-0.1 1.49,-1.36 1.69,0.15 2.67,-1.34 1.26,-2.07 -1.26,-4.57 -0.67,-0.1 -1.12,-1.55 -1.44,-0.6 -1.13,-1.58 0.05,-0.43 0.96,-0.08 1.05,-0.91 -0.63,-2.22 1,-1.3 -0.63,-0.6 0.44,-1.45 -0.8,-1.72 0.39,-1.52 -0.96,-0.93 -0.5,-1.6 0.28,-0.58 1.12,-0.39 -0.56,-0.88 -0.07,-1.98 0.96,-1.86 -0.27,-1.42 -1.11,-1.38 -0.67,0.05 -0.2,-2.72 -1.54,-0.86 -0.27,-3.72 -4.69,-3.58 -0.06,-2.07 0,0 2.86,-1.92 3.73,3.27 0.49,-2.27 1.01,-0.68 2.44,-0.03 0.13,-0.92 2.41,-0.74 0.51,-0.91 2.88,-1 1.83,0.72 0.81,-0.48 1.74,0.61 1.3,-1.67 2.060004,-1.22 0.37,-1.29 0.48,-0.2 1.02,1.17 3.63,2.39 0.56,1.54 0.76,-1.03 0.13,-1.24 0.96,0.4 1.27,1.89 1.18,0.52 0.75,-3.46 0.79,0.07 0.78,-0.91 1.04,-2.8 0.24,-1.5 -0.69,-0.67 -0.08,-4.51 1.32,-0.21 0.14,-1.32 -0.95,-1.59 0.42,-1.31 1.18,-0.92 -0.69,-0.96 0.01,-1.44 0.84,-1.84 0.75,-0.46 0.03,-1.48 0.59,-0.82 0.93,0.26 0.82,0 1.97,-0.57 -0.16,-1.02 2.17,-0.89 1.32,0.41 2.08,-0.27 0.79,0.79 0.78,-0.35 0.54,0.72 1.12,0.05 2.3,2.18 2.04,0.97 3.86,-1.42 3.87,-0.05 0.38,-0.58 3.6,-1.26 -0.04,-1.23 z" />
@@ -978,8 +1272,9 @@
           <div class="modal-section section-model">
             <h3 class="section-title">โมเดล 3 มิติ (3D Model)</h3>
             <div class="model-wrapper">
-              <model-viewer id="dinoModel" src="" alt="Dinosaur model" exposure="1.0" camera-controls auto-rotate ar
-                shadow-intensity="1" camera-orbit="45deg 55deg 2.5m" field-of-view="30deg"></model-viewer>
+              <model-viewer id="dinoModel" src="" alt="Dinosaur 3D Model" exposure="1.1" camera-controls auto-rotate
+                shadow-intensity="1.2" shadow-softness="0.8" camera-orbit="45deg 75deg auto" ar
+                interaction-prompt="auto"></model-viewer>
             </div>
           </div>
 
@@ -1002,7 +1297,9 @@
     <div class="footer-content">
       <div class="footer-left">
         <div class="footer-logos">
+          <img src="assests/img/msu_logo.png" alt="MSU LOGO" class="footer-logo-img">
           <img src="assests/img/Thai_PBS_Logo.png" alt="Thai PBS Logo" class="footer-logo-img">
+          <img src="assests/img/it_logo.svg" alt="IT" class="footer-logo-img">
           <img src="assests/img/tsc.png" alt="TSC Logo" class="footer-logo-img">
         </div>
         <div class="footer-text">
@@ -1011,13 +1308,21 @@
         </div>
       </div>
       <div class="footer-right">
-        <p>&copy; 2025 A Journey Through Time: Isan's Fossil Wonderland. All rights reserved.</p>
+        <p>ศูนย์สร้างสรรค์สื่อเพื่อสารธารณะ มหาวิทยาลัยมหาสารคาม ร่วมกับ สำนักเครือข่ายและการมีส่วนร่วมสาธารณะ
+          ไทยพีบีเอส
+        </p>
+        <p>&copy;2025 Longform Article Project.</p>
       </div>
     </div>
   </footer>
 
   <script>
-    AOS.init();
+    AOS.init({
+      duration: 850,
+      easing: 'ease-out-cubic',
+      once: false,
+      offset: 60
+    });
   </script>
   <!-- GSAP and ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>

@@ -123,8 +123,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Khorat Stratigraphy Section: Expand Content to Right on Scroll Animation
+  const stratExplorer = document.getElementById('stone-layer-explorer');
+  if (stratExplorer) {
+    const stratTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: stratExplorer,
+        start: 'top 75%',
+        toggleActions: 'play none none none',
+        once: true
+      }
+    });
+
+    stratTl
+      .fromTo('.stone-layer-content',
+        { scale: 0.94, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.8, ease: 'power3.out' }
+      )
+      .fromTo('.stone-image-wrapper',
+        { x: -40, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.8, ease: 'power3.out' },
+        '-=0.5'
+      )
+      .fromTo('.stone-text-wrapper',
+        { x: 60, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.9, ease: 'power3.out' },
+        '-=0.6'
+      );
+  }
+
   // Section 4: Headers Animation
-  gsap.from('.titans-title, .titans-subtitle, .titans-subtitle-desc, .diet-filter', {
+  gsap.from('.titans-title, .titans-subtitle, .titans-subtitle-desc, .filter-controls-wrapper', {
     opacity: 0,
     y: 30,
     duration: 0.8,
@@ -311,53 +340,112 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ---------------------------------------------
-   * Section4 diet filter logic
+   * Section: Stratigraphy Explorer Logic
    * --------------------------------------------- */
-  const dietButtons = document.querySelectorAll('.diet-btn');
-  const titanCards = document.querySelectorAll('.titan-card');
+  const stratigraphyData = {
+    'khok-kruat': {
+      epoch: 'ยุคครีเทเชียสตอนต้น (~100–115 ล้านปีก่อน)',
+      name: 'หมวดหินโคกกรวด (Khok Kruat Formation)',
+      env: 'ที่ราบน้ำท่วมถึงและแม่น้ำคดเคี้ยว สภาพอากาศแบบกึ่งแห้งแล้งสลับมรสุม',
+      fossils: 'สยามแรปเตอร์ (Siamraptor suwati), สิรินธรนา (Sirindhorna khoratensis), ราชสีมาซอรัส, สยามโมดอน, ซิตตะโกซอรัส, จระเข้โคราชซูคัส, เต่าโบราณ และปลากระดูกแข็ง'
+    },
+    'sao-khua': {
+      epoch: 'ยุคครีเทเชียสตอนต้น (~125–130 ล้านปีก่อน)',
+      name: 'หมวดหินเสาขัว (Sao Khua Formation)',
+      env: 'ที่ราบลุ่มแม่น้ำคดเคี้ยวและทะเลสาบน้ำจืดอันอุดมสมบูรณ์',
+      fossils: 'ภูเวียงโกซอรัส (Phuwiangosaurus), สยามโมไทรันนัส (Siamotyrannus), สยามโมซอรัส (Siamosaurus), กินรีมิมัส (Kinnareemimus), ภูเวียงเวเนเตอร์, วายุแรปเตอร์, เต่าภูเวียงเชลิส และหอยน้ำจืด'
+    },
+    'phu-kradung': {
+      epoch: 'ยุคจูแรสซิกตอนปลาย (~150 ล้านปีก่อน)',
+      name: 'หมวดหินภูกระดึง (Phu Kradung Formation)',
+      env: 'แม่น้ำสายใหญ่คดเคี้ยวและหนองบึงน้ำจืด สภาพอากาศอบอุ่นชื้นสลับแล้ง',
+      fossils: 'มินิโมเคอร์เซอร์ (Minimocursor phunoiensis), จระเข้ชาลาวัน (Chalawan thailandicus), ปลากระดูกแข็งเลปิโดเทสและอีสานอิคธิส, เต่ากาฬสินธุ์เอมิส, สเตโกซอร์ และเทอโรซอร์'
+    },
+    'nam-phong': {
+      epoch: 'ยุคไทรแอสซิกตอนปลาย (~200–210 ล้านปีก่อน)',
+      name: 'หมวดหินน้ำพอง / หมวดหินห้วยหินลาด (Nam Phong & Huai Hin Lat Fm.)',
+      env: 'ทะเลสาบน้ำจืดขนาดใหญ่และที่ราบตะกอนน้ำพาริมหุบเขาโบราณ',
+      fossils: 'อีสานโนซอรัส (Isanosaurus attavipatchi - ซอโรพอดแท้แรกของโลก), ไม้กลายเป็นหิน, ละอองเรณูสปอร์พืชโบราณ, หอยสองฝา และสัตว์เลื้อยคลานโบราณ'
+    },
+    'all-formations': {
+      epoch: 'มหายุคมีโซโซอิก (210 – 66 ล้านปีก่อน)',
+      name: '9 หมวดหินแห่งกลุ่มหินโคราช (Khorat Group)',
+      env: 'ลำดับชั้นหินจากล่างขึ้นบน: ห้วยหินลาด ➔ น้ำพอง ➔ ภูกระดึง ➔ พระวิหาร ➔ เสาขัว ➔ ภูพาน ➔ โคกกรวด ➔ มหาสารคาม ➔ ภูทอก',
+      fossils: 'แหล่งบันทึกวิวัฒนาการบรรพชีวินสัตว์มีกระดูกสันหลังและพืชโบราณที่สมบูรณ์และต่อเนื่องที่สุดแห่งหนึ่งของทวีปเอเชีย'
+    }
+  };
 
-  // Show all cards initially or hide? The original code hid them.
-  // Let's show all by default or keep the "click to filter" behavior.
-  // The original code had them hidden. Let's keep it consistent but maybe show all if no filter is active?
-  // Actually, let's make it so clicking a filter toggles it. If none active, show all? 
-  // Or stick to the original behavior: buttons act as toggles for categories.
+  const stratChips = document.querySelectorAll('.strat-chip');
+  const stoneDescContainer = document.getElementById('stoneDesc');
 
-  // Let's modify: Show ALL by default, filter when clicked.
-  titanCards.forEach((card) => card.classList.remove('hidden'));
+  stratChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const formKey = chip.dataset.formation;
+      const data = stratigraphyData[formKey];
+      if (!data || !stoneDescContainer) return;
 
-  dietButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const filter = button.dataset.filter;
+      stratChips.forEach((c) => c.classList.remove('active'));
+      chip.classList.add('active');
 
-      // If clicking already active button, deactivate it and show all
-      if (button.classList.contains('active')) {
-        button.classList.remove('active');
-        titanCards.forEach((card) => {
-          card.classList.remove('hidden');
-          // Animate back in
-          gsap.fromTo(card, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4 });
-        });
-        return;
-      }
-
-      // Remove active from others
-      dietButtons.forEach((btn) => btn.classList.remove('active'));
-      button.classList.add('active');
-
-      // Filter
-      titanCards.forEach((card) => {
-        if (card.dataset.diet === filter) {
-          card.classList.remove('hidden');
-          gsap.fromTo(card, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.4 });
-        } else {
-          card.classList.add('hidden');
-        }
-      });
+      stoneDescContainer.innerHTML = `
+        <div class="formation-card">
+          <div class="formation-header">
+            <span class="formation-epoch">${data.epoch}</span>
+            <h4 class="formation-name">${data.name}</h4>
+          </div>
+          <p class="formation-environment"><strong>สภาพแวดล้อมโบราณ:</strong> ${data.env}</p>
+          <div class="formation-fossils">
+            <strong>ฟอสซิลเด่น:</strong> ${data.fossils}
+          </div>
+        </div>
+      `;
     });
   });
 
   /* ---------------------------------------------
-   * Modal, scratch interaction and 3D model logic
+   * Section4: Multi-Filtering Logic (Diet & Epoch)
+   * --------------------------------------------- */
+  const dietButtons = document.querySelectorAll('.diet-btn');
+  const epochButtons = document.querySelectorAll('.epoch-btn');
+  const titanCards = document.querySelectorAll('.titan-card');
+
+  let currentDietFilter = 'all';
+  let currentEpochFilter = 'all';
+
+  function applyTitanFilters() {
+    titanCards.forEach((card) => {
+      const matchDiet = currentDietFilter === 'all' || card.dataset.diet === currentDietFilter;
+      const matchEpoch = currentEpochFilter === 'all' || card.dataset.epoch === currentEpochFilter;
+
+      if (matchDiet && matchEpoch) {
+        card.classList.remove('hidden');
+        gsap.fromTo(card, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.35 });
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+
+  dietButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      dietButtons.forEach((btn) => btn.classList.remove('active'));
+      button.classList.add('active');
+      currentDietFilter = button.dataset.filter || 'all';
+      applyTitanFilters();
+    });
+  });
+
+  epochButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      epochButtons.forEach((btn) => btn.classList.remove('active'));
+      button.classList.add('active');
+      currentEpochFilter = button.dataset.epoch || 'all';
+      applyTitanFilters();
+    });
+  });
+
+  /* ---------------------------------------------
+   * Modal, 3D Model & Scientific Timeline Data
    * --------------------------------------------- */
   const modal = document.getElementById('dinoModal');
   const closeModalBtn = document.querySelector('.close-modal');
@@ -366,133 +454,153 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const dinoData = {
     'Phuwiangosaurus sirindhornae': {
-      model: '../assests/model/Phuwiangosaurus_sirindhornae.glb',
+      model: 'assests/model/Phuwiangosaurus_sirindhornae.glb',
       footprint: 'assests/img/dino_section4/Phuwiangosaurus.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1982' }, //
-        { title: 'ขุดค้นฟอสซิล', year: '1982' },
-        { title: 'ประกาศชื่อวิทยาศาสตร์', year: '1994' },
-        { title: 'จัดแสดงในพิพิธภัณฑ์', year: '2001' },
+        { title: 'ค้นพบกระดูกชิ้นแรก', year: '1982 (พ.ศ. 2525) ณ ประตูตีหมา อุทยานฯ ภูเวียง' },
+        { title: 'ขุดค้นโครงกระดูกสมบูรณ์', year: '1989–1993 นำโดย ดร.วราวุธ สุธีธร' },
+        { title: 'ประกาศชื่อวิทยาศาสตร์', year: '1994 (Martin, Buffetaut & Suteethorn)' },
+        { title: 'จัดแสดงพิพิธภัณฑ์ภูเวียงและสิรินธร', year: 'เปิดจัดแสดงสมบูรณ์แบบระดับโลก' },
       ],
     },
     'Kinnareemimus khonkaennsis': {
-      model: '../assests/model/Kinnareemimus khonkaenensis.glb',
-      footprint: './assests/img/dino_section4/Kinnareemimus.png',
+      model: 'assests/model/Kinnareemimus khonkaenensis.glb',
+      footprint: 'assests/img/dino_section4/Kinnareemimus.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1995' },
-        { title: 'ขุดค้นฟอสซิล', year: '1990' },
-        { title: 'รายงานการค้นพบ', year: '1994' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: 'ไม่มีข้อมูลชัดเจน' },
+        { title: 'ค้นพบฟอสซิลกระดูกเท้า', year: '1992 (พ.ศ. 2535) แหล่งขุดค้นภูเวียง' },
+        { title: 'รายงานการค้นพบเบื้องต้น', year: '1999 ในฐานะ Early Ornithomimosaur' },
+        { title: 'ตั้งชื่อวิทยาศาสตร์เป็นทางการ', year: '2009 (Buffetaut, Suteethorn et al.)' },
+        { title: 'จัดแสดงในพิพิธภัณฑ์', year: 'ศูนย์ศึกษาวิจัยไดโนเสาร์ภูเวียง' },
+      ],
+    },
+    'Kinnareemimus khonkaenensis': {
+      model: 'assests/model/Kinnareemimus khonkaenensis.glb',
+      footprint: 'assests/img/dino_section4/Kinnareemimus.png',
+      timeline: [
+        { title: 'ค้นพบฟอสซิลกระดูกเท้า', year: '1992 (พ.ศ. 2535) แหล่งขุดค้นภูเวียง' },
+        { title: 'รายงานการค้นพบเบื้องต้น', year: '1999 ในฐานะ Early Ornithomimosaur' },
+        { title: 'ตั้งชื่อวิทยาศาสตร์เป็นทางการ', year: '2009 (Buffetaut, Suteethorn et al.)' },
+        { title: 'จัดแสดงในพิพิธภัณฑ์', year: 'ศูนย์ศึกษาวิจัยไดโนเสาร์ภูเวียง' },
       ],
     },
     'Sittakosaurus satyarakki': {
-      model: '../assests/model/Psittacosaurus_sattayaraki.glb',
-      footprint: '../assests/img/dino_section4/Sittakosaurus.png',
+      model: 'assests/model/Psittacosaurus_sattayaraki.glb',
+      footprint: 'assests/img/dino_section4/Sittakosaurus.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1992' },
-        { title: 'ขุดค้นฟอสซิล', year: '1980-1990' }, // 
-        { title: 'ประกาศสายพันธุ์', year: '1992' },
-        { title: 'เข้าสู่พิพิธภัณฑ์', year: 'ไม่มีข้อมูลชัดเจน' }, //
+        { title: 'ค้นพบขากรรไกรล่างมีฟัน', year: '1984 (พ.ศ. 2527) อ.คอนสวรรค์ จ.ชัยภูมิ' },
+        { title: 'ศึกษาวิจัยอนุกรมวิธาน', year: '1989 ยืนยันเป็นไดโนเสาร์ปากนกแก้วแรกของไทย' },
+        { title: 'ตีพิมพ์ประกาศสายพันธุ์ใหม่', year: '1992 ตั้งชื่อเกียรติแก่ นายนเรศ สัตยารักษ์' },
+        { title: 'จัดแสดงตัวอย่างต้นแบบ', year: 'กรมทรัพยากรธรณี กรุงเทพฯ และขอนแก่น' },
+      ],
+    },
+    'Psittacosaurus sattayaraki': {
+      model: 'assests/model/Psittacosaurus_sattayaraki.glb',
+      footprint: 'assests/img/dino_section4/Sittakosaurus.png',
+      timeline: [
+        { title: 'ค้นพบขากรรไกรล่างมีฟัน', year: '1984 (พ.ศ. 2527) อ.คอนสวรรค์ จ.ชัยภูมิ' },
+        { title: 'ศึกษาวิจัยอนุกรมวิธาน', year: '1989 ยืนยันเป็นไดโนเสาร์ปากนกแก้วแรกของไทย' },
+        { title: 'ตีพิมพ์ประกาศสายพันธุ์ใหม่', year: '1992 ตั้งชื่อเกียรติแก่ นายนเรศ สัตยารักษ์' },
+        { title: 'จัดแสดงตัวอย่างต้นแบบ', year: 'กรมทรัพยากรธรณี กรุงเทพฯ และขอนแก่น' },
       ],
     },
     'Ratchasimasaurus suranareae': {
-      model: '../assests/model/Ratchasimasaurus.glb',
-      footprint: '../assests/img/dino_section4/Ratchasimasaurus.png',
+      model: 'assests/model/Ratchasimasaurus.glb',
+      footprint: 'assests/img/dino_section4/Ratchasimasaurus.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '2011' },
-        { title: 'ขุดค้นฟอสซิล', year: '2010' },
-        { title: 'ตีพิมพ์ชื่อวิทยาศาสตร์', year: '2011' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: 'ไม่มีข้อมูลชัดเจน' },
+        { title: 'ค้นพบกระดูกขากรรไกรล่าง', year: '2007 (พ.ศ. 2550) ต.สุรนารี อ.เมืองนครราชสีมา' },
+        { title: 'ศึกษาร่วมไทย-ญี่ปุ่น', year: '2008–2011 สถาบันวิจัยไม้กลายเป็นหินฯ และมหาวิทยาลัยฟูกุอิ' },
+        { title: 'ตีพิมพ์ประกาศชื่อวิทยาศาสตร์', year: '2011 ให้เกียรติแด่ ท้าวสุรนารี (ย่าโม)' },
+        { title: 'จัดแสดงในพิพิธภัณฑ์', year: 'พิพิธภัณฑ์ไม้กลายเป็นหินฯ โคราช' },
       ],
     },
     'Siamodon nimngami': {
-      model: '../assests/model/Siamodon.glb',
-      footprint: '../assests/img/dino_section4/Siamodon.png',
+      model: 'assests/model/Siamodon.glb',
+      footprint: 'assests/img/dino_section4/Siamodon.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '2010' },
-        { title: 'ขุดค้นฟอสซิล', year: '2011' },//
-        { title: 'ประกาศชื่อวิทยาศาสตร์', year: '2011' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: 'ไม่มีข้อมูลชัดเจน' },//
+        { title: 'ค้นพบกระดูกขากรรไกรบนและฟัน', year: '2007–2010 บ้านสะพานหิน จ.นครราชสีมา' },
+        { title: 'วิจัยโครงสร้างฟันบดพืช', year: '2010 ยืนยันเป็นอิกัวโนดอนต์ชนิดใหม่' },
+        { title: 'ประกาศชื่อวิทยาศาสตร์', year: '2011 ให้เกียรติแก่ นายวิทยา นิ่มงาม ผู้ค้นพบ' },
+        { title: 'จัดแสดงในพิพิธภัณฑ์', year: 'Khorat Fossil Museum (Khorat Geopark)' },
       ],
     },
     'Sirindhorna khoratensis': {
-      model: '../assests/model/Sirindhorna.glb',
-      footprint: '../assests/img/dino_section4/Sirindhorna.png',
+      model: 'assests/model/Sirindhorna.glb',
+      footprint: 'assests/img/dino_section4/Sirindhorna.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '2007' },
-        { title: 'ขุดค้นฟอสซิล', year: '2007' },
-        { title: 'ตีพิมพ์ทางวิทยาศาสตร์', year: '2015' },
-        { title: 'ประกาศชื่อ', year: '2010' },
+        { title: 'ค้นพบชิ้นส่วนกะโหลกสมบูรณ์', year: '2007–2009 บ้านสะพานหิน โคราช' },
+        { title: 'การประกอบโครงสร้างกะโหลก 3 มิติ', year: '2012–2014 โดยคณะวิจัยไทย-ญี่ปุ่น' },
+        { title: 'ตีพิมพ์ในวารสารระดับโลก PLOS ONE', year: '2015 ได้รับพระราชทานพระราชานุญาตอัญเชิญพระนาม' },
+        { title: 'จัดแสดงไฮไลต์', year: 'สถาบันวิจัยไม้กลายเป็นหินฯ จ.นครราชสีมา' },
       ],
     },
     'Isanosaurus attavipatchi': {
-      model: '../assests/model/Isanosaurus.glb',
-      footprint: 'https://via.placeholder.com/600x300?text=Footprint+Isanosaurus',
+      model: 'assests/model/Isanosaurus.glb',
+      footprint: 'assests/img/dino_png/Isanosaurus.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1998' },
-        { title: 'ขุดค้นฟอสซิล', year: '1998' },
-        { title: 'รายงานทางวิทยาศาสตร์', year: '2000' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: 'ไม่มีข้อมูลชัดเจน' },//
+        { title: 'ค้นพบกระดูกท่อนขาและกระดูกสันหลัง', year: '1998 (พ.ศ. 2541) อ.หนองบัวระเหว จ.ชัยภูมิ' },
+        { title: 'กำหนดอายุชั้นหิน 210 ล้านปี', year: '1999 ยืนยันเป็น Sauropod ที่เก่าแก่ที่สุดในโลก' },
+        { title: 'ตีพิมพ์ในวารสาร Nature', year: '2000 (Buffetaut et al.) สร้างชื่อเสียงระดับโลก' },
+        { title: 'จัดแสดงในพิพิธภัณฑ์', year: 'พิพิธภัณฑ์สิรินธร จ.กาฬสินธุ์' },
       ],
     },
     'Minimocursor phunoiensis': {
-      model: '../assests/model/Minimocursor.glb',
-      footprint: '../assests/img/dino_section4/Minimocursor.png',
+      model: 'assests/model/Minimocursor.glb',
+      footprint: 'assests/img/dino_section4/Minimocursor.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '2013' }, //
-        { title: 'ขุดค้นฟอสซิล', year: '2023' },
-        { title: 'ประกาศสายพันธุ์ใหม่', year: '2023' },
-        { title: 'เข้าสู่พิพิธภัณฑ์', year: '2024' }, //
+        { title: 'ค้นพบโครงกระดูกฝังในหิน', year: '2012 (พ.ศ. 2555) แหล่งภูน้อย อ.คำม่วง กาฬสินธุ์' },
+        { title: 'เตรียมตัวอย่างและกรอกระดูกกว่า 5 ปี', year: '2014–2019 โดยศูนย์วิจัยบรรพชีวินวิทยา มมส. (PRC)' },
+        { title: 'ประกาศเป็นไดโนเสาร์ไทยชนิดที่ 13', year: '2023 (Manitkoon, Deesri, Chanthasit et al.)' },
+        { title: 'เปิดตัวและจัดแสดงต่อสาธารณชน', year: '2023–ปัจจุบัน ณ พิพิธภัณฑ์สิรินธร' },
       ],
     },
     'Siamotyrannus isanensis': {
-      model: '../assests/model/Siamotyrannus.glb',
-      footprint: 'https://via.placeholder.com/600x300?text=Footprint+Siamotyrannus',
+      model: 'assests/model/Siamotyrannus.glb',
+      footprint: 'assests/img/dino_png/Siamotyrannus.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1993' }, //
-        { title: 'ขุดค้นฟอสซิล', year: '1993' },
-        { title: 'ประกาศชื่อวิทยาศาสตร์', year: '1996' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: '1990' },
+        { title: 'ค้นพบกระดูกสะโพกและหาง', year: '1993 (พ.ศ. 2536) ภูประตูตีหมา อ.เวียงเก่า ขอนแก่น' },
+        { title: 'ศึกษาวิจัยวงศ์เทโรพอด', year: '1994–1995 บรรพบุรุษต้นตระกูลไทรันโนซอร์' },
+        { title: 'ตีพิมพ์ประกาศสายพันธุ์ใหม่', year: '1996 (Buffetaut, Suteethorn & Tong)' },
+        { title: 'จัดแสดงในพิพิธภัณฑ์', year: 'พิพิธภัณฑ์ไดโนเสาร์ภูเวียง' },
       ],
     },
     'Siamosaurus suteethorni': {
-      model: '../assests/model/Siamosaurus.glb',
-      footprint: 'https://via.placeholder.com/600x300?text=Footprint+Siamosaurus',
+      model: 'assests/model/Siamosaurus.glb',
+      footprint: 'assests/img/dino_png/Siamosaurus.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1976' },
-        { title: 'ขุดค้นฟอสซิล', year: '1970-1980' },
-        { title: 'ประกาศชื่อวิทยาศาสตร์', year: '1986' },
-        { title: 'การทบทวนชื่อ', year: 'ไม่มีข้อมูลชัดเจน' },//
+        { title: 'ค้นพบฟันรูปกรวยร่องสันแรก', year: '1983 (พ.ศ. 2526) ภูเวียง จ.ขอนแก่น' },
+        { title: 'ประกาศเป็นสไปโนซอริดตัวแรกของเอเชีย', year: '1986 (Buffetaut & Ingavat)' },
+        { title: 'ค้นพบตัวอย่างฟันเพิ่มเติมทั่วอีสาน', year: '1990–2000 กาฬสินธุ์, ชัยภูมิ, สกลนคร' },
+        { title: 'ทบทวนวิจัยระบบนิเวศการกินปลา', year: '2010–ปัจจุบัน บ่งชี้ความสมบูรณ์ของลุ่มน้ำโบราณ' },
       ],
     },
     'Phuwiangvenator yaemniyomi': {
-      model: '../assests/model/Phuwiangvenator.glb',
-      footprint: '../assests/img/dino_section4/Phuwiangvenator.png',
+      model: 'assests/model/Phuwiangvenator.glb',
+      footprint: 'assests/img/dino_section4/Phuwiangvenator.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1993' },
-        { title: 'ขุดค้นฟอสซิล', year: '1993' },
-        { title: 'รายงานการค้นพบ', year: '2019' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: '2011' }, //
+        { title: 'ค้นพบฟอสซิลกรงเล็บมือและกระดูกขา', year: '1993 (พ.ศ. 2536) หลุมขุดค้นที่ 9B ภูเวียง' },
+        { title: 'วิจัยเชิงลึกด้านวิวัฒนาการ Megaraptora', year: '2015–2018 โครงการวิจัยร่วมไทย-ญี่ปุ่น' },
+        { title: 'ตีพิมพ์ประกาศสายพันธุ์ใหม่', year: '2019 ตั้งชื่อเกียรติแก่ นายสุธรรม แย้มนิยม' },
+        { title: 'จัดแสดงในพิพิธภัณฑ์', year: 'ศูนย์ศึกษาวิจัยและพิพิธภัณฑ์ไดโนเสาร์ภูเวียง' },
       ],
     },
     'Vayuraptor nongbualamphuensis': {
-      model: '../assests/model/Vayuraptor.glb',
-      footprint: '../assests/img/dino_section4/Vayuraptor.png',
+      model: 'assests/model/Vayuraptor.glb',
+      footprint: 'assests/img/dino_section4/Vayuraptor.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '1988' },
-        { title: 'ขุดค้นฟอสซิล', year: '1988' },
-        { title: 'ประกาศชื่อวิทยาศาสตร์', year: '2019' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: '2017' },
+        { title: 'ค้นพบชิ้นส่วนกระดูกข้อเท้าและขา', year: '1988 (พ.ศ. 2531) ภูวัด อ.เมือง จ.หนองบัวลำภู' },
+        { title: 'จำแนกโครงสร้างสรีระราปเตอร์นักล่า', year: '2016–2019 โดยคณะผู้วิจัยไทย-ญี่ปุ่น' },
+        { title: 'ตีพิมพ์ประกาศชื่อ จ้าวสายลมแห่งหนองบัวลำภู', year: '2019 (Samathi, Chanthasit & Sander)' },
+        { title: 'จัดแสดงในพิพิธภัณฑ์', year: 'พิพิธภัณฑ์สิรินธร และพิพิธภัณฑ์หอยหิน 150 ล้านปี' },
       ],
     },
     'Siamraptor suwati': {
-      model: '../assests/model/Siamraptor.glb',
-      footprint: '../assests/img/dino_section4/Siamraptor.png',
+      model: 'assests/model/Siamraptor.glb',
+      footprint: 'assests/img/dino_section4/Siamraptor.png',
       timeline: [
-        { title: 'ค้นพบรอยเท้า', year: '2007' },
-        { title: 'ขุดค้นฟอสซิล', year: '2007-2009' },
-        { title: 'ประกาศชื่อวิทยาศาสตร์', year: '2019' },
-        { title: 'จัดแสดงพิพิธภัณฑ์', year: '2019' },
+        { title: 'ค้นพบฟอสซิลกะโหลก ขากรรไกร และฟัน', year: '2007–2009 บ้านสะพานหิน ต.สุรนารี โคราช' },
+        { title: 'วิจัยโครงกระดูกคาร์คาโรดอนโตซอร์', year: '2011–2018 สถาบันไม้กลายเป็นหินฯ และ ม.ฟูกุอิ' },
+        { title: 'ตีพิมพ์ในวารสารระดับโลก PLOS ONE', year: '2019 ไดโนเสาร์กินเนื้อใหญ่ที่สุดของไทย' },
+        { title: 'จัดแสดงในพิพิธภัณฑ์', year: 'พิพิธภัณฑ์ไม้กลายเป็นหินฯ จ.นครราชสีมา' },
       ],
     },
   };
@@ -515,7 +623,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function openModal() {
     modal.style.display = 'flex';
-    // Small delay to allow display:flex to apply before adding opacity class
     requestAnimationFrame(() => {
       modal.classList.add('open');
     });
@@ -525,7 +632,7 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.classList.remove('open');
     setTimeout(() => {
       modal.style.display = 'none';
-    }, 300); // Match transition duration
+    }, 300);
   }
 
   titanCards.forEach((card) => {
@@ -543,19 +650,16 @@ document.addEventListener('DOMContentLoaded', () => {
         modalTitle.textContent = `${nameTh} (${nameEn})`;
       }
 
-      // Fallback values if no data is defined
-      const modelSrc = data ? data.model : 'https://modelviewer.dev/shared-assets/models/Astronaut.glb';
-      const timelineEvents = data ? data.timeline : [
-        { title: 'ค้นพบรอยเท้า', year: '—' },
-        { title: 'ขุดค้นฟอสซิล', year: '—' },
-        { title: 'ประกาศชื่อ', year: '—' },
+      const modelSrc = (data && data.model) ? data.model : 'assests/model/Phuwiangosaurus_sirindhornae.glb';
+      const timelineEvents = (data && data.timeline) ? data.timeline : [
+        { title: 'ค้นพบฟอสซิล', year: '—' },
+        { title: 'ศึกษาวิจัย', year: '—' },
+        { title: 'ประกาศชื่อวิทยาศาสตร์', year: '—' },
         { title: 'จัดแสดงพิพิธภัณฑ์', year: '—' },
       ];
 
-      dinoModel.src = modelSrc;
-
+      dinoModel.setAttribute('src', modelSrc);
       buildTimeline(timelineEvents);
-
       openModal();
     });
   });
@@ -566,91 +670,175 @@ document.addEventListener('DOMContentLoaded', () => {
       closeModal();
     }
   });
-  // Force refresh ScrollTrigger on window load to ensure correct positions
+
   window.addEventListener('load', () => {
     ScrollTrigger.refresh();
-    // Double check after a short delay for any late layout shifts
     setTimeout(() => ScrollTrigger.refresh(), 500);
   });
 });
 
-
-
-
 /* ---------------------------------------------
- * Section5 – Thailand map (SVG)
+ * Section5 – Thailand Paleontology & Geopark Map (SVG)
  * --------------------------------------------- */
 const mapSvg = document.querySelector('.th-map');
 
-// Data for map provinces (Ported from update_map.py)
 const provinceData = {
   'kkn': {
     'data-name': 'ขอนแก่น',
-    'data-summary': 'ศูนย์กลางฟอสซิลไดโนเสาร์อีสาน',
-    'data-museum': 'พิพิธภัณฑ์สิรินธร, พิพิธภัณฑ์ไดโนเสาร์ภูเวียง',
-    'data-geopark': 'อุทยานธรณีขอนแก่น (Khon Kaen Geopark)'
+    'data-summary': 'จุดกำเนิดการค้นพบฟอสซิลไดโนเสาร์แห่งแรกของไทยเมื่อปี พ.ศ. 2519 ณ หุบเขาภูเวียง พบไดโนเสาร์สายพันธุ์ใหม่ของโลกถึง 5 ชนิด',
+    'data-museum': 'ศูนย์ศึกษาวิจัยและพิพิธภัณฑ์ไดโนเสาร์ภูเวียง, พิพิธภัณฑ์ธรรมชาติวิทยา มข.',
+    'data-geopark': 'อุทยานธรณีขอนแก่น (Khon Kaen Geopark - แหล่งภูเวียง)'
   },
   'ksn': {
     'data-name': 'กาฬสินธุ์',
-    'data-summary': 'ดินแดนภูน้อยและไดโนเสาร์หลายชนิด',
-    'data-museum': 'พิพิธภัณฑ์สิรินธร',
-    'data-geopark': 'อุทยานธรณีกาฬสินธุ์ (Kalasin Geopark)'
+    'data-summary': 'แหล่งฟอสซิลไดโนเสาร์กินพืชที่สมบูรณ์ที่สุด (ภูกุ้มข้าว) และแหล่งขุดค้นภูน้อย "Jurassic Park เมืองไทย" แหล่งกำเนิดมินิโมเคอร์เซอร์และสัตว์ร่วมยุคกว่า 5,000 ชิ้น',
+    'data-museum': 'พิพิธภัณฑ์สิรินธร (พิพิธภัณฑ์ไดโนเสาร์ใหญ่ที่สุดในอาเซียน)',
+    'data-geopark': 'อุทยานธรณีกาฬสินธุ์ (Kalasin Geopark & แหล่งรอยเท้าภูแฝก)'
   },
   'nma': {
     'data-name': 'นครราชสีมา',
-    'data-summary': 'บ้านของสยามแรปเตอร์ ราชสีมาซอรัส และ Sirindhorna',
-    'data-museum': 'พิพิธภัณฑ์ไม้กลายเป็นหินเฉลิมพระเกียรติฯ',
-    'data-geopark': 'อุทยานธรณีโลกโคราช (Khorat Geopark)'
-  },
-  'stn': {
-    'data-name': 'สตูล',
-    'data-summary': 'อุทยานธรณีโลกสตูลได้ประกาศเป็นอุทยานธรณีท้องถิ่น เมื่อวันที่ 14 สิงหาคม พ.ศ. 2557 ครอบคลุมพื้นที่ 4 อำเภอ ได้แก่ อำเภอทุ่งหว้า อำเภอมะนัง อำเภอละงู และอำเภอเมืองสตูล (อุทยานแห่งชาติตะรุเตา) รวมพื้นที่ 2,597 ตารางกิโลเมตร',
-    'data-museum': '-',
-    'data-geopark': 'อุทยานธรณีโลกสตูล (Satun Geopark)'
-  },
-  'ubn': {
-    'data-name': 'อุบลราชธานี',
-    'data-summary': 'อุทยานธรณีผาชัน สามพันโบก จังหวัดอุบลราชธานี ได้จัดตั้งและประกาศเป็นอุทยานธรณีท้องถิ่นเมื่อวันที่ 9 พฤษภาคม 2554 ครอบคลุม 4 อำเภอ ได้แก่ อำเภอสิรินธร อำเภอโขงเจียม อำเภอศรีเมืองใหม่ และอำเภอโพธิ์ไทร มีพื้นที่ 1,994 ตารางกิโลเมตร',
-    'data-museum': '-',
-    'data-geopark': 'อุทยานธรณีอุบลราชธานี (Ubon Ratchathani Geopark)'
+    'data-summary': 'มหานครแห่งบรรพชีวินโลก ดินแดน Triple Crown ของ UNESCO พบไดโนเสาร์ 4 ชนิด ช้างโบราณ 4 สกุล และเอปโคราช บรรพบุรุษอุรังอุตัง',
+    'data-museum': 'สถาบันวิจัยไม้กลายเป็นหินและทรัพยากรธรณีฯ, แหล่งขุดค้นบ่อทรายท่าช้าง',
+    'data-geopark': 'โคราชจีโอพาร์ก (Khorat UNESCO Global Geopark)'
   },
   'cpm': {
     'data-name': 'ชัยภูมิ',
-    'data-summary': 'จังหวัดชัยภูมิ ได้ประกาศจัดตั้งอุทยานธรณีชัยภูมิเป็นอุทยานธรณีในระดับท้องถิ่น เมื่อวันที่ 11 สิงหาคม 2564 ครอบคลุม 8 อำเภอ ได้แก่ อำเภอเมืองชัยภูมิ อำเภอบ้านเขว้า อำเภอหนองบัวระเหว อำเภอเทพสถิต อำเภอภักดีชุมพล อำเภอเกษตรสมบูรณ์ อำเภอหนองบัวแดง และอำเภอคอนสาร รวมพื้นที่ 8,732 ตารางกิโลเมตร',
-    'data-museum': '-',
-    'data-geopark': 'อุทยานธรณีชัยภูมิ (Chaiyaphum Geopark)'
+    'data-summary': 'แหล่งค้นพบอีสานโนซอรัส (Isanosaurus) ซอโรพอดเก่าแก่ที่สุดในโลก ยุคไทรแอสซิก 210 ล้านปี และซิตตะโกซอรัสปากนกแก้ว',
+    'data-museum': 'ศูนย์ข้อมูลธรณีวิทยาและฟอสซิลชัยภูมิ',
+    'data-geopark': 'อุทยานธรณีชัยภูมิ (Chaiyaphum Geopark & รอยเท้าวัดเขาตาเงาะ)'
+  },
+  'nbp': {
+    'data-name': 'หนองบัวลำภู',
+    'data-summary': 'แหล่งค้นพบฟอสซิลหอยหินอายุ 150 ล้านปี และไดโนเสาร์กินเนื้อวายุแรปเตอร์ (Vayuraptor) รวมถึงจระเข้โบราณชาลาวัน',
+    'data-museum': 'พิพิธภัณฑ์หอยหิน 150 ล้านปี และไดโนเสาร์โนนทัน',
+    'data-geopark': 'อุทยานธรณีหนองบัวลำภู (Nong Bua Lamphu Geopark)'
+  },
+  'mkm': {
+    'data-name': 'มหาสารคาม',
+    'data-summary': 'ศูนย์กลางงานวิจัยและการศึกษาบรรพชีวินวิทยาชั้นนำของเอเชียตะวันออกเฉียงใต้ โดยศูนย์วิจัยและการศึกษาบรรพชีวินวิทยา มมส. (PRC)',
+    'data-museum': 'ศูนย์วิจัยและการศึกษาบรรพชีวินวิทยา มหาวิทยาลัยมหาสารคาม (PRC Museum)',
+    'data-geopark': 'แหล่งเรียนรู้และคลังตัวอย่างฟอสซิลอ้างอิงระดับนานาชาติ'
+  },
+  'ubn': {
+    'data-name': 'อุบลราชธานี',
+    'data-summary': 'อุทยานธรณีผาชัน สามพันโบก ประติมากรรมหินทรายและกุมภลักษณ์แม่น้ำโขง พร้อมชั้นหินมหายุคมีโซโซอิกอันงดงาม',
+    'data-museum': 'ศูนย์บริการนักท่องเที่ยวอุทยานธรณีผาชัน',
+    'data-geopark': 'อุทยานธรณีผาชัน-สามพันโบก (Ubon Ratchathani Geopark)'
+  },
+  'mdh': {
+    'data-name': 'มุกดาหาร',
+    'data-summary': 'แหล่งค้นพบรอยทางเดินไดโนเสาร์กินเนื้อขนาดใหญ่กว่า 100 รอย บนลานหินทรายหมวดหินพระวิหาร ณ ภูแฝก-ภูหมู',
+    'data-museum': 'แหล่งรอยเท้าไดโนเสาร์ภูหลวง ภูสระดอกบัว',
+    'data-geopark': 'อุทยานธรณีมุกดาหาร'
+  },
+  'snk': {
+    'data-name': 'สกลนคร',
+    'data-summary': 'แหล่งรอยเท้าไดโนเสาร์ท่าอุเทน-สกลนคร และฟอสซิลพืชโบราณบนเทือกเขาภูพาน',
+    'data-museum': 'ศูนย์วัฒนธรรมและพิพิธภัณฑ์ภูพาน',
+    'data-geopark': 'พื้นที่ธรณีวิทยาภูพาน'
+  },
+  'udn': {
+    'data-name': 'อุดรธานี',
+    'data-summary': 'อุทยานประวัติศาสตร์ภูพระบาท ธรณีสัณฐานเพิงหินทรายมรดกโลก UNESCO และแหล่งโบราณคดีบ้านเชียง',
+    'data-museum': 'พิพิธภัณฑสถานแห่งชาติ บ้านเชียง, ศูนย์ข้อมูลภูพระบาท',
+    'data-geopark': 'ภูพระบาท มรดกโลกทางวัฒนธรรมและธรณีสัณฐาน'
+  },
+  'lei': {
+    'data-name': 'เลย',
+    'data-summary': 'แหล่งฟอสซิลรอยเท้าไดโนเสาร์ภูหลวง และภูเขาหินปูนคาสต์ยุคเพอร์เมียน ภูกระดึง-ภูเรือ',
+    'data-museum': 'ศูนย์วิจัยและพัฒนาการท่องเที่ยวทางธรณีวิทยาเลย',
+    'data-geopark': 'อุทยานธรณีเลย (Loei Geopark)'
+  },
+  'bkn': {
+    'data-name': 'บึงกาฬ',
+    'data-summary': 'หินสามวาฬ ภูสิงห์ ประติมากรรมหินทรายหมวดหินภูทอก 75 ล้านปี และภูทอกแหล่งธรณีสัณฐานมหัศจรรย์',
+    'data-museum': 'ศูนย์เรียนรู้ธรรมชาติภูสิงห์',
+    'data-geopark': 'พื้นที่ธรณีสัณฐานภูสิงห์-หินสามวาฬ'
+  },
+  'nki': {
+    'data-name': 'หนองคาย',
+    'data-summary': 'ลานหินทรายริมแม่น้ำโขงและรอยต่อชั้นหินมหายุคมีโซโซอิก',
+    'data-museum': 'พิพิธภัณฑ์สัตว์น้ำจังหวัดหนองคาย',
+    'data-geopark': 'พื้นที่ธรณีวิทยาและนิเวศลุ่มน้ำโขง'
+  },
+  'ret': {
+    'data-name': 'ร้อยเอ็ด',
+    'data-summary': 'พื้นที่ราบทุ่งกุลาร้องไห้ แหล่งสะสมตะกอนเกลือหินและหมวดหินมหาสารคามโบราณ',
+    'data-museum': 'พิพิธภัณฑสถานแห่งชาติ ร้อยเอ็ด',
+    'data-geopark': 'แหล่งเรียนรู้ธรณีวิทยาทุ่งกุลาร้องไห้'
+  },
+  'yst': {
+    'data-name': 'ยโสธร',
+    'data-summary': 'พื้นที่ราบลุ่มแม่น้ำชีและแนวชั้นหินทรายแป้งหมวดหินโคกกรวด',
+    'data-museum': 'ศูนย์เรียนรู้วัฒนธรรมและประวัติศาสตร์ยโสธร',
+    'data-geopark': 'พื้นที่ธรณีวิทยาลุ่มน้ำชี'
+  },
+  'acr': {
+    'data-name': 'อำนาจเจริญ',
+    'data-summary': 'วนอุทยานภูสิงห์-ภูผาผึ้ง ธรณีสัณฐานหินทรายและกุมภลักษณ์ลอยฟ้า',
+    'data-museum': 'ศูนย์บริการนักท่องเที่ยวภูสิงห์-ภูผาผึ้ง',
+    'data-geopark': 'พื้นที่ธรณีวิทยาภูสิงห์-ภูผาผึ้ง'
+  },
+  'brm': {
+    'data-name': 'บุรีรัมย์',
+    'data-summary': 'ดินแดนภูเขาไฟโบราณ 6 ลูก (เขากระโดง พนมรุ้ง ฯลฯ) ปรากฏการณ์ลาวาบะซอลต์ยุคควอเทอร์นารี',
+    'data-museum': 'ศูนย์เรียนรู้ภูเขาไฟกระโดง',
+    'data-geopark': 'อุทยานธรณีภูเขาไฟบุรีรัมย์ (Buriram Volcano Geopark)'
+  },
+  'srn': {
+    'data-name': 'สุรินทร์',
+    'data-summary': 'แหล่งค้นพบฟอสซิลและรอยต่อหมวดหินโคราช-หินตะกอนลานช้างโบราณ',
+    'data-museum': 'พิพิธภัณฑสถานแห่งชาติ สุรินทร์',
+    'data-geopark': 'แหล่งเรียนรู้ธรณีวิทยาและช้างโบราณ'
+  },
+  'ssk': {
+    'data-name': 'ศรีสะเกษ',
+    'data-summary': 'ผามออีแดง อุทยานแห่งชาติเขาพระวิหาร หน้าผาหินทรายหมวดหินพระวิหารยุคจูแรสซิก',
+    'data-museum': 'ศูนย์บริการข้อมูลนักท่องเที่ยวผามออีแดง',
+    'data-geopark': 'พื้นที่ธรณีวิทยาผามออีแดง เขาพระวิหาร'
+  },
+  'stn': {
+    'data-name': 'สตูล',
+    'data-summary': 'อุทยานธรณีโลกแห่งแรกของไทย โดดเด่นด้วยฟอสซิลมหายุคพาลีโอโซอิก (ไตรโลไบต์ แกรปโตไลต์ และนอติลอยด์)',
+    'data-museum': 'พิพิธภัณฑ์ธรรมชาติวิทยาเกาะเภตรา / พิพิธภัณฑ์ธรณีวิทยาทุ่งหว้า',
+    'data-geopark': 'อุทยานธรณีโลกสตูล (Satun UNESCO Global Geopark)'
   },
   'tak': {
     'data-name': 'ตาก',
-    'data-summary': 'จังหวัดตากได้ประกาศจัดตั้งอุทยานธรณีไม้กลายเป็นหินตาก เป็นอุทยานธรณีในระดับท้องถิ่น เมื่อวันที่ 30 มีนาคม พ.ศ. 2560 ครอบคลุมพื้นที่ 4 อำเภอของจังหวัดตาก ได้แก่ อำเภอสามเงา อำเภอบ้านตาก อำเภอเมืองตาก และอำเภอวังเจ้า รวมพื้นที่ 5,671 ตารางกิโลเมตร',
-    'data-museum': '-',
-    'data-geopark': 'อุทยานธรณีตาก (Tak Geopark)'
+    'data-summary': 'แหล่งไม้กลายเป็นหินที่ยาวที่สุดในโลก บันทึกสถิติ Guinness World Records ความยาวกว่า 69.7 เมตร',
+    'data-museum': 'พิพิธภัณฑ์ไม้กลายเป็นหินดอยบาทาก',
+    'data-geopark': 'อุทยานธรณีไม้กลายเป็นหินตาก (Tak Geopark)'
   },
   'lpg': {
     'data-name': 'ลำปาง',
-    'data-summary': 'ประกาศจัดตั้งอุทยานธรณีลำปางเป็นอุทยานธรณีในระดับท้องถิ่นเมื่อวันที่ 23 สิงหาคม 2565 ครอบคลุม 7 อำเภอ ได้แก่ อำเภอเมืองลำปางอำเภอเกาะคา อำเภอแม่เมาะ อำเภอแจ้ห่ม อำเภองาว อำเภอแม่ทะ และอำเภอเมืองปาน รวมพื้นที่ 2,012 ตารางกิโลเมตร',
-    'data-museum': '-',
+    'data-summary': 'แอ่งตะกอนภูเขาไฟและฟอสซิลหอยกาบคู่ ดอกไม้ทะเลโบราณยุคเพอร์เมียน-ไทรแอสซิก',
+    'data-museum': 'พิพิธภัณฑ์ธรณีวิทยาเหมืองแม่เมาะ',
     'data-geopark': 'อุทยานธรณีลำปาง (Lampang Geopark)'
   },
   'cri': {
     'data-name': 'เชียงราย',
-    'data-summary': 'จังหวัดเชียงราย ได้มีประกาศจังหวัดเชียงราย ลงวันที่ 21 กุมภาพันธ์ 2567 เรื่อง จัดตั้งอุทยานธรณีเชียงราย (Chiang Rai Geopark) โดยประกาศให้พื้นที่ในเขตอำเภอแม่สาย อำเภอแม่จัน และอำเภอเชียงแสน จังหวัดเชียงราย ซึ่งมีพื้นที่รวมทั้งหมด 1,434 ตารางกิโลเมตร เป็นอุทยานธรณีระดับท้องถิ่น',
-    'data-museum': '-',
+    'data-summary': 'ภูมิประเทศเขาหินปูน คาสต์ ถ้ำหลวง-ขุนน้ำนางนอน และแหล่งแร่โบราณ',
+    'data-museum': 'ศูนย์เรียนรู้ธรณีวิทยาเชียงราย',
     'data-geopark': 'อุทยานธรณีเชียงราย (Chiang Rai Geopark)'
   },
   'spb': {
     'data-name': 'สุพรรณบุรี',
-    'data-summary': 'จังหวัดสุพรรณบุรีได้ประกาศจัดตั้งอุทยานธรณีพุหางนาค เป็นอุทยานธรณีในระดับท้องถิ่นเมื่อวันที่ 17 มกราคม 2565 ครอบคลุม 4 อำเภอ ได้แก่ อำเภอเมืองสุพรรณบุรี อำเภออู่ทอง อำเภอดอนเจดีย์ และอำเภอหนองหญ้าไซรวมพื้นที่ ๑,๒๖๘ ตารางกิโลเมตร',
-    'data-museum': '-',
+    'data-summary': 'แหล่งเรียนรู้พุหางนาค ป่าหินโบราณอายุกว่าพันล้านปีและพืชพรรณดึกดำบรรพ์',
+    'data-museum': 'ศูนย์เรียนรู้พุหางนาค อ.อู่ทอง',
     'data-geopark': 'อุทยานธรณีพุหางนาค'
   },
   'pnb': {
-    'data-name': 'เพรชบูรณ์',
-    'data-summary': 'จังหวัดเพชรบูรณ์ได้มีประกาศ เรื่อง จัดตั้งอุทยานธรณีเพชรบูรณ์ เมื่อวันที่ 10 พฤษภาคม 2561 อุทยานธรณีเพชรบูรณ์ครอบคลุมพื้นที่ ๓ อำเภอ ทางตอนเหนือของจังหวัดเพชรบูรณ์ ได้แก่ อำเภอน้ำหนาว หล่มสัก และเมืองเพชรบูรณ์ มีพื้นที่ ๔,๔๓๖ ตารางกิโลเมตร',
-    'data-museum': '-',
-    'data-geopark': 'อุทยานธรณีเพชรบูรณ์ (Phetchburi Geopark)'
+    'data-name': 'เพชรบูรณ์',
+    'data-summary': 'อุทยานธรณีเพชรบูรณ์ มหัศจรรย์ผารอยเลื่อน แหล่งซากฟอสซิลปลาโบราณน้ำหนาวและรอยเท้าไดโนเสาร์',
+    'data-museum': 'ศูนย์เรียนรู้ซากดึกดำบรรพ์เพชรบูรณ์',
+    'data-geopark': 'อุทยานธรณีเพชรบูรณ์ (Phetchabun Geopark)'
+  },
+  'skn': {
+    'data-name': 'สมุทรสาคร',
+    'data-summary': 'แหล่งค้นพบโครงกระดูกวาฬโบราณอำนวยศิลป์ (Balaenoptera edeni) อายุกว่า 3,000–5,000 ปี ในชั้นตะกอนทะเลโบราณ',
+    'data-museum': 'ศูนย์เรียนรู้วาฬโบราณสมุทรสาคร',
+    'data-geopark': 'พื้นที่ธรณีสัณฐานชายฝั่งทะเลโบราณ'
   }
-
 };
 
 // Initialize map data
@@ -682,8 +870,10 @@ function createMapPins() {
     pinsGroup.setAttribute('id', 'mapPins');
     mapSvg.appendChild(pinsGroup);
   }
+  pinsGroup.innerHTML = '';
 
-  provinces.forEach((prov) => {
+  const allProvinces = document.querySelectorAll('.th-map .province');
+  allProvinces.forEach((prov) => {
     const id = prov.id;
     if (!id) return;
 
@@ -695,7 +885,6 @@ function createMapPins() {
     try {
       bbox = prov.getBBox();
     } catch (err) {
-      // getBBox can fail if element not rendered yet
       return;
     }
     const cx = bbox.x + bbox.width / 2;
@@ -718,7 +907,6 @@ function createMapPins() {
       // tail (teardrop path)
       const tail = document.createElementNS('http://www.w3.org/2000/svg', 'path');
       tail.classList.add('pin-tail');
-      // small teardrop pointing down from head center
       const tx = cx - (hasGeopark ? 6 : 0);
       const ty = cy - bbox.height * 0.12;
       const tailD = `M ${tx - 4} ${ty + 2} C ${tx - 4} ${ty + 10} ${tx} ${ty + 16} ${tx} ${ty + 20} C ${tx} ${ty + 16} ${tx + 4} ${ty + 10} ${tx + 4} ${ty + 2} Z`;
@@ -730,6 +918,9 @@ function createMapPins() {
 
       g.addEventListener('click', () => {
         prov.dispatchEvent(new Event('click'));
+      });
+      g.addEventListener('mouseenter', () => {
+        prov.dispatchEvent(new Event('mouseenter'));
       });
     }
 
@@ -759,16 +950,19 @@ function createMapPins() {
       g2.addEventListener('click', () => {
         prov.dispatchEvent(new Event('click'));
       });
+      g2.addEventListener('mouseenter', () => {
+        prov.dispatchEvent(new Event('mouseenter'));
+      });
     }
   });
 }
 
-// Create pins after initialization and a short delay to ensure SVG rendered
+// Create pins after initialization
 setTimeout(() => {
   createMapPins();
-}, 80);
+}, 100);
 
-// Re-select provinces after initialization (since class might have been added)
+// Select provinces after initialization
 const provinces = document.querySelectorAll('.th-map .province');
 const mapNameEl = document.getElementById('mapProvinceName');
 const mapSummaryEl = document.getElementById('mapProvinceSummary');
@@ -1011,42 +1205,17 @@ gsap.from('.section-map .map-layout', {
 
 
 /* ---------------------------------------------
- * Stone Layer Interaction
+ * Stone Layer / Stratigraphy Image Interaction
  * --------------------------------------------- */
-const stoneContainer = document.querySelector('.stone-layer-content');
-const stoneDesc = document.getElementById('stoneDesc');
-let stoneTyped = false;
-
-const stoneText = `กลุ่มหินโคราช (Khorat Group) ในภาคตะวันออกเฉียงเหนือของไทย เปรียบเสมือนบันทึกทางธรณีวิทยาที่เผยให้เห็นสภาพแวดล้อมโบราณ ตั้งแต่ยุคไทรแอสซิกตอนปลายจนถึงยุคปัจจุบัน โดยชั้นที่อยู่ล่างสุดคือ หินทรายแดงน้ำพอง (Nam Phong red sandstone) ซึ่งเป็นจุดเริ่มต้นของลำดับชั้น ตามด้วย หินดินดานภูเก้า (Phu Kradung shale) ที่มีสีม่วงเข้ม ซึ่งสะท้อนการสะสมตัวในสภาพแวดล้อมที่เปลี่ยนแปลง ถัดขึ้นมาคือ หินทรายสีอ่อนพระวิหาร (Phra Wiharn pale sandstone) ที่มีความแข็งแกร่งและมีความบริสุทธิ์สูง ต่อเนื่องด้วยชั้นที่สำคัญอย่าง หินทราย/หินทรายแป้งเสาขัว (Sao Khua sandstone/siltstone) ซึ่งเป็นแหล่งค้นพบซากดึกดำบรรพ์ไดโนเสาร์และสัตว์มีกระดูกสันหลังโบราณจำนวนมาก จากนั้นเป็น หินทรายภูพาน (Phu Phan sandstone) ที่แข็งแกร่งและมักพบเป็นโครงสร้างภูเขาสูง ปิดท้ายด้วยชั้นบนสุดคือ หินกรวด (Gravel Burrsed) ซึ่งเป็นตะกอนยุคควอเทอร์นารีที่สะสมตัวล่าสุด แสดงให้เห็นถึงประวัติศาสตร์การสะสมตะกอนอย่างต่อเนื่องยาวนานนับร้อยล้านปีของแผ่นดินไทย`;
-
-function typeStoneText() {
-  if (stoneTyped) return;
-  stoneTyped = true;
-  if (stoneDesc) stoneDesc.innerHTML = '';
-
-  let i = 0;
-  const speed = 15;
-
-  function type() {
-    if (stoneDesc && i < stoneText.length) {
-      stoneDesc.innerHTML += stoneText.charAt(i);
-      i++;
-      setTimeout(type, speed);
-    }
-  }
-  type();
-}
-
-if (stoneContainer) {
-  const triggerInteraction = () => {
-    stoneContainer.classList.add('active');
-    // Delay typing slightly to allow transition to start
-    setTimeout(typeStoneText, 300);
-  };
-
-  stoneContainer.addEventListener('mouseenter', triggerInteraction);
-  stoneContainer.addEventListener('click', triggerInteraction);
-  stoneContainer.addEventListener('touchstart', triggerInteraction, { passive: true });
+const stoneImgWrapper = document.querySelector('.stone-image-wrapper');
+if (stoneImgWrapper) {
+  stoneImgWrapper.addEventListener('click', () => {
+    // Cycle to next formation chip on image click
+    const chips = Array.from(document.querySelectorAll('.strat-chip'));
+    const activeIdx = chips.findIndex((c) => c.classList.contains('active'));
+    const nextIdx = (activeIdx + 1) % chips.length;
+    chips[nextIdx].click();
+  });
 }
 
 /* ---------------------------------------------
@@ -1070,3 +1239,561 @@ if (videoFacade && videoWrapper) {
     videoWrapper.appendChild(iframe);
   });
 }
+
+/* ---------------------------------------------
+ * Interactive Glowing Particle Canvas Engine (Follows Mouse)
+ * --------------------------------------------- */
+(function initBackgroundParticles() {
+  const canvas = document.getElementById('bgParticles');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let particles = [];
+  const particleCount = 85;
+
+  let mouse = {
+    x: -1000,
+    y: -1000,
+    targetX: -1000,
+    targetY: -1000,
+    radius: 180,
+    isActive: false
+  };
+
+  const colors = [
+    'rgba(251, 191, 36, ',   // Gold
+    'rgba(34, 211, 238, ',   // Cyan
+    'rgba(248, 250, 252, ',  // Soft White
+    'rgba(244, 114, 182, '   // Pink
+  ];
+
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  window.addEventListener('mousemove', (e) => {
+    mouse.targetX = e.clientX;
+    mouse.targetY = e.clientY;
+    mouse.isActive = true;
+  });
+
+  window.addEventListener('mouseleave', () => {
+    mouse.isActive = false;
+  });
+
+  // Touch support for mobile
+  window.addEventListener('touchmove', (e) => {
+    if (e.touches.length > 0) {
+      mouse.targetX = e.touches[0].clientX;
+      mouse.targetY = e.touches[0].clientY;
+      mouse.isActive = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => {
+    mouse.isActive = false;
+  });
+
+  class Particle {
+    constructor() {
+      this.reset(true);
+    }
+
+    reset(initial = false) {
+      this.x = Math.random() * width;
+      this.y = initial ? Math.random() * height : (Math.random() < 0.5 ? -10 : height + 10);
+      this.baseRadius = Math.random() * 2 + 1;
+      this.radius = this.baseRadius;
+      this.vx = (Math.random() - 0.5) * 0.6;
+      this.vy = (Math.random() - 0.5) * 0.6;
+      this.color = colors[Math.floor(Math.random() * colors.length)];
+      this.alpha = Math.random() * 0.5 + 0.3;
+      this.baseAlpha = this.alpha;
+      this.pulseSpeed = Math.random() * 0.02 + 0.008;
+      this.pulsePhase = Math.random() * Math.PI * 2;
+    }
+
+    update() {
+      // Natural drifting
+      this.x += this.vx;
+      this.y += this.vy;
+
+      // Pulse alpha
+      this.pulsePhase += this.pulseSpeed;
+      this.alpha = this.baseAlpha + Math.sin(this.pulsePhase) * 0.2;
+
+      // Smooth interaction with mouse
+      if (mouse.isActive) {
+        const dx = mouse.x - this.x;
+        const dy = mouse.y - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < mouse.radius && dist > 0) {
+          const force = (1 - dist / mouse.radius) * 1.5;
+          const angle = Math.atan2(dy, dx);
+          this.x += Math.cos(angle) * force * 1.8 + Math.sin(angle) * 0.5;
+          this.y += Math.sin(angle) * force * 1.8 - Math.cos(angle) * 0.5;
+          this.radius = this.baseRadius * (1 + (1 - dist / mouse.radius) * 0.8);
+        } else {
+          this.radius = this.baseRadius;
+        }
+      } else {
+        this.radius = this.baseRadius;
+      }
+
+      // Wrap edges smoothly
+      if (this.x < -20) this.x = width + 20;
+      if (this.x > width + 20) this.x = -20;
+      if (this.y < -20) this.y = height + 20;
+      if (this.y > height + 20) this.y = -20;
+    }
+
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = this.color + Math.max(0.1, this.alpha) + ')';
+      ctx.shadowColor = this.color + '0.8)';
+      ctx.shadowBlur = 8;
+      ctx.fill();
+    }
+  }
+
+  // Spark burst on click
+  window.addEventListener('click', (e) => {
+    // Only spawn if not clicking interactive UI buttons
+    if (e.target.closest('button, a, input, select, textarea')) return;
+    for (let i = 0; i < 6; i++) {
+      const p = new Particle();
+      p.x = e.clientX;
+      p.y = e.clientY;
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 3 + 1;
+      p.vx = Math.cos(angle) * speed;
+      p.vy = Math.sin(angle) * speed;
+      p.alpha = 0.9;
+      particles.push(p);
+      if (particles.length > particleCount + 18) {
+        particles.shift();
+      }
+    }
+  });
+
+  // Populate particles
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+  }
+
+  function render() {
+    mouse.x += (mouse.targetX - mouse.x) * 0.1;
+    mouse.y += (mouse.targetY - mouse.y) * 0.1;
+
+    ctx.clearRect(0, 0, width, height);
+
+    // Draw connecting lines between close particles
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < 90) {
+          const alpha = (1 - dist / 90) * 0.18;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(34, 211, 238, ${alpha})`;
+          ctx.lineWidth = 0.75;
+          ctx.shadowBlur = 0;
+          ctx.stroke();
+        }
+      }
+    }
+
+    particles.forEach((p) => {
+      p.update();
+      p.draw();
+    });
+
+    requestAnimationFrame(render);
+  }
+
+  render();
+})();
+
+/* ---------------------------------------------
+ * 3D Card Tilt & Micro-Interactions
+ * --------------------------------------------- */
+(function initCardTiltInteractions() {
+  const cards = document.querySelectorAll('.titan-card, .beyond-card, .choice-card, .game-card');
+  cards.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      const rotateX = -(y / (rect.height / 2)) * 3;
+      const rotateY = (x / (rect.width / 2)) * 3;
+
+      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+})();
+
+/* ---------------------------------------------
+ * Section 4.8 – Interactive Fossil Quest Game Engine
+ * --------------------------------------------- */
+(function initFossilQuestGame() {
+  const gameSection = document.getElementById('section-fossil-game');
+  if (!gameSection) return;
+
+  const gameLocation = document.getElementById('gameLocation');
+  const gameScoreEl = document.getElementById('gameScore');
+  const gameEpoch = document.getElementById('gameEpoch');
+  const gameQuestion = document.getElementById('gameQuestion');
+  const gameChoices = document.getElementById('gameChoices');
+  const gameFeedback = document.getElementById('gameFeedback');
+  const feedbackTitle = document.getElementById('feedbackTitle');
+  const feedbackText = document.getElementById('feedbackText');
+  const feedbackIcon = document.getElementById('feedbackIcon');
+  const btnNextStage = document.getElementById('btnNextStage');
+  const victoryScreen = document.getElementById('victoryScreen');
+  const gameArena = document.getElementById('gameArena');
+  const finalScoreEl = document.getElementById('finalScore');
+  const btnRestartGame = document.getElementById('btnRestartGame');
+  const stageSteps = document.querySelectorAll('.stage-step');
+  const stageConnectors = document.querySelectorAll('.stage-connector');
+
+  let currentStage = 0;
+  let score = 0;
+  let correctCount = 0;
+  let answered = false;
+
+  // Sound Synth via Web Audio API
+  let audioCtx = null;
+  function getAudioContext() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    return audioCtx;
+  }
+
+  function playSound(type) {
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      const now = ctx.currentTime;
+
+      if (type === 'correct') {
+        // Joyful ascending chime
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(523.25, now); // C5
+        osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.1); // E5
+        osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.2); // G5
+        osc.frequency.exponentialRampToValueAtTime(1046.50, now + 0.3); // C6
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.45);
+        osc.start(now);
+        osc.stop(now + 0.45);
+      } else if (type === 'wrong') {
+        // Gentle buzz
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(180, now);
+        osc.frequency.exponentialRampToValueAtTime(120, now + 0.25);
+        gain.gain.setValueAtTime(0.18, now);
+        gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+        osc.start(now);
+        osc.stop(now + 0.3);
+      } else if (type === 'fanfare') {
+        // Victory fanfare
+        const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+        notes.forEach((note, idx) => {
+          const o = ctx.createOscillator();
+          const g = ctx.createGain();
+          o.connect(g);
+          g.connect(ctx.destination);
+          o.type = 'triangle';
+          o.frequency.setValueAtTime(note, now + idx * 0.1);
+          g.gain.setValueAtTime(0.2, now + idx * 0.1);
+          g.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.1 + 0.4);
+          o.start(now + idx * 0.1);
+          o.stop(now + idx * 0.1 + 0.4);
+        });
+      }
+    } catch (e) {
+      // Audio not permitted without gesture or unsupported
+    }
+  }
+
+  const stages = [
+    {
+      location: '📍 แหล่งขุดค้น: อ.หนองบัวระเหว จ.ชัยภูมิ',
+      epoch: 'ยุคไทรแอสซิกตอนปลาย (~210 ล้านปีก่อน)',
+      question: 'ไดโนเสาร์ซอโรพอด (กินพืชคอยาว) ชนิดแรกของไทยและเก่าแก่ที่สุดในโลกที่พบในหมวดหินน้ำพองคือสายพันธุ์ใด?',
+      choices: [
+        'อีสานโนซอรัส อรรถวิภัชน์ชี (Isanosaurus)',
+        'ภูเวียงโกซอรัส สิรินธรเน (Phuwiangosaurus)',
+        'สยามโมไทรันนัส อีสานเอนซิส (Siamotyrannus)',
+        'ซิตตะโกซอรัส สัตยารักษ์กิ (Psittacosaurus)'
+      ],
+      correct: 0,
+      feedbackTitle: 'ถูกต้องยอดเยี่ยม! (Stage 1 Cleared)',
+      feedbackText: 'อีสานโนซอรัส อรรถวิภัชน์ชี (Isanosaurus) คือไดโนเสาร์ซอโรพอดแท้ชนิดแรกของโลก ซึ่งทำให้โลกรู้ว่าไดโนเสาร์คอยาวเริ่มวิวัฒนาการมาตั้งแต่ยุคไทรแอสซิก 210 ล้านปีก่อน ณ ชัยภูมิ'
+    },
+    {
+      location: '📍 แหล่งขุดค้นภูน้อย อ.คำม่วง จ.กาฬสินธุ์',
+      epoch: 'ยุคจูแรสซิกตอนปลาย (~150 ล้านปีก่อน)',
+      question: 'ไดโนเสาร์นักวิ่งตัวจิ๋วชนิดที่ 13 ของไทย ซึ่งค้นพบโครงกระดูกสมบูรณ์ที่สุดแห่งหนึ่งในเอเชีย ณ แหล่งภูน้อย "Jurassic Park เมืองไทย" คือใคร?',
+      choices: [
+        'กินรีมิมัส ขอนแก่นเอนซิส (Kinnareemimus)',
+        'มินิโมเคอร์เซอร์ ภูน้อยเอนซิส (Minimocursor)',
+        'วายุแรปเตอร์ หนองบัวลำภูเอนซิส (Vayuraptor)',
+        'สยามโมดอน นิ่มงามมิ (Siamodon)'
+      ],
+      correct: 1,
+      feedbackTitle: 'แม่นยำมาก! (Stage 2 Cleared)',
+      feedbackText: 'มินิโมเคอร์เซอร์ ภูน้อยเอนซิส (Minimocursor) เป็นไดโนเสาร์กินพืชขนาดเล็ก เดิน 2 ขา ปราดเปรียว ได้รับการวิจัยโดยศูนย์วิจัยและการศึกษาบรรพชีวินวิทยา มมส. (PRC) และตีพิมพ์ในปี 2023'
+    },
+    {
+      location: '📍 หุบเขาภูเวียง อ.เวียงเก่า จ.ขอนแก่น',
+      epoch: 'ยุคครีเทเชียสตอนต้น (~130 ล้านปีก่อน)',
+      question: 'ไดโนเสาร์สไปโนซอริดตัวแรกของเอเชียที่มีฟันรูปกรวยร่องสันคล้ายจระเข้ ใช้จับปลากินในลุ่มน้ำโบราณแห่งภูเวียงคือสายพันธุ์ใด?',
+      choices: [
+        'ภูเวียงเวเนเตอร์ แย้มนิยมอิ (Phuwiangvenator)',
+        'สยามแรปเตอร์ สุวัจน์ติ (Siamraptor)',
+        'สยามโมซอรัส สุธีธรนี (Siamosaurus)',
+        'ราชสีมาซอรัส สุรนารีเอ (Ratchasimasaurus)'
+      ],
+      correct: 2,
+      feedbackTitle: 'เก่งมาก! (Stage 3 Cleared)',
+      feedbackText: 'สยามโมซอรัส สุธีธรนี (Siamosaurus) เป็นไดโนเสาร์กินปลาตัวแรกของเอเชีย มีฟันทรงกรวยร่องสันคล้ายจระเข้ที่เหมาะแก่การจับปลาโบราณและฉลามน้ำจืดในหนองน้ำยุคครีเทเชียส'
+    },
+    {
+      location: '📍 บ้านสะพานหิน อ.เมือง จ.นครราชสีมา',
+      epoch: 'หมวดหินโคกกรวด ยุคครีเทเชียส (~115 ล้านปีก่อน)',
+      question: 'ไดโนเสาร์กินเนื้อขนาดใหญ่ที่สุดของไทย (ยอดนักล่าแห่งโคราช) ในกลุ่มคาร์คาโรดอนโตซอร์คือสายพันธุ์ใด?',
+      choices: [
+        'สยามแรปเตอร์ สุวัจน์ติ (Siamraptor)',
+        'สยามโมไทรันนัส อีสานเอนซิส (Siamotyrannus)',
+        'สิรินธรนา โคราชเอนซิส (Sirindhorna)',
+        'วายุแรปเตอร์ หนองบัวลำภูเอนซิส (Vayuraptor)'
+      ],
+      correct: 0,
+      feedbackTitle: 'สุดยอดนักสืบฟอสซิล! (Stage 4 Cleared)',
+      feedbackText: 'สยามแรปเตอร์ สุวัจน์ติ (Siamraptor) ยาวเกือบ 8 เมตร มีฟันคมกริบแบบฉลาม ถือเป็นนักล่าชั้นบนสุดของระบบนิเวศโบราณแห่งโคราช'
+    },
+    {
+      location: '📍 แหล่งบ่อทรายท่าช้าง โคราช UNESCO Global Geopark',
+      epoch: 'ยุคซีโนโซอิก ไมโอซีนตอนปลาย (~7–9 ล้านปีก่อน)',
+      question: 'ฟอสซิลเอปโบราณขนาดใหญ่ที่พบในบ่อทรายท่าช้าง ซึ่งเป็นหลักฐานสำคัญของบรรพบุรุษลิงอุรังอุตังในปัจจุบันคือสายพันธุ์ใด?',
+      choices: [
+        'สเตโกดอน (Stegodon)',
+        'ไฮยีนาลายจุดโบราณ (Crocuta crocuta ultima)',
+        'โคราชพิเธคัส พิริยะอิ (Khoratpithecus piriyai)',
+        'แรดโบราณไร้นอ (Aceratherium porpani)'
+      ],
+      correct: 2,
+      feedbackTitle: 'ยอดเยี่ยม! คุณพิชิตภารกิจครบ 5 ด่านแล้ว',
+      feedbackText: 'โคราชพิเธคัส พิริยะอิ (Khoratpithecus) เป็นเอปโบราณบรรพบุรุษอุรังอุตังที่สมบูรณ์ที่สุดชิ้นหนึ่งของโลก ทำให้โคราชได้รับการยกย่องเป็นมรดกบรรพชีวินวิทยาโลก'
+    }
+  ];
+
+  const letters = ['A', 'B', 'C', 'D'];
+
+  const inGameProgressFill = document.getElementById('inGameProgressFill');
+  const inGameDinoRunner = document.getElementById('inGameDinoRunner');
+  const inGameProgressText = document.getElementById('inGameProgressText');
+  const inGameDinoEmoji = document.getElementById('inGameDinoEmoji');
+  const inGameDinoBubble = document.getElementById('inGameDinoBubble');
+
+  const stageDinoStatuses = [
+    { percent: 0, emoji: '🦖', bubble: 'จุดเริ่มต้น: มุ่งสู่ไทรแอสซิก (~210 Ma)', label: 'ด่านที่ 1 / 5 (เริ่มต้น 0%)' },
+    { percent: 25, emoji: '🦕', bubble: 'บุกจูแรสซิกภูน้อย (~150 Ma)', label: 'ด่านที่ 2 / 5 (25%)' },
+    { percent: 50, emoji: '🦖', bubble: 'ลุยหุบเขาภูเวียง (~130 Ma)', label: 'ด่านที่ 3 / 5 (50%)' },
+    { percent: 75, emoji: '🦕', bubble: 'เผชิญหน้านักล่าโคกกรวด (~115 Ma)', label: 'ด่านที่ 4 / 5 (75%)' },
+    { percent: 100, emoji: '👑', bubble: 'พิชิตบ่อทรายท่าช้าง (~7-9 Ma)', label: 'ด่านที่ 5 / 5 (100%)' }
+  ];
+
+  function updateInGameProgress(stageIdx) {
+    const status = stageDinoStatuses[Math.min(stageIdx, stageDinoStatuses.length - 1)];
+    if (!status) return;
+
+    if (inGameProgressFill) inGameProgressFill.style.width = `${status.percent}%`;
+    if (inGameDinoRunner) inGameDinoRunner.style.left = `${status.percent}%`;
+    if (inGameProgressText) inGameProgressText.textContent = status.label;
+    if (inGameDinoEmoji) inGameDinoEmoji.textContent = status.emoji;
+    if (inGameDinoBubble) inGameDinoBubble.textContent = status.bubble;
+  }
+
+  function updateTrack() {
+    stageSteps.forEach((step, idx) => {
+      step.classList.remove('active', 'cleared');
+      if (idx < currentStage) {
+        step.classList.add('cleared');
+      } else if (idx === currentStage) {
+        step.classList.add('active');
+      }
+    });
+
+    stageConnectors.forEach((conn, idx) => {
+      conn.classList.remove('cleared');
+      if (idx < currentStage) {
+        conn.classList.add('cleared');
+      }
+    });
+
+    updateInGameProgress(currentStage);
+  }
+
+  function loadStage(idx) {
+    if (idx >= stages.length) {
+      showVictoryScreen();
+      return;
+    }
+
+    answered = false;
+    const stage = stages[idx];
+
+    gameLocation.textContent = stage.location;
+    gameEpoch.textContent = stage.epoch;
+    gameQuestion.textContent = stage.question;
+    gameScoreEl.textContent = score;
+
+    gameFeedback.classList.add('hidden');
+    gameChoices.innerHTML = '';
+
+    stage.choices.forEach((choice, cIdx) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'choice-btn';
+      btn.innerHTML = `<span class="choice-letter">${letters[cIdx]}</span> <span class="choice-text">${choice}</span>`;
+      btn.addEventListener('click', () => handleChoice(cIdx, btn));
+      gameChoices.appendChild(btn);
+    });
+
+    updateTrack();
+
+    gsap.fromTo(gameArena, { opacity: 0.8, y: 15 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+  }
+
+  function handleChoice(cIdx, btnEl) {
+    if (answered) return;
+    answered = true;
+
+    const stage = stages[currentStage];
+    const allBtns = gameChoices.querySelectorAll('.choice-btn');
+
+    if (cIdx === stage.correct) {
+      // Correct!
+      playSound('correct');
+      btnEl.classList.add('correct');
+      score += 100;
+      correctCount++;
+      gameScoreEl.textContent = score;
+
+      feedbackIcon.textContent = '🎉';
+      feedbackTitle.textContent = stage.feedbackTitle;
+      feedbackText.textContent = stage.feedbackText;
+      gameFeedback.classList.remove('hidden');
+
+      if (currentStage === stages.length - 1) {
+        btnNextStage.textContent = '🏆 ดูผลประกาศนียบัตร ➔';
+      } else {
+        btnNextStage.textContent = 'ลุยด่านถัดไป ➔';
+      }
+    } else {
+      // Wrong
+      playSound('wrong');
+      btnEl.classList.add('wrong');
+      // Highlight correct
+      allBtns[stage.correct].classList.add('correct');
+
+      feedbackIcon.textContent = '💡';
+      feedbackTitle.textContent = 'ยังไม่ถูกต้อง แต่ได้เรียนรู้!';
+      feedbackText.textContent = stage.feedbackText;
+      gameFeedback.classList.remove('hidden');
+      btnNextStage.textContent = (currentStage === stages.length - 1) ? '🏆 ดูผลการทดสอบ ➔' : 'ด่านถัดไป ➔';
+    }
+
+    allBtns.forEach((b) => b.disabled = true);
+  }
+
+  btnNextStage.addEventListener('click', () => {
+    currentStage++;
+    if (currentStage >= stages.length) {
+      showVictoryScreen();
+    } else {
+      loadStage(currentStage);
+    }
+  });
+
+  function showVictoryScreen() {
+    playSound('fanfare');
+    gameArena.classList.add('hidden');
+    victoryScreen.classList.remove('hidden');
+
+    const totalStages = stages.length;
+    const clearedStagesEl = document.getElementById('clearedStages');
+    const accuracyRankEl = document.getElementById('accuracyRank');
+    const victoryBadgeIcon = document.getElementById('victoryBadgeIcon');
+    const victoryTitle = document.getElementById('victoryTitle');
+    const victoryDesc = document.getElementById('victoryDesc');
+
+    finalScoreEl.textContent = score;
+    if (clearedStagesEl) clearedStagesEl.textContent = `${correctCount} / ${totalStages}`;
+    const accuracy = Math.round((correctCount / totalStages) * 100);
+    if (accuracyRankEl) accuracyRankEl.textContent = `${accuracy}%`;
+
+    if (correctCount === 5) {
+      if (victoryBadgeIcon) victoryBadgeIcon.textContent = '🎖️';
+      if (victoryTitle) victoryTitle.textContent = 'ยอดเยี่ยมไร้ที่ติ! คุณผ่านภารกิจข้ามกาลเวลาสมบูรณ์แบบ';
+      if (victoryDesc) victoryDesc.innerHTML = 'คุณได้รับตราเกียรติยศ <strong>"สุดยอดนักบรรพชีวินวิทยาแห่งแผ่นดินอีสาน (Master Paleontologist)"</strong> ตอบถูกครบทั้ง 5 แหล่งสำคัญ!';
+    } else if (correctCount >= 3) {
+      if (victoryBadgeIcon) victoryBadgeIcon.textContent = '🥈';
+      if (victoryTitle) victoryTitle.textContent = 'เก่งมาก! คุณผ่านภารกิจระดับนักสำรวจเชี่ยวชาญ';
+      if (victoryDesc) victoryDesc.innerHTML = `คุณได้รับตราเกียรติยศ <strong>"นักสำรวจฟอสซิลระดับเชี่ยวชาญ (Expert Explorer)"</strong> ตอบถูกต้อง ${correctCount} จาก ${totalStages} แหล่งสำคัญ`;
+    } else if (correctCount >= 1) {
+      if (victoryBadgeIcon) victoryBadgeIcon.textContent = '🥉';
+      if (victoryTitle) victoryTitle.textContent = 'ยินดีด้วย! คุณผ่านการทดสอบขั้นพื้นฐาน';
+      if (victoryDesc) victoryDesc.innerHTML = `คุณได้รับตราเกียรติยศ <strong>"นักล่าฟอสซิลรุ่นเยาว์ (Apprentice Fossil Hunter)"</strong> ตอบถูกต้อง ${correctCount} จาก ${totalStages} แหล่งสำคัญ`;
+    } else {
+      if (victoryBadgeIcon) victoryBadgeIcon.textContent = '🧭';
+      if (victoryTitle) victoryTitle.textContent = 'เสร็จสิ้นการสำรวจข้ามกาลเวลา';
+      if (victoryDesc) victoryDesc.innerHTML = 'ลองเล่นใหม่อีกครั้งเพื่อสะสมความรู้และพิชิตคะแนนเต็ม 500 XP ให้ได้นะ!';
+    }
+
+    stageSteps.forEach((s) => s.classList.add('cleared'));
+    stageConnectors.forEach((c) => c.classList.add('cleared'));
+    updateInGameProgress(stages.length - 1);
+
+    gsap.fromTo(victoryScreen, { opacity: 0, scale: 0.92 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.5)' });
+  }
+
+  btnRestartGame.addEventListener('click', () => {
+    currentStage = 0;
+    score = 0;
+    correctCount = 0;
+    gameArena.classList.remove('hidden');
+    victoryScreen.classList.add('hidden');
+    loadStage(0);
+  });
+
+  // Initial load
+  loadStage(0);
+})();
