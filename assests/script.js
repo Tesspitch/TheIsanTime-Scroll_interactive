@@ -825,7 +825,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
     },
     'Nagatitan chaipanyensis': {
-      model: 'assests/model/nagatitan_v2.3mf',
+      model: 'assests/model/nagatitan_v2.glb',
       footprint: 'assests/img/dino_section4/nagatitan.jpg',
       timeline: [
         { title: 'ค้นพบฟอสซิลกะโหลก ขากรรไกร และฟัน', year: '2559 ที่จังหวัดชัยภูมิ' },
