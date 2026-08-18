@@ -165,14 +165,14 @@ document.addEventListener('DOMContentLoaded', () => {
   let animationFrameId = null;
   if (loaderCanvas) {
     const ctx = loaderCanvas.getContext('2d');
-    
+
     // Set internal canvas resolution
     loaderCanvas.width = 200;
     loaderCanvas.height = 200;
 
     const numParticles = 25;
     const particles = [];
-    
+
     // Core colors: fossil gold, light gold, neon cyan (matching primary and secondary theme colors)
     const colors = ['#fbbf24', '#f59e0b', '#22d3ee', '#38bdf8', '#fbbf24'];
 
@@ -233,10 +233,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Accelerate towards target
         const dx = targetX - p.x;
         const dy = targetY - p.y;
-        
+
         p.vx += dx * p.speedFactor;
         p.vy += dy * p.speedFactor;
-        
+
         // Apply friction
         p.vx *= p.friction;
         p.vy *= p.friction;
@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       animationFrameId = requestAnimationFrame(animateParticles);
     }
-    
+
     // Start animation loop
     animateParticles();
   }
@@ -437,10 +437,10 @@ document.addEventListener('DOMContentLoaded', () => {
       vid.loop = true;
       vid.playsInline = true;
       vid.preload = 'auto'; // Request browser to preload
-      
+
       // Append to section2 before content
       section2.insertBefore(vid, section2.firstChild);
-      
+
       preloadedVideos[id] = vid;
 
       // Track loading progress for loading screen
@@ -822,6 +822,16 @@ document.addEventListener('DOMContentLoaded', () => {
         { title: 'เตรียมตัวอย่างและกรอกระดูกกว่า 5 ปี', year: '2014–2019 โดยศูนย์วิจัยบรรพชีวินวิทยา มมส. (PRC)' },
         { title: 'ประกาศเป็นไดโนเสาร์ไทยชนิดที่ 13', year: '2023 (Manitkoon, Deesri, Chanthasit et al.)' },
         { title: 'เปิดตัวและจัดแสดงต่อสาธารณชน', year: '2023–ปัจจุบัน ณ พิพิธภัณฑ์สิรินธร' },
+      ],
+    },
+    'Nagatitan chaipanyensis': {
+      model: 'assests/model/nagatitan_v2.3mf',
+      footprint: 'assests/img/dino_section4/nagatitan.jpg',
+      timeline: [
+        { title: 'ค้นพบฟอสซิลกะโหลก ขากรรไกร และฟัน', year: '2559 ที่จังหวัดชัยภูมิ' },
+        { title: 'วิจัยโครงกระดูกคาร์คาโรดอนโตซอร์', year: 'ไม่พบข้อมูล' },
+        { title: 'ตีพิมพ์ในวารสารระดับโลก PLOS ONE', year: '2569' },
+        { title: 'จัดแสดงในพิพิธภัณฑ์', year: 'พิพิธภัณฑ์สิรินธร จังหวัดกาฬสินธุ์' },
       ],
     },
     'Siamotyrannus isanensis': {
